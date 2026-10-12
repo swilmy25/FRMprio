@@ -12,9 +12,9 @@ A React and TypeScript dashboard for coordinating FRM and PwC project delivery.
 - Search, status filtering and priority sorting.
 - Editable projects with browser-local storage and JSON export/import.
 
-Initial data is illustrative and clearly labeled. It is not sourced from the user's spreadsheet. The Google Sheets Prioritization tab requires access or an uploaded export before actual data can be mapped, including columns V–X. Preserve missing values as unknown when mapping actual records; do not infer missing dates, hours or baseline commitments.
+The initial seed is clearly labeled sample data. Use **Import** to select an Excel workbook containing the **Prioritization** tab or a source JSON snapshot. The dashboard maps the actual source into a separate workbook view, including V (five delivery perspectives), W (start date) and X (current staffing). The uploaded workbook is not bundled in the public app or repository. Imported values persist in the current browser; subsequent reloads do not require another upload. A different browser or cleared storage requires an import again until live Google access is configured.
 
-Data is saved in the current browser only. Local project records have no shared database. A separate read-only Google Sheets source panel can read the private Prioritization tab after OAuth setup; it does not yet map or overwrite Gantt project records. Export JSON to back up or transfer projects; importing replaces the current project set after confirmation.
+Data is saved in the current browser only. Local project records have no shared database. A separate read-only Google Sheets source panel can read the private Prioritization tab after OAuth setup; recognized Prioritization columns update the source-backed Gantt view without overwriting manual project records. Export JSON to back up or transfer projects; importing replaces the current project set after confirmation.
 
 ## Development
 
@@ -37,7 +37,7 @@ npm test
 
 The build checks TypeScript and creates `dist/`. Browser tests cover the scope calculations, project edits and persistence, filtering, import/export and mobile layout. Tests use system Chromium when available; otherwise install the Playwright browser with `npx playwright install chromium`. The cloud runtime may require browser execution outside the restricted sandbox.
 
-## Calculation rules
+## Manual project calculation rules
 
 - Remaining plan = baseline minus completed planned work, calculated independently for controls and hours.
 - Extra work is kept separate from the baseline. Completed planned work cannot exceed its baseline.
@@ -66,7 +66,7 @@ Google account configuration and private-sheet access have not been exercised ye
 
 Source reads preserve Google's formatted cell values and empty cells. V–X are highlighted. All populated source columns are displayed, paged at 25 rows. Automatic refresh runs every five minutes while the page is open, visible and authorized. Access-token expiry pauses refresh and requires sign-in again. There is no unattended/background server synchronization.
 
-Tokens remain only in memory and are cleared on disconnect/reload; the public client ID may be retained in browser storage. Disconnect clears the local session and source view, but does not revoke the app's grant in Google account settings. Source data is not stored on the server. “Export source for mapping” downloads a token-free JSON snapshot that can be provided to Codex to verify headers, missing values and the project mapping. The local Gantt records remain unchanged until that mapping is implemented and verified.
+Tokens remain only in memory and are cleared on disconnect/reload; the public client ID may be retained in browser storage. Disconnect clears the local session and source view, but does not revoke the app's grant in Google account settings. Source data is not sent to a dashboard server; recognized snapshots are stored locally in the browser. “Export source for mapping” downloads a token-free JSON snapshot that can be provided to Codex to verify headers, missing values and the project mapping. Recognized Prioritization columns are mapped automatically into the workbook view, while the manual project records remain separate.
 
 Connecting the dashboard is separate from connecting Google Drive to a Codex chat. No Google Drive connector or account-linking tool was available to this session. Browser OAuth does not grant the assistant persistent access to your Google account.
 
@@ -80,7 +80,7 @@ The repository includes `.github/workflows/pages.yml`. A push to `main` builds a
 
 For Google sign-in, the Authorized JavaScript origin is `https://swilmy25.github.io` (without the repository path). Optionally set repository Actions variable `VITE_GOOGLE_CLIENT_ID` to the public OAuth Web client ID before building. The workflow reads this variable; otherwise enter the ID in the dashboard UI. No Google client secret is used.
 
-Publishing this static app exposes the app code and illustrative sample data to viewers of the Pages site. Private Google Sheets rows are fetched only in an authorized viewer's browser. There is no server-side Google credential, source-data upload, or automatic source-to-Gantt mapping. Project edits remain local to each browser.
+Publishing this static app exposes the app code and illustrative sample data to viewers of the Pages site. Private Google Sheets rows are fetched only in an authorized viewer's browser. There is no server-side Google credential, source-data upload, or server-side storage of imported source data. Project edits remain local to each browser.
 
 Local Pages build check:
 
@@ -90,3 +90,13 @@ npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
 ```
 
 Changing to a custom domain or another Pages path requires updating `PAGES_BASE_PATH` in the deployment workflow and the Google OAuth authorized origin.
+
+## Source-backed workbook mapping
+
+The Prioritization schema uses B reference, C activity, D control scope, E PwC owners, F FRM leads, G FRM priority/timing, H category, I PwC priority, J stated alignment, K activity type, L current estimated effort, M actuals incurred, N reported remaining, O/P completed/outstanding control counts, Q original due, R proposed updated due, S delay causes, T time used, U notes/actions, V five delivery perspectives, W start date, and X staffing support.
+
+Source values are preserved as quoted context, including cached formula-error markers. Dates and numbers that cannot be parsed remain unknown. Current estimates are not silently interpreted as original approved baseline, and actual effort is not treated as completed planned work. Original and revised dates are retained separately. When R has a date range, its last stated date is identified as a range endpoint. If only Q has a precise date, the chart labels it as original due only. Bars require both start and end dates; missing starts use due markers rather than fabricated windows. Progress percentages are not inferred.
+
+Portfolio summaries show known numeric subtotals and unknown counts. Positive remaining hours exclude negative reported balances; negative source values are still displayed and counted in the signed source subtotal. Column V text is not added to N because overlap may exist. No capacity gap is computed without a confirmed baseline, incremental work classification and available future capacity. Formal status is not supplied by this source: displayed indications are attributed to source notes, section placement or recorded effort, and users can filter them. Duplicate reference numbers use sheet-row IDs; repeated narratives and conflicting numeric statements are flagged.
+
+The committed tests use synthetic data. Actual workbook validation is performed privately in the workspace; do not commit source workbooks, source snapshots or private screenshots to the public repository. Files imported into a viewer's browser are not part of a GitHub Pages deployment.

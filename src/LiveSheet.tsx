@@ -3,7 +3,7 @@ import { columnLetter, loadGoogleIdentity, readPrioritization, SHEETS_SCOPE, SPR
 import type { SheetSnapshot } from './googleSheets'
 
 const CLIENT_STORAGE = 'frmprio.google.clientId'
-export default function LiveSheet() {
+export default function LiveSheet({ onSnapshot }: { onSnapshot?: (snapshot: SheetSnapshot) => void }) {
   const [expanded, setExpanded] = useState(false)
   const [clientId, setClientId] = useState(() => { try { return localStorage.getItem(CLIENT_STORAGE) ?? import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '' } catch { return import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '' } })
   const [connected, setConnected] = useState(false)
@@ -32,14 +32,14 @@ export default function LiveSheet() {
     setBusy(true); setError('')
     try {
       const data = await readPrioritization(credential.value, controller.signal)
-      if (mounted.current && generation.current === version && request.current === controller) { setSnapshot(data); setPage(0) }
+      if (mounted.current && generation.current === version && request.current === controller) { setSnapshot(data); setPage(0); onSnapshot?.(data) }
     } catch (e) {
       if (mounted.current && generation.current === version && request.current === controller) setError(controller.signal.aborted ? 'Sheet refresh timed out. The last successful data remains below; try again.' : e instanceof Error ? e.message : 'Sheet refresh failed.')
     } finally {
       clearTimeout(timeout)
       if (mounted.current && generation.current === version && request.current === controller) { request.current = null; setBusy(false) }
     }
-  }, [])
+  }, [onSnapshot])
 
   const connect = async () => {
     const id = clientId.trim()
@@ -89,7 +89,7 @@ export default function LiveSheet() {
       <div className="live-actions">{connected ? <><button className="button" onClick={() => void refresh()} disabled={busy}>{busy ? 'Refreshing…' : 'Refresh now'}</button><button className="button" onClick={disconnect}>Disconnect</button><label className="auto-refresh"><input type="checkbox" checked={automatic} onChange={e => setAutomatic(e.target.checked)} />Refresh every 5 minutes while open</label></> : <><button className="button primary" onClick={() => void connect()} disabled={busy}>{busy ? 'Connecting…' : 'Sign in with Google'}</button>{busy && <button className="button" onClick={disconnect}>Cancel connection</button>}</> }<a className="button" href={`https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit?gid=${SHEET_ID}`} target="_blank" rel="noreferrer">Open source sheet</a></div>
       {error && <p className="error" role="alert">{error}</p>}
       {!clientId && <p className="live-help">One-time setup: enable Google Sheets API in a Google Cloud project, configure Google Auth Platform consent, and create a Web OAuth client with this dashboard’s exact origin in Authorized JavaScript origins. Use an Internal audience if eligible, or add your account as a test user for an External app in testing. Enter its public client ID above. Do not enter a client secret. Use the origin shown in your browser’s address bar (scheme, hostname and port; no path).</p>}
-      {snapshot && <><div className="live-read-note"><button className="button source-export" onClick={exportSource}>Export source for mapping</button><strong>{snapshot.title}</strong> · {snapshot.rows.length} source rows. All cells are shown as Google formats them; empty cells remain empty. Columns V–X are highlighted. The Gantt still uses local project records until the actual column mapping is verified.</div><div className="sheet-scroll"><table className="source-table"><thead><tr><th>Row</th>{Array.from({ length: columns }, (_, i) => <th key={i} className={i >= 21 && i <= 23 ? 'source-context' : ''}>{columnLetter(i)}</th>)}</tr></thead><tbody>{snapshot.rows.slice(page * 25, (page + 1) * 25).map((row, ri) => <tr key={ri}><th>{page * 25 + ri + 1}</th>{Array.from({ length: columns }, (_, ci) => <td key={ci} className={ci >= 21 && ci <= 23 ? 'source-context' : ''}>{row[ci] ?? ''}</td>)}</tr>)}</tbody></table></div>{!snapshot.rows.length && <p className="live-help">This tab has no populated cells.</p>}<div className="sheet-pagination"><button className="button" disabled={page === 0} onClick={() => setPage(page - 1)}>Previous</button><span>Page {page + 1} of {pages}</span><button className="button" disabled={page + 1 >= pages} onClick={() => setPage(page + 1)}>Next</button></div></>}
+      {snapshot && <><div className="live-read-note"><button className="button source-export" onClick={exportSource}>Export source for mapping</button><strong>{snapshot.title}</strong> · {snapshot.rows.length} source rows. All cells are shown as Google formats them; empty cells remain empty. Columns V–X are highlighted. Recognized Prioritization columns update the workbook dashboard; missing fields remain unknown. Manual project records remain separate.</div><div className="sheet-scroll"><table className="source-table"><thead><tr><th>Row</th>{Array.from({ length: columns }, (_, i) => <th key={i} className={i >= 21 && i <= 23 ? 'source-context' : ''}>{columnLetter(i)}</th>)}</tr></thead><tbody>{snapshot.rows.slice(page * 25, (page + 1) * 25).map((row, ri) => <tr key={ri}><th>{page * 25 + ri + 1}</th>{Array.from({ length: columns }, (_, ci) => <td key={ci} className={ci >= 21 && ci <= 23 ? 'source-context' : ''}>{row[ci] ?? ''}</td>)}</tr>)}</tbody></table></div>{!snapshot.rows.length && <p className="live-help">This tab has no populated cells.</p>}<div className="sheet-pagination"><button className="button" disabled={page === 0} onClick={() => setPage(page - 1)}>Previous</button><span>Page {page + 1} of {pages}</span><button className="button" disabled={page + 1 >= pages} onClick={() => setPage(page + 1)}>Next</button></div></>}
     </div>}
   </section>
 }
