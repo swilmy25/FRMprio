@@ -8,7 +8,7 @@ test('capacity accounts for completed extras only in total scope, and future req
   expect(validate({ ...p, done: { ...p.done, hours: 161 } })).toContain('cannot exceed')
   expect(validate({ ...p, end: '2026-09-01' })).toContain('End date')
 })
-test.beforeEach(async ({ page }) => { await page.goto('/') })
+test.beforeEach(async ({ page }) => { await page.goto('/'); await page.getByRole('button', { name: 'Manual projects', exact: true }).click() })
 test('dashboard shows timeline, owners and all five scope perspectives', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Project dashboard' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Delivered to plan' })).toBeVisible()

@@ -8,6 +8,7 @@ import { isSourceSnapshot, parseSource, SOURCE_STORAGE } from './prioritization'
 import type { SourceSnapshot } from './prioritization'
 import type { SheetSnapshot } from './googleSheets'
 import { readSourceFile } from './readSourceFile'
+import { PUBLISHED_SNAPSHOT } from './publishedSnapshot'
 
 const STORAGE = 'frmprio.projects.v1'
 const day = 86400000
@@ -52,8 +53,9 @@ function App() {
     try { const saved = localStorage.getItem(STORAGE); if (saved) { const parsed = JSON.parse(saved); if (Array.isArray(parsed) && parsed.every(p => typeof p.id === 'string' && statuses.includes(p.status) && priorities.includes(p.pwcPriority) && priorities.includes(p.frmPriority) && !validate(p))) return parsed } } catch { /* Fall back to clearly labeled examples. */ }
     return structuredClone(sampleProjects)
   })
-  const [source, setSource] = useState<SourceSnapshot | null>(() => { try {const saved=JSON.parse(localStorage.getItem(SOURCE_STORAGE) ?? 'null'); if(isSourceSnapshot(saved)) {parseSource(saved);return saved}} catch {} return null })
-  const [sourceVisible, setSourceVisible] = useState(true)
+  const [source, setSource] = useState<SourceSnapshot | null>(() => { try {const saved=JSON.parse(localStorage.getItem(SOURCE_STORAGE) ?? 'null'); if(isSourceSnapshot(saved)) {parseSource(saved);return saved}} catch {} return structuredClone(PUBLISHED_SNAPSHOT) })
+  const [sourceVisible, setSourceVisible] = useState(() => {try {return localStorage.getItem('frmprio.sourceView') !== 'manual'} catch {return true}})
+  useEffect(() => {try {localStorage.setItem('frmprio.sourceView',sourceVisible?'workbook':'manual')} catch {}},[sourceVisible])
   const [notice, setNotice] = useState('')
   useEffect(() => { if(source) {try {localStorage.setItem(SOURCE_STORAGE,JSON.stringify(source))} catch {queueMicrotask(()=>setNotice('Workbook could not be retained in this browser. Export a backup before leaving.'))}} },[source])
   const applyLiveSource = useCallback((data:SheetSnapshot) => { const imported: SourceSnapshot = {kind:'frmprio.prioritization.v1',fileName:'Live Google Sheets',tabName:data.title,importedAt:new Date(data.fetchedAt).toISOString(),rows:data.rows}; try {parseSource(imported);setSource(imported);setSourceVisible(true);setNotice('Dashboard updated from the live Prioritization tab.')} catch(e) {setNotice(e instanceof Error?e.message:'The sheet layout could not be mapped.')} },[])

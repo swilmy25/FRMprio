@@ -82,3 +82,15 @@ test('live tab refresh updates the workbook view without replacing manual projec
  await page.reload()
  await expect(page.locator('.source-details h2')).toHaveText('Live source update 2')
 })
+
+
+test('new visitors see the published workbook without importing a file',async({page})=>{
+ await page.goto('/')
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(46)
+ await expect(page.locator('.source-snapshot-banner')).toContainText('Prioritization')
+ await expect(page.locator('.workbook-dashboard .metric').nth(0)).toContainText('9,729')
+ await expect(page.locator('.workbook-dashboard .metric').nth(1)).toContainText('2,999')
+ await expect(page.locator('.workbook-dashboard .gantt-bar')).toHaveCount(7)
+ await page.reload()
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(46)
+})
