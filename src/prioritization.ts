@@ -132,3 +132,15 @@ export function dateHealth(p:SourceActivity,today:string):DateHealth {
  if(!p.end)return {tone:'ongoing',label:'Ongoing / not dated',reasons:['Source is ongoing or dates are not applicable.']}
  return {tone:'scheduled',label:p.end===today?'Due today':'Scheduled',reasons:[]}
 }
+
+export function activitiesForLead(activities:SourceActivity[],lead:string|null):SourceActivity[] {
+ if(!lead)return activities
+ const directory=peopleDirectory(activities.map(p=>p.frmLeads))
+ return activities.filter(p=>directory.resolve(p.frmLeads).includes(lead))
+}
+export function snapshotForLead(snapshot:SourceSnapshot,lead:string):SourceSnapshot {
+ const scoped=activitiesForLead(parseSource(snapshot),lead)
+ const selectedRows=new Set(scoped.map(p=>p.row))
+ const header=snapshot.rows.findIndex(row=>/task\s*\/\s*activity/i.test(row[2]??''))
+ return {...snapshot,publicationId:undefined,fileName:`${snapshot.fileName} · FRM lead: ${lead}`,sections:Object.fromEntries(scoped.map(p=>[String(p.row),p.section])),rows:snapshot.rows.map((row,index)=>index<=header||selectedRows.has(index+1)?row:row.map(()=>''))}
+}

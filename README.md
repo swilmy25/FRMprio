@@ -35,6 +35,14 @@ The user explicitly authorized publishing their supplied Prioritization data. Th
 - Unfinished work with TBD, pending/missing/unresolved dates, invalid ordering, or an end before today is red for escalation. Dates are checked in America/Los_Angeles and rechecked each minute and on visibility changes. An end today is not yet overdue. Past actual starts alone are not overdue. N/A/ongoing PMO dates remain undated.
 - Both dates appear as text alongside the Gantt. Bars require both dates; a diamond means end only. No progress percentages are inferred.
 
+## FRM lead views
+
+Project dashboard remains the complete, deduplicated portfolio. The navigation provides a view for each FRM lead found in the source, with activity counts. On mobile these are horizontally scrollable view tabs. Shared activities appear once in the overall portfolio and in every assigned lead's view.
+
+A lead view scopes its Gantt, dates, completion/escalation/alignment metrics, owner/category/priority filters, and activity details to that lead. Clickable breakdowns show FRM priorities, categories and PwC ownership. Shared-owner activities count under each relevant owner, so owner totals need not sum to the activity count. Clearing filters does not remove the lead scope. Navigation starts each view with clear filters; live refreshes retain the current scope and filters.
+
+URLs such as `#lead=Avi` can be shared or reloaded; `#portfolio` returns to the overall dashboard. Lead exports include only that lead's source rows and preserve shared ownership and source row references. Overall exports continue to include the full source snapshot. Staffing remains detail-only.
+
 ## Browser data and live Google Sheets
 
 New visitors see the bundled snapshot without an import. Existing legacy source caches are ignored so the fresh publication is shown. Newer publications replace prior bundled defaults while preserving separately imported snapshots and manual project edits. Manual / workbook view choice persists.
@@ -69,7 +77,7 @@ npm run build
 npm test
 ```
 
-The build checks TypeScript. The 19 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, and default/live source loading. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
+The build checks TypeScript. The 23 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, and default/live source loading. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
 
 ## GitHub Pages deployment
 

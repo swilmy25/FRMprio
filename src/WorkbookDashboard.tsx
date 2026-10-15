@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { alignmentState, dateHealth, parseSource, peopleDirectory, priorityRank, rating } from './prioritization'
+import { activitiesForLead, alignmentState, dateHealth, parseSource, peopleDirectory, priorityRank, rating } from './prioritization'
 import type { SourceActivity, SourceSnapshot } from './prioritization'
 
 const day = 86400000
@@ -15,8 +15,8 @@ function ChoiceFilter({ title, options, selected, onChange }: { title: string; o
     {options.map(option => <label key={option}><input type="checkbox" aria-label={`${title}: ${option}`} checked={selected.includes(option)} onChange={() => onChange(selected.includes(option) ? selected.filter(s => s !== option) : [...selected, option])} />{option}</label>)}
   </div></details>
 }
-export default function WorkbookDashboard({ snapshot }: { snapshot: SourceSnapshot }) {
-  const activities = useMemo(() => parseSource(snapshot), [snapshot])
+export default function WorkbookDashboard({ snapshot, lead = null }: { snapshot: SourceSnapshot; lead?: string | null }) {
+  const activities = useMemo(() => activitiesForLead(parseSource(snapshot),lead), [snapshot,lead])
   const leads = useMemo(() => peopleDirectory(activities.map(p => p.frmLeads)), [activities])
   const owners = useMemo(() => peopleDirectory(activities.map(p => p.pwcOwners), true), [activities])
   const [selectedId, setSelectedId] = useState(activities[0]?.id ?? '')
@@ -55,16 +55,22 @@ export default function WorkbookDashboard({ snapshot }: { snapshot: SourceSnapsh
   const active = [...selectedLeads.map(v => ['FRM lead', v, () => setLeads(selectedLeads.filter(s => s !== v))] as const), ...selectedOwners.map(v => ['PwC owner', v, () => setOwners(selectedOwners.filter(s => s !== v))] as const), ...frmRatings.map(v => ['FRM priority', v, () => setFrmRatings(frmRatings.filter(s => s !== v))] as const), ...pwcRatings.map(v => ['PwC priority', v, () => setPwcRatings(pwcRatings.filter(s => s !== v))] as const), ...categories.map(v => ['Category', v, () => setCategories(categories.filter(s => s !== v))] as const)]
   return <div className="workbook-dashboard">
     <div className="source-snapshot-banner"><span>PRIORITIZATION SNAPSHOT</span><strong>{snapshot.tabName}</strong><p>{snapshot.fileName} · {activities.length} activities · updated {new Date(snapshot.importedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PT</p><p>Orange columns only: activity, accountable owners, priorities, alignment, category, activity type, dates and detailed staffing.</p></div>
+    {lead && <div className="lead-scope-banner"><strong>FRM lead: {lead}</strong><p>All summaries, filters, timeline rows and exports are scoped to this lead. Shared projects appear in each assigned lead’s view and once in the overall portfolio.</p></div>}
     <div className="metric-grid workbook-metrics">
       <button className="metric" onClick={clear}><p>Activities in view</p><strong>{filtered.length}<small> / {activities.length}</small></strong><span>Click to clear all filters</span></button>
       <button className={`metric ${healthFilter === 'completed' ? 'metric-active' : ''}`} onClick={() => setHealthFilter(healthFilter === 'completed' ? 'All date statuses' : 'completed')}><p>Completed</p><strong className="green-number">{complete}</strong><span>Marked complete in the source</span></button>
       <button className={`metric ${healthFilter === 'escalation' ? 'metric-active' : ''}`} onClick={() => setHealthFilter(healthFilter === 'escalation' ? 'All date statuses' : 'escalation')}><p>Escalation</p><strong className="red-number">{escalated}</strong><span>TBD, missing dates or overdue end</span></button>
       <button className={`metric ${alignment === 'Not aligned' ? 'metric-active' : ''}`} onClick={() => setAlignment(alignment === 'Not aligned' ? 'All alignment' : 'Not aligned')}><p>PwC / FRM not aligned</p><strong>{unaligned}</strong><span>Source says No or ratings differ</span></button>
     </div>
+    {lead && <section className="lead-breakdowns" aria-label="FRM lead breakdown">
+      <article><h2>FRM priorities</h2>{[...new Set(activities.map(p=>rating(p.frmPriority)))].map(r=><button key={r} onClick={()=>setFrmRatings(frmRatings.includes(r)?frmRatings.filter(v=>v!==r):[r])} aria-pressed={frmRatings.includes(r)}>{r}<strong>{activities.filter(p=>rating(p.frmPriority)===r).length}</strong></button>)}</article>
+      <article><h2>Categories</h2>{[...new Set(activities.map(p=>p.category||'Not supplied'))].sort().map(c=><button key={c} onClick={()=>setCategories(categories.includes(c)?categories.filter(v=>v!==c):[c])} aria-pressed={categories.includes(c)}>{c}<strong>{activities.filter(p=>(p.category||'Not supplied')===c).length}</strong></button>)}</article>
+      <article><h2>PwC ownership</h2>{owners.options.map(owner=><button key={owner} onClick={()=>setOwners(selectedOwners.includes(owner)?selectedOwners.filter(v=>v!==owner):[owner])} aria-pressed={selectedOwners.includes(owner)}>{owner}<strong>{activities.filter(p=>owners.resolve(p.pwcOwners).includes(owner)).length}</strong></button>)}<p>Shared projects count under each owner.</p></article>
+    </section>}
     <section className="panel workbook-filter-panel" aria-label="Activity filters">
       <div className="filter-heading"><h2>Find your projects</h2><button className="button" onClick={clear}>Clear all filters</button></div>
-      <div className="people-filters">
-        <ChoiceFilter title="FRM lead" options={leads.options} selected={selectedLeads} onChange={setLeads} />
+      <div className={`people-filters ${lead?'lead-scoped-filters':''}`}>
+        {!lead && <ChoiceFilter title="FRM lead" options={leads.options} selected={selectedLeads} onChange={setLeads} />}
         <ChoiceFilter title="PwC owner" options={owners.options} selected={selectedOwners} onChange={setOwners} />
         <ChoiceFilter title="FRM priority" options={[...new Set(activities.map(p => rating(p.frmPriority)))]} selected={frmRatings} onChange={setFrmRatings} />
         <ChoiceFilter title="PwC priority" options={[...new Set(activities.map(p => rating(p.pwcPriority)))]} selected={pwcRatings} onChange={setPwcRatings} />
