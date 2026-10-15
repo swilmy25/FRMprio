@@ -1,11 +1,11 @@
-export const SOURCE_STORAGE = 'frmprio.prioritization.v1'
-export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][] }
+export const SOURCE_STORAGE = 'frmprio.prioritization.v2'
+export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][]; includedColumns?: number[]; sections?: Record<string,string>; publicationId?: string }
 export type SourceActivity = {
   id: string; row: number; ref: string; name: string; section: string;
   pwcOwners: string; frmLeads: string; staffing: string; frmPriority: string; pwcPriority: string; alignment: string;
   category: string; activityType: string; estimate: number | null; actual: number | null; remaining: number | null;
   controls: string; completedControls: string; outstandingControls: string;
-  originalDue: string; revisedDue: string; startRaw: string; start: string | null; end: string | null; endBasis: string;
+  originalDue: string; revisedDue: string; startRaw: string; start: string | null; end: string | null; endBasis: string; endRaw: string; completed: boolean;
   delay: string; timeUsed: string; notes: string; response: string;
   perspectives: Record<'a' | 'b' | 'c' | 'd' | 'e', string>; warnings: string[]; status: string;
 }
@@ -35,36 +35,41 @@ export function splitPerspectives(text: string): SourceActivity['perspectives'] 
 export function isSourceSnapshot(value: unknown): value is SourceSnapshot {
   if (!value || typeof value !== 'object') return false
   const v = value as SourceSnapshot
-  return v.kind === 'frmprio.prioritization.v1' && typeof v.fileName === 'string' && typeof v.tabName === 'string' && typeof v.importedAt === 'string' && Number.isFinite(Date.parse(v.importedAt)) && Array.isArray(v.rows) && v.rows.length <= 10000 && v.rows.every(row => Array.isArray(row) && row.length <= 200 && row.every(cell => typeof cell === 'string'))
+  return v.kind === 'frmprio.prioritization.v1' && typeof v.fileName === 'string' && typeof v.tabName === 'string' && typeof v.importedAt === 'string' && Number.isFinite(Date.parse(v.importedAt)) && Array.isArray(v.rows) && v.rows.length <= 10000 && v.rows.every(row => Array.isArray(row) && row.length <= 200 && row.every(cell => typeof cell === 'string')) && (v.includedColumns === undefined || Array.isArray(v.includedColumns) && v.includedColumns.every(n=>Number.isInteger(n) && n>=0 && n<200)) && (v.sections === undefined || !!v.sections && typeof v.sections==='object' && Object.values(v.sections).every(s=>['Active portfolio','Deprioritized','Completed'].includes(s))) && (v.publicationId===undefined || typeof v.publicationId==='string')
 }
 export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
   const header = snapshot.rows.findIndex(row => /task\s*\/\s*activity/i.test(row[2] ?? '') && /FRM Lead/i.test(row[5] ?? '') && /Owner/i.test(row[4] ?? ''))
   if (header < 0) throw new Error('The Prioritization column layout is unrecognized. Expected Task / Activity in C, owners in E, and FRM Lead in F.')
+  const dedicatedEnd = /(?:projected|actual).*end/i.test(snapshot.rows[header][23] ?? '')
+  const included = (column:number) => !snapshot.includedColumns || snapshot.includedColumns.includes(column)
   let section = 'Active portfolio'
   const activities: SourceActivity[] = []
   const responseCounts = new Map<string, number>()
   for (const row of snapshot.rows.slice(header + 1)) if (row[2]?.trim() && row[21]?.trim()) responseCounts.set(row[21].trim(), (responseCounts.get(row[21].trim()) ?? 0) + 1)
   snapshot.rows.slice(header + 1).forEach((cells, index) => {
     const cell = (i: number) => (cells[i] ?? '').trim()
-    if (!cell(2)) { if (/depriorit/i.test(cell(1))) section = 'Deprioritized'; return }
+    if (!cell(2)) { if (/depriorit/i.test(cell(1))) section = 'Deprioritized'; else if (/^completed$/i.test(cell(1))) section='Completed'; return }
+    section = snapshot.sections?.[String(header+index+2)] ?? section
     const warnings: string[] = []
     const estimate = sourceNumber(cell(11)), actual = sourceNumber(cell(12)), remaining = sourceNumber(cell(13))
     const start = sourceDate(cell(22))
-    const revised = sourceDate(cell(17))
-    const range = cell(17).match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s*-\s*(\d{1,2}\/\d{1,2}\/\d{4})$/)
+    const endRaw = dedicatedEnd ? cell(23) : cell(17)
+    const completed = section==='Completed' || /^completed$/i.test(endRaw)
+    const revised = sourceDate(endRaw)
+    const range = endRaw.match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s*-\s*(\d{1,2}\/\d{1,2}\/\d{4})$/)
     const rangeEnd = range ? sourceDate(range[2]) : null
-    const end = revised ?? rangeEnd ?? sourceDate(cell(16))
-    const endBasis = revised ? 'Proposed updated due' : rangeEnd ? 'Updated due range endpoint' : end ? 'Original due only' : 'End unknown'
-    if(rangeEnd) warnings.push('R contains a due-date range. The last stated date is shown as an endpoint, not a single agreed deadline.')
+    const end = revised ?? rangeEnd ?? (dedicatedEnd ? null : sourceDate(cell(16)))
+    const endBasis = dedicatedEnd ? 'Projected/actual end · X' : revised ? 'Proposed updated due' : rangeEnd ? 'Updated due range endpoint' : end ? 'Original due only' : 'End unknown'
+    if(rangeEnd) warnings.push(`${dedicatedEnd?'X':'R'} contains a due-date range. The last stated date is shown as an endpoint, not a single agreed deadline.`)
     if(end && endBasis === 'Original due only') warnings.push('No precise revised due date; the timeline shows the original due date only.')
     const perspectives = splitPerspectives(cell(21))
-    if (estimate === null) warnings.push(`Estimated effort is unknown (L: ${cell(11) || 'blank'}).`)
-    if (actual === null) warnings.push(`Actual hours are unknown (M: ${cell(12) || 'blank'}).`)
-    if (remaining === null) warnings.push(`Remaining hours are unknown (N: ${cell(13) || 'blank'}).`)
+    if (included(11) && estimate === null) warnings.push(`Estimated effort is unknown (L: ${cell(11) || 'blank'}).`)
+    if (included(12) && actual === null) warnings.push(`Actual hours are unknown (M: ${cell(12) || 'blank'}).`)
+    if (included(13) && remaining === null) warnings.push(`Remaining hours are unknown (N: ${cell(13) || 'blank'}).`)
     if (remaining !== null && remaining < 0) warnings.push(`Reported remaining is ${remaining} hrs; actuals exceed the estimate. This is an estimate overrun, not negative future work.`)
     if (estimate !== null && actual !== null && remaining !== null && Math.abs(estimate - actual - remaining) > 0.05) warnings.push('L − M does not reconcile with N; values are preserved as reported.')
     if (!start) warnings.push(`No precise start date (W: ${cell(22) || 'blank'}); no start date is inferred.`)
-    if (!end) warnings.push(`No single end date (R: ${cell(17) || 'blank'}, Q: ${cell(16) || 'blank'}).`)
+    if (!end && !completed && !/^(N\/A|Ongoing)/i.test(endRaw)) warnings.push(`No precise end date (${dedicatedEnd?'X':'R'}: ${endRaw || 'blank'}).`)
     if (start && end && start > end) warnings.push('Source start date is after the due date; the timeline window is not plotted.')
     if (cell(9).toLowerCase() === 'no') warnings.push('FRM and PwC alignment is explicitly marked No (J).')
     if (/^done\b/i.test(cell(20)) && remaining !== null && remaining > 0) warnings.push('U says Done but N still reports remaining hours; completion status needs review.')
@@ -74,8 +79,8 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     const bHours = perspectives.b.match(/\b(\d+(?:\.\d+)?)\s*(?:hrs|hours)\b/i)
     if (aHours && actual !== null && Number(aHours[1]) !== actual) warnings.push(`V(a) reports ${aHours[1]} hrs versus ${actual} actual hrs in M. The two figures are not merged.`)
     if (bHours && remaining !== null && Number(bHours[1]) !== remaining) warnings.push(`V(b) reports ${bHours[1]} hrs versus ${remaining} remaining hrs in N. Confirm scope and timing.`)
-    const status = section === 'Deprioritized' ? 'Deprioritized' : actual !== null && estimate !== null && actual > estimate ? 'Effort overrun' : /^done\b/i.test(cell(20)) && remaining === 0 ? 'Reported complete' : /on track/i.test(`${cell(18)} ${cell(21)}`) ? 'Reported on track' : cell(18) && !/^(N\/A|No Delay)/i.test(cell(18)) ? 'Delay noted' : /\bat risk\b/i.test(cell(20)) ? 'Risk noted' : actual === 0 ? 'No hours recorded' : 'Status not supplied'
-    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: cell(2), section, pwcOwners: cell(4), frmLeads: cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, end, endBasis, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(23), perspectives, warnings, status })
+    const status = completed ? 'Completed' : section === 'Deprioritized' ? 'Deprioritized' : actual !== null && estimate !== null && actual > estimate ? 'Effort overrun' : /^done\b/i.test(cell(20)) && remaining === 0 ? 'Reported complete' : /on track/i.test(`${cell(18)} ${cell(21)}`) ? 'Reported on track' : cell(18) && !/^(N\/A|No Delay)/i.test(cell(18)) ? 'Delay noted' : /\bat risk\b/i.test(cell(20)) ? 'Risk noted' : actual === 0 ? 'No hours recorded' : 'Status not supplied'
+    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: cell(2), section, pwcOwners: cell(4), frmLeads: cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, end, endBasis, endRaw, completed, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(dedicatedEnd?24:23), perspectives, warnings, status })
   })
   return activities
 }
@@ -83,4 +88,47 @@ export function priorityRank(value: string): number { return /critical/i.test(va
 export function knownTotals(activities: SourceActivity[]) {
   const sum = (key: 'estimate' | 'actual' | 'remaining') => ({ hours: activities.reduce((n, p) => n + (p[key] ?? 0), 0), known: activities.filter(p => p[key] !== null).length })
   return { estimate: sum('estimate'), actual: sum('actual'), remaining: sum('remaining'), positiveRemaining: activities.reduce((n,p) => n + Math.max(0, p.remaining ?? 0),0), negativeRemaining: activities.filter(p => p.remaining !== null && p.remaining < 0).length }
+}
+
+
+export const ORANGE_COLUMNS = [2,4,5,6,7,8,9,10,22,23,24]
+export function orangeOnly(snapshot:SourceSnapshot):SourceSnapshot {
+  const header=snapshot.rows.find(row=>/task\s*\/\s*activity/i.test(row[2]??'') && /FRM Lead/i.test(row[5]??''))
+  if(header && !/(?:projected|actual).*end/i.test(header[23]??''))throw new Error('Use the current Prioritization layout with projected end in X and staffing in Y.')
+  const sections:Record<string,string>={};let current='Active portfolio'
+  snapshot.rows.forEach((row,index)=>{if(!row[2]?.trim()){if(/depriorit/i.test(row[1]??'')) current='Deprioritized';else if(/^completed$/i.test(row[1]??'')) current='Completed'}else if(!/task\s*\/\s*activity/i.test(row[2])) sections[String(index+1)]=snapshot.sections?.[String(index+1)]??current})
+  return {...snapshot,includedColumns:ORANGE_COLUMNS,sections,rows:snapshot.rows.map(row=>Array.from({length:25},(_,i)=>ORANGE_COLUMNS.includes(i)?row[i]??'':''))}
+}
+export function rating(value:string):string {
+ const match=value.trim().match(/^(Critical|High|Moderate|Medium|Low|Not Applicable)/i)
+ return match ? match[1].toLowerCase()==='not applicable'?'Not applicable':match[1][0].toUpperCase()+match[1].slice(1).toLowerCase() : 'Not supplied'
+}
+export function alignmentState(p:SourceActivity):string {
+ if(/^no$/i.test(p.alignment))return 'Not aligned'
+ const a=priorityRank(p.frmPriority),b=priorityRank(p.pwcPriority)
+ if(a<4 && b<4 && a!==b)return 'Not aligned'
+ if(/^yes$/i.test(p.alignment))return 'Aligned'
+ if(/^n\/a$/i.test(p.alignment))return 'Not applicable'
+ return 'Not recorded'
+}
+export function peopleDirectory(values:string[],fullNames=false):{options:string[];resolve:(value:string)=>string[]} {
+ const chunks=(v:string)=>v.split(/[,/&]|\band\b/i).map(s=>s.trim().replace(/\s+/g,' ')).filter(Boolean)
+ const preliminary=values.flatMap(v=>chunks(v).flatMap(s=>{const words=s.split(' ');return fullNames&&words.length>2&&words.length%2===0?Array.from({length:words.length/2},(_,i)=>words.slice(i*2,i*2+2).join(' ')):[s]}))
+ const candidates=[...new Set(preliminary)]
+ const resolve=(v:string)=>chunks(v).flatMap(s=>{const words=s.split(' ');return fullNames&&words.length>2&&words.length%2===0?Array.from({length:words.length/2},(_,i)=>words.slice(i*2,i*2+2).join(' ')):[s]}).map(s=>{if(s.includes(' '))return s;const found=candidates.filter(n=>n.split(' ')[0]===s&&n.includes(' '));return found.length===1?found[0]:s})
+ return {options:[...new Set(values.flatMap(resolve))].sort(),resolve}
+}
+export type DateHealth={tone:'completed'|'escalation'|'scheduled'|'ongoing';label:string;reasons:string[]}
+export function dateHealth(p:SourceActivity,today:string):DateHealth {
+ if(p.completed)return {tone:'completed',label:'Completed',reasons:['Marked completed in the source.']}
+ const reasons:string[]=[]
+ const exempt=(s:string)=>/^(N\/A|Ongoing)/i.test(s)
+ if(!p.start&&!exempt(p.startRaw))reasons.push(/tbd|pending/i.test(p.startRaw)?'Start date TBD':'Start date missing or unresolved')
+ if(!p.end&&!exempt(p.endRaw))reasons.push(/tbd|pending/i.test(p.endRaw)?'End date TBD':'End date missing or unresolved')
+ if(p.start&&p.end&&p.start>p.end)reasons.push('Start date is after end date')
+ if(p.end&&p.end<today)reasons.push('End date has passed; completion is not recorded')
+ if(p.start&&p.start<today&&/not started/i.test(p.startRaw))reasons.push('Projected start date has passed')
+ if(reasons.length)return {tone:'escalation',label:'Escalation',reasons}
+ if(!p.end)return {tone:'ongoing',label:'Ongoing / not dated',reasons:['Source is ongoing or dates are not applicable.']}
+ return {tone:'scheduled',label:p.end===today?'Due today':'Scheduled',reasons:[]}
 }

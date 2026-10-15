@@ -1,4 +1,4 @@
-import { isSourceSnapshot, parseSource } from './prioritization'
+import { isSourceSnapshot, orangeOnly, parseSource } from './prioritization'
 import type { SourceSnapshot } from './prioritization'
 export async function readSourceFile(file: File): Promise<SourceSnapshot | null> {
   if (/\.xlsx$/i.test(file.name)) {
@@ -24,14 +24,14 @@ export async function readSourceFile(file: File): Promise<SourceSnapshot | null>
     }}
     const snapshot: SourceSnapshot = {kind:'frmprio.prioritization.v1', fileName:file.name, tabName:'Prioritization', importedAt:new Date().toISOString(), rows}
     parseSource(snapshot)
-    return snapshot
+    return orangeOnly(snapshot)
   }
   const parsed: unknown = JSON.parse(await file.text())
-  if (isSourceSnapshot(parsed)) { parseSource(parsed); return parsed }
+  if (isSourceSnapshot(parsed)) { parseSource(parsed); return orangeOnly(parsed) }
   if (parsed && typeof parsed==='object' && 'rows' in parsed && 'title' in parsed) {
     const value = parsed as {rows: unknown; title: unknown; fetchedAt?: number}
     const snapshot = {kind:'frmprio.prioritization.v1', fileName:'Google Sheets export', tabName:value.title, importedAt:new Date(value.fetchedAt ?? Date.now()).toISOString(), rows:value.rows}
-    if (isSourceSnapshot(snapshot)) {parseSource(snapshot);return snapshot}
+    if (isSourceSnapshot(snapshot)) {parseSource(snapshot);return orangeOnly(snapshot)}
   }
   return null
 }

@@ -1,33 +1,67 @@
-# FRMprio project dashboard
+# FRMprio
 
-A React and TypeScript dashboard for coordinating FRM and PwC project delivery.
+React and TypeScript dashboard for FRM / PwC project coordination, published through GitHub Pages.
 
-## Features
+## Current source
 
-- Multi-project Gantt timeline and projected-date list.
-- Status, independent PwC and FRM priorities, and owners for both teams.
-- Category, activity type, delivery assignments, context and priority decisions.
-- Planned delivery, remaining planned work, extra completed work and extra requested work, in controls and hours.
-- Future capacity gaps and full-scope hour estimates.
-- Search, status filtering and priority sorting.
-- Editable projects with browser-local storage and JSON export/import.
+The user-authorized snapshot in `src/data/prioritization.json` comes only from the **Prioritization** tab in the latest supplied workbook. It contains 48 activities, including 3 explicitly completed activities. Only columns marked orange in the workbook are included:
 
-The Prioritization snapshot supplied by the user is bundled and displayed by default, with their explicit authorization to publish. It contains 46 activities. Manual-project sample data remains available only through the Manual projects view. Use **Import** to select an Excel workbook containing the **Prioritization** tab or a source JSON snapshot. The dashboard maps the actual source into a separate workbook view, including V (five delivery perspectives), W (start date) and X (current staffing). Only the Prioritization tab is included as src/data/prioritization.json. The other workbook tabs and original Excel file are not included. Published source details are accessible to viewers of the Pages site and repository. Imported values persist in the current browser; subsequent reloads do not require another upload. A different browser or cleared storage requires an import again until live Google access is configured.
+| Column | Field |
+| --- | --- |
+| C | Task / activity |
+| E | PwC owners |
+| F | FRM lead |
+| G | FRM proposed priority / timing |
+| H | Category |
+| I | PwC proposed priority |
+| J | Alignment on prioritization |
+| K | Activity type |
+| W | Projected / actual start |
+| X | Projected end |
+| Y | Staffing support planned / currently |
 
-Data is saved in the current browser only. Local project records have no shared database. A separate read-only Google Sheets source panel can read the private Prioritization tab after OAuth setup; recognized Prioritization columns update the source-backed Gantt view without overwriting manual project records. Export JSON to back up or transfer projects; importing replaces the current project set after confirmation.
+The source uses colored markers in row 1, with labels in row 2. Excluded cells are empty in the published snapshot. Section membership (active, deprioritized, completed) is retained as structural metadata. No other workbook tabs are included. Hours, controls, original due dates and the blue column V narrative are excluded. Staffing support is shown only in the selected activity's detail view, not in overview rows, filters, search, or the raw source preview.
 
-## Development
+The user explicitly authorized publishing their supplied Prioritization data. This static snapshot and the app code are accessible to viewers of the GitHub Pages site and repository. Do not add unrelated tabs or other private uploads without authorization.
 
-Use Node.js 24 and npm 11. From `/workspace/FRMprio`:
+## Filters and dates
+
+- Multi-select filters for individual FRM leads and PwC owners, separate FRM/PwC priority ratings, and category. Shared owners and shared leads are matched individually; full source wording remains in details.
+- OR within a multi-select filter, AND across different filters. Active selections can be removed individually or cleared together.
+- Alignment filters include explicit No and differing known ratings. An inconsistent Yes is shown as needing alignment, with its original source value preserved in details. Blank/TBD is not treated as aligned.
+- Clickable completed, escalation and alignment summary cards; section/date-status filters and priority sorting.
+- W is the start and X is the end. Y is staffing. No fallback to excluded historical dates. Due-date ranges retain the source range and use the final stated date as the timeline endpoint.
+- Completed section membership or X marked Completed takes precedence and is green. If no actual completion date was supplied, the chart says so instead of inventing a date or duration.
+- Unfinished work with TBD, pending/missing/unresolved dates, invalid ordering, or an end before today is red for escalation. Dates are checked in America/Los_Angeles and rechecked each minute and on visibility changes. An end today is not yet overdue. Past actual starts alone are not overdue. N/A/ongoing PMO dates remain undated.
+- Both dates appear as text alongside the Gantt. Bars require both dates; a diamond means end only. No progress percentages are inferred.
+
+## Browser data and live Google Sheets
+
+New visitors see the bundled snapshot without an import. Existing legacy source caches are ignored so the fresh publication is shown. Newer publications replace prior bundled defaults while preserving separately imported snapshots and manual project edits. Manual / workbook view choice persists.
+
+**Import** accepts a current-layout Excel workbook containing Prioritization or a source JSON snapshot. Only the selected orange columns and structural sections are retained; cached formula errors are not evaluated. Imports persist locally in that browser. **Export** downloads the active snapshot or separate manual projects. Different browsers and cleared storage require the published default, another import or live access. The manual-project sample planner remains available separately.
+
+Read-only Google sign-in and five-minute refresh while open, visible and authorized are implemented. Real Google access is still pending; OAuth/API tests use mocks. Tokens stay in memory, expire, and are cleared on disconnect/reload. Source snapshots already imported/refreshed remain in browser storage. Disconnect does not revoke Google's account-level app grant or erase saved workbook data.
+
+To enable private live access:
+
+1. Enable Google Sheets API in a Google Cloud project and configure OAuth consent / permitted test users or an eligible Internal audience.
+2. Create a Web OAuth client with the exact deployed origin in Authorized JavaScript origins. For the default Pages address this is `https://swilmy25.github.io`, without `/FRMprio/`. Organization policy may require administrator approval.
+3. Enter its public client ID in the dashboard connection panel, or configure `VITE_GOOGLE_CLIENT_ID` before building. Never enter a client secret or token in Vite variables.
+4. Sign in with an account authorized to view the linked spreadsheet. Sheet ID `8496958` selects Prioritization by ID. Recognized source columns refresh the workbook view without overwriting manual projects.
+
+Dashboard sign-in does not give this chat persistent Google account access. There is no unattended server sync or shared editing backend.
+
+## Development and validation
+
+Use Node.js 24 and npm 11, from `/workspace/FRMprio`:
 
 ```sh
 npm ci
 npm run dev -- --host 127.0.0.1 --port 5173 --strictPort
 ```
 
-The explicit host avoids restricted network-interface enumeration in the cloud runtime.
-
-## Validation
+The explicit host avoids restricted interface enumeration in the cloud runtime.
 
 ```sh
 npm run lint
@@ -35,68 +69,19 @@ npm run build
 npm test
 ```
 
-The build checks TypeScript and creates `dist/`. Browser tests cover the scope calculations, project edits and persistence, filtering, import/export and mobile layout. Tests use system Chromium when available; otherwise install the Playwright browser with `npx playwright install chromium`. The cloud runtime may require browser execution outside the restricted sandbox.
+The build checks TypeScript. The 19 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, and default/live source loading. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
 
-## Manual project calculation rules
+## GitHub Pages deployment
 
-- Remaining plan = baseline minus completed planned work, calculated independently for controls and hours.
-- Extra work is kept separate from the baseline. Completed planned work cannot exceed its baseline.
-- Future demand = remaining planned hours + extra requested hours.
-- Project capacity gap = max(0, future demand − available future hours).
-- Portfolio gap sums individual project gaps before capacity reallocation.
-- Full-scope hours = baseline + extra completed hours + extra requested hours.
-- Extra completed hours are excluded from future demand.
-- Gantt progress reflects completed planned hours, not control count or elapsed time.
+`.github/workflows/pages.yml` deploys on pushes to main. In repository Settings → Pages, choose **GitHub Actions** as the source. Builds use `PAGES_BASE_PATH=/FRMprio/`. The expected site is `https://swilmy25.github.io/FRMprio/`; verify the deployment workflow before claiming a pushed update is live. This cloud runtime may block GitHub API and Pages HTTP verification even when Git push works.
 
-Available future hours are explicitly entered per project. Estimates do not determine working-day capacity, shared-owner conflicts, FTE requirements or a new completion date. Priority changes are proposed decisions recorded with context, not automatic allocations.
+Optional repository Actions variable `VITE_GOOGLE_CLIENT_ID` supplies the public Google client ID at build time. Do not change repository visibility or add Google secrets to work around access failures.
 
-## Private live Google Sheets connection
-
-The dashboard's “Connect Google Sheets” panel uses Google Identity Services and the Google Sheets API. It requests `https://www.googleapis.com/auth/spreadsheets.readonly`, reads spreadsheet `1jSFvzJaWn_QlN53gygctoY_Y2Avt_jh3pm-ybYXuizc`, and selects the Prioritization tab by sheet ID `8496958` rather than guessing its name.
-
-One-time account setup, which must be performed by the Google project owner:
-
-1. In Google Cloud Console, create or select a project and enable Google Sheets API.
-2. Configure Google Auth Platform consent. Use an Internal audience when eligible, or add permitted test users for an External app in testing. Organization policy may require administrator approval.
-3. Create a Web application OAuth client. Add the dashboard's actual origin (scheme, hostname and port, without a path) to Authorized JavaScript origins. Use HTTPS for hosted production. Local development may use a permitted localhost origin. No redirect URI is needed for the Identity Services popup token flow.
-4. Enter the public client ID in the dashboard connection panel. Alternatively set `VITE_GOOGLE_CLIENT_ID` before the Vite build. Never put a client secret or access token in Vite variables.
-5. Sign in with an account that already has permission to view the spreadsheet and approve read-only Sheets access.
-
-Google account configuration and private-sheet access have not been exercised yet. Browser tests simulate OAuth and API responses; they validate integration behavior, not real account authorization.
-
-Source reads preserve Google's formatted cell values and empty cells. V–X are highlighted. All populated source columns are displayed, paged at 25 rows. Automatic refresh runs every five minutes while the page is open, visible and authorized. Access-token expiry pauses refresh and requires sign-in again. There is no unattended/background server synchronization.
-
-Tokens remain only in memory and are cleared on disconnect/reload; the public client ID may be retained in browser storage. Disconnect clears the local session and source view, but does not revoke the app's grant in Google account settings. Source data is not sent to a dashboard server; recognized snapshots are stored locally in the browser. “Export source for mapping” downloads a token-free JSON snapshot that can be provided to Codex to verify headers, missing values and the project mapping. Recognized Prioritization columns are mapped automatically into the workbook view, while the manual project records remain separate.
-
-Connecting the dashboard is separate from connecting Google Drive to a Codex chat. No Google Drive connector or account-linking tool was available to this session. Browser OAuth does not grant the assistant persistent access to your Google account.
-
-## Publish with GitHub Pages
-
-The repository includes `.github/workflows/pages.yml`. A push to `main` builds and deploys the dashboard to the repository Pages path `/FRMprio/`. The development server continues to use `/`.
-
-1. In GitHub repository **Settings → Pages → Build and deployment**, choose **GitHub Actions** as the source. Depending on repository visibility and account plan, GitHub Pages may require an eligible plan. Do not change repository visibility to work around this without the owner's approval.
-2. Push the project to `main`. If it is already pushed, run **Actions → Deploy dashboard to GitHub Pages → Run workflow** after selecting the Pages source.
-3. Open the URL reported by the successful deployment. The expected default URL is `https://swilmy25.github.io/FRMprio/`; this is not a verified deployment until the workflow succeeds and the page responds.
-
-For Google sign-in, the Authorized JavaScript origin is `https://swilmy25.github.io` (without the repository path). Optionally set repository Actions variable `VITE_GOOGLE_CLIENT_ID` to the public OAuth Web client ID before building. The workflow reads this variable; otherwise enter the ID in the dashboard UI. No Google client secret is used.
-
-Publishing this static app exposes its code and the user-authorized Prioritization snapshot to viewers of the Pages site. Future snapshots imported by a viewer remain browser-local until explicitly bundled and published. Private Google Sheets rows are fetched only in an authorized viewer's browser. There is no server-side Google credential, source-data upload, or server-side storage of imported source data. Project edits remain local to each browser.
-
-Local Pages build check:
+Production path check:
 
 ```sh
 PAGES_BASE_PATH=/FRMprio/ npm run build
 npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
 ```
 
-Changing to a custom domain or another Pages path requires updating `PAGES_BASE_PATH` in the deployment workflow and the Google OAuth authorized origin.
-
-## Source-backed workbook mapping
-
-The Prioritization schema uses B reference, C activity, D control scope, E PwC owners, F FRM leads, G FRM priority/timing, H category, I PwC priority, J stated alignment, K activity type, L current estimated effort, M actuals incurred, N reported remaining, O/P completed/outstanding control counts, Q original due, R proposed updated due, S delay causes, T time used, U notes/actions, V five delivery perspectives, W start date, and X staffing support.
-
-Source values are preserved as quoted context, including cached formula-error markers. Dates and numbers that cannot be parsed remain unknown. Current estimates are not silently interpreted as original approved baseline, and actual effort is not treated as completed planned work. Original and revised dates are retained separately. When R has a date range, its last stated date is identified as a range endpoint. If only Q has a precise date, the chart labels it as original due only. Bars require both start and end dates; missing starts use due markers rather than fabricated windows. Progress percentages are not inferred.
-
-Portfolio summaries show known numeric subtotals and unknown counts. Positive remaining hours exclude negative reported balances; negative source values are still displayed and counted in the signed source subtotal. Column V text is not added to N because overlap may exist. No capacity gap is computed without a confirmed baseline, incremental work classification and available future capacity. Formal status is not supplied by this source: displayed indications are attributed to source notes, section placement or recorded effort, and users can filter them. Duplicate reference numbers use sheet-row IDs; repeated narratives and conflicting numeric statements are flagged.
-
-Most tests use synthetic data; the default-view test also validates the explicitly published source snapshot. The source data in src/data/prioritization.json is included in the deployment with the user's authorization. Do not add unrelated tabs, future private uploads or private screenshots to the repository without authorization. Files imported later into a viewer's browser do not automatically become part of a GitHub Pages deployment. Stored source snapshots take precedence over the bundled default, preserving local imports and live updates. The Manual projects / Workbook view preference also persists across reloads.
+A custom domain or different Pages path requires updating the build base and Google authorized origin.

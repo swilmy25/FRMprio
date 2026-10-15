@@ -1,7 +1,7 @@
 export const SPREADSHEET_ID = '1jSFvzJaWn_QlN53gygctoY_Y2Avt_jh3pm-ybYXuizc'
 export const SHEET_ID = 8496958
 export const SHEETS_SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly'
-export type SheetSnapshot = { title: string; rows: string[][]; fetchedAt: number }
+export type SheetSnapshot = { title: string; rows: string[][]; fetchedAt: number; sections?: Record<string,string> }
 export type TokenResponse = { access_token?: string; expires_in?: number; error?: string; scope?: string }
 type GoogleIdentity = { accounts: { oauth2: { initTokenClient: (config: {
   client_id: string; scope: string; include_granted_scopes: boolean;

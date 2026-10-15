@@ -1,51 +1,119 @@
-import { useMemo, useState } from 'react'
-import { knownTotals, parseSource, priorityRank } from './prioritization'
-import type { SourceSnapshot, SourceActivity } from './prioritization'
+import { useEffect, useMemo, useState } from 'react'
+import { alignmentState, dateHealth, parseSource, peopleDirectory, priorityRank, rating } from './prioritization'
+import type { SourceActivity, SourceSnapshot } from './prioritization'
 
-const n = (value: number | null) => value === null ? 'Unknown' : value.toLocaleString('en-US', { maximumFractionDigits: 1 })
-const date = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
 const day = 86400000
 const value = (iso: string) => Date.parse(`${iso}T00:00:00Z`)
-function Pill({ text }: { text: string }) { const theme = /^(high|critical)/i.test(text) ? 'high' : /^(moderate|medium)/i.test(text) ? 'medium' : /^low/i.test(text) ? 'low' : ''; return <span className={`badge ${theme}`}>{text || 'Not supplied'}</span> }
-
+const date = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+function Pill({ text }: { text: string }) {
+  const theme = /^(high|critical)/i.test(text) ? 'high' : /^(moderate|medium)/i.test(text) ? 'medium' : /^low/i.test(text) ? 'low' : ''
+  return <span className={`badge ${theme}`}>{text || 'Not supplied'}</span>
+}
+function ChoiceFilter({ title, options, selected, onChange }: { title: string; options: string[]; selected: string[]; onChange: (next: string[]) => void }) {
+  return <details className="choice-filter"><summary>{title}<span>{selected.length ? `${selected.length} selected` : 'All'}</span></summary><div className="choice-menu" role="group" aria-label={title}>
+    <button className="clear-choice" onClick={() => onChange([])}>Clear {title.toLowerCase()}</button>
+    {options.map(option => <label key={option}><input type="checkbox" aria-label={`${title}: ${option}`} checked={selected.includes(option)} onChange={() => onChange(selected.includes(option) ? selected.filter(s => s !== option) : [...selected, option])} />{option}</label>)}
+  </div></details>
+}
 export default function WorkbookDashboard({ snapshot }: { snapshot: SourceSnapshot }) {
   const activities = useMemo(() => parseSource(snapshot), [snapshot])
+  const leads = useMemo(() => peopleDirectory(activities.map(p => p.frmLeads)), [activities])
+  const owners = useMemo(() => peopleDirectory(activities.map(p => p.pwcOwners), true), [activities])
   const [selectedId, setSelectedId] = useState(activities[0]?.id ?? '')
   const [search, setSearch] = useState('')
-  const [category, setCategory] = useState('All categories')
+  const [selectedLeads, setLeads] = useState<string[]>([])
+  const [selectedOwners, setOwners] = useState<string[]>([])
+  const [frmRatings, setFrmRatings] = useState<string[]>([])
+  const [pwcRatings, setPwcRatings] = useState<string[]>([])
+  const [categories, setCategories] = useState<string[]>([])
+  const [alignment, setAlignment] = useState('All alignment')
   const [section, setSection] = useState('All sections')
-  const [status, setStatus] = useState('All source statuses')
+  const [healthFilter, setHealthFilter] = useState('All date statuses')
   const [sort, setSort] = useState('Sheet order')
   const [view, setView] = useState('Timeline')
-  const filtered = activities.filter(p => `${p.name} ${p.pwcOwners} ${p.frmLeads} ${p.staffing} ${p.notes} ${p.response}`.toLowerCase().includes(search.toLowerCase()) && (category === 'All categories' || p.category === category) && (section === 'All sections' || p.section === section) && (status === 'All source statuses' || p.status === status)).sort((a,b) => sort === 'PwC priority' ? priorityRank(a.pwcPriority) - priorityRank(b.pwcPriority) : sort === 'FRM priority' ? priorityRank(a.frmPriority) - priorityRank(b.frmPriority) : a.row-b.row)
+  const [today, setToday] = useState(() => new Date().toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' }))
+  useEffect(() => { const update=()=>setToday(new Date().toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'})); const timer=setInterval(update,60000); document.addEventListener('visibilitychange',update); return()=>{clearInterval(timer);document.removeEventListener('visibilitychange',update)} },[])
+  const matches = (selected: string[], values: string[]) => !selected.length || selected.some(s => values.includes(s))
+  const filtered = activities.filter(p => `${p.name} ${p.pwcOwners} ${p.frmLeads} ${p.category} ${p.activityType}`.toLowerCase().includes(search.toLowerCase())
+    && matches(selectedLeads, leads.resolve(p.frmLeads)) && matches(selectedOwners, owners.resolve(p.pwcOwners))
+    && matches(frmRatings, [rating(p.frmPriority)]) && matches(pwcRatings, [rating(p.pwcPriority)]) && matches(categories, [p.category || 'Not supplied'])
+    && (alignment === 'All alignment' || alignmentState(p) === alignment)
+    && (section === 'All sections' || p.section === section)
+    && (healthFilter === 'All date statuses' || dateHealth(p, today).tone === healthFilter)
+  ).sort((a, b) => sort === 'PwC priority' ? priorityRank(a.pwcPriority) - priorityRank(b.pwcPriority) : sort === 'FRM priority' ? priorityRank(a.frmPriority) - priorityRank(b.frmPriority) : a.row - b.row)
   const selected = filtered.find(p => p.id === selectedId) ?? filtered[0]
-  const totals = knownTotals(filtered)
-  const warnings = filtered.filter(p => p.warnings.length).length
+  const complete = filtered.filter(p => p.completed).length
+  const escalated = filtered.filter(p => dateHealth(p, today).tone === 'escalation').length
+  const unaligned = filtered.filter(p => alignmentState(p) === 'Not aligned').length
   const dated = filtered.flatMap(p => [p.start, p.end].filter((d): d is string => !!d))
-  const minimum = dated.length ? Math.min(...dated.map(value)) - day * 4 : value('2026-10-01')
+  const minimum = dated.length ? Math.min(...dated.map(value)) - day * 4 : value(today) - day * 7
   const maximum = dated.length ? Math.max(...dated.map(value)) + day * 7 : minimum + day * 90
-  const duration = Math.max(day*7, maximum-minimum)
-  const ticks = Array.from({length:6},(_, i) => date(new Date(minimum+duration*i/5).toISOString().slice(0,10)))
+  const duration = Math.max(day * 7, maximum - minimum)
+  const ticks = Array.from({ length: 6 }, (_, i) => new Date(minimum + duration * i / 5).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'}))
+  const todayPercent = (value(today) - minimum) / duration * 100
+  const clear = () => { setSearch(''); setLeads([]); setOwners([]); setFrmRatings([]); setPwcRatings([]); setCategories([]); setAlignment('All alignment'); setSection('All sections'); setHealthFilter('All date statuses') }
+  const active = [...selectedLeads.map(v => ['FRM lead', v, () => setLeads(selectedLeads.filter(s => s !== v))] as const), ...selectedOwners.map(v => ['PwC owner', v, () => setOwners(selectedOwners.filter(s => s !== v))] as const), ...frmRatings.map(v => ['FRM priority', v, () => setFrmRatings(frmRatings.filter(s => s !== v))] as const), ...pwcRatings.map(v => ['PwC priority', v, () => setPwcRatings(pwcRatings.filter(s => s !== v))] as const), ...categories.map(v => ['Category', v, () => setCategories(categories.filter(s => s !== v))] as const)]
   return <div className="workbook-dashboard">
-    <div className="source-snapshot-banner"><span>WORKBOOK SNAPSHOT</span><strong>{snapshot.tabName}</strong><p>{snapshot.fileName} · {activities.length} activities · imported {new Date(snapshot.importedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PT</p><p>Stored in this browser. This is a dated snapshot, not a live connection. Source rows and quoted context remain unchanged.</p></div>
-    <div className="metric-grid"><div className="metric"><p>Estimated total effort · L</p><strong>{n(totals.estimate.hours)}<small> hrs</small></strong><span>{totals.estimate.known}/{filtered.length} activities have numeric estimates</span></div><div className="metric"><p>Actuals / already incurred · M</p><strong>{n(totals.actual.hours)}<small> hrs</small></strong><span>{totals.actual.known}/{filtered.length} activities have numeric actuals</span></div><div className="metric"><p>Positive remaining effort · N</p><strong>{n(totals.positiveRemaining)}<small> hrs</small></strong><span>Known nonnegative values · {filtered.length-totals.remaining.known} unknown</span></div><div className="metric impact-metric"><p>Requires clarification</p><strong>{warnings}<small> activities</small></strong><span>Missing dates, source conflicts or unknowns</span></div></div>
-    <p className="source-calculation-note">L is the current effort estimate, not a confirmed original baseline. M is actual effort, not necessarily completed planned work. N totals {n(totals.remaining.hours)} hrs as reported, including {totals.negativeRemaining} negative value(s). Remaining capacity is not supplied, so a resource gap cannot yet be calculated.</p>
-    <section className="panel" aria-label="Workbook project timeline"><div className="panel-toolbar"><div className="tabs">{['Timeline','Projects'].map(t=><button key={t} className={view===t?'selected':''} onClick={()=>setView(t)}>{t}</button>)}</div><div className="filters"><input aria-label="Search source activities" placeholder="Search activities, owners or context…" value={search} onChange={e=>setSearch(e.target.value)}/><select aria-label="Filter source category" value={category} onChange={e=>setCategory(e.target.value)}><option>All categories</option>{[...new Set(activities.map(p=>p.category))].filter(Boolean).map(c=><option key={c}>{c}</option>)}</select><select aria-label="Filter source section" value={section} onChange={e=>setSection(e.target.value)}><option>All sections</option><option>Active portfolio</option><option>Deprioritized</option></select><select aria-label="Sort source activities" value={sort} onChange={e=>setSort(e.target.value)}><option>Sheet order</option><option>PwC priority</option><option>FRM priority</option></select></div></div>
-    <div className="source-status-filter"><label>Status indications<select aria-label="Filter source status" value={status} onChange={e=>setStatus(e.target.value)}><option>All source statuses</option>{[...new Set(activities.map(p=>p.status))].map(s=><option key={s}>{s}</option>)}</select></label><span>Derived only from source notes / effort. No formal status column was supplied.</span></div>
-    <div className="timeline-scroll"><div className="workbook-table"><div className="row table-head workbook-row"><span>ACTIVITY / ACCOUNTABLE OWNERS</span><span>STATUS / PRIORITIES</span><span>EST. / ACTUAL / REMAINING</span>{view==='Timeline'?<div className="time-axis">{ticks.map((t,i)=><span key={i} style={{left:`${i/5*100}%`}}>{t}</span>)}</div>:<span>START / PROPOSED END</span>}</div>
-    {filtered.map(p=>{const validWindow=p.start && p.end && p.start<=p.end;return <button key={p.id} className={`row project-row workbook-row ${selected?.id===p.id?'selected-row':''}`} onClick={()=>setSelectedId(p.id)} aria-pressed={selected?.id===p.id}><div className="project-cell"><strong><small className="source-ref">#{p.ref} · row {p.row}</small>{p.name.split('\n')[0]}</strong><span><b>PwC</b> {p.pwcOwners || 'Not supplied'}<br/><b>FRM</b> {p.frmLeads || 'Not supplied'}</span></div><div className="source-status"><span className={`badge ${p.status==='Delay noted' || p.status==='Effort overrun'?'at-risk':p.section==='Deprioritized'?'blocked':''}`}>{p.status}</span><div><span>PwC</span><Pill text={p.pwcPriority}/><span>FRM</span><Pill text={p.frmPriority.split('(')[0].trim()}/></div></div><div className="source-hours"><strong>{n(p.estimate)} / {n(p.actual)} / <span className={p.remaining!==null && p.remaining<0?'negative':''}>{n(p.remaining)}</span></strong><small>hours · L / M / N</small>{p.warnings.length>0 && <span className="data-flag">{p.warnings.length} clarification(s)</span>}</div>{view==='Timeline'?<div className="track">{[0,1,2,3,4,5].map(i=><span key={i} className="gridline" style={{left:`${i/5*100}%`}}/>)}{validWindow?<div className={`gantt-bar ${p.section==='Deprioritized'?'blocked':'not-started'}`} style={{left:`${(value(p.start!)-minimum)/duration*100}%`,width:`${(value(p.end!)-value(p.start!)+day)/duration*100}%`}} title={`Reported start ${p.start}; ${p.endBasis} ${p.end}. No progress percentage inferred.`}><span className="bar-label">{p.end!.slice(5)}</span></div>:p.end?<><span className="due-marker" style={{left:`${(value(p.end)-minimum)/duration*100}%`}} title={`${p.endBasis} ${date(p.end)}. Start not supplied.`}>◆</span><span className="unplanned-label">{p.start?'Window needs review':`Start unknown · ${p.endBasis.toLowerCase()}`}</span></>:<span className="unplanned-label">Dates unresolved</span>}</div>:<div className="date-range">{p.start?date(p.start):p.startRaw || 'Start not supplied'}<small>{p.revisedDue || p.originalDue || 'End not supplied'}</small></div>}</button>})}
-    {!filtered.length && <div className="empty"><h3>No matching activities</h3><p>Try another search or filter.</p></div>}</div></div><div className="timeline-footer"><span>{filtered.length}/{activities.length} activities · summaries reflect filters</span><span>Bars require both dates. ◆ Due date only. No start dates or completion percentages inferred.</span></div></section>
-    {selected && <SourceDetails activity={selected} />}
+    <div className="source-snapshot-banner"><span>PRIORITIZATION SNAPSHOT</span><strong>{snapshot.tabName}</strong><p>{snapshot.fileName} · {activities.length} activities · updated {new Date(snapshot.importedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PT</p><p>Orange columns only: activity, accountable owners, priorities, alignment, category, activity type, dates and detailed staffing.</p></div>
+    <div className="metric-grid workbook-metrics">
+      <button className="metric" onClick={clear}><p>Activities in view</p><strong>{filtered.length}<small> / {activities.length}</small></strong><span>Click to clear all filters</span></button>
+      <button className={`metric ${healthFilter === 'completed' ? 'metric-active' : ''}`} onClick={() => setHealthFilter(healthFilter === 'completed' ? 'All date statuses' : 'completed')}><p>Completed</p><strong className="green-number">{complete}</strong><span>Marked complete in the source</span></button>
+      <button className={`metric ${healthFilter === 'escalation' ? 'metric-active' : ''}`} onClick={() => setHealthFilter(healthFilter === 'escalation' ? 'All date statuses' : 'escalation')}><p>Escalation</p><strong className="red-number">{escalated}</strong><span>TBD, missing dates or overdue end</span></button>
+      <button className={`metric ${alignment === 'Not aligned' ? 'metric-active' : ''}`} onClick={() => setAlignment(alignment === 'Not aligned' ? 'All alignment' : 'Not aligned')}><p>PwC / FRM not aligned</p><strong>{unaligned}</strong><span>Source says No or ratings differ</span></button>
+    </div>
+    <section className="panel workbook-filter-panel" aria-label="Activity filters">
+      <div className="filter-heading"><h2>Find your projects</h2><button className="button" onClick={clear}>Clear all filters</button></div>
+      <div className="people-filters">
+        <ChoiceFilter title="FRM lead" options={leads.options} selected={selectedLeads} onChange={setLeads} />
+        <ChoiceFilter title="PwC owner" options={owners.options} selected={selectedOwners} onChange={setOwners} />
+        <ChoiceFilter title="FRM priority" options={[...new Set(activities.map(p => rating(p.frmPriority)))]} selected={frmRatings} onChange={setFrmRatings} />
+        <ChoiceFilter title="PwC priority" options={[...new Set(activities.map(p => rating(p.pwcPriority)))]} selected={pwcRatings} onChange={setPwcRatings} />
+        <ChoiceFilter title="Category" options={[...new Set(activities.map(p => p.category || 'Not supplied'))].sort()} selected={categories} onChange={setCategories} />
+      </div>
+      <div className="filters supplemental-filters"><input aria-label="Search source activities" placeholder="Search activities or accountable owners…" value={search} onChange={e => setSearch(e.target.value)} />
+        <select aria-label="Filter priority alignment" value={alignment} onChange={e => setAlignment(e.target.value)}>{['All alignment', 'Not aligned', 'Aligned', 'Not recorded', 'Not applicable'].map(s => <option key={s}>{s}</option>)}</select>
+        <select aria-label="Filter source section" value={section} onChange={e => setSection(e.target.value)}>{['All sections', 'Active portfolio', 'Deprioritized', 'Completed'].map(s => <option key={s}>{s}</option>)}</select>
+        <select aria-label="Filter date status" value={healthFilter} onChange={e => setHealthFilter(e.target.value)}><option>All date statuses</option><option value="completed">Completed</option><option value="escalation">Escalation</option><option value="scheduled">Scheduled / due today</option><option value="ongoing">Ongoing / not dated</option></select>
+      </div>
+      {!!active.length && <div className="active-filters">{active.map(([title, v, remove]) => <button key={`${title}:${v}`} onClick={remove} aria-label={`Remove ${title}: ${v}`}>{title}: {v} <span>×</span></button>)}</div>}
+      <p className="filter-explanation">Multiple selections within one filter match any selected value; different filters combine. Names on shared-owner activities match individually.</p>
+    </section>
+    <section className="panel" aria-label="Workbook project timeline">
+      <div className="panel-toolbar"><div className="tabs">{['Timeline', 'Projects'].map(t => <button key={t} className={view === t ? 'selected' : ''} onClick={() => setView(t)}>{t}</button>)}</div><div className="filters"><span className="as-of">Date check: {date(today)} · Pacific time</span><select aria-label="Sort source activities" value={sort} onChange={e => setSort(e.target.value)}>{['Sheet order', 'PwC priority', 'FRM priority'].map(s => <option key={s}>{s}</option>)}</select></div></div>
+      <div className="timeline-scroll"><div className={`workbook-table ${view === 'Projects' ? 'date-list' : ''}`}>
+        <div className="row table-head workbook-row"><span>ACTIVITY / OWNERS</span><span>PRIORITIES / ALIGNMENT</span><span>PROJECTED/ACTUAL START</span><span>PROJECTED/ACTUAL END</span>{view === 'Timeline' && <div className="time-axis">{ticks.map((t, i) => <span key={i} style={{ left: `${i / 5 * 100}%` }}>{t}</span>)}</div>}</div>
+        {filtered.map(p => {
+          const health = dateHealth(p, today), validWindow = p.start && p.end && p.start <= p.end
+          return <button key={p.id} className={`row project-row workbook-row date-${health.tone} ${selected?.id === p.id ? 'selected-row' : ''}`} onClick={() => setSelectedId(p.id)} aria-pressed={selected?.id === p.id}>
+            <div className="project-cell"><strong title={p.name}><small className="source-ref">Row {p.row} · {p.section}</small>{p.name.split('\n')[0]}</strong><span className="owners-list"><span className="owner-line" title={p.pwcOwners}><b>PwC</b> {p.pwcOwners || 'Not supplied'}</span><span className="owner-line" title={p.frmLeads}><b>FRM</b> {p.frmLeads || 'Not supplied'}</span></span></div>
+            <div className="source-status"><div className="priority-pair"><span>PwC</span><Pill text={rating(p.pwcPriority)} /></div><div className="priority-pair"><span>FRM</span><Pill text={rating(p.frmPriority)} /></div><span className={`badge alignment-${alignmentState(p).toLowerCase().replaceAll(' ', '-')}`}>{alignmentState(p)}</span></div>
+            <div className="source-date"><strong>{p.start ? date(p.start) : p.startRaw || 'Not supplied'}</strong><span className={`badge health-${health.tone}`}>{health.label}</span></div>
+            <div className="source-date"><strong>{p.completed && !p.end ? 'Completed' : p.end ? date(p.end) : p.endRaw || 'Not supplied'}</strong><small>{p.completed && !p.end ? 'Actual end date not recorded' : p.endRaw !== p.end && p.end ? p.endRaw : ''}</small>{health.tone === 'escalation' && <span className="date-reason">{health.reasons.join(' · ')}</span>}</div>
+            {view === 'Timeline' && <div className="track">{[0, 1, 2, 3, 4, 5].map(i => <span key={i} className="gridline" style={{ left: `${i / 5 * 100}%` }} />)}{todayPercent >= 0 && todayPercent <= 100 && <span className="today-line" style={{ left: `${todayPercent}%` }} />}
+              {validWindow ? <div className={`gantt-bar health-${health.tone}`} style={{ left: `${(value(p.start!) - minimum) / duration * 100}%`, width: `${(value(p.end!) - value(p.start!) + day) / duration * 100}%` }} title={`${p.start} to ${p.end}. ${health.label}. ${health.reasons.join(' ')}`}><span className="bar-label">{p.end!.slice(5)}</span></div>
+                : p.completed ? <span className="completed-marker">✓ Completed · end date not recorded</span>
+                  : p.end ? <><span className={`due-marker health-${health.tone}`} style={{ left: `${(value(p.end) - minimum) / duration * 100}%` }} title={`End ${date(p.end)}; start unresolved`}>◆</span><span className="unplanned-label">Start not supplied</span></>
+                    : <span className={`unresolved-marker health-${health.tone}`}>{health.tone === 'escalation' ? 'Escalate · dates unresolved' : 'Ongoing / dates not applicable'}</span>}
+            </div>}
+          </button>
+        })}
+        {!filtered.length && <div className="empty"><h3>No matching activities</h3><p>Clear a filter or try a different selection.</p></div>}
+      </div></div>
+      <div className="timeline-footer"><span>{filtered.length}/{activities.length} activities · summaries reflect filters</span><span className="date-legend"><i className="legend-green" /> Completed <i className="legend-red" /> TBD / unresolved / overdue <i className="legend-blue" /> Scheduled · ◆ End date only</span></div>
+    </section>
+    <p className="date-rule-note">Red flags unfinished work with a TBD/unresolved date or an end date before today. Past actual starts are not overdue by themselves. Completed work stays green. N/A / ongoing PMO dates remain undated.</p>
+    {selected && <SourceDetails activity={selected} today={today} />}
   </div>
 }
-function SourceDetails({activity:p}:{activity:SourceActivity}){
-  return <section className="project-detail source-details" aria-label="Workbook activity detail"><div className="detail-heading"><div><p className="eyebrow">SOURCE ROW {p.row} · REF {p.ref} · {p.section.toUpperCase()}</p><h2>{p.name}</h2><p className="detail-meta">PwC owners: {p.pwcOwners || 'Not supplied'} <span>·</span> FRM leads: {p.frmLeads || 'Not supplied'}</p></div></div><div className="detail-tags"><span>{p.category || 'Category unknown'}</span><span>{p.activityType || 'Activity type unknown'}</span><span>PwC priority: {p.pwcPriority || 'Not supplied'}</span><span>FRM priority: {p.frmPriority || 'Not supplied'}</span><span>Alignment (J): {p.alignment || 'Not recorded'}</span></div>
-    <div className="source-facts"><div><span>Original due · Q</span><strong>{p.originalDue || 'Not supplied'}</strong></div><div><span>Proposed updated due · R</span><strong>{p.revisedDue || 'Not supplied'}</strong></div><div><span>Start · W</span><strong>{p.startRaw || 'Not supplied'}</strong></div><div><span>Current staffing · X</span><strong>{p.staffing || 'Not supplied'}</strong></div></div>
-    <div className="source-effort"><div><span>Total controls / scope · D</span><strong>{p.controls || 'Unknown'}</strong></div><div><span>Controls completed · O</span><strong>{p.completedControls || 'Unknown'}</strong></div><div><span>Controls outstanding · P</span><strong>{p.outstandingControls || 'Unknown'}</strong></div><div><span>Estimated / actual / remaining hours</span><strong>{n(p.estimate)} / {n(p.actual)} / {n(p.remaining)}</strong></div></div>
-    {p.warnings.length>0 && <div className="source-warnings"><h3>Clarifications needed</h3><ul>{p.warnings.map(w=><li key={w}>{w}</li>)}</ul></div>}
-    <div className="source-perspectives">{([['a','A','Delivered in accordance with plan'],['b','B','Remaining to hit plan'],['c','C','Completed in addition to plan'],['d','D','Requested in addition to plan'],['e','E','Priority movement / net resource impact']] as const).map(([key,letter,title])=><article key={key} className={`scope-card ${key==='e'?'source-decision':''}`}><div className="scope-title"><span className="letter">{letter}</span><h3>{title}</h3></div><p>{p.perspectives[key] || 'Not provided in column V. Original baseline / work classification must be confirmed; numeric effort columns are not substituted.'}</p><span className="quoted-label">Column V · source wording</span></article>)}</div>
-    {p.response && !Object.values(p.perspectives).some(Boolean) && <div className="context"><span>UNSTRUCTURED V</span><p>{p.response}</p></div>}
-    <div className="source-context-grid">{([['Delay / dependency · S',p.delay],['Time used on · T',p.timeUsed],['Notes / actions · U',p.notes]] as const).map(([title,text])=><article key={title}><h3>{title}</h3><p>{text || 'Not supplied'}</p></article>)}</div>
-    <div className="decision-panel source-impact"><div><div className="scope-title"><span className="letter">E</span><h3>Decision support</h3></div><p>{p.alignment.toLowerCase()==='no'?'Priorities are explicitly unaligned in the source. Confirm sequencing with both leads.':priorityRank(p.frmPriority)!==priorityRank(p.pwcPriority)&&priorityRank(p.frmPriority)<4&&priorityRank(p.pwcPriority)<4?'PwC and FRM priorities differ. Confirm whether work should be resequenced.':'No reallocation is assumed. Confirm the baseline, incremental requests and future capacity before committing resources.'}</p></div><div className="source-gap"><strong>Capacity gap: unknown</strong><p>Available future capacity is not provided. Column V requests are not added to column N because their overlap is unresolved.</p></div></div>
+function SourceDetails({ activity: p, today }: { activity: SourceActivity; today: string }) {
+  const health = dateHealth(p, today)
+  return <section className="project-detail source-details" aria-label="Workbook activity detail">
+    <div className="detail-heading"><div><p className="eyebrow">SOURCE ROW {p.row} · {p.section.toUpperCase()}</p><h2>{p.name}</h2><p className="detail-meta">PwC owners: {p.pwcOwners || 'Not supplied'} <span>·</span> FRM leads: {p.frmLeads || 'Not supplied'}</p></div><span className={`badge health-${health.tone}`}>{health.label}</span></div>
+    <div className="detail-tags"><span>Category: {p.category || 'Not supplied'}</span><span>Activity: {p.activityType || 'Not supplied'}</span><span>PwC priority: {p.pwcPriority || 'Not supplied'}</span><span>FRM priority / timing: {p.frmPriority || 'Not supplied'}</span><span>Source alignment (J): {p.alignment || 'Not recorded'}</span></div>
+    <div className="source-facts source-date-facts"><div><span>Projected/actual start · W</span><strong>{p.start ? date(p.start) : p.startRaw || 'Not supplied'}</strong></div><div><span>Projected/actual end · X</span><strong>{p.end ? date(p.end) : p.endRaw || 'Not supplied'}</strong>{p.completed && !p.end && <small>Marked complete; exact actual end date not supplied.</small>}{p.end && p.endRaw !== p.end && <small>Source: {p.endRaw}</small>}</div></div>
+    <article className="staffing-detail"><p className="eyebrow">STAFFING VIEW · DETAIL ONLY</p><h3>Staffing support planned / currently · Y</h3><p>{p.staffing || 'Not supplied'}</p></article>
+    {health.tone === 'escalation' && <div className="date-escalation-panel"><h3>Escalation needed</h3><ul>{health.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul></div>}
+    {alignmentState(p) === 'Not aligned' && <div className="source-warnings"><h3>Priority alignment needed</h3><p>{/^no$/i.test(p.alignment) ? 'The source explicitly marks FRM and PwC as not aligned.' : 'The supplied priority ratings differ, even if the alignment field says Yes.'} Confirm sequencing with both accountable owners.</p></div>}
+    <p className="footnote">Only the orange source columns are included. Hours, controls, original due dates and the blue narrative column are excluded from this view.</p>
   </section>
 }

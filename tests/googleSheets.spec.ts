@@ -21,9 +21,9 @@ test('live source reads the selected tab, preserves context, refreshes, and disc
     if (route.request().url().includes('/values/')) {
       expect(decodeURIComponent(route.request().url())).toContain("'Prioritization'")
       reads++
-      const header = Array.from({ length: 24 }, (_, i) => `Header ${i + 1}`)
+      const header = Array.from({ length: 25 }, (_, i) => `Header ${i + 1}`); header[2]='Task / Activity'; header[4]='Owner(s)'; header[5]='FRM Lead';header[22]='Projected/Actual Start Date';header[23]='Projected End Date';header[24]='Staffing Support'
       const row = Array.from({ length: 24 }, () => '')
-      row[0] = `Live work ${reads}`; row[21] = 'V: dependency'; row[22] = 'W: FRM assignment'; row[23] = 'X: PwC assignment'
+      row[2] = `Live work ${reads}`; row[21] = 'V: excluded dependency'; row[22] = '2026-10-01'; row[23] = '2026-11-01';row[24]='Example support'
       return route.fulfill({ json: { values: [header, row] } })
     }
     return route.fulfill({ json: { sheets: [{ properties: { sheetId: 1, title: 'Other tab' } }, { properties: { sheetId: 8496958, title: 'Prioritization' } }] } })
@@ -33,7 +33,7 @@ test('live source reads the selected tab, preserves context, refreshes, and disc
   await page.getByLabel('Google OAuth Web client ID').fill('test-client.apps.googleusercontent.com')
   await page.getByRole('button', { name: 'Sign in with Google' }).click()
   await expect(page.locator('.source-table')).toContainText('Live work 1')
-  await expect(page.locator('.source-context')).toContainText(['V', 'W', 'X', 'Header 22', 'Header 23', 'Header 24', 'V: dependency', 'W: FRM assignment', 'X: PwC assignment'])
+  await expect(page.locator('.source-context')).toContainText(['W', 'X', 'Projected/Actual Start Date', 'Projected End Date', '2026-10-01', '2026-11-01'])
   expect(await page.evaluate(() => Object.values(localStorage).join(' '))).not.toContain('test-fixture-token')
   await page.getByRole('button', { name: 'Refresh now' }).click()
   await expect(page.locator('.source-table')).toContainText('Live work 2')
@@ -58,7 +58,7 @@ test('Google access denial is visible and does not overwrite project records', a
   await page.getByLabel('Google OAuth Web client ID').fill('test-client.apps.googleusercontent.com')
   await page.getByRole('button', { name: 'Sign in with Google' }).click()
   await expect(page.getByRole('alert')).toContainText('Google denied access')
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(46)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
   await expect(page.locator('.source-table')).toHaveCount(0)
 })
 test('expired authorization pauses refresh and keeps last successfully read data', async ({ page }) => {
@@ -66,7 +66,7 @@ test('expired authorization pauses refresh and keeps last successfully read data
   await page.addInitScript(() => {
     window.google = { accounts: { oauth2: { initTokenClient: config => ({ requestAccessToken: () => config.callback({ access_token: 'test-fixture-token', expires_in: 60 }) }), revoke: (_token, callback) => callback() } } }
   })
-  await page.route('https://sheets.googleapis.com/**', route => route.fulfill({ json: route.request().url().includes('/values/') ? { values: [['Existing data']] } : { sheets: [{ properties: { sheetId: 8496958, title: 'Prioritization' } }] } }))
+  await page.route('https://sheets.googleapis.com/**', route => route.fulfill({ json: route.request().url().includes('/values/') ? { values: [['', '', 'Existing data']] } : { sheets: [{ properties: { sheetId: 8496958, title: 'Prioritization' } }] } }))
   await page.goto('/')
   await page.getByRole('button', { name: 'Connect Google Sheets' }).click()
   await page.getByLabel('Google OAuth Web client ID').fill('test-client.apps.googleusercontent.com')

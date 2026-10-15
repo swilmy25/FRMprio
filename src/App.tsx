@@ -4,7 +4,7 @@ import { impact, newProject, priorities, sampleProjects, statuses, validate } fr
 import './App.css'
 import LiveSheet from './LiveSheet'
 import WorkbookDashboard from './WorkbookDashboard'
-import { isSourceSnapshot, parseSource, SOURCE_STORAGE } from './prioritization'
+import { isSourceSnapshot, parseSource, orangeOnly, SOURCE_STORAGE } from './prioritization'
 import type { SourceSnapshot } from './prioritization'
 import type { SheetSnapshot } from './googleSheets'
 import { readSourceFile } from './readSourceFile'
@@ -53,12 +53,12 @@ function App() {
     try { const saved = localStorage.getItem(STORAGE); if (saved) { const parsed = JSON.parse(saved); if (Array.isArray(parsed) && parsed.every(p => typeof p.id === 'string' && statuses.includes(p.status) && priorities.includes(p.pwcPriority) && priorities.includes(p.frmPriority) && !validate(p))) return parsed } } catch { /* Fall back to clearly labeled examples. */ }
     return structuredClone(sampleProjects)
   })
-  const [source, setSource] = useState<SourceSnapshot | null>(() => { try {const saved=JSON.parse(localStorage.getItem(SOURCE_STORAGE) ?? 'null'); if(isSourceSnapshot(saved)) {parseSource(saved);return saved}} catch {} return structuredClone(PUBLISHED_SNAPSHOT) })
-  const [sourceVisible, setSourceVisible] = useState(() => {try {return localStorage.getItem('frmprio.sourceView') !== 'manual'} catch {return true}})
+  const [source, setSource] = useState<SourceSnapshot | null>(() => { try {const saved=JSON.parse(localStorage.getItem(SOURCE_STORAGE) ?? 'null'); if(isSourceSnapshot(saved)) {parseSource(saved);if(saved.publicationId && saved.publicationId===localStorage.getItem('frmprio.publishedId') && saved.publicationId!==PUBLISHED_SNAPSHOT.publicationId)return structuredClone(PUBLISHED_SNAPSHOT);return orangeOnly(saved)}} catch {} return structuredClone(PUBLISHED_SNAPSHOT) })
+  const [sourceVisible, setSourceVisible] = useState(() => {try {return !localStorage.getItem(SOURCE_STORAGE) || localStorage.getItem('frmprio.sourceView') !== 'manual'} catch {return true}})
   useEffect(() => {try {localStorage.setItem('frmprio.sourceView',sourceVisible?'workbook':'manual')} catch {}},[sourceVisible])
   const [notice, setNotice] = useState('')
-  useEffect(() => { if(source) {try {localStorage.setItem(SOURCE_STORAGE,JSON.stringify(source))} catch {queueMicrotask(()=>setNotice('Workbook could not be retained in this browser. Export a backup before leaving.'))}} },[source])
-  const applyLiveSource = useCallback((data:SheetSnapshot) => { const imported: SourceSnapshot = {kind:'frmprio.prioritization.v1',fileName:'Live Google Sheets',tabName:data.title,importedAt:new Date(data.fetchedAt).toISOString(),rows:data.rows}; try {parseSource(imported);setSource(imported);setSourceVisible(true);setNotice('Dashboard updated from the live Prioritization tab.')} catch(e) {setNotice(e instanceof Error?e.message:'The sheet layout could not be mapped.')} },[])
+  useEffect(() => { if(source) {try {localStorage.setItem(SOURCE_STORAGE,JSON.stringify(source));localStorage.setItem('frmprio.publishedId',PUBLISHED_SNAPSHOT.publicationId??'')} catch {queueMicrotask(()=>setNotice('Workbook could not be retained in this browser. Export a backup before leaving.'))}} },[source])
+  const applyLiveSource = useCallback((data:SheetSnapshot) => { const imported: SourceSnapshot = orangeOnly({kind:'frmprio.prioritization.v1',fileName:'Live Google Sheets',tabName:data.title,importedAt:new Date(data.fetchedAt).toISOString(),rows:data.rows,sections:data.sections}); try {parseSource(imported);setSource(imported);setSourceVisible(true);setNotice('Dashboard updated from the live Prioritization tab.')} catch(e) {setNotice(e instanceof Error?e.message:'The sheet layout could not be mapped.')} },[])
   const activeSource = sourceVisible ? source : null
   useEffect(() => { try { localStorage.setItem(STORAGE, JSON.stringify(projects)) } catch { queueMicrotask(() => setNotice('Changes could not be saved in this browser. Export your data to retain it.')) } }, [projects])
   const [selectedId, setSelectedId] = useState(projects[0]?.id ?? '')
@@ -96,7 +96,7 @@ function App() {
       {!visible.length && <div className="empty"><h3>{projects.length ? 'No matching projects' : 'Your portfolio starts here'}</h3><p>{projects.length ? 'Try another search or status filter.' : 'Add a project to start planning delivery.'}</p></div>}</div></div><div className="timeline-footer"><span>{visible.length} of {projects.length} projects · Summary reflects current filters</span><div><span className="legend-line" />Today <span className="legend-bar" />Planned window <span className="legend-fill" />Planned hours completed</div></div></section>
       {selected && <ProjectDetail project={selected} onEdit={() => setEditor(selected)} />}
       </>}
-      <p className="footnote">Capacity estimates use entered hours, not a resource schedule. Shared-owner conflicts and working-day availability require review.</p>
+      {!activeSource && <p className="footnote">Capacity estimates use entered hours, not a resource schedule. Shared-owner conflicts and working-day availability require review.</p>}
       </div>
     </main>{editor && <Editor key={editor.id} project={editor} onClose={() => setEditor(null)} onSave={p => { setProjects(prev => prev.some(x => x.id === p.id) ? prev.map(x => x.id === p.id ? p : x) : [...prev, p]); setSelectedId(p.id); setEditor(null) }} onDelete={id => { setProjects(prev => prev.filter(p => p.id !== id)); setEditor(null) }} />}
   </div>
