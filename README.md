@@ -4,7 +4,7 @@ React and TypeScript dashboard for FRM / PwC project coordination, published thr
 
 ## Current source
 
-The user-authorized snapshot in `src/data/prioritization.json` comes only from the **Prioritization** tab in the latest supplied workbook. It contains 48 activities, including 3 explicitly completed activities. Only columns marked orange in the workbook are included:
+The user-authorized snapshot in `src/data/prioritization.json` comes from the **Prioritization** tab in `OAI Blueprint IT Team Wide Weekly Sync Agenda (2).xlsx`, with the user's October 20, 2026 meeting decisions applied. It contains 45 activities: 6 completed and 1 closed because Nano will not be assessed in FY26. Only columns marked orange in the workbook are included:
 
 | Column | Field |
 | --- | --- |
@@ -23,6 +23,10 @@ The user-authorized snapshot in `src/data/prioritization.json` comes only from t
 The source uses colored markers in row 1, with labels in row 2. Excluded cells are empty in the published snapshot. Section membership (active, deprioritized, completed) is retained as structural metadata. No other workbook tabs are included. Hours, controls, original due dates and the blue column V narrative are excluded. Staffing support is shown only in the selected activity's detail view, not in overview rows, filters, search, or the raw source preview.
 
 The user explicitly authorized publishing their supplied Prioritization data. This static snapshot and the app code are accessible to viewers of the GitHub Pages site and repository. Do not add unrelated tabs or other private uploads without authorization.
+
+Meeting decisions are stored separately from worksheet values, attributed to Sonu, Mayra or Jeff, and shown in activity details and a collapsible change log. The recorded date is when the notes were supplied, not an assumed meeting date. Applied interpretations are labeled separately. Original orange-column values remain available in details and exports.
+
+The update applies Keystone 10/30, API Tokenization 10/23 and Vertex 10/31 end dates; Revenue new controls, Chronosphere and Stripe remain TBD. Revenue's Databricks–Orion migration context is merged into Revenue new controls, counted once, and retained in both original FRM lead views. Azure and SDLC–Keystone are removed. The latest workbook no longer has a standalone Non-Rev controls line; its distinct AWS activity remains. AWS's invalid `11/31` end is unresolved and red. IronClad completion applies to the 2026 memo only; the separate 2027 scoping activity remains planned pending clarification. Nano is a scope closure, not evidence of completed testing, and no actual completion dates are invented.
 
 ## Filters and dates
 
@@ -45,9 +49,9 @@ URLs such as `#lead=Avi` can be shared or reloaded; `#portfolio` returns to the 
 
 ## Browser data and live Google Sheets
 
-New visitors see the bundled snapshot without an import. Existing legacy source caches are ignored so the fresh publication is shown. Newer publications replace prior bundled defaults while preserving separately imported snapshots and manual project edits. Manual / workbook view choice persists.
+New visitors see the bundled snapshot without an import. Existing legacy source caches are ignored so the fresh publication is shown. Newer publications replace prior bundled defaults while preserving separately imported snapshots and manual project edits. A browser-local snapshot displays a **Load published update** action to return to the current workbook and meeting decisions after confirmation. Manual / workbook view choice persists.
 
-**Import** accepts a current-layout Excel workbook containing Prioritization or a source JSON snapshot. Only the selected orange columns and structural sections are retained; cached formula errors are not evaluated. Imports persist locally in that browser. **Export** downloads the active snapshot or separate manual projects. Different browsers and cleared storage require the published default, another import or live access. The manual-project sample planner remains available separately.
+**Import** accepts a current-layout Excel workbook containing Prioritization or a source JSON snapshot. Only the selected orange columns and structural sections are retained from Excel; cached formula errors are not evaluated. A raw workbook import does not contain the separately supplied meeting decisions. JSON exports retain applicable meeting annotations and merged context, including scoped lead exports. Imports persist locally in that browser. **Export** downloads the active snapshot or separate manual projects. Different browsers and cleared storage require the published default, another import or live access. The manual-project sample planner remains available separately.
 
 Read-only Google sign-in and five-minute refresh while open, visible and authorized are implemented. Real Google access is still pending; OAuth/API tests use mocks. Tokens stay in memory, expire, and are cleared on disconnect/reload. Source snapshots already imported/refreshed remain in browser storage. Disconnect does not revoke Google's account-level app grant or erase saved workbook data.
 
@@ -77,7 +81,7 @@ npm run build
 npm test
 ```
 
-The build checks TypeScript. The 23 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, and default/live source loading. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
+The build checks TypeScript. The 28 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, default/live source loading, meeting provenance and date overrides, scope closures, removals, merged revenue context, and returning to the published update. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
 
 ## GitHub Pages deployment
 

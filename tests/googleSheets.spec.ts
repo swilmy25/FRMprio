@@ -58,7 +58,7 @@ test('Google access denial is visible and does not overwrite project records', a
   await page.getByLabel('Google OAuth Web client ID').fill('test-client.apps.googleusercontent.com')
   await page.getByRole('button', { name: 'Sign in with Google' }).click()
   await expect(page.getByRole('alert')).toContainText('Google denied access')
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
   await expect(page.locator('.source-table')).toHaveCount(0)
 })
 test('expired authorization pauses refresh and keeps last successfully read data', async ({ page }) => {

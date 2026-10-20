@@ -1,0 +1,77 @@
+import { test, expect } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+import { activitiesForLead, dateHealth, isSourceSnapshot, orangeOnly, ORANGE_COLUMNS, parseSource, snapshotForLead, SOURCE_STORAGE } from '../src/prioritization'
+import type { SourceSnapshot } from '../src/prioritization'
+const snapshot:SourceSnapshot=JSON.parse(readFileSync(new URL('../src/data/prioritization.json',import.meta.url),'utf8'))
+const activities=parseSource(snapshot)
+const activity=(row:number)=>activities.find(p=>p.row===row)!
+
+test('latest workbook and meeting decisions retain provenance and apply the requested dates',()=>{
+ expect(isSourceSnapshot(snapshot)).toBe(true)
+ expect(activities).toHaveLength(45)
+ expect(activity(34).end).toBe('2026-10-30')
+ expect(activity(34).meetingNotes[0].applicationNote).toContain('supersedes the earlier TBD')
+ expect(activity(12).end).toBe('2026-10-23')
+ expect(activity(12).workbookEndRaw).toBe('2026-10-15')
+ expect(activity(12).meetingNotes[0].source).toBe('Mayra')
+ expect(activity(35).end).toBe('2026-10-31')
+ expect(activity(35).workbookEndRaw).toBe('2026-10-30')
+ for(const row of [16,17,36]){
+  expect(activity(row).endRaw).toBe('TBD')
+  expect(dateHealth(activity(row),'2026-10-20').tone).toBe('escalation')
+ }
+ expect(snapshot.rows.every(row=>row.every((value,i)=>ORANGE_COLUMNS.includes(i)||value===''))).toBe(true)
+})
+test('completed closures are distinct from testing and future IronClad scope remains planned',()=>{
+ expect(activities.filter(p=>p.completed)).toHaveLength(7)
+ for(const row of [8,21,37])expect(activity(row).section).toBe('Completed')
+ expect(activity(37).closureReason).toBe('Not assessed in FY26')
+ expect(dateHealth(activity(37),'2026-10-20').label).toBe('Closed · not assessed in FY26')
+ expect(activity(9).name).toContain('2027')
+ expect(activity(9).completed).toBe(false)
+ expect(activity(5).completed).toBe(true)
+})
+test('named removals leave AWS and Project Keystone intact and preserve revenue merge context',()=>{
+ for(const row of [38,39,42])expect(activities.find(p=>p.row===row)).toBeUndefined()
+ expect(activities.some(p=>p.name==='Azure'||p.name==='SDLC - Keystone'||p.name.startsWith('Non-Rev controls'))).toBe(false)
+ expect(activity(40).name).toBe('AWS')
+ expect(activity(40).endRaw).toBe('11/31')
+ expect(dateHealth(activity(40),'2026-10-20').tone).toBe('escalation')
+ expect(activity(34).name).toContain('Project Keystone')
+ expect(activity(16).mergedActivities).toHaveLength(1)
+ expect(activity(16).mergedActivities[0].name).toContain('Databricks - Orion')
+ for(const lead of ['Ash','Urminder'])expect(activitiesForLead(activities,lead).filter(p=>p.row===16)).toHaveLength(1)
+ const exported=snapshotForLead(snapshot,'Ash')
+ expect(isSourceSnapshot(exported)).toBe(true)
+ expect(parseSource(orangeOnly(exported)).find(p=>p.row===16)?.meetingNotes).toHaveLength(2)
+ expect(Object.keys(exported.annotations??{}).every(row=>parseSource(exported).some(p=>p.row===Number(row)))).toBe(true)
+})
+test('notes and original workbook values are visible, merged context is searchable, and Nano is clearly closed',async({page})=>{
+ await page.goto('/')
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+ await page.getByLabel('Search source activities').fill('API Tokenization')
+ await expect(page.locator('.source-date-facts')).toContainText('Oct 23, 2026')
+ await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('2026-10-15')
+ await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Mayra')
+ await page.getByLabel('Search source activities').fill('Databricks - Orion')
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(1)
+ await expect(page.getByRole('region',{name:'Merged activity context'})).toContainText('Original source row 39')
+ await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('FRM confirmation of scoping')
+ await page.getByLabel('Search source activities').fill('Nano')
+ await expect(page.locator('.workbook-row.date-completed')).toHaveCount(1)
+ await expect(page.locator('.source-details')).toContainText('this is not completed testing')
+ await expect(page.locator('.completed-marker')).toContainText('not assessed in FY26')
+ await page.reload()
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+})
+test('a browser-local import can explicitly return to the published workbook and decisions',async({page})=>{
+ const local=structuredClone(snapshot);delete local.publicationId;delete local.annotations;delete local.changeLog
+ await page.addInitScript(({key,data})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(data))},{key:SOURCE_STORAGE,data:local})
+ await page.goto('/')
+ await expect(page.getByRole('button',{name:'Load published update'})).toBeVisible()
+ page.once('dialog',dialog=>dialog.accept())
+ await page.getByRole('button',{name:'Load published update'}).click()
+ await page.getByLabel('Search source activities').fill('API Tokenization')
+ await expect(page.locator('.source-date-facts')).toContainText('Oct 23, 2026')
+ await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Mayra')
+})

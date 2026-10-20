@@ -1,7 +1,12 @@
+export type MeetingNote = { source:string; recordedOn:string; text:string; applicationNote?:string }
+export type MergedActivity = { row:number; name:string; pwcOwners:string; frmLeads:string; frmPriority:string; category:string; pwcPriority:string; alignment:string; activityType:string; startRaw:string; endRaw:string; staffing:string }
+export type ActivityAnnotation = { notes:MeetingNote[]; endOverride?:string; sectionOverride?:string; closureReason?:string; frmLeadsOverride?:string; mergedActivities?:MergedActivity[] }
+export type ChangeRecord = { source:string; recordedOn:string; row?:number; activity:string; detail:string; frmLeads?:string }
+
 export const SOURCE_STORAGE = 'frmprio.prioritization.v2'
-export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][]; includedColumns?: number[]; sections?: Record<string,string>; publicationId?: string }
+export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][]; includedColumns?: number[]; sections?: Record<string,string>; publicationId?: string; annotations?:Record<string,ActivityAnnotation>; changeLog?:ChangeRecord[] }
 export type SourceActivity = {
-  id: string; row: number; ref: string; name: string; section: string;
+  id: string; row: number; ref: string; name: string; section: string; workbookEndRaw:string; workbookFrmLeads:string; closureReason:string; meetingNotes:MeetingNote[]; mergedActivities:MergedActivity[];
   pwcOwners: string; frmLeads: string; staffing: string; frmPriority: string; pwcPriority: string; alignment: string;
   category: string; activityType: string; estimate: number | null; actual: number | null; remaining: number | null;
   controls: string; completedControls: string; outstandingControls: string;
@@ -32,10 +37,16 @@ export function splitPerspectives(text: string): SourceActivity['perspectives'] 
   }
   return result
 }
+function object(value:unknown):value is Record<string,unknown> {return !!value&&typeof value==='object'&&!Array.isArray(value)}
+function validNotes(value:unknown):boolean {return Array.isArray(value)&&value.every(n=>object(n)&&typeof n.source==='string'&&typeof n.text==='string'&&typeof n.recordedOn==='string'&&!!sourceDate(n.recordedOn)&&(n.applicationNote===undefined||typeof n.applicationNote==='string'))}
+function validAnnotations(value:unknown):boolean {
+ return value===undefined || object(value)&&Object.entries(value).every(([key,a])=>/^[1-9]\d*$/.test(key)&&object(a)&&validNotes(a.notes)&&['endOverride','closureReason','frmLeadsOverride'].every(k=>a[k]===undefined||typeof a[k]==='string')&&(a.sectionOverride===undefined||['Active portfolio','Deprioritized','Completed'].includes(String(a.sectionOverride)))&&(a.mergedActivities===undefined||Array.isArray(a.mergedActivities)&&a.mergedActivities.every(m=>object(m)&&Number.isInteger(m.row)&&Number(m.row)>0&&['name','pwcOwners','frmLeads','frmPriority','category','pwcPriority','alignment','activityType','startRaw','endRaw','staffing'].every(k=>typeof m[k]==='string'))))
+}
+function validChangeLog(value:unknown):boolean {return value===undefined||Array.isArray(value)&&value.every(c=>object(c)&&['source','activity','detail'].every(k=>typeof c[k]==='string')&&typeof c.recordedOn==='string'&&!!sourceDate(c.recordedOn)&&(c.row===undefined||Number.isInteger(c.row)&&Number(c.row)>0)&&(c.frmLeads===undefined||typeof c.frmLeads==='string'))}
 export function isSourceSnapshot(value: unknown): value is SourceSnapshot {
   if (!value || typeof value !== 'object') return false
   const v = value as SourceSnapshot
-  return v.kind === 'frmprio.prioritization.v1' && typeof v.fileName === 'string' && typeof v.tabName === 'string' && typeof v.importedAt === 'string' && Number.isFinite(Date.parse(v.importedAt)) && Array.isArray(v.rows) && v.rows.length <= 10000 && v.rows.every(row => Array.isArray(row) && row.length <= 200 && row.every(cell => typeof cell === 'string')) && (v.includedColumns === undefined || Array.isArray(v.includedColumns) && v.includedColumns.every(n=>Number.isInteger(n) && n>=0 && n<200)) && (v.sections === undefined || !!v.sections && typeof v.sections==='object' && Object.values(v.sections).every(s=>['Active portfolio','Deprioritized','Completed'].includes(s))) && (v.publicationId===undefined || typeof v.publicationId==='string')
+  return v.kind === 'frmprio.prioritization.v1' && typeof v.fileName === 'string' && typeof v.tabName === 'string' && typeof v.importedAt === 'string' && Number.isFinite(Date.parse(v.importedAt)) && Array.isArray(v.rows) && v.rows.length <= 10000 && v.rows.every(row => Array.isArray(row) && row.length <= 200 && row.every(cell => typeof cell === 'string')) && (v.includedColumns === undefined || Array.isArray(v.includedColumns) && v.includedColumns.every(n=>Number.isInteger(n) && n>=0 && n<200)) && (v.sections === undefined || !!v.sections && typeof v.sections==='object' && Object.values(v.sections).every(s=>['Active portfolio','Deprioritized','Completed'].includes(s))) && (v.publicationId===undefined || typeof v.publicationId==='string') && validAnnotations(v.annotations) && validChangeLog(v.changeLog)
 }
 export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
   const header = snapshot.rows.findIndex(row => /task\s*\/\s*activity/i.test(row[2] ?? '') && /FRM Lead/i.test(row[5] ?? '') && /Owner/i.test(row[4] ?? ''))
@@ -50,11 +61,14 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     const cell = (i: number) => (cells[i] ?? '').trim()
     if (!cell(2)) { if (/depriorit/i.test(cell(1))) section = 'Deprioritized'; else if (/^completed$/i.test(cell(1))) section='Completed'; return }
     section = snapshot.sections?.[String(header+index+2)] ?? section
+    const annotation=snapshot.annotations?.[String(header+index+2)]
+    const effectiveSection=annotation?.sectionOverride??section
+    const workbookEndRaw=dedicatedEnd?cell(23):cell(17)
     const warnings: string[] = []
     const estimate = sourceNumber(cell(11)), actual = sourceNumber(cell(12)), remaining = sourceNumber(cell(13))
     const start = sourceDate(cell(22))
-    const endRaw = dedicatedEnd ? cell(23) : cell(17)
-    const completed = section==='Completed' || /^completed$/i.test(endRaw)
+    const endRaw = annotation?.endOverride??workbookEndRaw
+    const completed = effectiveSection==='Completed' || /^completed$/i.test(endRaw)
     const revised = sourceDate(endRaw)
     const range = endRaw.match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s*-\s*(\d{1,2}\/\d{1,2}\/\d{4})$/)
     const rangeEnd = range ? sourceDate(range[2]) : null
@@ -79,8 +93,8 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     const bHours = perspectives.b.match(/\b(\d+(?:\.\d+)?)\s*(?:hrs|hours)\b/i)
     if (aHours && actual !== null && Number(aHours[1]) !== actual) warnings.push(`V(a) reports ${aHours[1]} hrs versus ${actual} actual hrs in M. The two figures are not merged.`)
     if (bHours && remaining !== null && Number(bHours[1]) !== remaining) warnings.push(`V(b) reports ${bHours[1]} hrs versus ${remaining} remaining hrs in N. Confirm scope and timing.`)
-    const status = completed ? 'Completed' : section === 'Deprioritized' ? 'Deprioritized' : actual !== null && estimate !== null && actual > estimate ? 'Effort overrun' : /^done\b/i.test(cell(20)) && remaining === 0 ? 'Reported complete' : /on track/i.test(`${cell(18)} ${cell(21)}`) ? 'Reported on track' : cell(18) && !/^(N\/A|No Delay)/i.test(cell(18)) ? 'Delay noted' : /\bat risk\b/i.test(cell(20)) ? 'Risk noted' : actual === 0 ? 'No hours recorded' : 'Status not supplied'
-    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: cell(2), section, pwcOwners: cell(4), frmLeads: cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, end, endBasis, endRaw, completed, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(dedicatedEnd?24:23), perspectives, warnings, status })
+    const status = completed ? 'Completed' : effectiveSection === 'Deprioritized' ? 'Deprioritized' : actual !== null && estimate !== null && actual > estimate ? 'Effort overrun' : /^done\b/i.test(cell(20)) && remaining === 0 ? 'Reported complete' : /on track/i.test(`${cell(18)} ${cell(21)}`) ? 'Reported on track' : cell(18) && !/^(N\/A|No Delay)/i.test(cell(18)) ? 'Delay noted' : /\bat risk\b/i.test(cell(20)) ? 'Risk noted' : actual === 0 ? 'No hours recorded' : 'Status not supplied'
+    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: cell(2), section:effectiveSection, workbookEndRaw, workbookFrmLeads:cell(5), closureReason:annotation?.closureReason??'',meetingNotes:annotation?.notes??[],mergedActivities:annotation?.mergedActivities??[],pwcOwners: cell(4), frmLeads: annotation?.frmLeadsOverride??cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, end, endBasis, endRaw, completed, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(dedicatedEnd?24:23), perspectives, warnings, status })
   })
   return activities
 }
@@ -120,7 +134,7 @@ export function peopleDirectory(values:string[],fullNames=false):{options:string
 }
 export type DateHealth={tone:'completed'|'escalation'|'scheduled'|'ongoing';label:string;reasons:string[]}
 export function dateHealth(p:SourceActivity,today:string):DateHealth {
- if(p.completed)return {tone:'completed',label:'Completed',reasons:['Marked completed in the source.']}
+ if(p.completed)return {tone:'completed',label:p.closureReason?`Closed · ${p.closureReason[0].toLowerCase()}${p.closureReason.slice(1)}`:'Completed',reasons:[p.closureReason||'Marked completed in the source or confirmed by a meeting update.']}
  const reasons:string[]=[]
  const exempt=(s:string)=>/^(N\/A|Ongoing)/i.test(s)
  if(!p.start&&!exempt(p.startRaw))reasons.push(/tbd|pending/i.test(p.startRaw)?'Start date TBD':'Start date missing or unresolved')
@@ -142,5 +156,5 @@ export function snapshotForLead(snapshot:SourceSnapshot,lead:string):SourceSnaps
  const scoped=activitiesForLead(parseSource(snapshot),lead)
  const selectedRows=new Set(scoped.map(p=>p.row))
  const header=snapshot.rows.findIndex(row=>/task\s*\/\s*activity/i.test(row[2]??''))
- return {...snapshot,publicationId:undefined,fileName:`${snapshot.fileName} · FRM lead: ${lead}`,sections:Object.fromEntries(scoped.map(p=>[String(p.row),p.section])),rows:snapshot.rows.map((row,index)=>index<=header||selectedRows.has(index+1)?row:row.map(()=>''))}
+ return {...snapshot,publicationId:undefined,fileName:`${snapshot.fileName} · FRM lead: ${lead}`,sections:Object.fromEntries(scoped.map(p=>[String(p.row),p.section])),annotations:Object.fromEntries(Object.entries(snapshot.annotations??{}).filter(([row])=>selectedRows.has(Number(row)))),changeLog:snapshot.changeLog?.filter(change=>change.row&&selectedRows.has(change.row)||change.frmLeads&&peopleDirectory([change.frmLeads]).resolve(change.frmLeads).includes(lead)),rows:snapshot.rows.map((row,index)=>index<=header||selectedRows.has(index+1)?row:row.map(()=>''))}
 }
