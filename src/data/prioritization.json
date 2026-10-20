@@ -1667,6 +1667,18 @@
       ],
       "sectionOverride": "Completed",
       "endOverride": "Completed"
+    },
+    "19": {
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-20",
+          "text": "Combine Phase 2 and Phase 3 Ads New ITAC Controls into their own line item, owned by Stephen Wilm, with an October 13, 2026 start and November 15, 2026 end.",
+          "applicationNote": "Applied to the existing combined Sprint 2 / 3 activity at source row 19. Original Sprint 1.5 and Sprint 2 / 3 wording is retained as workbook context; the confirmed activity window is October 13–November 15."
+        }
+      ],
+      "nameOverride": "Ads New ITAC Controls — Phases 2 & 3",
+      "endOverride": "2026-11-15"
     }
   },
   "changeLog": [
@@ -1873,7 +1885,21 @@
       ],
       "discussion": "Completion applied to UI Change. Confirm separately whether the November Engine Manager UAR is included; it remains planned.",
       "pwcOwners": "Layla Yang"
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-20",
+      "row": 19,
+      "activity": "Ads New ITAC Controls — Phases 2 & 3",
+      "detail": "Phase 2 and Phase 3 Ads New ITAC Controls combined into one line item. October 13 start and November 15 end confirmed; Stephen Wilm remains the PwC owner and Urminder the FRM lead.",
+      "frmLeads": "Urminder",
+      "pwcOwners": "Stephen Wilm",
+      "title": "Ads New ITAC Controls — Phases 2 & 3",
+      "flags": [
+        "scope-change",
+        "date-confirmed"
+      ]
     }
   ],
-  "publicationId": "orange-notes-470d59969b70"
+  "publicationId": "orange-notes-e03d6766c353"
 }

@@ -30,6 +30,8 @@ Layla's additional Deloitte monitoring follow-up remains **In progress** and nee
 
 The update applies Keystone 10/30, API Tokenization 10/23 and Vertex 10/31 end dates; Revenue new controls, Chronosphere and Stripe remain TBD. Revenue's Databricks–Orion migration context is merged into Revenue new controls, counted once, and retained in both original FRM lead views. Azure and SDLC–Keystone are removed. The latest workbook no longer has a standalone Non-Rev controls line; its distinct AWS activity remains. AWS's invalid `11/31` end is unresolved and red. IronClad completion applies to the 2026 memo only; the separate 2027 scoping activity remains planned pending clarification. Nano is a scope closure, not evidence of completed testing, and no actual completion dates are invented.
 
+Stephen Wilm’s **Ads New ITAC Controls — Phases 2 & 3** is one combined activity, with FRM lead Urminder, starting **October 13** and ending **November 15, 2026**. The user-supplied scope/date confirmation is recorded under Stephen in the owner summary, with **User update** retained as its source. The original workbook title, including Sprint 1.5 and the former embedded sprint windows, is preserved in details and exports. This updates source row 19 without changing the separate Sprint 1 or Arsenal UI ITGC activities.
+
 ## Filters and dates
 
 - Multi-select filters for individual FRM leads and PwC owners, separate FRM/PwC priority ratings, and category. Shared owners and shared leads are matched individually; full source wording remains in details.

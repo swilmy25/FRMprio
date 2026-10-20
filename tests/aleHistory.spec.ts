@@ -15,11 +15,14 @@ const firstHistory = () => observeAleHistory(EMPTY_ALE_HISTORY, snapshot, curren
 
 test('published baseline uses observed dates and the readout carries all effective FRM owners', () => {
   expect(isAleHistory(published)).toBe(true)
-  expect(published.updates).toHaveLength(1)
+  expect(published.updates.length).toBeGreaterThanOrEqual(1)
   expect(published.updates[0].decisions).toHaveLength(7)
   for (const item of [...current.escalations, ...current.alignment]) {
-    const logged = aleItemHistory(published, aleUpdateId(snapshot, current), item.historyKey)!
-    expect(logged).toEqual({ firstSeen: '2026-10-20', lastSeen: '2026-10-20', seenUpdates: 1, status: 'new' })
+    const baseline = aleItemHistory(published, published.updates[0].id, item.historyKey)!
+    expect(baseline).toEqual({ firstSeen: '2026-10-20', lastSeen: '2026-10-20', seenUpdates: 1, status: 'new' })
+    const latest = aleItemHistory(published, aleUpdateId(snapshot, current), item.historyKey)!
+    expect(latest.firstSeen).toBe('2026-10-20')
+    expect(latest.seenUpdates).toBe(published.updates.length)
   }
   expect(current.escalations.find(item => item.topic === 'Revenue new controls')?.frmOwners).toEqual(['Urminder', 'Ash'])
   expect(current.alignment[0].frmOwners).toEqual(['Urminder', 'Ash'])
@@ -93,18 +96,18 @@ test('readout shows both owner teams and carryover dates that survive reload and
   const revenue = root.getByRole('article', { name: 'Escalations: Revenue new controls', exact: true })
   await expect(revenue.locator('.ale-frm-owners')).toContainText('@Urminder')
   await expect(revenue.locator('.ale-frm-owners')).toContainText('@Ash')
-  await expect(revenue.locator('.ale-item-history')).toContainText('New this update')
+  await expect(revenue.locator('.ale-item-history')).toContainText(published.updates.length===1?'New this update':`Carryover · ${published.updates.length} updates`)
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-10-21'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
-  await expect(revenue.locator('.ale-item-history')).toContainText('Carryover · 2 updates')
+  await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
   await expect(revenue.locator('.ale-item-history')).toContainText('First logged Oct 20, 2026')
   await expect(revenue.locator('.ale-item-history')).toContainText('Last seen Oct 21, 2026')
   await expect(root.locator('.ale-metrics .metric').nth(3).locator('strong')).toHaveText('7')
   await page.reload()
-  await expect(revenue.locator('.ale-item-history')).toContainText('Carryover · 2 updates')
+  await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
   const history = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), ALE_HISTORY_STORAGE)
-  expect(history.updates).toHaveLength(2)
+  expect(history.updates).toHaveLength(published.updates.length + 1)
   await page.setViewportSize({ width: 390, height: 844 })
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
 })
@@ -119,7 +122,7 @@ test('source exports transfer local update history into a fresh browser without 
   const download = await downloadPromise
   const exported: SourceSnapshot = JSON.parse(readFileSync((await download.path())!, 'utf8'))
   expect(isSourceSnapshot(exported)).toBe(true)
-  expect(exported.aleHistory?.updates).toHaveLength(2)
+  expect(exported.aleHistory?.updates).toHaveLength(published.updates.length + 1)
   const context = await browser.newContext()
   try {
     const other = await context.newPage()
@@ -128,7 +131,7 @@ test('source exports transfer local update history into a fresh browser without 
     await other.locator('input[type=file]').setInputFiles({ name: 'transferred.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(exported)) })
     await other.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
     const row = other.getByRole('article', { name: 'Escalations: Stripe', exact: true })
-    await expect(row.locator('.ale-item-history')).toContainText('Carryover · 2 updates')
+    await expect(row.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
     await expect(row.locator('.ale-frm-owners')).toContainText('@Ash')
   } finally { await context.close() }
 })
@@ -143,5 +146,5 @@ test('history storage failures are visible and the in-memory history remains ava
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-10-21'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('Local update history could not be saved')
-  await expect(page.getByRole('article', { name: 'Escalations: Stripe', exact: true }).locator('.ale-item-history')).toContainText('Carryover · 2 updates')
+  await expect(page.getByRole('article', { name: 'Escalations: Stripe', exact: true }).locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
 })

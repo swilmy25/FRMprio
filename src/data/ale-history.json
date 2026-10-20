@@ -41,6 +41,47 @@
           "bucket": "alignment"
         }
       ]
+    },
+    {
+      "id": "7ccf62d3357f2c0f",
+      "observedAt": "2026-10-20T19:43:57.412Z",
+      "decisions": [
+        {
+          "key": "escalation:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:it ops (chronosphere) scoping and discovery",
+          "topic": "IT Ops / Chronosphere",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:monitoring (airflow/fivetran/azure scheduler/spark/grafana/pagerduty) on compute jobs/interfaces/itacs - additional followup and documentation to address deloitte questions/adding the same aspects in review",
+          "topic": "Monitoring — Deloitte follow-up",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:stripe",
+          "topic": "Stripe",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:aws",
+          "topic": "AWS",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:sdlc - pando",
+          "topic": "SDLC — Pando",
+          "bucket": "escalation"
+        },
+        {
+          "key": "alignment:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "alignment"
+        }
+      ]
     }
   ]
 }
