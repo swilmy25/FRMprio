@@ -1,3 +1,6 @@
+import { aleHistoryForNames, isAleHistory } from './aleHistory.ts'
+import type { AleHistory } from './aleHistory'
+
 export type MeetingNote = { source:string; recordedOn:string; text:string; applicationNote?:string }
 export type MergedActivity = { row:number; name:string; pwcOwners:string; frmLeads:string; frmPriority:string; category:string; pwcPriority:string; alignment:string; activityType:string; startRaw:string; endRaw:string; staffing:string }
 export type ActivityAnnotation = { notes:MeetingNote[]; endOverride?:string; sectionOverride?:string; closureReason?:string; frmLeadsOverride?:string; mergedActivities?:MergedActivity[]; statusOverride?:'In progress' }
@@ -6,7 +9,7 @@ export type MeetingUpdateFlag = typeof MEETING_UPDATE_FLAGS[number]
 export type ChangeRecord = { source:string; recordedOn:string; row?:number; activity:string; detail:string; frmLeads?:string; pwcOwners?:string; title?:string; flags?:MeetingUpdateFlag[]; discussion?:string }
 
 export const SOURCE_STORAGE = 'frmprio.prioritization.v2'
-export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][]; includedColumns?: number[]; sections?: Record<string,string>; publicationId?: string; annotations?:Record<string,ActivityAnnotation>; changeLog?:ChangeRecord[] }
+export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][]; includedColumns?: number[]; sections?: Record<string,string>; publicationId?: string; annotations?:Record<string,ActivityAnnotation>; changeLog?:ChangeRecord[]; aleHistory?:AleHistory }
 export type SourceActivity = {
   id: string; row: number; ref: string; name: string; section: string; workbookEndRaw:string; workbookFrmLeads:string; closureReason:string; meetingNotes:MeetingNote[]; mergedActivities:MergedActivity[];
   pwcOwners: string; frmLeads: string; staffing: string; frmPriority: string; pwcPriority: string; alignment: string;
@@ -48,7 +51,7 @@ function validChangeLog(value:unknown):boolean {return value===undefined||Array.
 export function isSourceSnapshot(value: unknown): value is SourceSnapshot {
   if (!value || typeof value !== 'object') return false
   const v = value as SourceSnapshot
-  return v.kind === 'frmprio.prioritization.v1' && typeof v.fileName === 'string' && typeof v.tabName === 'string' && typeof v.importedAt === 'string' && Number.isFinite(Date.parse(v.importedAt)) && Array.isArray(v.rows) && v.rows.length <= 10000 && v.rows.every(row => Array.isArray(row) && row.length <= 200 && row.every(cell => typeof cell === 'string')) && (v.includedColumns === undefined || Array.isArray(v.includedColumns) && v.includedColumns.every(n=>Number.isInteger(n) && n>=0 && n<200)) && (v.sections === undefined || !!v.sections && typeof v.sections==='object' && Object.values(v.sections).every(s=>['Active portfolio','Deprioritized','Completed'].includes(s))) && (v.publicationId===undefined || typeof v.publicationId==='string') && validAnnotations(v.annotations) && validChangeLog(v.changeLog)
+  return v.kind === 'frmprio.prioritization.v1' && typeof v.fileName === 'string' && typeof v.tabName === 'string' && typeof v.importedAt === 'string' && Number.isFinite(Date.parse(v.importedAt)) && Array.isArray(v.rows) && v.rows.length <= 10000 && v.rows.every(row => Array.isArray(row) && row.length <= 200 && row.every(cell => typeof cell === 'string')) && (v.includedColumns === undefined || Array.isArray(v.includedColumns) && v.includedColumns.every(n=>Number.isInteger(n) && n>=0 && n<200)) && (v.sections === undefined || !!v.sections && typeof v.sections==='object' && Object.values(v.sections).every(s=>['Active portfolio','Deprioritized','Completed'].includes(s))) && (v.publicationId===undefined || typeof v.publicationId==='string') && validAnnotations(v.annotations) && validChangeLog(v.changeLog) && (v.aleHistory===undefined || isAleHistory(v.aleHistory))
 }
 export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
   const header = snapshot.rows.findIndex(row => /task\s*\/\s*activity/i.test(row[2] ?? '') && /FRM Lead/i.test(row[5] ?? '') && /Owner/i.test(row[4] ?? ''))
@@ -158,5 +161,5 @@ export function snapshotForLead(snapshot:SourceSnapshot,lead:string):SourceSnaps
  const scoped=activitiesForLead(parseSource(snapshot),lead)
  const selectedRows=new Set(scoped.map(p=>p.row))
  const header=snapshot.rows.findIndex(row=>/task\s*\/\s*activity/i.test(row[2]??''))
- return {...snapshot,publicationId:undefined,fileName:`${snapshot.fileName} · FRM lead: ${lead}`,sections:Object.fromEntries(scoped.map(p=>[String(p.row),p.section])),annotations:Object.fromEntries(Object.entries(snapshot.annotations??{}).filter(([row])=>selectedRows.has(Number(row)))),changeLog:snapshot.changeLog?.filter(change=>change.row&&selectedRows.has(change.row)||change.frmLeads&&peopleDirectory([change.frmLeads]).resolve(change.frmLeads).includes(lead)),rows:snapshot.rows.map((row,index)=>index<=header||selectedRows.has(index+1)?row:row.map(()=>''))}
+ return {...snapshot,aleHistory:snapshot.aleHistory?aleHistoryForNames(snapshot.aleHistory,scoped.map(p=>p.name)):undefined,publicationId:undefined,fileName:`${snapshot.fileName} · FRM lead: ${lead}`,sections:Object.fromEntries(scoped.map(p=>[String(p.row),p.section])),annotations:Object.fromEntries(Object.entries(snapshot.annotations??{}).filter(([row])=>selectedRows.has(Number(row)))),changeLog:snapshot.changeLog?.filter(change=>change.row&&selectedRows.has(change.row)||change.frmLeads&&peopleDirectory([change.frmLeads]).resolve(change.frmLeads).includes(lead)),rows:snapshot.rows.map((row,index)=>index<=header||selectedRows.has(index+1)?row:row.map(()=>''))}
 }

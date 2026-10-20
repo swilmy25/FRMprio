@@ -1,7 +1,8 @@
-import { alignmentState, dateHealth, peopleDirectory, priorityRank, rating } from './prioritization'
+import { alignmentState, dateHealth, peopleDirectory, priorityRank, rating } from './prioritization.ts'
+import { aleHistoryKey } from './aleHistory.ts'
 import type { SourceActivity } from './prioritization'
 
-export type AleDecision = { id: string; activityId: string; topic: string; owners: string[]; nextStep: string }
+export type AleDecision = { id: string; activityId: string; historyKey: string; topic: string; owners: string[]; frmOwners: string[]; nextStep: string }
 export type AleReadoutData = { escalations: AleDecision[]; alignment: AleDecision[]; decisionCount: number; topicCount: number; overlapCount: number }
 
 function topic(activity: SourceActivity): string {
@@ -40,11 +41,14 @@ function alignmentNextStep(activity: SourceActivity): string {
 
 export function buildAleReadout(activities: SourceActivity[], today: string): AleReadoutData {
   const owners = peopleDirectory(activities.map(activity => activity.pwcOwners), true)
+  const frmOwners = peopleDirectory(activities.map(activity => activity.frmLeads))
   const decision = (activity: SourceActivity, bucket: 'escalation' | 'alignment'): AleDecision => ({
     id: `${bucket}:${activity.id}`,
     activityId: activity.id,
+    historyKey: aleHistoryKey(activity.name, bucket),
     topic: topic(activity),
     owners: [...new Set(owners.resolve(activity.pwcOwners))],
+    frmOwners: [...new Set(frmOwners.resolve(activity.frmLeads))],
     nextStep: bucket === 'escalation' ? escalationNextStep(activity, today) : alignmentNextStep(activity),
   })
   const escalations = activities.filter(activity => dateHealth(activity, today).tone === 'escalation').map(activity => decision(activity, 'escalation'))

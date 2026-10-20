@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run readout:log && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "readout:log": "node scripts/update-ale-history.ts"
   },
   "dependencies": {
     "fflate": "^0.8.3",
