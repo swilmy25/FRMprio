@@ -61,7 +61,10 @@
     "48": "Deprioritized",
     "52": "Completed",
     "53": "Completed",
-    "54": "Completed"
+    "54": "Completed",
+    "55": "Deprioritized",
+    "56": "Active portfolio",
+    "57": "Active portfolio"
   },
   "rows": [
     [
@@ -1521,6 +1524,87 @@
       "2026-09-20",
       "Completed",
       "Ankita/Layla"
+    ],
+    [
+      "",
+      "",
+      "Non-Platform OE Testing — ITGCs",
+      "",
+      "Stephen / Jeff",
+      "Sudhika & Chandana",
+      "Moderate",
+      "Non - Platform",
+      "Moderate",
+      "Yes",
+      "Testing (e.g. ToD)",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "2026-10-19",
+      "2026-12-15",
+      "Joaquin, Matt, Cole, Nester, Iskyas, Ciera"
+    ],
+    [
+      "",
+      "",
+      "Platform OE Testing — ITACs",
+      "",
+      "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "",
+      "",
+      "Platform",
+      "",
+      "",
+      "Testing (OE)",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "Platform OE Testing — ITGCs",
+      "",
+      "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "",
+      "",
+      "Platform",
+      "",
+      "",
+      "Testing (OE)",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
     ]
   ],
   "annotations": {
@@ -1679,6 +1763,50 @@
       ],
       "nameOverride": "Ads New ITAC Controls — Phases 2 & 3",
       "endOverride": "2026-11-15"
+    },
+    "48": {
+      "nameOverride": "Non-Platform OE Testing — ITACs",
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-20",
+          "text": "Split Non-Platform OE Testing into separate ITACs and ITGCs tracking items. This item tracks ITACs. High-level OE testing visibility; detailed scope, controls, progress and staffing are maintained in a separate dashboard. No link has been supplied yet.",
+          "applicationNote": "The October 19–December 15 window, Moderate priorities, Deprioritized section, Stephen/Jeff ownership and Sudhika/Chandana FRM leads are inherited from the former combined item. Dates and staffing represent shared context, not separate effort allocations."
+        }
+      ]
+    },
+    "55": {
+      "userAdded": true,
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-20",
+          "text": "ITGCs tracking item split from the combined Non-Platform OE Testing item at source row 48. High-level OE testing visibility; detailed scope, controls, progress and staffing are maintained in a separate dashboard. No link has been supplied yet.",
+          "applicationNote": "The October 19–December 15 window, Moderate priorities, Deprioritized section, Stephen/Jeff ownership and Sudhika/Chandana FRM leads are inherited from the former combined item. Dates and staffing represent shared context, not separate effort allocations."
+        }
+      ]
+    },
+    "56": {
+      "userAdded": true,
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-20",
+          "text": "Add a high-level Platform OE Testing ITACs line item with Sonu Kumar, Mayra Mendoza and Layla Yang as joint PwC owners. High-level OE testing visibility; detailed scope, controls, progress and staffing are maintained in a separate dashboard. No link has been supplied yet.",
+          "applicationNote": "FRM leads, priorities, alignment, dates and staffing were not supplied. Start/end dates are TBD; other unconfirmed fields are left blank."
+        }
+      ]
+    },
+    "57": {
+      "userAdded": true,
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-20",
+          "text": "Add a high-level Platform OE Testing ITGCs line item with Sonu Kumar, Mayra Mendoza and Layla Yang as joint PwC owners. High-level OE testing visibility; detailed scope, controls, progress and staffing are maintained in a separate dashboard. No link has been supplied yet.",
+          "applicationNote": "FRM leads, priorities, alignment, dates and staffing were not supplied. Start/end dates are TBD; other unconfirmed fields are left blank."
+        }
+      ]
     }
   },
   "changeLog": [
@@ -1899,7 +2027,63 @@
         "scope-change",
         "date-confirmed"
       ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-20",
+      "row": 48,
+      "activity": "Non-Platform OE Testing — ITACs",
+      "title": "Non-Platform OE Testing — ITACs",
+      "detail": "Original combined Non-Platform OE Testing item split into ITACs and ITGCs. This line now tracks ITACs; shared workbook context is retained.",
+      "pwcOwners": "Stephen / Jeff",
+      "frmLeads": "Sudhika & Chandana",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-20",
+      "row": 55,
+      "activity": "Non-Platform OE Testing — ITGCs",
+      "title": "Non-Platform OE Testing — ITGCs",
+      "detail": "Add Non-Platform OE Testing ITGCs, split from source row 48 with the same shared owner, FRM lead, date and priority context.",
+      "pwcOwners": "Stephen / Jeff",
+      "frmLeads": "Sudhika & Chandana",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-20",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE Testing — ITACs",
+      "detail": "Add Platform OE Testing ITACs for high-level visibility, jointly owned by Sonu, Mayra and Layla.",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ],
+      "discussion": "Confirm FRM lead, priorities and start/end dates; detailed OE testing remains in the separate dashboard."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-20",
+      "row": 57,
+      "activity": "Platform OE Testing — ITGCs",
+      "title": "Platform OE Testing — ITGCs",
+      "detail": "Add Platform OE Testing ITGCs for high-level visibility, jointly owned by Sonu, Mayra and Layla.",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ],
+      "discussion": "Confirm FRM lead, priorities and start/end dates; detailed OE testing remains in the separate dashboard."
     }
   ],
-  "publicationId": "orange-notes-e03d6766c353"
+  "publicationId": "orange-notes-b91eb7c54a31"
 }

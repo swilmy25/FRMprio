@@ -21,6 +21,7 @@ function escalationNextStep(activity: SourceActivity, today: string): string {
   const notes = activity.meetingNotes.map(note => note.text).join(' ')
   if (/^Revenue new controls\b/i.test(activity.name) && /scop/i.test(notes) && !activity.end) return 'Get FRM scoping confirmed and agree start/end dates for the consolidated revenue work.'
   if (/^Monitoring\b/i.test(activity.name) && /Sarah/i.test(notes)) return 'Get Layla’s confirmation after her meeting with Sarah and agree a revised end date.'
+  if (/^Platform OE Testing/i.test(activity.name) && !activity.frmLeads.trim()) return 'Confirm the FRM lead, priorities and start/end dates for this OE testing bucket.'
   if (activity.section === 'Deprioritized') return 'Confirm whether to resume this work and agree a start date and delivery plan.'
   const health = dateHealth(activity, today)
   if (activity.start && activity.end && activity.start > activity.end) return 'Agree valid start/end dates; the current start is after the end.'

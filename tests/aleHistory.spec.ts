@@ -19,10 +19,12 @@ test('published baseline uses observed dates and the readout carries all effecti
   expect(published.updates[0].decisions).toHaveLength(7)
   for (const item of [...current.escalations, ...current.alignment]) {
     const baseline = aleItemHistory(published, published.updates[0].id, item.historyKey)!
-    expect(baseline).toEqual({ firstSeen: '2026-10-20', lastSeen: '2026-10-20', seenUpdates: 1, status: 'new' })
+    if (published.updates[0].decisions.some(decision=>decision.key===item.historyKey)) {
+      expect(baseline).toEqual({ firstSeen: '2026-10-20', lastSeen: '2026-10-20', seenUpdates: 1, status: 'new' })
+    } else expect(baseline).toBeNull()
     const latest = aleItemHistory(published, aleUpdateId(snapshot, current), item.historyKey)!
     expect(latest.firstSeen).toBe('2026-10-20')
-    expect(latest.seenUpdates).toBe(published.updates.length)
+    expect(latest.seenUpdates).toBe(published.updates.filter(update=>update.decisions.some(decision=>decision.key===item.historyKey)).length)
   }
   expect(current.escalations.find(item => item.topic === 'Revenue new controls')?.frmOwners).toEqual(['Urminder', 'Ash'])
   expect(current.alignment[0].frmOwners).toEqual(['Urminder', 'Ash'])
@@ -103,7 +105,7 @@ test('readout shows both owner teams and carryover dates that survive reload and
   await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
   await expect(revenue.locator('.ale-item-history')).toContainText('First logged Oct 20, 2026')
   await expect(revenue.locator('.ale-item-history')).toContainText('Last seen Oct 21, 2026')
-  await expect(root.locator('.ale-metrics .metric').nth(3).locator('strong')).toHaveText('7')
+  await expect(root.locator('.ale-metrics .metric').nth(3).locator('strong')).toHaveText(String(current.decisionCount))
   await page.reload()
   await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
   const history = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), ALE_HISTORY_STORAGE)
@@ -116,7 +118,7 @@ test('source exports transfer local update history into a fresh browser without 
   await page.clock.setFixedTime(new Date('2026-10-21T18:00:00.000Z'))
   await page.goto('/')
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-10-21'))) })
-  await expect(page.getByRole('status')).toContainText('Imported 45 activities')
+  await expect(page.getByRole('status')).toContainText('Imported 48 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
   const download = await downloadPromise

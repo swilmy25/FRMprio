@@ -15,14 +15,14 @@ function fixture(end: string): SourceSnapshot {
   return { ...snapshot, publicationId: undefined, annotations: undefined, changeLog: undefined, fileName: 'Readout test fixture', rows: [...snapshot.rows.slice(0, 2), row], sections: { '3': 'Active portfolio' } }
 }
 
-test('readout matches both buckets: seven decisions across six topics with worksheet owners and distinct revenue asks', () => {
+test('readout matches both buckets: nine decisions across eight topics with worksheet owners and distinct revenue asks', () => {
   const data = buildAleReadout(activities, today)
-  expect(data.decisionCount).toBe(7)
-  expect(data.topicCount).toBe(6)
+  expect(data.decisionCount).toBe(9)
+  expect(data.topicCount).toBe(8)
   expect(data.overlapCount).toBe(1)
   expect(data.escalations.map(item => item.activityId)).toEqual(activities.filter(item => dateHealth(item, today).tone === 'escalation').map(item => item.id))
   expect(data.alignment.map(item => item.activityId)).toEqual(activities.filter(item => alignmentState(item) === 'Not aligned').map(item => item.id))
-  expect(new Set([...data.escalations, ...data.alignment].map(item => item.id)).size).toBe(7)
+  expect(new Set([...data.escalations, ...data.alignment].map(item => item.id)).size).toBe(9)
   const stripe = data.escalations.find(item => item.topic === 'Stripe')!
   expect(stripe.owners).toEqual(['Joaquin Garcia', 'Mayra Mendoza'])
   expect(stripe.owners).not.toContain('Jeff Rose')
@@ -31,6 +31,13 @@ test('readout matches both buckets: seven decisions across six topics with works
   expect(data.escalations.find(item => item.topic === 'AWS')?.nextStep).toContain('11/31')
   expect(data.escalations.find(item => item.topic.includes('Monitoring'))?.nextStep).toContain('Sarah')
   expect(data.escalations.find(item => item.topic === 'SDLC — Pando')?.nextStep).toContain('whether to resume')
+  const platform = data.escalations.filter(item => item.topic.startsWith('Platform OE Testing'))
+  expect(platform).toHaveLength(2)
+  for (const item of platform) {
+    expect(item.owners).toEqual(['Sonu Kumar', 'Mayra Mendoza', 'Layla Yang'])
+    expect(item.frmOwners).toEqual([])
+    expect(item.nextStep).toContain('Confirm the FRM lead')
+  }
 })
 
 test('unknown owners stay unassigned, completed work leaves escalation and actions follow current data', () => {
@@ -54,11 +61,11 @@ test('top button opens the full portfolio readout from a filtered lead view and 
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(page).toHaveURL(/#view=ale-kazam$/)
   const readout = page.getByRole('region', { name: readoutName })
-  await expect(readout.locator('.ale-metrics .metric').nth(0).locator('strong')).toHaveText('7')
-  await expect(readout.locator('.ale-metrics .metric').nth(1).locator('strong')).toHaveText('6')
+  await expect(readout.locator('.ale-metrics .metric').nth(0).locator('strong')).toHaveText('9')
+  await expect(readout.locator('.ale-metrics .metric').nth(1).locator('strong')).toHaveText('8')
   await expect(readout.locator('.ale-metrics .metric').nth(2).locator('strong')).toHaveText('1')
-  await expect(readout.getByRole('article')).toHaveCount(7)
-  await expect(readout).toContainText('Whole portfolio · 6 topics')
+  await expect(readout.getByRole('article')).toHaveCount(9)
+  await expect(readout).toContainText('Whole portfolio · 8 topics')
   await expect(readout).toContainText('1 topic appears in both buckets')
   const stripe = readout.getByRole('article', { name: 'Escalations: Stripe', exact: true })
   await expect(stripe.locator('.ale-owners')).toContainText('@Mayra Mendoza')
@@ -68,7 +75,7 @@ test('top button opens the full portfolio readout from a filtered lead view and 
   await expect(page.locator('.live-sheet')).toBeHidden()
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Project dashboard', exact: true })).toBeVisible()
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
 })
 
 test('readout link survives reload and browser navigation restores the appropriate view', async ({ page }) => {
@@ -93,7 +100,7 @@ test('mobile readout fits the viewport and keeps owners, topics and next steps v
   await page.goto('/')
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   const readout = page.getByRole('region', { name: readoutName })
-  await expect(readout.getByRole('article')).toHaveCount(7)
+  await expect(readout.getByRole('article')).toHaveCount(9)
   await expect(readout.getByRole('article', { name: 'Escalations: Monitoring — Deloitte follow-up', exact: true })).toContainText('@Layla Yang')
   await expect(readout.getByRole('article', { name: 'Escalations: Monitoring — Deloitte follow-up', exact: true })).toContainText('Sarah')
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)

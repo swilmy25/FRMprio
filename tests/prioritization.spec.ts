@@ -99,11 +99,11 @@ test('new publication replaces an older bundled browser snapshot, and ignores th
   const previous = { ...orangeOnly(fixture), publicationId: 'old-published-data' }
   await page.addInitScript(({ key, snapshot }) => { localStorage.setItem(key, JSON.stringify(snapshot)); localStorage.setItem('frmprio.publishedId', 'old-published-data'); localStorage.setItem('frmprio.prioritization.v1', JSON.stringify(snapshot)) }, { key: SOURCE_STORAGE, snapshot: previous })
   await page.goto('/')
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
 })
 test('new visitors see the fresh orange-only workbook with completed items and explicit dates', async ({ page }) => {
   await page.goto('/')
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
   await expect(page.locator('.workbook-row.date-completed')).toHaveCount(8)
   await expect(page.locator('.table-head')).toContainText('PROJECTED/ACTUAL START')
   await expect(page.locator('.table-head')).toContainText('PROJECTED/ACTUAL END')

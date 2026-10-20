@@ -53,7 +53,7 @@ export default function MeetingUpdates({ snapshot, lead, today, onSelectActivity
         <span className="meeting-headline-flags"><span className="meeting-flag flag-date-moved">{count('date-moved')} moved dates</span><span className="meeting-flag flag-new-tbd">{count('new-tbd')} new TBDs</span><span className="meeting-flag flag-discussion">{count('discussion')} to discuss</span></span>
       </summary>
       <div className="meeting-summary-body">
-        <p className="meeting-summary-description">Grouped by PwC owners in worksheet column E; note providers are labeled separately. Shared updates appear under each owner and count once in totals. Date comparisons use the workbook end date; recorded dates show when notes were supplied.</p>
+        <p className="meeting-summary-description">Grouped by assigned PwC owners from the workbook and user updates; note providers are labeled separately. Shared updates appear under each owner and count once in totals. Date comparisons use the workbook end date; recorded dates show when notes were supplied.</p>
         <div className="meeting-member-filters" role="group" aria-label="Meeting PwC owner">
           <button aria-pressed={!member} onClick={() => setMember(null)}>All PwC owners</button>
           {groups.map(group => <button key={group.member} aria-pressed={member === group.member} onClick={() => setMember(member === group.member ? null : group.member)}>{group.member}<span aria-hidden="true">{group.items.length}</span></button>)}

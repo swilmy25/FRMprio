@@ -9,7 +9,7 @@ const count=(lead:string)=>activitiesForLead(activities,lead).length
 
 test('each lead has a scoped view and returning to Project dashboard restores the overall portfolio',async({page})=>{
  await page.goto('/')
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
  for(const lead of leadNames){
   await page.locator('.sidebar').getByRole('button',{name:`${lead} view`,exact:true}).click()
   await expect(page.getByRole('heading',{name:`${lead}'s projects`,exact:true})).toBeVisible()
@@ -21,7 +21,7 @@ test('each lead has a scoped view and returning to Project dashboard restores th
  }
  await page.locator('.sidebar').getByRole('button',{name:'Project dashboard',exact:true}).click()
  await expect(page.getByRole('heading',{name:'Project dashboard',exact:true})).toBeVisible()
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
 })
 test('shared activities appear in each assigned lead view without duplicating the overall total',async({page})=>{
  const shared=activities.find(p=>peopleDirectory([p.frmLeads]).options.length>1)!
@@ -32,7 +32,7 @@ test('shared activities appear in each assigned lead view without duplicating th
   await expect(page.locator('.workbook-row.project-row').filter({hasText:`Row ${shared.row} ·`})).toHaveCount(1)
  }
  await page.goto('/#portfolio')
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
 })
 test('lead links survive reload, export only their scope and offer breakdown filters',async({page})=>{
  const lead='Avi'
@@ -60,5 +60,5 @@ test('mobile view tabs switch lead scope without overflowing the viewport',async
  await expect(page.locator('.workbook-row.project-row')).toHaveCount(count('Avi'))
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
  await page.locator('.view-tabs').getByRole('button',{name:'Project dashboard',exact:true}).click()
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
 })

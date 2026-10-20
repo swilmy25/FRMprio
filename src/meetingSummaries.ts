@@ -20,7 +20,7 @@ export function meetingUpdatesByMember(snapshot: SourceSnapshot, lead: string | 
   const groups = new Map<string, MeetingSummaryItem[]>()
   changes.forEach((change, id) => {
     const activity = change.row === undefined ? undefined : byRow.get(change.row)
-    // Active worksheet ownership is authoritative. Removed activities retain their
+    // Current activity ownership is authoritative. Removed activities retain their
     // recorded column E owners; a note's author never supplies missing ownership.
     const pwcOwners = [...new Set(directory.resolve(activity ? activity.pwcOwners : change.pwcOwners ?? ''))]
     const providedBy = directory.resolve(change.source).join(', ') || 'Not supplied'
