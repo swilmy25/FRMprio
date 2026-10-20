@@ -49,6 +49,12 @@ A lead view scopes its Gantt, dates, completion/escalation/alignment metrics, ow
 
 URLs such as `#lead=Avi` can be shared or reloaded; `#portfolio` returns to the overall dashboard. Lead exports include only that lead's source rows and preserve shared ownership and source row references. Overall exports continue to include the full source snapshot. Staffing remains detail-only.
 
+## Ale-kazam readout
+
+The **Ale-kazam** button at the top opens Alejandro's high-level readout across the entire active source snapshot, independently of lead views and project filters. The shareable link is `#view=ale-kazam`. It contains only decision metrics and two compact lists: Escalations and PwC / FRM alignment. Each decision shows the worksheet's PwC owner tags, a short topic, and a one-sentence next step based on the recorded blocker. These are proposed next steps for Alejandro and the team, not additional meeting commitments.
+
+As of October 20, 2026, the published source has **7 decision items: 6 escalations and 1 alignment item across 6 topics**. Revenue new controls appears in both buckets, with separate scope/date and priority decisions. Counts follow the same date-health and alignment rules as the dashboard, including the deprioritized SDLC–Pando item with a missing start date. Counts update as the data or Pacific date changes; they are not fixed at seven. Completed date escalations drop out. The Google Sheets panel stays mounted while hidden in the readout so an authorized session can continue refreshing. Use **Back to dashboard** or a lead navigation button to return to the normal views.
+
 ## Browser data and live Google Sheets
 
 New visitors see the bundled snapshot without an import. Existing legacy source caches are ignored so the fresh publication is shown. Newer publications replace prior bundled defaults while preserving separately imported snapshots and manual project edits. A browser-local snapshot displays a **Load published update** action to return to the current workbook and meeting decisions after confirmation. Manual / workbook view choice persists.
@@ -83,7 +89,7 @@ npm run build
 npm test
 ```
 
-The build checks TypeScript. The 35 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, default/live source loading, meeting provenance and date overrides, scope closures, removals, merged revenue context, returning to the published update, member summaries, new versus existing TBDs, Layla's status updates, linked activity selection and scoped exports, mobile summary filters, a worksheet-derived ownership fixture, and shared / missing / removed ownership attribution. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
+The build checks TypeScript. The 42 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, default/live source loading, meeting provenance and date overrides, scope closures, removals, merged revenue context, returning to the published update, member summaries, new versus existing TBDs, Layla's status updates, linked activity selection and scoped exports, mobile summary filters, a worksheet-derived ownership fixture, shared / missing / removed ownership attribution, and the Ale-kazam readout's counts, overlap, actions, ownership, full-portfolio scope, navigation, mobile layout, Pacific rollover and ongoing authorized refresh. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
 
 ## GitHub Pages deployment
 

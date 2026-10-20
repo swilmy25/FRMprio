@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { activitiesForLead, alignmentState, dateHealth, parseSource, peopleDirectory, priorityRank, rating } from './prioritization'
 import type { SourceActivity, SourceSnapshot } from './prioritization'
 import MeetingUpdates from './MeetingUpdates'
+import { usePacificDate } from './usePacificDate'
 
 const day = 86400000
 const value = (iso: string) => Date.parse(`${iso}T00:00:00Z`)
@@ -32,8 +33,7 @@ export default function WorkbookDashboard({ snapshot, lead = null }: { snapshot:
   const [healthFilter, setHealthFilter] = useState('All date statuses')
   const [sort, setSort] = useState('Sheet order')
   const [view, setView] = useState('Timeline')
-  const [today, setToday] = useState(() => new Date().toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' }))
-  useEffect(() => { const update=()=>setToday(new Date().toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'})); const timer=setInterval(update,60000); document.addEventListener('visibilitychange',update); return()=>{clearInterval(timer);document.removeEventListener('visibilitychange',update)} },[])
+  const today = usePacificDate()
   const matches = (selected: string[], values: string[]) => !selected.length || selected.some(s => values.includes(s))
   const filtered = activities.filter(p => `${p.name} ${p.pwcOwners} ${p.frmLeads} ${p.category} ${p.activityType} ${p.meetingNotes.map(n=>n.text).join(' ')} ${p.mergedActivities.map(m=>m.name).join(' ')}`.toLowerCase().includes(search.toLowerCase())
     && matches(selectedLeads, leads.resolve(p.frmLeads)) && matches(selectedOwners, owners.resolve(p.pwcOwners))
