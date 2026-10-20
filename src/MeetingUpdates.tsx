@@ -65,19 +65,19 @@ export default function MeetingUpdates({ snapshot, lead, today, onSelectActivity
         <div className="meeting-member-grid" aria-live="polite">
           {visibleGroups.map(group => <article key={group.member} className="meeting-member-card" aria-label={`${group.member} meeting updates`}>
             <header><h3>{group.member}</h3><span>{group.items.length} {group.items.length === 1 ? 'update' : 'updates'}</span></header>
-            <ul>{group.items.map(({ change, activity, pwcOwners }, index) => {
+            <ul>{group.items.map(({ change, activity, pwcOwners, providedBy }, index) => {
               const flags = change.flags ?? []
               return <li key={`${change.row ?? 'unlinked'}:${change.recordedOn}:${index}`}>
                 <div className="meeting-item-flags">{flags.map(flag => <span key={flag} className={`meeting-flag flag-${flag}`}>{labels[flag]}</span>)}</div>
                 <h4>{activity ? <button onClick={() => onSelectActivity(activity.row)} aria-label={`View ${change.title || change.activity} activity`}>{change.title || change.activity}</button> : change.title || change.activity}</h4>
                 <p className="meeting-owner-line"><strong>PwC {pwcOwners.length > 1 ? 'owners' : 'owner'}:</strong> {pwcOwners.join(', ') || 'Not recorded in latest workbook'}{pwcOwners.length > 1 ? ' · Shared ownership' : ''}</p>
+                <p className="meeting-update-source"><span><strong>Update from:</strong> {providedBy}</span><small>Recorded {dateText(change.recordedOn)}</small></p>
                 {activity && (flags.includes('date-moved') || flags.includes('new-tbd')) && <p className="meeting-date-change">Workbook end <span>{dateText(activity.workbookEndRaw)}</span><span aria-hidden="true"> → </span><strong>{dateText(activity.endRaw)}</strong></p>}
                 {activity && flags.includes('date-confirmed') && <p className="meeting-date-change">End confirmed: <strong>{dateText(activity.endRaw)}</strong> · unchanged from workbook</p>}
                 {flags.includes('existing-tbd') && <p className="meeting-date-change">End remains <strong>TBD</strong> · already TBD in workbook</p>}
                 <p className="meeting-item-description">{change.detail}</p>
                 {activity?.end && activity.end < today && !activity.completed && <p className="meeting-overdue">Current end {dateText(activity.end)} has passed; confirm revised timing.</p>}
                 {change.discussion && <p className="meeting-discussion"><strong>Discuss / next step:</strong> {change.discussion}</p>}
-                <small className="meeting-recorded">Update provided by {change.source} · Recorded {dateText(change.recordedOn)}</small>
               </li>
             })}</ul>
           </article>)}

@@ -115,6 +115,9 @@ test('all dashboard and meeting owners match the uploaded worksheet, with Jeff a
  const mayra=groups.find(group=>group.member==='Mayra Mendoza')!
  expect(mayra.items.filter(item=>item.change.source==='Jeff').map(item=>item.change.row)).toEqual([16,17,36,38])
  expect(mayra.items.find(item=>item.change.row===36)?.pwcOwners).toEqual(['Joaquin Garcia','Mayra Mendoza'])
+ expect(mayra.items.find(item=>item.change.row===36)?.providedBy).toBe('Jeff Rose')
+ const sources:Record<string,string>={Jeff:'Jeff Rose',Mayra:'Mayra Mendoza',Sonu:'Sonu Kumar',Layla:'Layla Yang'}
+ for(const item of uniqueMeetingItems(groups))expect(item.providedBy).toBe(sources[item.change.source])
  expect(groups.find(group=>group.unassigned)?.items.map(item=>item.change.activity)).toEqual(['Non-Rev controls'])
  const exported=snapshotForLead(snapshot,'Avi')
  expect(meetingUpdatesByMember(exported).find(group=>group.member==='Mayra Mendoza')?.items.some(item=>item.change.row===38)).toBe(true)
@@ -172,7 +175,8 @@ test('member and focus filters show before/after dates and actionable TBDs witho
  await expect(summaries.getByRole('button',{name:'View IT Ops / Chronosphere activity'})).toHaveCount(0)
  await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
  await expect(mayra.locator('li').filter({hasText:'Stripe'})).toContainText('PwC owners: Joaquin Garcia, Mayra Mendoza')
- await expect(mayra.locator('li').filter({hasText:'Stripe'})).toContainText('Update provided by Jeff')
+ await expect(mayra.locator('li').filter({hasText:'Stripe'}).locator('.meeting-update-source')).toContainText('Update from: Jeff Rose')
+ await expect(mayra.locator('li').filter({hasText:'Stripe'}).locator('.meeting-update-source')).toContainText('Recorded Oct 20, 2026')
  await summaries.getByRole('button',{name:'Jeff Rose',exact:false}).click()
  await expect(summaries.getByRole('article')).toHaveCount(0)
  await expect(summaries).toContainText('No meeting updates match these filters')
