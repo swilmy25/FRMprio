@@ -3,7 +3,7 @@ export type MergedActivity = { row:number; name:string; pwcOwners:string; frmLea
 export type ActivityAnnotation = { notes:MeetingNote[]; endOverride?:string; sectionOverride?:string; closureReason?:string; frmLeadsOverride?:string; mergedActivities?:MergedActivity[]; statusOverride?:'In progress' }
 export const MEETING_UPDATE_FLAGS = ['date-moved','date-confirmed','new-tbd','existing-tbd','discussion','completed','closed','scope-change','in-progress'] as const
 export type MeetingUpdateFlag = typeof MEETING_UPDATE_FLAGS[number]
-export type ChangeRecord = { source:string; recordedOn:string; row?:number; activity:string; detail:string; frmLeads?:string; title?:string; flags?:MeetingUpdateFlag[]; discussion?:string }
+export type ChangeRecord = { source:string; recordedOn:string; row?:number; activity:string; detail:string; frmLeads?:string; pwcOwners?:string; title?:string; flags?:MeetingUpdateFlag[]; discussion?:string }
 
 export const SOURCE_STORAGE = 'frmprio.prioritization.v2'
 export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][]; includedColumns?: number[]; sections?: Record<string,string>; publicationId?: string; annotations?:Record<string,ActivityAnnotation>; changeLog?:ChangeRecord[] }
@@ -44,7 +44,7 @@ function validNotes(value:unknown):boolean {return Array.isArray(value)&&value.e
 function validAnnotations(value:unknown):boolean {
  return value===undefined || object(value)&&Object.entries(value).every(([key,a])=>/^[1-9]\d*$/.test(key)&&object(a)&&validNotes(a.notes)&&['endOverride','closureReason','frmLeadsOverride'].every(k=>a[k]===undefined||typeof a[k]==='string')&&(a.statusOverride===undefined||a.statusOverride==='In progress')&&(a.sectionOverride===undefined||['Active portfolio','Deprioritized','Completed'].includes(String(a.sectionOverride)))&&(a.mergedActivities===undefined||Array.isArray(a.mergedActivities)&&a.mergedActivities.every(m=>object(m)&&Number.isInteger(m.row)&&Number(m.row)>0&&['name','pwcOwners','frmLeads','frmPriority','category','pwcPriority','alignment','activityType','startRaw','endRaw','staffing'].every(k=>typeof m[k]==='string'))))
 }
-function validChangeLog(value:unknown):boolean {return value===undefined||Array.isArray(value)&&value.every(c=>object(c)&&['source','activity','detail'].every(k=>typeof c[k]==='string')&&typeof c.recordedOn==='string'&&!!sourceDate(c.recordedOn)&&(c.row===undefined||Number.isInteger(c.row)&&Number(c.row)>0)&&['frmLeads','title','discussion'].every(k=>c[k]===undefined||typeof c[k]==='string')&&(c.flags===undefined||Array.isArray(c.flags)&&c.flags.every(flag=>MEETING_UPDATE_FLAGS.includes(flag))))}
+function validChangeLog(value:unknown):boolean {return value===undefined||Array.isArray(value)&&value.every(c=>object(c)&&['source','activity','detail'].every(k=>typeof c[k]==='string')&&typeof c.recordedOn==='string'&&!!sourceDate(c.recordedOn)&&(c.row===undefined||Number.isInteger(c.row)&&Number(c.row)>0)&&['frmLeads','pwcOwners','title','discussion'].every(k=>c[k]===undefined||typeof c[k]==='string')&&(c.flags===undefined||Array.isArray(c.flags)&&c.flags.every(flag=>MEETING_UPDATE_FLAGS.includes(flag))))}
 export function isSourceSnapshot(value: unknown): value is SourceSnapshot {
   if (!value || typeof value !== 'object') return false
   const v = value as SourceSnapshot

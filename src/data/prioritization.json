@@ -1680,7 +1680,8 @@
       "title": "Project Keystone",
       "flags": [
         "date-confirmed"
-      ]
+      ],
+      "pwcOwners": "Sonu Kumar"
     },
     {
       "source": "Sonu",
@@ -1692,7 +1693,8 @@
       "title": "Nano",
       "flags": [
         "closed"
-      ]
+      ],
+      "pwcOwners": "Sonu Kumar"
     },
     {
       "source": "Mayra",
@@ -1704,7 +1706,8 @@
       "title": "API Tokenization",
       "flags": [
         "date-moved"
-      ]
+      ],
+      "pwcOwners": "Mayra Mendoza"
     },
     {
       "source": "Mayra",
@@ -1718,7 +1721,8 @@
         "new-tbd",
         "discussion"
       ],
-      "discussion": "FRM to confirm scoping before a revised end date can be agreed."
+      "discussion": "FRM to confirm scoping before a revised end date can be agreed.",
+      "pwcOwners": "Mayra Mendoza"
     },
     {
       "source": "Mayra",
@@ -1730,7 +1734,8 @@
       "title": "Monorepo Inventory",
       "flags": [
         "completed"
-      ]
+      ],
+      "pwcOwners": "Mayra Mendoza"
     },
     {
       "source": "Mayra",
@@ -1742,7 +1747,8 @@
       "title": "Vertex ITGCs",
       "flags": [
         "date-moved"
-      ]
+      ],
+      "pwcOwners": "Joaquin Garcia Mayra Mendoza"
     },
     {
       "source": "Jeff",
@@ -1756,7 +1762,8 @@
         "completed",
         "discussion"
       ],
-      "discussion": "Completion applies to the 2026 memo; confirm separately whether the 2027 scoping item is also complete."
+      "discussion": "Completion applies to the 2026 memo; confirm separately whether the 2027 scoping item is also complete.",
+      "pwcOwners": "Jeff Rose"
     },
     {
       "source": "Jeff",
@@ -1768,7 +1775,8 @@
       "title": "Revenue new controls",
       "flags": [
         "scope-change"
-      ]
+      ],
+      "pwcOwners": "Mayra Mendoza"
     },
     {
       "source": "Jeff",
@@ -1782,7 +1790,8 @@
         "existing-tbd",
         "discussion"
       ],
-      "discussion": "Confirm scope and an end date for IT Ops / Chronosphere; the workbook was already TBD."
+      "discussion": "Confirm scope and an end date for IT Ops / Chronosphere; the workbook was already TBD.",
+      "pwcOwners": "Mayra Mendoza"
     },
     {
       "source": "Jeff",
@@ -1796,7 +1805,8 @@
         "new-tbd",
         "discussion"
       ],
-      "discussion": "Confirm Stripe timing and agree a replacement for the former October 30 end date."
+      "discussion": "Confirm Stripe timing and agree a replacement for the former October 30 end date.",
+      "pwcOwners": "Joaquin Garcia Mayra Mendoza"
     },
     {
       "source": "Jeff",
@@ -1808,7 +1818,8 @@
       "title": "Azure",
       "flags": [
         "scope-change"
-      ]
+      ],
+      "pwcOwners": "Mayra Mendoza"
     },
     {
       "source": "Sonu",
@@ -1820,7 +1831,8 @@
       "title": "SDLC — Keystone",
       "flags": [
         "scope-change"
-      ]
+      ],
+      "pwcOwners": "Nareg Seukunian Sonu Kumar"
     },
     {
       "source": "Sonu",
@@ -1844,7 +1856,8 @@
         "in-progress",
         "discussion"
       ],
-      "discussion": "Layla to confirm back after meeting with Sarah; agree a revised end date."
+      "discussion": "Layla to confirm back after meeting with Sarah; agree a revised end date.",
+      "pwcOwners": "Layla Yang"
     },
     {
       "source": "Layla",
@@ -1858,8 +1871,9 @@
         "completed",
         "discussion"
       ],
-      "discussion": "Completion applied to UI Change. Confirm separately whether the November Engine Manager UAR is included; it remains planned."
+      "discussion": "Completion applied to UI Change. Confirm separately whether the November Engine Manager UAR is included; it remains planned.",
+      "pwcOwners": "Layla Yang"
     }
   ],
-  "publicationId": "orange-notes-188ff23381a9"
+  "publicationId": "orange-notes-470d59969b70"
 }

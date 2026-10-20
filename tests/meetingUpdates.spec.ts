@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test'
 import { readFileSync } from 'node:fs'
-import { activitiesForLead, dateHealth, isSourceSnapshot, orangeOnly, ORANGE_COLUMNS, parseSource, snapshotForLead, SOURCE_STORAGE } from '../src/prioritization'
+import { activitiesForLead, dateHealth, isSourceSnapshot, orangeOnly, ORANGE_COLUMNS, parseSource, peopleDirectory, snapshotForLead, SOURCE_STORAGE } from '../src/prioritization'
 import type { SourceSnapshot } from '../src/prioritization'
-import { meetingUpdatesByMember } from '../src/meetingSummaries'
+import { meetingUpdatesByMember, uniqueMeetingItems, UNRECORDED_PWC_OWNER } from '../src/meetingSummaries'
 const snapshot:SourceSnapshot=JSON.parse(readFileSync(new URL('../src/data/prioritization.json',import.meta.url),'utf8'))
 const activities=parseSource(snapshot)
 const activity=(row:number)=>activities.find(p=>p.row===row)!
+const verifiedOwners:{ownersByRow:Record<string,string[]>}=JSON.parse(readFileSync(new URL('./fixtures/workbook-pwc-owners.json',import.meta.url),'utf8'))
 
 test('latest workbook and meeting decisions retain provenance and apply the requested dates',()=>{
  expect(isSourceSnapshot(snapshot)).toBe(true)
@@ -79,8 +80,9 @@ test('a browser-local import can explicitly return to the published workbook and
 
 test('member summaries distinguish moved dates, confirmed dates, new TBDs and existing TBDs',()=>{
  const groups=meetingUpdatesByMember(snapshot)
- expect(groups.map(group=>group.member)).toEqual(['Sonu Kumar','Mayra Mendoza','Jeff Rose','Layla Yang'])
- const items=groups.flatMap(group=>group.items)
+ expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','Sonu Kumar'])
+ expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
+ const items=uniqueMeetingItems(groups)
  expect(items).toHaveLength(15)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
  expect(rows('date-moved')).toEqual([12,35])
@@ -95,6 +97,48 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  const legacy=structuredClone(snapshot)
  legacy.changeLog?.forEach(change=>{delete change.flags})
  expect(isSourceSnapshot(legacy)).toBe(true)
+})
+
+test('all dashboard and meeting owners match the uploaded worksheet, with Jeff attributed only to his owned activity',()=>{
+ const directory=peopleDirectory(activities.map(item=>item.pwcOwners),true)
+ for(const item of activities)expect(directory.resolve(item.pwcOwners),`Worksheet E at row ${item.row}`).toEqual(verifiedOwners.ownersByRow[String(item.row)])
+ const groups=meetingUpdatesByMember(snapshot)
+ for(const group of groups){
+  for(const item of group.items){
+   const expected=item.change.row?verifiedOwners.ownersByRow[String(item.change.row)]:[]
+   expect(item.pwcOwners,`Meeting ownership at row ${item.change.row}`).toEqual(expected)
+   if(!group.unassigned)expect(expected).toContain(group.member)
+  }
+ }
+ const jeff=groups.find(group=>group.member==='Jeff Rose')!
+ expect(jeff.items.map(item=>item.change.row)).toEqual([8])
+ const mayra=groups.find(group=>group.member==='Mayra Mendoza')!
+ expect(mayra.items.filter(item=>item.change.source==='Jeff').map(item=>item.change.row)).toEqual([16,17,36,38])
+ expect(mayra.items.find(item=>item.change.row===36)?.pwcOwners).toEqual(['Joaquin Garcia','Mayra Mendoza'])
+ expect(groups.find(group=>group.unassigned)?.items.map(item=>item.change.activity)).toEqual(['Non-Rev controls'])
+ const exported=snapshotForLead(snapshot,'Avi')
+ expect(meetingUpdatesByMember(exported).find(group=>group.member==='Mayra Mendoza')?.items.some(item=>item.change.row===38)).toBe(true)
+})
+
+test('shared and removed updates use recorded ownership and never infer an owner from the note provider',()=>{
+ const example=structuredClone(snapshot)
+ example.annotations=undefined
+ example.rows=example.rows.map((row,i)=>i<2?row:row.map(()=>''))
+ example.rows[2]=[...snapshot.rows[2]];example.rows[2][4]='Mayra Mendoza, Joaquin Garcia, Mayra'
+ example.rows[3]=[...snapshot.rows[3]];example.rows[3][4]=''
+ example.changeLog=[
+  {source:'Jeff',recordedOn:'2026-10-20',row:3,activity:'Shared',detail:'Shared update',pwcOwners:'Jeff Rose',flags:['new-tbd']},
+  {source:'Jeff',recordedOn:'2026-10-20',row:4,activity:'Unowned',detail:'Blank worksheet owner',pwcOwners:'Jeff Rose'},
+  {source:'Jeff',recordedOn:'2026-10-20',row:38,activity:'Removed',detail:'Removed activity',pwcOwners:'Mayra Mendoza'},
+  {source:'Jeff',recordedOn:'2026-10-20',activity:'Unknown',detail:'No recorded owner'},
+ ]
+ const groups=meetingUpdatesByMember(example)
+ expect(groups.some(group=>group.member==='Jeff Rose')).toBe(false)
+ expect(groups.find(group=>group.member==='Mayra Mendoza')?.items.map(item=>item.change.row)).toEqual([3,38])
+ expect(groups.find(group=>group.member==='Joaquin Garcia')?.items.map(item=>item.change.row)).toEqual([3])
+ expect(groups.find(group=>group.unassigned)?.items).toHaveLength(2)
+ expect(uniqueMeetingItems(groups)).toHaveLength(4)
+ expect(uniqueMeetingItems(groups).filter(item=>item.change.flags?.includes('new-tbd'))).toHaveLength(1)
 })
 
 test('Layla updates only the additional monitoring follow-up and current Engine Manager UI scope',()=>{
@@ -115,9 +159,9 @@ test('Layla updates only the additional monitoring follow-up and current Engine 
 
 test('member and focus filters show before/after dates and actionable TBDs without filtering the Gantt',async({page})=>{
  await page.goto('/')
- const summaries=page.getByRole('region',{name:'Meeting updates by PwC team member'})
+ const summaries=page.getByRole('region',{name:'Meeting updates by PwC owner'})
  await summaries.locator('summary').click()
- await expect(summaries.getByRole('article')).toHaveCount(4)
+ await expect(summaries.getByRole('article')).toHaveCount(7)
  const mayra=summaries.getByRole('article',{name:'Mayra Mendoza meeting updates'})
  await expect(mayra).toContainText('Oct 15, 2026 → Oct 23, 2026')
  await expect(mayra).toContainText('Oct 30, 2026 → Oct 31, 2026')
@@ -127,9 +171,15 @@ test('member and focus filters show before/after dates and actionable TBDs witho
  await expect(summaries).toContainText('Oct 30, 2026 → TBD')
  await expect(summaries.getByRole('button',{name:'View IT Ops / Chronosphere activity'})).toHaveCount(0)
  await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
+ await expect(mayra.locator('li').filter({hasText:'Stripe'})).toContainText('PwC owners: Joaquin Garcia, Mayra Mendoza')
+ await expect(mayra.locator('li').filter({hasText:'Stripe'})).toContainText('Update provided by Jeff')
  await summaries.getByRole('button',{name:'Jeff Rose',exact:false}).click()
- await expect(summaries.getByRole('article')).toHaveCount(1)
- await expect(summaries.getByRole('article')).toContainText('Stripe')
+ await expect(summaries.getByRole('article')).toHaveCount(0)
+ await expect(summaries).toContainText('No meeting updates match these filters')
+ await summaries.getByRole('button',{name:'All updates',exact:true}).click()
+ await expect(summaries.getByRole('article')).toContainText('IronClad')
+ for(const title of ['Stripe','Revenue new controls','IT Ops / Chronosphere','Azure'])await expect(summaries.getByRole('article')).not.toContainText(title)
+ await summaries.getByRole('button',{name:'Mayra Mendoza',exact:false}).click()
  await summaries.getByRole('button',{name:'Existing TBDs',exact:true}).click()
  await expect(summaries.getByRole('article')).toContainText('already TBD in workbook')
  await expect(summaries.getByRole('article')).toContainText('IT Ops / Chronosphere')
@@ -139,7 +189,7 @@ test('member and focus filters show before/after dates and actionable TBDs witho
 test('Layla summaries link to the scoped activities, preserve their status and export the follow-up',async({page})=>{
  await page.clock.setFixedTime(new Date('2026-10-20T18:00:00Z'))
  await page.goto('/#lead=Avi')
- const summaries=page.getByRole('region',{name:'Meeting updates by PwC team member'})
+ const summaries=page.getByRole('region',{name:'Meeting updates by PwC owner'})
  await summaries.locator('summary').click()
  await summaries.getByRole('button',{name:'Layla Yang',exact:false}).click()
  await expect(summaries.getByRole('article')).toHaveCount(1)
@@ -165,13 +215,13 @@ test('Layla summaries link to the scoped activities, preserve their status and e
 test('mobile member summaries stay inside the viewport and empty focus filters can be cleared',async({page})=>{
  await page.setViewportSize({width:390,height:844})
  await page.goto('/')
- const summaries=page.getByRole('region',{name:'Meeting updates by PwC team member'})
+ const summaries=page.getByRole('region',{name:'Meeting updates by PwC owner'})
  await summaries.locator('summary').click()
  await summaries.getByRole('button',{name:'Layla Yang',exact:false}).click()
  await summaries.getByRole('button',{name:'New TBDs',exact:true}).click()
  await expect(summaries).toContainText('No meeting updates match these filters')
  await summaries.getByRole('button',{name:'Clear meeting filters',exact:true}).click()
- await expect(summaries.getByRole('article')).toHaveCount(4)
+ await expect(summaries.getByRole('article')).toHaveCount(7)
  await summaries.getByRole('button',{name:'View Monitoring — Deloitte follow-up activity',exact:true}).click()
  await expect(page.locator('.source-details h2')).toContainText('additional followup')
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
