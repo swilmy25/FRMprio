@@ -1644,6 +1644,29 @@
         }
       ],
       "endOverride": "TBD"
+    },
+    "27": {
+      "notes": [
+        {
+          "source": "Layla",
+          "recordedOn": "2026-10-20",
+          "text": "Additional monitoring follow-up and documentation to address Deloitte questions, including the same aspects in review, are still in progress. Layla will confirm back after meeting with Sarah.",
+          "applicationNote": "This update applies to the additional follow-up activity, not the original monitoring assessment already marked complete. No revised date was supplied; the October 15 workbook end date remains overdue."
+        }
+      ],
+      "statusOverride": "In progress"
+    },
+    "45": {
+      "notes": [
+        {
+          "source": "Layla",
+          "recordedOn": "2026-10-20",
+          "text": "Engine Manager is completed.",
+          "applicationNote": "Applied to Engine Manager UI Change. The separate November Engine Manager UAR (Q2→Q3) remains planned pending confirmation of scope. No actual completion date was supplied."
+        }
+      ],
+      "sectionOverride": "Completed",
+      "endOverride": "Completed"
     }
   },
   "changeLog": [
@@ -1653,7 +1676,11 @@
       "row": 34,
       "activity": "Project Keystone - Understanding What Happened, What Migrated, Architecture Changes before SDLC testing can be done (changes from intiial understanding)",
       "detail": "Project Keystone end date confirmed as October 30, 2026. This supersedes the earlier TBD escalation note.",
-      "frmLeads": "Avi"
+      "frmLeads": "Avi",
+      "title": "Project Keystone",
+      "flags": [
+        "date-confirmed"
+      ]
     },
     {
       "source": "Sonu",
@@ -1661,7 +1688,11 @@
       "row": 37,
       "activity": "Nano",
       "detail": "Nano will not be assessed in FY26. Move to the Completed / closed bucket; this is a scope closure, not completed testing.",
-      "frmLeads": "Avi"
+      "frmLeads": "Avi",
+      "title": "Nano",
+      "flags": [
+        "closed"
+      ]
     },
     {
       "source": "Mayra",
@@ -1669,7 +1700,11 @@
       "row": 12,
       "activity": "API Tokenization with Astra Model",
       "detail": "API Tokenization due date moved to October 23, 2026.",
-      "frmLeads": "Urminder"
+      "frmLeads": "Urminder",
+      "title": "API Tokenization",
+      "flags": [
+        "date-moved"
+      ]
     },
     {
       "source": "Mayra",
@@ -1677,7 +1712,13 @@
       "row": 16,
       "activity": "Revenue new controls",
       "detail": "Revenue new controls end date is TBD, pending FRM confirmation of scoping.",
-      "frmLeads": "Urminder"
+      "frmLeads": "Urminder",
+      "title": "Revenue new controls",
+      "flags": [
+        "new-tbd",
+        "discussion"
+      ],
+      "discussion": "FRM to confirm scoping before a revised end date can be agreed."
     },
     {
       "source": "Mayra",
@@ -1685,7 +1726,11 @@
       "row": 21,
       "activity": "Monorepo Inventory",
       "detail": "Monorepo Inventory is complete. The meeting note does not supply an actual completion date.",
-      "frmLeads": "Ash"
+      "frmLeads": "Ash",
+      "title": "Monorepo Inventory",
+      "flags": [
+        "completed"
+      ]
     },
     {
       "source": "Mayra",
@@ -1693,7 +1738,11 @@
       "row": 35,
       "activity": "Vertex (ITGCs)",
       "detail": "Vertex ITGCs due date moved to October 31, 2026.",
-      "frmLeads": "Urminder"
+      "frmLeads": "Urminder",
+      "title": "Vertex ITGCs",
+      "flags": [
+        "date-moved"
+      ]
     },
     {
       "source": "Jeff",
@@ -1701,15 +1750,25 @@
       "row": 8,
       "activity": "IronClad - 2026 scoping memo",
       "detail": "IronClad 2026 scoping memo moved to completed. The separate 2027 scoping activity remains planned pending explicit confirmation.",
-      "frmLeads": "Sudhika"
+      "frmLeads": "Sudhika",
+      "title": "IronClad — 2026 scoping memo",
+      "flags": [
+        "completed",
+        "discussion"
+      ],
+      "discussion": "Completion applies to the 2026 memo; confirm separately whether the 2027 scoping item is also complete."
     },
     {
       "source": "Jeff",
       "recordedOn": "2026-10-20",
       "row": 16,
       "activity": "Revenue new controls",
-      "detail": "Merged the Databricks–Orion revenue-control activity into Revenue new controls for context. It is counted once; both original FRM leads remain visible in the consolidated lead views.",
-      "frmLeads": "Urminder"
+      "detail": "Databricks–Orion revenue-control scope merged into this item; the standalone line was removed. Counted once, with both original FRM leads retained.",
+      "frmLeads": "Urminder, Ash",
+      "title": "Revenue new controls",
+      "flags": [
+        "scope-change"
+      ]
     },
     {
       "source": "Jeff",
@@ -1717,7 +1776,13 @@
       "row": 17,
       "activity": "IT Ops (Chronosphere) Scoping and Discovery",
       "detail": "IT Ops / Chronosphere remains TBD for now.",
-      "frmLeads": "Avi"
+      "frmLeads": "Avi",
+      "title": "IT Ops / Chronosphere",
+      "flags": [
+        "existing-tbd",
+        "discussion"
+      ],
+      "discussion": "Confirm scope and an end date for IT Ops / Chronosphere; the workbook was already TBD."
     },
     {
       "source": "Jeff",
@@ -1725,7 +1790,13 @@
       "row": 36,
       "activity": "Stripe",
       "detail": "Stripe end date moved to TBD for now.",
-      "frmLeads": "Ash"
+      "frmLeads": "Ash",
+      "title": "Stripe",
+      "flags": [
+        "new-tbd",
+        "discussion"
+      ],
+      "discussion": "Confirm Stripe timing and agree a replacement for the former October 30 end date."
     },
     {
       "source": "Jeff",
@@ -1733,15 +1804,11 @@
       "row": 38,
       "activity": "Azure",
       "detail": "Azure removed as requested.",
-      "frmLeads": "Avi"
-    },
-    {
-      "source": "Jeff",
-      "recordedOn": "2026-10-20",
-      "row": 39,
-      "activity": "Revenue controls since Databricks - Orion migration ",
-      "detail": "Standalone Databricks–Orion revenue item removed after merging its orange-column context into Revenue new controls (row 16).",
-      "frmLeads": "Ash"
+      "frmLeads": "Avi",
+      "title": "Azure",
+      "flags": [
+        "scope-change"
+      ]
     },
     {
       "source": "Sonu",
@@ -1749,14 +1816,50 @@
       "row": 42,
       "activity": "SDLC - Keystone",
       "detail": "SDLC - Keystone removed as a standalone activity; Project Keystone remains tracked separately.",
-      "frmLeads": "Avi"
+      "frmLeads": "Avi",
+      "title": "SDLC — Keystone",
+      "flags": [
+        "scope-change"
+      ]
     },
     {
       "source": "Sonu",
       "recordedOn": "2026-10-20",
       "activity": "Non-Rev controls",
-      "detail": "No standalone Non-Rev controls line exists in the latest workbook. It is tracked elsewhere. The distinct AWS activity in the new workbook is retained."
+      "detail": "No standalone Non-Rev controls line exists in the latest workbook. It is tracked elsewhere. The distinct AWS activity in the new workbook is retained.",
+      "title": "Non-Rev controls",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "Layla",
+      "recordedOn": "2026-10-20",
+      "row": 27,
+      "activity": "Monitoring (Airflow/Fivetran/Azure scheduler/Spark/Grafana/PagerDuty) on Compute jobs/interfaces/ITACs - additional followup and documentation to address Deloitte questions/adding the same aspects in review",
+      "title": "Monitoring — Deloitte follow-up",
+      "detail": "Additional follow-up and documentation for Deloitte questions, including the same aspects in review, remain in progress.",
+      "frmLeads": "Avi",
+      "flags": [
+        "in-progress",
+        "discussion"
+      ],
+      "discussion": "Layla to confirm back after meeting with Sarah; agree a revised end date."
+    },
+    {
+      "source": "Layla",
+      "recordedOn": "2026-10-20",
+      "row": 45,
+      "activity": "Engine Manager UI Change",
+      "title": "Engine Manager UI Change",
+      "detail": "Marked complete from Layla’s update; no actual completion date was supplied.",
+      "frmLeads": "Avi",
+      "flags": [
+        "completed",
+        "discussion"
+      ],
+      "discussion": "Completion applied to UI Change. Confirm separately whether the November Engine Manager UAR is included; it remains planned."
     }
   ],
-  "publicationId": "orange-notes-163fde1ec895"
+  "publicationId": "orange-notes-188ff23381a9"
 }

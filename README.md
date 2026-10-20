@@ -4,7 +4,7 @@ React and TypeScript dashboard for FRM / PwC project coordination, published thr
 
 ## Current source
 
-The user-authorized snapshot in `src/data/prioritization.json` comes from the **Prioritization** tab in `OAI Blueprint IT Team Wide Weekly Sync Agenda (2).xlsx`, with the user's October 20, 2026 meeting decisions applied. It contains 45 activities: 6 completed and 1 closed because Nano will not be assessed in FY26. Only columns marked orange in the workbook are included:
+The user-authorized snapshot in `src/data/prioritization.json` comes from the **Prioritization** tab in `OAI Blueprint IT Team Wide Weekly Sync Agenda (2).xlsx`, with the user's October 20, 2026 meeting decisions applied. It contains 45 activities: 7 completed and 1 closed because Nano will not be assessed in FY26. Only columns marked orange in the workbook are included:
 
 | Column | Field |
 | --- | --- |
@@ -24,7 +24,9 @@ The source uses colored markers in row 1, with labels in row 2. Excluded cells a
 
 The user explicitly authorized publishing their supplied Prioritization data. This static snapshot and the app code are accessible to viewers of the GitHub Pages site and repository. Do not add unrelated tabs or other private uploads without authorization.
 
-Meeting decisions are stored separately from worksheet values, attributed to Sonu, Mayra or Jeff, and shown in activity details and a collapsible change log. The recorded date is when the notes were supplied, not an assumed meeting date. Applied interpretations are labeled separately. Original orange-column values remain available in details and exports.
+Meeting decisions are stored separately from worksheet values, attributed to Sonu, Mayra, Jeff or Layla, and shown in activity details and a collapsible summary grouped by PwC team member. Member and focus filters isolate moved dates, new TBDs, existing TBDs and discussion actions without changing the Gantt filters. Date moves and new TBDs show workbook end → current end. Keystone is a confirmed date, and Chronosphere was already TBD; neither is labeled a new change. Activity links clear project filters and open the matching detail. Lead views and exports retain their scoped notes. The recorded date is when the notes were supplied, not an assumed meeting date. Applied interpretations are labeled separately. Original orange-column values remain available in details and exports.
+
+Layla's additional Deloitte monitoring follow-up remains **In progress** and needs her confirmation after meeting with Sarah. Its October 15 workbook end is retained and flagged overdue; no new date or TBD is invented. The separately completed original monitoring assessment stays complete. Engine Manager completion applies to **UI Change**, with its former due date retained only as workbook context. The separate November Engine Manager UAR remains planned pending scope clarification; no actual completion date is invented.
 
 The update applies Keystone 10/30, API Tokenization 10/23 and Vertex 10/31 end dates; Revenue new controls, Chronosphere and Stripe remain TBD. Revenue's Databricks–Orion migration context is merged into Revenue new controls, counted once, and retained in both original FRM lead views. Azure and SDLC–Keystone are removed. The latest workbook no longer has a standalone Non-Rev controls line; its distinct AWS activity remains. AWS's invalid `11/31` end is unresolved and red. IronClad completion applies to the 2026 memo only; the separate 2027 scoping activity remains planned pending clarification. Nano is a scope closure, not evidence of completed testing, and no actual completion dates are invented.
 
@@ -81,7 +83,7 @@ npm run build
 npm test
 ```
 
-The build checks TypeScript. The 28 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, default/live source loading, meeting provenance and date overrides, scope closures, removals, merged revenue context, and returning to the published update. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
+The build checks TypeScript. The 33 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, default/live source loading, meeting provenance and date overrides, scope closures, removals, merged revenue context, returning to the published update, member summaries, new versus existing TBDs, Layla's status updates, linked activity selection and scoped exports, and mobile summary filters. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
 
 ## GitHub Pages deployment
 
