@@ -45,6 +45,20 @@ test('completed work remains green, TBD and overdue end dates escalate, past act
   expect(alignmentState(a[0])).toBe('Not aligned')
   expect(alignmentState({ ...a[0], alignment: 'Yes' })).toBe('Not aligned')
 })
+test('month-only starts retain precision, avoid invented days and still check invalid ordering and overdue ends', () => {
+  const example=structuredClone(fixture)
+  const activity=(start:string)=>{example.rows[2][22]=start;return parseSource(orangeOnly(example))[0]}
+  const july=activity('July 2026')
+  expect(july.start).toBeNull()
+  expect(july.startMonth).toBe('2026-07')
+  expect(dateHealth(july,'2026-10-21').tone).toBe('scheduled')
+  expect(activity('2026-07').startMonth).toBe('2026-07')
+  expect(activity('2026-13').startMonth).toBeNull()
+  expect(dateHealth(activity('2026-13'),'2026-10-21').reasons).toContain('Start date missing or unresolved')
+  expect(dateHealth(activity('December 2026'),'2026-10-21').reasons).toContain('Start month is after end date')
+  expect(dateHealth(july,'2026-11-16').reasons).toContain('End date has passed; completion is not recorded')
+  expect(dateHealth({...july,completed:true},'2026-11-16').tone).toBe('completed')
+})
 test('shared owners resolve individually, including aliases, and FRM leads split correctly', () => {
   const directory = peopleDirectory(['Alex Morgan Jordan Lee', 'Alex / Jordan', 'Alex Morgan'], true)
   expect(directory.options).toEqual(['Alex Morgan', 'Jordan Lee'])
@@ -99,11 +113,11 @@ test('new publication replaces an older bundled browser snapshot, and ignores th
   const previous = { ...orangeOnly(fixture), publicationId: 'old-published-data' }
   await page.addInitScript(({ key, snapshot }) => { localStorage.setItem(key, JSON.stringify(snapshot)); localStorage.setItem('frmprio.publishedId', 'old-published-data'); localStorage.setItem('frmprio.prioritization.v1', JSON.stringify(snapshot)) }, { key: SOURCE_STORAGE, snapshot: previous })
   await page.goto('/')
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(49)
 })
 test('new visitors see the fresh orange-only workbook with completed items and explicit dates', async ({ page }) => {
   await page.goto('/')
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(49)
   await expect(page.locator('.workbook-row.date-completed')).toHaveCount(8)
   await expect(page.locator('.table-head')).toContainText('PROJECTED/ACTUAL START')
   await expect(page.locator('.table-head')).toContainText('PROJECTED/ACTUAL END')

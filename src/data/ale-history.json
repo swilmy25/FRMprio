@@ -133,6 +133,57 @@
           "bucket": "alignment"
         }
       ]
+    },
+    {
+      "id": "9effde4df359552f",
+      "observedAt": "2026-10-21T16:52:32.283Z",
+      "decisions": [
+        {
+          "key": "escalation:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:it ops (chronosphere) scoping and discovery",
+          "topic": "IT Ops / Chronosphere",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:monitoring (airflow/fivetran/azure scheduler/spark/grafana/pagerduty) on compute jobs/interfaces/itacs - additional followup and documentation to address deloitte questions/adding the same aspects in review",
+          "topic": "Monitoring — Deloitte follow-up",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:stripe",
+          "topic": "Stripe",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:aws",
+          "topic": "AWS",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:sdlc - pando",
+          "topic": "SDLC — Pando",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:platform oe testing - itacs",
+          "topic": "Platform OE Testing — ITACs",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:platform oe testing - itgcs",
+          "topic": "Platform OE Testing — ITGCs",
+          "bucket": "escalation"
+        },
+        {
+          "key": "alignment:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "alignment"
+        }
+      ]
     }
   ]
 }

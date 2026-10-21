@@ -64,7 +64,8 @@
     "54": "Completed",
     "55": "Deprioritized",
     "56": "Active portfolio",
-    "57": "Active portfolio"
+    "57": "Active portfolio",
+    "58": "Active portfolio"
   },
   "rows": [
     [
@@ -1605,6 +1606,33 @@
       "TBD",
       "TBD",
       ""
+    ],
+    [
+      "",
+      "",
+      "Non-GAAP metrics",
+      "",
+      "Stephen Wilm",
+      "Avi & Ale",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "July 2026",
+      "2026-11-15",
+      ""
     ]
   ],
   "annotations": {
@@ -1805,6 +1833,18 @@
           "recordedOn": "2026-10-20",
           "text": "Add a high-level Platform OE Testing ITGCs line item with Sonu Kumar, Mayra Mendoza and Layla Yang as joint PwC owners. High-level OE testing visibility; detailed scope, controls, progress and staffing are maintained in a separate dashboard. No link has been supplied yet.",
           "applicationNote": "FRM leads, priorities, alignment, dates and staffing were not supplied. Start/end dates are TBD; other unconfirmed fields are left blank."
+        }
+      ]
+    },
+    "58": {
+      "userAdded": true,
+      "statusOverride": "In progress",
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-21",
+          "text": "Non-GAAP metrics: Contracted Power is the final metric remaining to complete; all other metrics are ready. Stephen Wilm is the PwC owner, with Avi and Ale as FRM leads. Start is July 2026; end is November 15, 2026.",
+          "applicationNote": "The exact July start day was not supplied and is not inferred. Ready is retained as reported, without marking the overall activity complete or assigning a completion percentage. Priorities, category, activity type and staffing were not supplied."
         }
       ]
     }
@@ -2083,7 +2123,21 @@
         "discussion"
       ],
       "discussion": "Confirm FRM lead, priorities and start/end dates; detailed OE testing remains in the separate dashboard."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-21",
+      "row": 58,
+      "activity": "Non-GAAP metrics",
+      "title": "Non-GAAP metrics",
+      "detail": "Add Non-GAAP metrics, owned by Stephen Wilm with Avi and Ale as FRM leads. July 2026 start (exact day unspecified); November 15 end. Contracted Power is the final metric remaining; all other metrics are ready.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Avi & Ale",
+      "flags": [
+        "scope-change",
+        "in-progress"
+      ]
     }
   ],
-  "publicationId": "orange-notes-b91eb7c54a31"
+  "publicationId": "orange-notes-820c76a1c594"
 }

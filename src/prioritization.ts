@@ -15,7 +15,7 @@ export type SourceActivity = {
   pwcOwners: string; frmLeads: string; staffing: string; frmPriority: string; pwcPriority: string; alignment: string;
   category: string; activityType: string; estimate: number | null; actual: number | null; remaining: number | null;
   controls: string; completedControls: string; outstandingControls: string;
-  originalDue: string; revisedDue: string; startRaw: string; start: string | null; end: string | null; endBasis: string; endRaw: string; completed: boolean;
+  originalDue: string; revisedDue: string; startRaw: string; start: string | null; startMonth: string | null; end: string | null; endBasis: string; endRaw: string; completed: boolean;
   delay: string; timeUsed: string; notes: string; response: string;
   perspectives: Record<'a' | 'b' | 'c' | 'd' | 'e', string>; warnings: string[]; status: string;
 }
@@ -31,6 +31,15 @@ export function sourceDate(value: string): string | null {
   const normalized = iso ? value.trim() : `${us![3]}-${us![1].padStart(2, '0')}-${us![2].padStart(2, '0')}`
   const parsed = new Date(`${normalized}T00:00:00Z`)
   return Number.isFinite(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === normalized ? normalized : null
+}
+function sourceMonth(value: string): string | null {
+  const text = value.trim().toLowerCase()
+  const iso = text.match(/^(\d{4})-(\d{2})$/)
+  const named = text.match(/^([a-z]+)\s+(\d{4})$/)
+  const months = ['january','february','march','april','may','june','july','august','september','october','november','december']
+  const month = iso ? Number(iso[2]) : named ? months.indexOf(named[1]) + 1 : 0
+  const year = iso?.[1] ?? named?.[2]
+  return year && month >= 1 && month <= 12 ? `${year}-${String(month).padStart(2,'0')}` : null
 }
 export function splitPerspectives(text: string): SourceActivity['perspectives'] {
   const result = { a: '', b: '', c: '', d: '', e: '' }
@@ -72,6 +81,7 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     const warnings: string[] = []
     const estimate = sourceNumber(cell(11)), actual = sourceNumber(cell(12)), remaining = sourceNumber(cell(13))
     const start = sourceDate(cell(22))
+    const startMonth = start ? null : sourceMonth(cell(22))
     const endRaw = annotation?.endOverride??workbookEndRaw
     const completed = effectiveSection==='Completed' || /^completed$/i.test(endRaw)
     const revised = sourceDate(endRaw)
@@ -87,7 +97,8 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     if (included(13) && remaining === null) warnings.push(`Remaining hours are unknown (N: ${cell(13) || 'blank'}).`)
     if (remaining !== null && remaining < 0) warnings.push(`Reported remaining is ${remaining} hrs; actuals exceed the estimate. This is an estimate overrun, not negative future work.`)
     if (estimate !== null && actual !== null && remaining !== null && Math.abs(estimate - actual - remaining) > 0.05) warnings.push('L − M does not reconcile with N; values are preserved as reported.')
-    if (!start) warnings.push(`No precise start date (W: ${cell(22) || 'blank'}); no start date is inferred.`)
+    if (startMonth) warnings.push(`Start month supplied (${cell(22)}); the exact day is not supplied or inferred.`)
+    if (!start && !startMonth) warnings.push(`No precise start date (W: ${cell(22) || 'blank'}); no start date is inferred.`)
     if (!end && !completed && !/^(N\/A|Ongoing)/i.test(endRaw)) warnings.push(`No precise end date (${dedicatedEnd?'X':'R'}: ${endRaw || 'blank'}).`)
     if (start && end && start > end) warnings.push('Source start date is after the due date; the timeline window is not plotted.')
     if (cell(9).toLowerCase() === 'no') warnings.push('FRM and PwC alignment is explicitly marked No (J).')
@@ -99,7 +110,7 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     if (aHours && actual !== null && Number(aHours[1]) !== actual) warnings.push(`V(a) reports ${aHours[1]} hrs versus ${actual} actual hrs in M. The two figures are not merged.`)
     if (bHours && remaining !== null && Number(bHours[1]) !== remaining) warnings.push(`V(b) reports ${bHours[1]} hrs versus ${remaining} remaining hrs in N. Confirm scope and timing.`)
     const status = completed ? 'Completed' : annotation?.statusOverride ?? (effectiveSection === 'Deprioritized' ? 'Deprioritized' : actual !== null && estimate !== null && actual > estimate ? 'Effort overrun' : /^done\b/i.test(cell(20)) && remaining === 0 ? 'Reported complete' : /on track/i.test(`${cell(18)} ${cell(21)}`) ? 'Reported on track' : cell(18) && !/^(N\/A|No Delay)/i.test(cell(18)) ? 'Delay noted' : /\bat risk\b/i.test(cell(20)) ? 'Risk noted' : actual === 0 ? 'No hours recorded' : 'Status not supplied')
-    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: annotation?.nameOverride??cell(2), workbookName:cell(2), userAdded:annotation?.userAdded??false, section:effectiveSection, workbookEndRaw, workbookFrmLeads:cell(5), closureReason:annotation?.closureReason??'',meetingNotes:annotation?.notes??[],mergedActivities:annotation?.mergedActivities??[],pwcOwners: cell(4), frmLeads: annotation?.frmLeadsOverride??cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, end, endBasis, endRaw, completed, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(dedicatedEnd?24:23), perspectives, warnings, status })
+    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: annotation?.nameOverride??cell(2), workbookName:cell(2), userAdded:annotation?.userAdded??false, section:effectiveSection, workbookEndRaw, workbookFrmLeads:cell(5), closureReason:annotation?.closureReason??'',meetingNotes:annotation?.notes??[],mergedActivities:annotation?.mergedActivities??[],pwcOwners: cell(4), frmLeads: annotation?.frmLeadsOverride??cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, startMonth, end, endBasis, endRaw, completed, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(dedicatedEnd?24:23), perspectives, warnings, status })
   })
   return activities
 }
@@ -142,9 +153,10 @@ export function dateHealth(p:SourceActivity,today:string):DateHealth {
  if(p.completed)return {tone:'completed',label:p.closureReason?`Closed · ${p.closureReason[0].toLowerCase()}${p.closureReason.slice(1)}`:'Completed',reasons:[p.closureReason||'Marked completed in the source or confirmed by a meeting update.']}
  const reasons:string[]=[]
  const exempt=(s:string)=>/^(N\/A|Ongoing)/i.test(s)
- if(!p.start&&!exempt(p.startRaw))reasons.push(/tbd|pending/i.test(p.startRaw)?'Start date TBD':'Start date missing or unresolved')
+ if(!p.start&&!p.startMonth&&!exempt(p.startRaw))reasons.push(/tbd|pending/i.test(p.startRaw)?'Start date TBD':'Start date missing or unresolved')
  if(!p.end&&!exempt(p.endRaw))reasons.push(/tbd|pending/i.test(p.endRaw)?'End date TBD':'End date missing or unresolved')
  if(p.start&&p.end&&p.start>p.end)reasons.push('Start date is after end date')
+ if(p.startMonth&&p.end&&p.startMonth>p.end.slice(0,7))reasons.push('Start month is after end date')
  if(p.end&&p.end<today)reasons.push('End date has passed; completion is not recorded')
  if(p.start&&p.start<today&&/not started/i.test(p.startRaw))reasons.push('Projected start date has passed')
  if(reasons.length)return {tone:'escalation',label:'Escalation',reasons}

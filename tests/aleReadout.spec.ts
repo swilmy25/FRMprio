@@ -75,7 +75,7 @@ test('top button opens the full portfolio readout from a filtered lead view and 
   await expect(page.locator('.live-sheet')).toBeHidden()
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Project dashboard', exact: true })).toBeVisible()
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(48)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(49)
 })
 
 test('readout link survives reload and browser navigation restores the appropriate view', async ({ page }) => {

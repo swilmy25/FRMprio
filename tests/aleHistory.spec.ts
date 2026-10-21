@@ -118,7 +118,7 @@ test('source exports transfer local update history into a fresh browser without 
   await page.clock.setFixedTime(new Date('2026-10-21T18:00:00.000Z'))
   await page.goto('/')
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-10-21'))) })
-  await expect(page.getByRole('status')).toContainText('Imported 48 activities')
+  await expect(page.getByRole('status')).toContainText('Imported 49 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
   const download = await downloadPromise

@@ -4,7 +4,7 @@ React and TypeScript dashboard for FRM / PwC project coordination, published thr
 
 ## Current source
 
-The user-authorized snapshot in `src/data/prioritization.json` comes from the **Prioritization** tab in `OAI Blueprint IT Team Wide Weekly Sync Agenda (2).xlsx`, with the user's October 20, 2026 meeting decisions applied. It now contains 48 activities, including the user-requested OE testing split/additions: 7 completed and 1 closed because Nano will not be assessed in FY26. Only columns marked orange in the workbook are included:
+The user-authorized snapshot in `src/data/prioritization.json` comes from the **Prioritization** tab in `OAI Blueprint IT Team Wide Weekly Sync Agenda (2).xlsx`, with the user's October 20, 2026 meeting decisions applied. It now contains 49 activities, including the user-requested OE testing split/additions and Non-GAAP metrics: 7 completed and 1 closed because Nano will not be assessed in FY26. Only columns marked orange in the workbook are included:
 
 | Column | Field |
 | --- | --- |
@@ -36,6 +36,8 @@ OE testing has four high-level tracking lines: **Non-Platform OE Testing — ITA
 
 Platform OE items at rows 56–57 are jointly assigned to **Sonu Kumar, Mayra Mendoza and Layla Yang**. FRM leads, priorities, alignment and staffing are unconfirmed; start/end dates are TBD and therefore use the existing escalation rules. The two new date escalations have proposed actions to confirm the FRM lead, priorities and dates. These user-added entries are labeled as added activities rather than workbook source rows. All four retain context explaining that detailed OE scope/progress lives in a separate dashboard; no link or detailed figures were supplied or invented. They appear in the portfolio, owner filters, summaries and exports. Non-Platform items also appear in both assigned FRM lead views. Added-activity metadata and scope notes survive JSON exports/imports; raw workbook imports do not contain those additions.
 
+**Non-GAAP metrics** was added October 21, owned by **Stephen Wilm** with **Avi and Ale** as FRM leads. It remains **In progress**: **Contracted Power is the final metric remaining; all other metrics are ready**. The start is **July 2026**, with no exact day supplied, and the end is **November 15, 2026**. Unprovided priorities/category/activity type/staffing stay blank; no completion percentage or completed status is inferred. It appears once in the portfolio and in both lead views, owner filters, meeting summaries and exports.
+
 ## Filters and dates
 
 - Multi-select filters for individual FRM leads and PwC owners, separate FRM/PwC priority ratings, and category. Shared owners and shared leads are matched individually; full source wording remains in details.
@@ -45,7 +47,7 @@ Platform OE items at rows 56–57 are jointly assigned to **Sonu Kumar, Mayra Me
 - W is the start and X is the end. Y is staffing. No fallback to excluded historical dates. Due-date ranges retain the source range and use the final stated date as the timeline endpoint.
 - Completed section membership or X marked Completed takes precedence and is green. If no actual completion date was supplied, the chart says so instead of inventing a date or duration.
 - Unfinished work with TBD, pending/missing/unresolved dates, invalid ordering, or an end before today is red for escalation. Dates are checked in America/Los_Angeles and rechecked each minute and on visibility changes. An end today is not yet overdue. Past actual starts alone are not overdue. N/A/ongoing PMO dates remain undated.
-- Both dates appear as text alongside the Gantt. Bars require both dates; a diamond means end only. No progress percentages are inferred.
+- Both dates appear as text alongside the Gantt. Bars require exact dates; a diamond means end only. Month-only starts (for example July 2026 or 2026-07) retain their precision and are labeled as month only. They extend the displayed timeline range to include that month but do not create a daily start date or a precise-duration bar. A known start month alone does not trigger a missing-start escalation; a start month later than the end date still escalates. No progress percentages are inferred.
 
 ## FRM lead views
 
@@ -101,7 +103,7 @@ npm run build
 npm test
 ```
 
-The build checks TypeScript. The 50 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, default/live source loading, meeting provenance and date overrides, scope closures, removals, merged revenue context, returning to the published update, member summaries, new versus existing TBDs, Layla's status updates, linked activity selection and scoped exports, mobile summary filters, a worksheet-derived ownership fixture, shared / missing / removed ownership attribution, and the Ale-kazam readout's counts, overlap, actions, ownership, full-portfolio scope, navigation, mobile layout, Pacific rollover and ongoing authorized refresh, plus first/last dates, consecutive and returning items, stable identity across row and owner changes, idempotent polling, scoped history exports, persistence across reloads and browsers, and visible storage failures. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
+The build checks TypeScript. The 51 tests cover the manual planner, Google read/expiry/disconnect behavior, orange-only projection, individual/shared-person filters, combined filters, alignment, date boundaries and completed precedence, detail-only staffing, browser-cache upgrades, default/live source loading, meeting provenance and date overrides, scope closures, removals, merged revenue context, returning to the published update, member summaries, new versus existing TBDs, Layla's status updates, linked activity selection and scoped exports, mobile summary filters, a worksheet-derived ownership fixture, shared / missing / removed ownership attribution, and the Ale-kazam readout's counts, overlap, actions, ownership, full-portfolio scope, navigation, mobile layout, Pacific rollover and ongoing authorized refresh, plus first/last dates, consecutive and returning items, stable identity across row and owner changes, idempotent polling, scoped history exports, persistence across reloads and browsers, and visible storage failures. Chromium may require execution outside the cloud sandbox. System Chromium is used when available; otherwise run `npx playwright install chromium`.
 
 ## GitHub Pages deployment
 
