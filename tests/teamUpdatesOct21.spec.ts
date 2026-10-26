@@ -11,7 +11,7 @@ const activity = (row: number) => activities.find(item => item.row === row)!
 const today = '2026-10-26'
 
 test('date corrections supersede overdue values without closing unfinished work or changing unrelated activities', () => {
-  expect(activities).toHaveLength(49)
+  expect(activities).toHaveLength(50)
   expect(activity(40).end).toBe('2026-11-30')
   expect(activity(40).workbookEndRaw).toBe('11/31')
   expect(activity(40).start).toBe('2026-10-26')

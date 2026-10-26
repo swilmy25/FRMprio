@@ -65,7 +65,8 @@
     "55": "Deprioritized",
     "56": "Active portfolio",
     "57": "Active portfolio",
-    "58": "Active portfolio"
+    "58": "Active portfolio",
+    "59": "Active portfolio"
   },
   "rows": [
     [
@@ -1633,6 +1634,33 @@
       "July 2026",
       "2026-11-15",
       ""
+    ],
+    [
+      "",
+      "",
+      "HR/Payroll late terminations — impact assessment support",
+      "",
+      "Stephen Wilm",
+      "Sudhika & Chandana",
+      "",
+      "HR/Payroll",
+      "High",
+      "",
+      "Impact assessment / SAD support",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      "Coordinate with @cloie.vonmassenhausen; gather evidence from Adi for HR Ops review. Stephen/Cloie work split and hours to confirm."
     ]
   ],
   "annotations": {
@@ -1982,6 +2010,70 @@
         }
       ],
       "pwcOwnersOverride": "Ben Oates"
+    },
+    "59": {
+      "userAdded": true,
+      "statusOverride": "In progress",
+      "planningEstimate": {
+        "status": "Proposed",
+        "minHours": 40,
+        "maxHours": 80,
+        "scope": "Provisional effort for the full assessment of approximately 20 late-termination cases, if Stephen were to cover the full scope. This is a planning range, not a team-provided commitment.",
+        "allocationNote": "To be confirmed with Cloie, Sudhika and Chandana after agreeing the work split; do not allocate the entire range to Stephen by default.",
+        "breakdown": [
+          {
+            "label": "Map affected systems/access and assemble evidence",
+            "minHours": 8,
+            "maxHours": 16
+          },
+          {
+            "label": "Inspect relevant UARs and trace removal decisions",
+            "minHours": 12,
+            "maxHours": 24
+          },
+          {
+            "label": "Review available Network / DB / Application last logins",
+            "minHours": 12,
+            "maxHours": 24
+          },
+          {
+            "label": "Coordinate findings, HR Ops review support and SAD input",
+            "minHours": 8,
+            "maxHours": 16
+          }
+        ],
+        "assumptions": [
+          "Approximately 20 termination cases with roughly 1–3 relevant systems per person.",
+          "Termination dates, access evidence, relevant UARs and available last-login information can be obtained through the PBC process without major retrieval work.",
+          "Shared review evidence can be reused and the scope is divided with Cloie before Stephen’s incremental hours are committed."
+        ],
+        "exclusions": [
+          "Remediation, retesting and expanded OE-exception investigation if control misses are confirmed.",
+          "Substantial log reconstruction, inaccessible evidence or a materially larger population/system footprint."
+        ]
+      },
+      "escalationReason": "HR/Payroll late-termination impact assessment is needed for SAD finalization; deadline and incremental resource allocation are unconfirmed.",
+      "escalationAction": "Agree Stephen’s scope and hours with Cloie and confirm SAD timing with Sudhika/Chandana; raise an OE exception immediately if a relevant UAR missed a late termination.",
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Approximately 20 terminations were not updated in Workday timely. Stephen Wilm is to support the impact assessment for Marshall’s SAD update/finalization. Coordinate closely with @cloie.vonmassenhausen.\na) Determine which systems each affected user could access.\nb) Inspect each relevant user access review to determine whether the control owner identified the late termination for removal.\nc) Inspect available Network, DB and Application last-login dates against the actual termination date to identify post-termination sign-in.\nIf a late termination went undetected by the relevant UAR, raise an OE exception immediately.",
+          "applicationNote": "High PwC priority is assigned for timely SAD support and the conditional OE-exception response. FRM priority and the SAD delivery deadline remain unconfirmed. Approximately 20 cases is not a count of confirmed UAR exceptions. Missing log evidence remains an evidence gap, not evidence of no post-termination activity."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "PBC instructions have been shared with Sudhika and Chandana on gathering evidence from Adi and providing it for HR Ops review.",
+          "applicationNote": "Sudhika and Chandana are used as the FRM leads based on the supplied coordination response. In progress reflects assessment setup/PBC coordination; evidence collection, HR Ops review and assessment completion are not confirmed."
+        },
+        {
+          "source": "Planning estimate",
+          "recordedOn": "2026-10-26",
+          "text": "Proposed full-assessment planning range: 40–80 hours under the stated assumptions. Stephen’s incremental support share must be confirmed after the work split with Cloie.",
+          "applicationNote": "This is an initial planning estimate prepared for this update, not an estimate supplied or approved by Stephen, Cloie or FRM. Remediation, retesting and expanded exception investigation are separate scope if needed."
+        }
+      ]
     }
   },
   "changeLog": [
@@ -2470,7 +2562,37 @@
         "waiting-frm",
         "escalation-paused"
       ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 59,
+      "activity": "HR/Payroll late terminations — impact assessment support",
+      "title": "HR/Payroll late terminations — impact assessment",
+      "detail": "Add High-priority PwC impact assessment support for approximately 20 late Workday termination updates. Stephen coordinates with Cloie; PBC instructions are shared with Sudhika/Chandana for evidence from Adi and HR Ops review. Map access, inspect relevant UARs and check available post-termination logins.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Sudhika & Chandana",
+      "flags": [
+        "scope-change",
+        "in-progress",
+        "discussion"
+      ],
+      "discussion": "Confirm the SAD deadline and Stephen’s incremental allocation. Raise an OE exception immediately if a relevant UAR failed to identify a late termination."
+    },
+    {
+      "source": "Planning estimate",
+      "recordedOn": "2026-10-26",
+      "row": 59,
+      "activity": "HR/Payroll late terminations — impact assessment support",
+      "title": "HR/Payroll assessment — proposed effort",
+      "detail": "Proposed 40–80 hours for the full assessment under the stated assumptions. Stephen’s share is unconfirmed pending the division of work with Cloie; this is not an approved or allocated budget.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Sudhika & Chandana",
+      "flags": [
+        "discussion"
+      ],
+      "discussion": "Agree the scope split, evidence availability and incremental hours with Cloie, Stephen, Sudhika and Chandana before committing capacity."
     }
   ],
-  "publicationId": "orange-notes-6de87dce7efb"
+  "publicationId": "orange-notes-553f7923c59f"
 }
