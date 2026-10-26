@@ -93,7 +93,8 @@ test('relative follow-up is anchored to the confirmed post date and pending TOD 
   expect(dateHealth(activity(17),today).tone).toBe('paused')
   for (const row of [56,57]) {
     expect(activity(row).status).toBe('Waiting on FRM')
-    expect(activity(row).escalationAction).toContain('pending FRM TOD decision')
+    expect(activity(row).start).toBe('2026-10-21')
+    expect(dateHealth(activity(row),today).tone).toBe('scheduled')
   }
   expect(activities.filter(item => item.name.includes('OE Testing'))).toHaveLength(4)
   const exported = snapshotForLead(orangeOnly(snapshot), 'Avi')
@@ -125,6 +126,8 @@ test('portfolio, owner filters, dated source attribution, paused view and Ale-ka
   await expect(platformRows).toHaveCount(2)
   await page.locator('.project-cell > strong[title="Platform OE Testing — ITACs"]').click()
   await expect(page.locator('.source-date-facts')).toContainText('Dec 18, 2026')
+  await expect(page.locator('.source-date-facts')).toContainText('Oct 21, 2026')
+  await expect(platformRows.locator('.gantt-bar.health-scheduled')).toHaveCount(2)
   await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('separate Codex dashboard')
   await page.locator('.workbook-filter-panel summary').filter({hasText:'PwC owner'}).click()
   const stephen = page.getByRole('checkbox',{name:'PwC owner: Stephen Wilm',exact:true})
@@ -146,5 +149,6 @@ test('portfolio, owner filters, dated source attribution, paused view and Ale-ka
   const readout=page.getByRole('region',{name:'Alejandro’s leadership readout'})
   await expect(readout.getByRole('article',{name:'Escalations: Oracle MCP',exact:true})).toContainText('@Stephen Wilm')
   await expect(readout.getByRole('article',{name:'Escalations: SDLC — Pando',exact:true})).toContainText('@Ben Oates')
-  for(const title of ['Stripe','AWS','Monitoring — Deloitte follow-up','IT Ops / Chronosphere'])await expect(readout.getByRole('article',{name:`Escalations: ${title}`,exact:true})).toHaveCount(0)
+  await expect(readout.getByRole('article',{name:'Escalations: SDLC — Pando',exact:true})).toContainText('EY on delivery of the readiness package')
+  for(const title of ['Stripe','AWS','Monitoring — Deloitte follow-up','IT Ops / Chronosphere','Platform OE Testing — ITACs','Platform OE Testing — ITGCs'])await expect(readout.getByRole('article',{name:`Escalations: ${title}`,exact:true})).toHaveCount(0)
 })

@@ -1577,7 +1577,7 @@
       "",
       "",
       "",
-      "TBD",
+      "2026-10-21",
       "TBD",
       ""
     ],
@@ -1604,7 +1604,7 @@
       "",
       "",
       "",
-      "TBD",
+      "2026-10-21",
       "TBD",
       ""
     ],
@@ -1938,11 +1938,16 @@
           "recordedOn": "2026-10-26",
           "text": "Remove Stephen Wilm as an owner of Platform OE Testing — ITACs. Mayra Mendoza and Layla Yang remain assigned. Set the Platform OE Testing — ITACs end date to December 18, 2026. Refer to the separate Codex dashboard for OE progress and workflows.",
           "applicationNote": "Stephen is removed without reassigning this item to Sonu. This line provides high-level visibility; detailed OE progress and workflows are tracked in the separate Codex dashboard. Its link has not been supplied. Start date, FRM lead and priorities remain unconfirmed, and the previous pending TOD reassessment is not marked resolved."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Set the Platform OE testing start date to last Wednesday, October 21, 2026. The end remains December 18, 2026. With both dates supplied, remove this bucket from current escalation/Ale-kazam; use the separate Codex dashboard for detailed OE progress and workflows.",
+          "applicationNote": "Last Wednesday is resolved relative to October 26 in America/Los_Angeles. The former TBD start is superseded. Existing owners, FRM lead/priority fields and the December 18 end are unchanged. This schedule update does not assert testing completion or resolution of the previously reported TOD confirmation. No escalation pause is needed; normal date and risk checks remain active."
         }
       ],
       "pwcOwnersOverride": "Mayra Mendoza, Layla Yang",
       "statusOverride": "Waiting on FRM",
-      "escalationAction": "Use the separate Codex OE dashboard for progress and workflows; confirm the pending FRM TOD decision, lead, priority and start date against the December 18 end date.",
       "endOverride": "2026-12-18"
     },
     "57": {
@@ -1966,10 +1971,15 @@
           "recordedOn": "2026-10-26",
           "text": "Set the Platform OE Testing — ITGCs end date to December 18, 2026. Refer to the separate Codex dashboard for OE progress and workflows.",
           "applicationNote": "Sonu Kumar, Mayra Mendoza and Layla Yang remain assigned. This line provides high-level visibility; detailed OE progress and workflows are tracked in the separate Codex dashboard. Its link has not been supplied. Start date, FRM lead and priorities remain unconfirmed, and the previous pending TOD reassessment is not marked resolved."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Set the Platform OE testing start date to last Wednesday, October 21, 2026. The end remains December 18, 2026. With both dates supplied, remove this bucket from current escalation/Ale-kazam; use the separate Codex dashboard for detailed OE progress and workflows.",
+          "applicationNote": "Last Wednesday is resolved relative to October 26 in America/Los_Angeles. The former TBD start is superseded. Existing owners, FRM lead/priority fields and the December 18 end are unchanged. This schedule update does not assert testing completion or resolution of the previously reported TOD confirmation. No escalation pause is needed; normal date and risk checks remain active."
         }
       ],
       "statusOverride": "Waiting on FRM",
-      "escalationAction": "Use the separate Codex OE dashboard for progress and workflows; confirm the pending FRM TOD decision, lead, priority and start date against the December 18 end date.",
       "endOverride": "2026-12-18"
     },
     "58": {
@@ -2052,9 +2062,17 @@
           "recordedOn": "2026-10-26",
           "text": "SDLC / Pando is Ben Oates’s item.",
           "applicationNote": "Reassign the PwC owner from Mayra Mendoza to Ben Oates. FRM lead Avi and existing dates/Deprioritized section are unchanged."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "SDLC / Pando is waiting on EY to deliver the readiness package.",
+          "applicationNote": "Record the EY readiness-package dependency as the current reason work is on hold. Ben Oates remains the PwC owner and Avi the FRM lead. The November 15 project end is unchanged; neither an EY delivery date nor a project start date was supplied. The missing-start escalation remains, with an EY-specific follow-up rather than a generic request to resume work."
         }
       ],
-      "pwcOwnersOverride": "Ben Oates"
+      "pwcOwnersOverride": "Ben Oates",
+      "statusOverride": "On hold",
+      "escalationAction": "Ben Oates / Avi: follow up with EY on delivery of the readiness package and confirm the start date against the November 15 end date."
     },
     "59": {
       "userAdded": true,
@@ -2782,7 +2800,48 @@
         "discussion"
       ],
       "discussion": "Urminder/Ash to confirm the ToD conclusion and remaining-control reassessment approach."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE ITACs — October 21 start; scheduled through December 18",
+      "detail": "Start confirmed as October 21, 2026 (last Wednesday); end remains December 18. This bucket leaves current escalation/Ale-kazam because its dates are now supplied. Detailed OE progress and workflows remain in the separate Codex dashboard.",
+      "pwcOwners": "Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 57,
+      "activity": "Platform OE Testing — ITGCs",
+      "title": "Platform OE ITGCs — October 21 start; scheduled through December 18",
+      "detail": "Start confirmed as October 21, 2026 (last Wednesday); end remains December 18. This bucket leaves current escalation/Ale-kazam because its dates are now supplied. Detailed OE progress and workflows remain in the separate Codex dashboard.",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 43,
+      "activity": "SDLC - Pando",
+      "title": "SDLC — Pando: awaiting EY readiness package",
+      "detail": "Waiting on EY to deliver the readiness package. Ben Oates remains the PwC owner and Avi the FRM lead. The November 15 end is retained; the package delivery date and project start are not yet supplied.",
+      "pwcOwners": "Ben Oates",
+      "frmLeads": "Avi",
+      "flags": [
+        "on-hold",
+        "discussion"
+      ],
+      "discussion": "Follow up with EY on package delivery and confirm the project start against November 15."
     }
   ],
-  "publicationId": "orange-notes-fb0ab4acaeac"
+  "publicationId": "orange-notes-f3a2a1ffd87b"
 }
