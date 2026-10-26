@@ -41,6 +41,6 @@ export default function AleReadout({ data, today, history, updateId, storageErro
     <DecisionBucket title="PwC / FRM alignment" items={data.alignment} tone="ale-alignment" history={history} updateId={updateId} />
     {!!history.updates.length && <p className="ale-history-note">Tracking began {dateText(pacificDay(history.updates[0].observedAt))}; earlier history is unavailable. Published history is shared; browser imports are saved locally and included in source exports.</p>}
     {storageError && <p className="error" role="alert">Local update history could not be saved. Export the dashboard before leaving to retain it.</p>}
-    <p className="ale-footnote">Next steps summarize the recorded blockers for Alejandro and the team to resolve. Owner tags follow the worksheet.</p>
+    <p className="ale-footnote">Next steps summarize the recorded blockers for Alejandro and the team to resolve. Owner tags follow current assignments.</p>
   </section>
 }

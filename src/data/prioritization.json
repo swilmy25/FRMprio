@@ -1682,6 +1682,13 @@
           "recordedOn": "2026-10-20",
           "text": "Merge the Databricks–Orion revenue-control activity with Revenue new controls for context.",
           "applicationNote": "Counted as one consolidated activity. Both original FRM lead relationships are retained in the lead views."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Revenue confirmation remains pending with Urminder and Ash. Mayra cites an initial October 9 deadline, prior discussions and another reminder, and requests escalation if there is no further information by the day after her October 21 post.",
+          "applicationNote": "The escalation checkpoint is October 22 and has passed as of October 26 without confirmation in the supplied updates. October 9 is retained as historical deadline context; no replacement delivery end was provided, so the current end remains TBD."
         }
       ],
       "endOverride": "TBD",
@@ -1701,7 +1708,10 @@
           "staffing": "TBD"
         }
       ],
-      "frmLeadsOverride": "Urminder, Ash"
+      "frmLeadsOverride": "Urminder, Ash",
+      "statusOverride": "Waiting on FRM",
+      "followUpDate": "2026-10-22",
+      "escalationAction": "Escalate the outstanding FRM confirmation with Urminder and Ash after the October 22 checkpoint, then agree scope and dates."
     },
     "21": {
       "notes": [
@@ -1743,9 +1753,18 @@
           "source": "Jeff",
           "recordedOn": "2026-10-20",
           "text": "IT Ops / Chronosphere remains TBD for now."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Chronosphere is on hold on the FRM side.",
+          "applicationNote": "Retain the TBD end and existing ownership. This is an FRM hold, not completed work or a confirmed restart date."
         }
       ],
-      "endOverride": "TBD"
+      "endOverride": "TBD",
+      "statusOverride": "On hold",
+      "escalationAction": "Confirm FRM’s hold decision and agree a next review or restart trigger for Chronosphere."
     },
     "36": {
       "notes": [
@@ -1753,9 +1772,18 @@
           "source": "Jeff",
           "recordedOn": "2026-10-20",
           "text": "Stripe end date moved to TBD for now."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Stripe is waiting for FRM. Remove it from the escalation/readout list for now; Mayra will bring it back when dates are available.",
+          "applicationNote": "Retain Stripe as open in the portfolio with end TBD and existing owners. Pause its date escalation while awaiting dates; no completion or deletion is implied. Normal escalation rules resume when an end date is supplied or a new explicit risk is recorded."
         }
       ],
-      "endOverride": "TBD"
+      "endOverride": "TBD",
+      "statusOverride": "Waiting on FRM",
+      "escalationPaused": true
     },
     "27": {
       "notes": [
@@ -1764,9 +1792,17 @@
           "recordedOn": "2026-10-20",
           "text": "Additional monitoring follow-up and documentation to address Deloitte questions, including the same aspects in review, are still in progress. Layla will confirm back after meeting with Sarah.",
           "applicationNote": "This update applies to the additional follow-up activity, not the original monitoring assessment already marked complete. No revised date was supplied; the October 15 workbook end date remains overdue."
+        },
+        {
+          "source": "Layla Yang",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Update the monitoring / Deloitte follow-up end to December 31, 2026 because additional testing is being addressed during TOE.",
+          "applicationNote": "Applies to the additional follow-up activity, not the completed original assessment. It remains in progress; the prior overdue October 15 end is superseded by December 31."
         }
       ],
-      "statusOverride": "In progress"
+      "statusOverride": "In progress",
+      "endOverride": "2026-12-31"
     },
     "45": {
       "notes": [
@@ -1787,10 +1823,20 @@
           "recordedOn": "2026-10-20",
           "text": "Combine Phase 2 and Phase 3 Ads New ITAC Controls into their own line item, owned by Stephen Wilm, with an October 13, 2026 start and November 15, 2026 end.",
           "applicationNote": "Applied to the existing combined Sprint 2 / 3 activity at source row 19. Original Sprint 1.5 and Sprint 2 / 3 wording is retained as workbook context; the confirmed activity window is October 13–November 15."
+        },
+        {
+          "source": "Stephen Wilm",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Sprint 2 and 3 PBCs have been escalated with Urminder and are being tracked with TPM @sdp. The November 15 closure target remains.",
+          "applicationNote": "The combined Phases 2 & 3 activity keeps its October 13–November 15 window. Escalation concerns PBC dependencies; no revised end or missed commitment is asserted."
         }
       ],
       "nameOverride": "Ads New ITAC Controls — Phases 2 & 3",
-      "endOverride": "2026-11-15"
+      "endOverride": "2026-11-15",
+      "statusOverride": "In progress",
+      "escalationReason": "Sprint 2 / 3 PBC dependency escalated with Urminder; tracked with TPM @sdp.",
+      "escalationAction": "Follow up with Urminder and TPM @sdp on PBC delivery and protect the November 15 closure target."
     },
     "48": {
       "nameOverride": "Non-Platform OE Testing — ITACs",
@@ -1822,8 +1868,25 @@
           "recordedOn": "2026-10-20",
           "text": "Add a high-level Platform OE Testing ITACs line item with Sonu Kumar, Mayra Mendoza and Layla Yang as joint PwC owners. High-level OE testing visibility; detailed scope, controls, progress and staffing are maintained in a separate dashboard. No link has been supplied yet.",
           "applicationNote": "FRM leads, priorities, alignment, dates and staffing were not supplied. Start/end dates are TBD; other unconfirmed fields are left blank."
+        },
+        {
+          "source": "Sonu Kumar",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Sonu is not performing OE ITAC testing and directs the ITACs item to Stephen Wilm.",
+          "applicationNote": "Replace Sonu with Stephen for Platform OE ITACs; Mayra and Layla remain as previously assigned co-owners. Platform OE ITGC ownership is unchanged."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Platform OE testing is waiting for FRM confirmation of the TOD reassessment; Mayra links this pending confirmation to the Revenue discussion.",
+          "applicationNote": "Apply the Platform-wide update to both OE buckets without merging their activities. FRM leads, priorities and dates remain unconfirmed."
         }
-      ]
+      ],
+      "pwcOwnersOverride": "Stephen Wilm, Mayra Mendoza, Layla Yang",
+      "statusOverride": "Waiting on FRM",
+      "escalationAction": "Get FRM confirmation of the TOD reassessment linked to Revenue, then agree this OE bucket’s lead, priority and dates."
     },
     "57": {
       "userAdded": true,
@@ -1833,8 +1896,17 @@
           "recordedOn": "2026-10-20",
           "text": "Add a high-level Platform OE Testing ITGCs line item with Sonu Kumar, Mayra Mendoza and Layla Yang as joint PwC owners. High-level OE testing visibility; detailed scope, controls, progress and staffing are maintained in a separate dashboard. No link has been supplied yet.",
           "applicationNote": "FRM leads, priorities, alignment, dates and staffing were not supplied. Start/end dates are TBD; other unconfirmed fields are left blank."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Platform OE testing is waiting for FRM confirmation of the TOD reassessment; Mayra links this pending confirmation to the Revenue discussion.",
+          "applicationNote": "Apply the Platform-wide update to both OE buckets without merging their activities. FRM leads, priorities and dates remain unconfirmed."
         }
-      ]
+      ],
+      "statusOverride": "Waiting on FRM",
+      "escalationAction": "Get FRM confirmation of the TOD reassessment linked to Revenue, then agree this OE bucket’s lead, priority and dates."
     },
     "58": {
       "userAdded": true,
@@ -1847,6 +1919,69 @@
           "applicationNote": "The exact July start day was not supplied and is not inferred. Ready is retained as reported, without marking the overall activity complete or assigning a completion percentage. Priorities, category, activity type and staffing were not supplied."
         }
       ]
+    },
+    "18": {
+      "notes": [
+        {
+          "source": "Stephen Wilm",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Sprint 1 was reported on track to provide the remaining four workpapers during the week of the October 21 update and then close Sprint 1.",
+          "applicationNote": "This is a progress report, not confirmed completion. The reported week has elapsed as of October 26; no delivery/closure confirmation was supplied. The existing October 30 end is retained."
+        }
+      ],
+      "statusOverride": "On track"
+    },
+    "26": {
+      "notes": [
+        {
+          "source": "Stephen Wilm",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "During the October 16 testing meeting, a user could post journal entries directly without approvals and post to the wrong Oracle environment. @ssherugar had an RCA meeting planned for October 21 and was to update Stephen and Joaquin. October 30 completion is very much at risk and trending adversely.",
+          "applicationNote": "October 16 is the reported issue date; the October 21 RCA was planned, with no outcome supplied. The October 30 end is retained and flagged at risk, rather than inventing a replacement date."
+        }
+      ],
+      "statusOverride": "At risk",
+      "escalationReason": "Oracle testing identified approval bypass and wrong-environment journal posting; October 30 delivery is at risk.",
+      "escalationAction": "Get @ssherugar’s RCA outcome, agree remediation and retesting, and confirm or replan the October 30 end date."
+    },
+    "40": {
+      "notes": [
+        {
+          "source": "Sonu Kumar",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Correct the AWS end date from the invalid 11/31 to November 30, 2026.",
+          "applicationNote": "The October 26 start is unchanged. The invalid workbook date remains available as original context."
+        }
+      ],
+      "endOverride": "2026-11-30"
+    },
+    "22": {
+      "notes": [
+        {
+          "source": "Layla Yang",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "Monorepo Automated Account Classification remains on track for completion on October 31, 2026.",
+          "applicationNote": "The workbook end of October 30 is updated to October 31. This is the new control, separate from completed Monorepo Inventory."
+        }
+      ],
+      "endOverride": "2026-10-31",
+      "statusOverride": "On track"
+    },
+    "43": {
+      "notes": [
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-10-21",
+          "recordedOn": "2026-10-26",
+          "text": "SDLC / Pando is Ben Oates’s item.",
+          "applicationNote": "Reassign the PwC owner from Mayra Mendoza to Ben Oates. FRM lead Avi and existing dates/Deprioritized section are unchanged."
+        }
+      ],
+      "pwcOwnersOverride": "Ben Oates"
     }
   },
   "changeLog": [
@@ -2137,7 +2272,205 @@
         "scope-change",
         "in-progress"
       ]
+    },
+    {
+      "source": "Stephen Wilm",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 18,
+      "activity": "Ads ITAC controls — Sprint 1",
+      "title": "Ads ITAC controls — Sprint 1",
+      "detail": "Sprint 1 was reported on track to provide the remaining four workpapers during the week of the October 21 update and then close Sprint 1.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "on-track"
+      ]
+    },
+    {
+      "source": "Stephen Wilm",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 19,
+      "activity": "Ads New ITAC Controls — Phases 2 & 3",
+      "title": "Ads New ITAC Controls — Phases 2 & 3",
+      "detail": "Sprint 2 and 3 PBCs have been escalated with Urminder and are being tracked with TPM @sdp. The November 15 closure target remains.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "in-progress",
+        "discussion"
+      ],
+      "discussion": "Confirm PBC delivery timing with Urminder and TPM @sdp; November 15 remains the target."
+    },
+    {
+      "source": "Stephen Wilm",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 26,
+      "activity": "Oracle MCP",
+      "title": "Oracle MCP",
+      "detail": "During the October 16 testing meeting, a user could post journal entries directly without approvals and post to the wrong Oracle environment. @ssherugar had an RCA meeting planned for October 21 and was to update Stephen and Joaquin. October 30 completion is very much at risk and trending adversely.",
+      "pwcOwners": "Joaquin Garcia Stephen Wilm",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "at-risk",
+        "discussion"
+      ],
+      "discussion": "Stephen and Joaquin to obtain the RCA outcome and agree remediation, retesting and an achievable delivery date."
+    },
+    {
+      "source": "Sonu Kumar",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 40,
+      "activity": "AWS",
+      "title": "AWS",
+      "detail": "Correct the AWS end date from the invalid 11/31 to November 30, 2026.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "date-corrected"
+      ]
+    },
+    {
+      "source": "Layla Yang",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 27,
+      "activity": "Monitoring — Deloitte follow-up",
+      "title": "Monitoring — Deloitte follow-up",
+      "detail": "Update the monitoring / Deloitte follow-up end to December 31, 2026 because additional testing is being addressed during TOE.",
+      "pwcOwners": "Layla Yang",
+      "frmLeads": "Avi",
+      "flags": [
+        "date-moved",
+        "scope-change",
+        "in-progress"
+      ]
+    },
+    {
+      "source": "Layla Yang",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 22,
+      "activity": "Monorepo Automated Account Classification",
+      "title": "Monorepo Automated Account Classification",
+      "detail": "Monorepo Automated Account Classification remains on track for completion on October 31, 2026.",
+      "pwcOwners": "Layla Yang",
+      "frmLeads": "Avi",
+      "flags": [
+        "date-moved",
+        "on-track"
+      ]
+    },
+    {
+      "source": "Sonu Kumar",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE Testing — ITACs",
+      "detail": "Sonu is not performing OE ITAC testing and directs the ITACs item to Stephen Wilm.",
+      "pwcOwners": "Stephen Wilm, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 17,
+      "activity": "IT Ops / Chronosphere",
+      "title": "IT Ops / Chronosphere",
+      "detail": "Chronosphere is on hold on the FRM side.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Avi",
+      "flags": [
+        "on-hold",
+        "discussion"
+      ],
+      "discussion": "Confirm the FRM hold decision and next review/restart trigger."
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 43,
+      "activity": "SDLC — Pando",
+      "title": "SDLC — Pando",
+      "detail": "SDLC / Pando is Ben Oates’s item.",
+      "pwcOwners": "Ben Oates",
+      "frmLeads": "Avi",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE Testing — ITACs",
+      "detail": "Platform OE testing is waiting for FRM confirmation of the TOD reassessment; Mayra links this pending confirmation to the Revenue discussion.",
+      "pwcOwners": "Stephen Wilm, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "FRM to confirm TOD reassessment; align with the linked Revenue confirmation and agree OE milestones."
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 57,
+      "activity": "Platform OE Testing — ITGCs",
+      "title": "Platform OE Testing — ITGCs",
+      "detail": "Platform OE testing is waiting for FRM confirmation of the TOD reassessment; Mayra links this pending confirmation to the Revenue discussion.",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "FRM to confirm TOD reassessment; align with the linked Revenue confirmation and agree OE milestones."
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 16,
+      "activity": "Revenue new controls",
+      "title": "Revenue new controls",
+      "detail": "Revenue confirmation remains pending with Urminder and Ash. Mayra cites an initial October 9 deadline, prior discussions and another reminder, and requests escalation if there is no further information by the day after her October 21 post.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder, Ash",
+      "flags": [
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "October 22 follow-up checkpoint has passed; obtain FRM confirmation and escalate the unresolved scope/priority decision."
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-10-21",
+      "recordedOn": "2026-10-26",
+      "row": 36,
+      "activity": "Stripe",
+      "title": "Stripe",
+      "detail": "Stripe is waiting for FRM. Remove it from the escalation/readout list for now; Mayra will bring it back when dates are available.",
+      "pwcOwners": "Joaquin Garcia Mayra Mendoza",
+      "frmLeads": "Ash",
+      "flags": [
+        "waiting-frm",
+        "escalation-paused"
+      ]
     }
   ],
-  "publicationId": "orange-notes-820c76a1c594"
+  "publicationId": "orange-notes-6de87dce7efb"
 }

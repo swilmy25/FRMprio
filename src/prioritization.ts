@@ -1,17 +1,19 @@
 import { aleHistoryForNames, isAleHistory } from './aleHistory.ts'
 import type { AleHistory } from './aleHistory'
 
-export type MeetingNote = { source:string; recordedOn:string; text:string; applicationNote?:string }
+export type MeetingNote = { source:string; recordedOn:string; postedOn?:string; text:string; applicationNote?:string }
 export type MergedActivity = { row:number; name:string; pwcOwners:string; frmLeads:string; frmPriority:string; category:string; pwcPriority:string; alignment:string; activityType:string; startRaw:string; endRaw:string; staffing:string }
-export type ActivityAnnotation = { notes:MeetingNote[]; userAdded?:boolean; nameOverride?:string; endOverride?:string; sectionOverride?:string; closureReason?:string; frmLeadsOverride?:string; mergedActivities?:MergedActivity[]; statusOverride?:'In progress' }
-export const MEETING_UPDATE_FLAGS = ['date-moved','date-confirmed','new-tbd','existing-tbd','discussion','completed','closed','scope-change','in-progress'] as const
+export const ACTIVITY_STATUSES = ['In progress','On track','At risk','On hold','Waiting on FRM'] as const
+export type ActivityStatus = typeof ACTIVITY_STATUSES[number]
+export type ActivityAnnotation = { notes:MeetingNote[]; userAdded?:boolean; escalationPaused?:boolean; escalationReason?:string; escalationAction?:string; followUpDate?:string; pwcOwnersOverride?:string; nameOverride?:string; endOverride?:string; sectionOverride?:string; closureReason?:string; frmLeadsOverride?:string; mergedActivities?:MergedActivity[]; statusOverride?:ActivityStatus }
+export const MEETING_UPDATE_FLAGS = ['date-moved','date-confirmed','new-tbd','existing-tbd','discussion','completed','closed','scope-change','in-progress','date-corrected','on-track','at-risk','on-hold','waiting-frm','escalation-paused'] as const
 export type MeetingUpdateFlag = typeof MEETING_UPDATE_FLAGS[number]
-export type ChangeRecord = { source:string; recordedOn:string; row?:number; activity:string; detail:string; frmLeads?:string; pwcOwners?:string; title?:string; flags?:MeetingUpdateFlag[]; discussion?:string }
+export type ChangeRecord = { source:string; recordedOn:string; postedOn?:string; row?:number; activity:string; detail:string; frmLeads?:string; pwcOwners?:string; title?:string; flags?:MeetingUpdateFlag[]; discussion?:string }
 
 export const SOURCE_STORAGE = 'frmprio.prioritization.v2'
 export type SourceSnapshot = { kind: 'frmprio.prioritization.v1'; fileName: string; tabName: string; importedAt: string; rows: string[][]; includedColumns?: number[]; sections?: Record<string,string>; publicationId?: string; annotations?:Record<string,ActivityAnnotation>; changeLog?:ChangeRecord[]; aleHistory?:AleHistory }
 export type SourceActivity = {
-  id: string; row: number; ref: string; name: string; workbookName:string; userAdded:boolean; section: string; workbookEndRaw:string; workbookFrmLeads:string; closureReason:string; meetingNotes:MeetingNote[]; mergedActivities:MergedActivity[];
+  id: string; row: number; ref: string; name: string; workbookName:string; userAdded:boolean; section: string; workbookEndRaw:string; workbookFrmLeads:string; workbookPwcOwners:string; escalationPaused:boolean; escalationReason:string; escalationAction:string; followUpDate:string|null; closureReason:string; meetingNotes:MeetingNote[]; mergedActivities:MergedActivity[];
   pwcOwners: string; frmLeads: string; staffing: string; frmPriority: string; pwcPriority: string; alignment: string;
   category: string; activityType: string; estimate: number | null; actual: number | null; remaining: number | null;
   controls: string; completedControls: string; outstandingControls: string;
@@ -52,11 +54,11 @@ export function splitPerspectives(text: string): SourceActivity['perspectives'] 
   return result
 }
 function object(value:unknown):value is Record<string,unknown> {return !!value&&typeof value==='object'&&!Array.isArray(value)}
-function validNotes(value:unknown):boolean {return Array.isArray(value)&&value.every(n=>object(n)&&typeof n.source==='string'&&typeof n.text==='string'&&typeof n.recordedOn==='string'&&!!sourceDate(n.recordedOn)&&(n.applicationNote===undefined||typeof n.applicationNote==='string'))}
+function validNotes(value:unknown):boolean {return Array.isArray(value)&&value.every(n=>object(n)&&typeof n.source==='string'&&typeof n.text==='string'&&typeof n.recordedOn==='string'&&!!sourceDate(n.recordedOn)&&(n.postedOn===undefined||typeof n.postedOn==='string'&&!!sourceDate(n.postedOn))&&(n.applicationNote===undefined||typeof n.applicationNote==='string'))}
 function validAnnotations(value:unknown):boolean {
- return value===undefined || object(value)&&Object.entries(value).every(([key,a])=>/^[1-9]\d*$/.test(key)&&object(a)&&validNotes(a.notes)&&(a.userAdded===undefined||typeof a.userAdded==='boolean')&&['nameOverride','endOverride','closureReason','frmLeadsOverride'].every(k=>a[k]===undefined||typeof a[k]==='string')&&(a.statusOverride===undefined||a.statusOverride==='In progress')&&(a.sectionOverride===undefined||['Active portfolio','Deprioritized','Completed'].includes(String(a.sectionOverride)))&&(a.mergedActivities===undefined||Array.isArray(a.mergedActivities)&&a.mergedActivities.every(m=>object(m)&&Number.isInteger(m.row)&&Number(m.row)>0&&['name','pwcOwners','frmLeads','frmPriority','category','pwcPriority','alignment','activityType','startRaw','endRaw','staffing'].every(k=>typeof m[k]==='string'))))
+ return value===undefined || object(value)&&Object.entries(value).every(([key,a])=>/^[1-9]\d*$/.test(key)&&object(a)&&validNotes(a.notes)&&['userAdded','escalationPaused'].every(k=>a[k]===undefined||typeof a[k]==='boolean')&&['nameOverride','endOverride','closureReason','frmLeadsOverride','pwcOwnersOverride','escalationReason','escalationAction'].every(k=>a[k]===undefined||typeof a[k]==='string')&&(a.followUpDate===undefined||typeof a.followUpDate==='string'&&!!sourceDate(a.followUpDate))&&(a.statusOverride===undefined||ACTIVITY_STATUSES.includes(a.statusOverride as ActivityStatus))&&(a.sectionOverride===undefined||['Active portfolio','Deprioritized','Completed'].includes(String(a.sectionOverride)))&&(a.mergedActivities===undefined||Array.isArray(a.mergedActivities)&&a.mergedActivities.every(m=>object(m)&&Number.isInteger(m.row)&&Number(m.row)>0&&['name','pwcOwners','frmLeads','frmPriority','category','pwcPriority','alignment','activityType','startRaw','endRaw','staffing'].every(k=>typeof m[k]==='string'))))
 }
-function validChangeLog(value:unknown):boolean {return value===undefined||Array.isArray(value)&&value.every(c=>object(c)&&['source','activity','detail'].every(k=>typeof c[k]==='string')&&typeof c.recordedOn==='string'&&!!sourceDate(c.recordedOn)&&(c.row===undefined||Number.isInteger(c.row)&&Number(c.row)>0)&&['frmLeads','pwcOwners','title','discussion'].every(k=>c[k]===undefined||typeof c[k]==='string')&&(c.flags===undefined||Array.isArray(c.flags)&&c.flags.every(flag=>MEETING_UPDATE_FLAGS.includes(flag))))}
+function validChangeLog(value:unknown):boolean {return value===undefined||Array.isArray(value)&&value.every(c=>object(c)&&['source','activity','detail'].every(k=>typeof c[k]==='string')&&typeof c.recordedOn==='string'&&!!sourceDate(c.recordedOn)&&(c.postedOn===undefined||typeof c.postedOn==='string'&&!!sourceDate(c.postedOn))&&(c.row===undefined||Number.isInteger(c.row)&&Number(c.row)>0)&&['frmLeads','pwcOwners','title','discussion'].every(k=>c[k]===undefined||typeof c[k]==='string')&&(c.flags===undefined||Array.isArray(c.flags)&&c.flags.every(flag=>MEETING_UPDATE_FLAGS.includes(flag))))}
 export function isSourceSnapshot(value: unknown): value is SourceSnapshot {
   if (!value || typeof value !== 'object') return false
   const v = value as SourceSnapshot
@@ -110,7 +112,7 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     if (aHours && actual !== null && Number(aHours[1]) !== actual) warnings.push(`V(a) reports ${aHours[1]} hrs versus ${actual} actual hrs in M. The two figures are not merged.`)
     if (bHours && remaining !== null && Number(bHours[1]) !== remaining) warnings.push(`V(b) reports ${bHours[1]} hrs versus ${remaining} remaining hrs in N. Confirm scope and timing.`)
     const status = completed ? 'Completed' : annotation?.statusOverride ?? (effectiveSection === 'Deprioritized' ? 'Deprioritized' : actual !== null && estimate !== null && actual > estimate ? 'Effort overrun' : /^done\b/i.test(cell(20)) && remaining === 0 ? 'Reported complete' : /on track/i.test(`${cell(18)} ${cell(21)}`) ? 'Reported on track' : cell(18) && !/^(N\/A|No Delay)/i.test(cell(18)) ? 'Delay noted' : /\bat risk\b/i.test(cell(20)) ? 'Risk noted' : actual === 0 ? 'No hours recorded' : 'Status not supplied')
-    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: annotation?.nameOverride??cell(2), workbookName:cell(2), userAdded:annotation?.userAdded??false, section:effectiveSection, workbookEndRaw, workbookFrmLeads:cell(5), closureReason:annotation?.closureReason??'',meetingNotes:annotation?.notes??[],mergedActivities:annotation?.mergedActivities??[],pwcOwners: cell(4), frmLeads: annotation?.frmLeadsOverride??cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, startMonth, end, endBasis, endRaw, completed, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(dedicatedEnd?24:23), perspectives, warnings, status })
+    activities.push({ id: `source-row-${header + index + 2}`, row: header + index + 2, ref: cell(1), name: annotation?.nameOverride??cell(2), workbookName:cell(2), userAdded:annotation?.userAdded??false, section:effectiveSection, workbookEndRaw, workbookFrmLeads:cell(5), workbookPwcOwners:cell(4), escalationPaused:annotation?.escalationPaused??false, escalationReason:annotation?.escalationReason??'', escalationAction:annotation?.escalationAction??'', followUpDate:annotation?.followUpDate??null, closureReason:annotation?.closureReason??'',meetingNotes:annotation?.notes??[],mergedActivities:annotation?.mergedActivities??[],pwcOwners: annotation?.pwcOwnersOverride??cell(4), frmLeads: annotation?.frmLeadsOverride??cell(5), frmPriority: cell(6), pwcPriority: cell(8), alignment: cell(9), category: cell(7), activityType: cell(10), estimate, actual, remaining, controls: cell(3), completedControls: cell(14), outstandingControls: cell(15), originalDue: cell(16), revisedDue: cell(17), startRaw: cell(22), start, startMonth, end, endBasis, endRaw, completed, delay: cell(18), timeUsed: cell(19), notes: cell(20), response: cell(21), staffing: cell(dedicatedEnd?24:23), perspectives, warnings, status })
   })
   return activities
 }
@@ -148,10 +150,14 @@ export function peopleDirectory(values:string[],fullNames=false):{options:string
  const resolve=(v:string)=>chunks(v).flatMap(s=>{const words=s.split(' ');return fullNames&&words.length>2&&words.length%2===0?Array.from({length:words.length/2},(_,i)=>words.slice(i*2,i*2+2).join(' ')):[s]}).map(s=>{if(s.includes(' '))return s;const found=candidates.filter(n=>n.split(' ')[0]===s&&n.includes(' '));return found.length===1?found[0]:s})
  return {options:[...new Set(values.flatMap(resolve))].sort(),resolve}
 }
-export type DateHealth={tone:'completed'|'escalation'|'scheduled'|'ongoing';label:string;reasons:string[]}
+export type DateHealth={tone:'completed'|'escalation'|'scheduled'|'ongoing'|'paused';label:string;reasons:string[]}
 export function dateHealth(p:SourceActivity,today:string):DateHealth {
  if(p.completed)return {tone:'completed',label:p.closureReason?`Closed · ${p.closureReason[0].toLowerCase()}${p.closureReason.slice(1)}`:'Completed',reasons:[p.closureReason||'Marked completed in the source or confirmed by a meeting update.']}
+ if(p.escalationPaused&&!p.end&&/^(TBD|pending|)$/i.test(p.endRaw.trim())&&!p.escalationReason&&p.status!=='At risk')return {tone:'paused',label:'Escalation paused',reasons:['Awaiting FRM dates; escalation paused by the recorded team update.']}
  const reasons:string[]=[]
+ if(p.escalationReason)reasons.push(p.escalationReason)
+ else if(p.status==='At risk')reasons.push('Team reports delivery at risk')
+ if(p.followUpDate&&p.followUpDate<today)reasons.push(`Follow-up checkpoint passed (${p.followUpDate}); confirmation not recorded`)
  const exempt=(s:string)=>/^(N\/A|Ongoing)/i.test(s)
  if(!p.start&&!p.startMonth&&!exempt(p.startRaw))reasons.push(/tbd|pending/i.test(p.startRaw)?'Start date TBD':'Start date missing or unresolved')
  if(!p.end&&!exempt(p.endRaw))reasons.push(/tbd|pending/i.test(p.endRaw)?'End date TBD':'End date missing or unresolved')

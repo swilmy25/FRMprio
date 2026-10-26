@@ -13,10 +13,18 @@ const labels: Record<MeetingUpdateFlag, string> = {
   closed: 'Scope closed',
   'scope-change': 'Scope change',
   'in-progress': 'In progress',
+  'date-corrected': 'Date corrected',
+  'on-track': 'On track',
+  'at-risk': 'At risk',
+  'on-hold': 'On hold',
+  'waiting-frm': 'Waiting on FRM',
+  'escalation-paused': 'Escalation paused',
 }
 const focusOptions = [
   { value: 'all', label: 'All updates' },
   { value: 'date-moved', label: 'Moved dates' },
+  { value: 'date-corrected', label: 'Corrected dates' },
+  { value: 'at-risk', label: 'At risk' },
   { value: 'new-tbd', label: 'New TBDs' },
   { value: 'existing-tbd', label: 'Existing TBDs' },
   { value: 'discussion', label: 'Needs discussion' },
@@ -71,8 +79,8 @@ export default function MeetingUpdates({ snapshot, lead, today, onSelectActivity
                 <div className="meeting-item-flags">{flags.map(flag => <span key={flag} className={`meeting-flag flag-${flag}`}>{labels[flag]}</span>)}</div>
                 <h4>{activity ? <button onClick={() => onSelectActivity(activity.row)} aria-label={`View ${change.title || change.activity} activity`}>{change.title || change.activity}</button> : change.title || change.activity}</h4>
                 <p className="meeting-owner-line"><strong>PwC {pwcOwners.length > 1 ? 'owners' : 'owner'}:</strong> {pwcOwners.join(', ') || 'Not recorded in latest workbook'}{pwcOwners.length > 1 ? ' · Shared ownership' : ''}</p>
-                <p className="meeting-update-source"><span><strong>Update from:</strong> {providedBy}</span><small>Recorded {dateText(change.recordedOn)}</small></p>
-                {activity && (flags.includes('date-moved') || flags.includes('new-tbd')) && <p className="meeting-date-change">Workbook end <span>{dateText(activity.workbookEndRaw)}</span><span aria-hidden="true"> → </span><strong>{dateText(activity.endRaw)}</strong></p>}
+                <p className="meeting-update-source"><span><strong>Update from:</strong> {providedBy}</span><small>{change.postedOn && <>Posted {dateText(change.postedOn)} · </>}Recorded {dateText(change.recordedOn)}</small></p>
+                {activity && (flags.includes('date-moved') || flags.includes('date-corrected') || flags.includes('new-tbd')) && <p className="meeting-date-change">Workbook end <span>{dateText(activity.workbookEndRaw)}</span><span aria-hidden="true"> → </span><strong>{dateText(activity.endRaw)}</strong></p>}
                 {activity && flags.includes('date-confirmed') && <p className="meeting-date-change">End confirmed: <strong>{dateText(activity.endRaw)}</strong> · unchanged from workbook</p>}
                 {flags.includes('existing-tbd') && <p className="meeting-date-change">End remains <strong>TBD</strong> · already TBD in workbook</p>}
                 <p className="meeting-item-description">{change.detail}</p>
