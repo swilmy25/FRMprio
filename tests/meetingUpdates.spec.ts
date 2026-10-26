@@ -71,7 +71,7 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  expect(activity(12).meetingNotes[0].source).toBe('Mayra')
  expect(activity(35).end).toBe('2026-10-31')
  expect(activity(35).workbookEndRaw).toBe('2026-10-30')
- for(const row of [16,17]){
+ for(const row of [16]){
   expect(activity(row).endRaw).toBe('TBD')
   expect(dateHealth(activity(row),'2026-10-20').tone).toBe('escalation')
  }
@@ -99,7 +99,7 @@ test('named removals leave AWS and Project Keystone intact and preserve revenue 
  for(const lead of ['Ash','Urminder'])expect(activitiesForLead(activities,lead).filter(p=>p.row===16)).toHaveLength(1)
  const exported=snapshotForLead(snapshot,'Ash')
  expect(isSourceSnapshot(exported)).toBe(true)
- expect(parseSource(orangeOnly(exported)).find(p=>p.row===16)?.meetingNotes).toHaveLength(3)
+ expect(parseSource(orangeOnly(exported)).find(p=>p.row===16)?.meetingNotes).toEqual(activity(16).meetingNotes)
  expect(Object.keys(exported.annotations??{}).every(row=>parseSource(exported).some(p=>p.row===Number(row)))).toBe(true)
 })
 test('notes and original workbook values are visible, merged context is searchable, and Nano is clearly closed',async({page})=>{
@@ -167,7 +167,7 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Ben Oates','Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','Sonu Kumar','Stephen Wilm'])
  expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
  const items=uniqueMeetingItems(groups)
- expect(items).toHaveLength(41)
+ expect(items).toHaveLength(44)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
  expect(rows('date-moved')).toEqual([12,22,26,27,35,56,57,59])
  expect(rows('date-corrected')).toEqual([40])

@@ -26,8 +26,8 @@ test('readout matches both buckets: ten decisions across nine topics with worksh
   const oracle = data.escalations.find(item => item.topic === 'Oracle MCP')!
   expect(oracle.owners).toEqual(['Joaquin Garcia', 'Stephen Wilm'])
   expect(oracle.owners).not.toContain('Jeff Rose')
-  expect(data.escalations.some(item=>['Stripe','AWS','Monitoring — Deloitte follow-up'].includes(item.topic))).toBe(false)
-  expect(data.escalations.find(item => item.topic === 'Revenue new controls')?.nextStep).toContain('October 22 checkpoint')
+  expect(data.escalations.some(item=>['Stripe','AWS','Monitoring — Deloitte follow-up','IT Ops / Chronosphere'].includes(item.topic))).toBe(false)
+  expect(data.escalations.find(item => item.topic === 'Revenue new controls')?.nextStep).toContain('October 9 decision deadline')
   expect(data.alignment[0].nextStep).toContain('PwC High versus FRM Low')
   expect(oracle.nextStep).toContain('larger-value sample transaction')
   expect(data.escalations.find(item=>item.topic.includes('Phases 2 & 3'))?.nextStep).toContain('@sdp')

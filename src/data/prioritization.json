@@ -1717,6 +1717,12 @@
           "recordedOn": "2026-10-26",
           "text": "Revenue confirmation remains pending with Urminder and Ash. Mayra cites an initial October 9 deadline, prior discussions and another reminder, and requests escalation if there is no further information by the day after her October 21 post.",
           "applicationNote": "The escalation checkpoint is October 22 and has passed as of October 26 without confirmation in the supplied updates. October 9 is retained as historical deadline context; no replacement delivery end was provided, so the current end remains TBD."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "recordedOn": "2026-10-26",
+          "text": "To escalate — due past October 9, 2026: confirm the conclusion of the ToD reassessment. The rest is solved, but FRM still needs to check how to proceed with reassessments for the remaining controls not selected for TOE.",
+          "applicationNote": "Narrow the current escalation to the outstanding FRM ToD conclusion and reassessment approach, rather than generic unresolved scoping. Record October 9 as the overdue decision deadline; the later October 22 chase checkpoint remains historical context. Project start/end remain unconfirmed/TBD. Mayra remains the PwC owner, Urminder/Ash remain the FRM leads, and the separately recorded priority mismatch is not marked resolved."
         }
       ],
       "endOverride": "TBD",
@@ -1738,8 +1744,9 @@
       ],
       "frmLeadsOverride": "Urminder, Ash",
       "statusOverride": "Waiting on FRM",
-      "followUpDate": "2026-10-22",
-      "escalationAction": "Escalate the outstanding FRM confirmation with Urminder and Ash after the October 22 checkpoint, then agree scope and dates."
+      "followUpDate": "2026-10-09",
+      "escalationAction": "Urminder / Ash: confirm the ToD reassessment conclusion and how to reassess remaining controls not selected for TOE; the October 9 decision deadline is overdue.",
+      "escalationReason": "Overdue FRM decision due October 9, 2026: confirm the ToD reassessment conclusion and the approach for remaining controls not selected for TOE; Mayra reports the rest is resolved."
     },
     "21": {
       "notes": [
@@ -1788,11 +1795,20 @@
           "recordedOn": "2026-10-26",
           "text": "Chronosphere is on hold on the FRM side.",
           "applicationNote": "Retain the TBD end and existing ownership. This is an FRM hold, not completed work or a confirmed restart date."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-10-22",
+          "recordedOn": "2026-10-26",
+          "text": "Chronosphere was a priority when the list was assembled, but it no longer is. Nothing has been pending on the PwC side since this past Tuesday; Mayra has been updating the agenda directly to reflect that.",
+          "applicationNote": "The supplied Slack permalink is dated October 22, 2026 at 10:09 AM Pacific, so this past Tuesday refers to October 20. Deprioritize this item and remove it from active escalation/Ale-kazam readouts. Retain the record and historical notes; this clarification does not assert completed testing or FRM delivery. The TBD end is retained without generating a current PwC escalation."
         }
       ],
       "endOverride": "TBD",
       "statusOverride": "On hold",
-      "escalationAction": "Confirm FRM’s hold decision and agree a next review or restart trigger for Chronosphere."
+      "sectionOverride": "Deprioritized",
+      "escalationPaused": true,
+      "escalationPauseReason": "No current PwC action; no longer a priority per Mayra."
     },
     "36": {
       "notes": [
@@ -2110,6 +2126,20 @@
         }
       ],
       "endOverride": "2026-11-15"
+    },
+    "13": {
+      "statusOverride": "Waiting on FRM",
+      "followUpDate": "2026-10-16",
+      "escalationReason": "Overdue FRM decision due October 16, 2026: Urminder to clarify materiality or the usage path of ChatGPT tokenization and confirm the control owner.",
+      "escalationAction": "Urminder: clarify ChatGPT tokenization materiality or usage path and confirm the control owner; the October 16 FRM decision deadline is overdue.",
+      "notes": [
+        {
+          "source": "Mayra Mendoza",
+          "recordedOn": "2026-10-26",
+          "text": "To escalate — due past October 16, 2026: Urminder to clarify materiality or the usage path of ChatGPT tokenization and confirm the control owner.",
+          "applicationNote": "Apply this clarification to the distinct ChatGPT Tokenizer with Astra Model activity. October 16 is the overdue FRM decision deadline, not a supplied replacement for the October 30 project end. The API Tokenization activity and its October 23 end are unchanged. Mayra remains the PwC owner and Urminder the FRM lead."
+        }
+      ]
     }
   },
   "changeLog": [
@@ -2707,7 +2737,52 @@
         "discussion"
       ],
       "discussion": "Confirm Stephen’s incremental work split/hours with Cloie while protecting November 15; raise an OE exception immediately if a relevant UAR missed a late termination."
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-10-22",
+      "recordedOn": "2026-10-26",
+      "row": 17,
+      "activity": "IT Ops (Chronosphere) Scoping and Discovery",
+      "title": "Chronosphere — deprioritized; no current PwC action",
+      "detail": "Mayra confirms Chronosphere is no longer a priority and nothing has been pending on the PwC side since Tuesday, October 20. Her agenda updates reflect that. Retain it as deprioritized and remove it from active escalations/Ale-kazam.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Avi",
+      "flags": [
+        "scope-change",
+        "escalation-paused"
+      ]
+    },
+    {
+      "source": "Mayra Mendoza",
+      "recordedOn": "2026-10-26",
+      "row": 13,
+      "activity": "ChatGPT Tokenizer with Astra Model",
+      "title": "ChatGPT tokenization — FRM decision overdue October 16",
+      "detail": "Overdue decision due October 16, 2026: Urminder to clarify materiality or usage path for ChatGPT tokenization and confirm the control owner. The October 30 project end is unchanged.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": [
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "Urminder to provide the materiality/usage-path decision and confirm the control owner."
+    },
+    {
+      "source": "Mayra Mendoza",
+      "recordedOn": "2026-10-26",
+      "row": 16,
+      "activity": "Revenue new controls\n- Apple RevShare moving to AutoRecon Platform\n",
+      "title": "Revenue new controls — ToD decision overdue October 9",
+      "detail": "Overdue decision due October 9, 2026: FRM to confirm the ToD reassessment conclusion and how to reassess remaining controls not selected for TOE. Mayra reports the rest is resolved; project end remains TBD.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder, Ash",
+      "flags": [
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "Urminder/Ash to confirm the ToD conclusion and remaining-control reassessment approach."
     }
   ],
-  "publicationId": "orange-notes-acfc188aaf2f"
+  "publicationId": "orange-notes-fb0ab4acaeac"
 }

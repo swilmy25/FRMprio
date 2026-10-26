@@ -101,7 +101,7 @@ test('history validation, merging and lead exports retain dates without exportin
   expect(merged.updates[0].observedAt).toBe('2026-10-20T18:00:00.000Z')
   const exported = snapshotForLead({ ...snapshot, aleHistory: original }, 'Avi')
   expect(isSourceSnapshot(exported)).toBe(true)
-  expect(orangeOnly(exported).aleHistory?.updates[0].decisions).toHaveLength(2)
+  expect(orangeOnly(exported).aleHistory?.updates[0].decisions).toHaveLength(1)
   expect(exported.aleHistory?.updates[0].decisions.some(item => /Stripe|Revenue/.test(item.topic))).toBe(false)
   const invalid = structuredClone(original); invalid.updates[0].observedAt = '2026-02-30T18:00:00.000Z'
   expect(isAleHistory(invalid)).toBe(false)
