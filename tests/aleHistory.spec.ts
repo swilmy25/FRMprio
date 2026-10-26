@@ -33,6 +33,24 @@ test('published baseline uses observed dates and the readout carries all effecti
   expect(current.escalations.find(item => item.topic === 'SDLC — Pando')?.owners).toEqual(['Ben Oates'])
 })
 
+test('shortening Oracle’s title preserves its existing escalation dates and history in lead exports', () => {
+  const oracle = current.escalations.find(item => item.topic === 'Oracle MCP')!
+  const prior = published.updates.slice(0, -1).filter(update => update.decisions.some(item => item.topic === 'Oracle MCP'))
+  expect(prior.length).toBeGreaterThan(0)
+  expect(oracle.historyKey).toBe(prior[0].decisions.find(item => item.topic === 'Oracle MCP')!.key)
+  expect(aleItemHistory(published, aleUpdateId(snapshot, current), oracle.historyKey)).toMatchObject({
+    firstSeen: pacificDay(prior[0].observedAt), seenUpdates: prior.length + 1, status: 'carryover',
+  })
+  const exported = snapshotForLead({ ...snapshot, aleHistory: published }, 'Sudhika')
+  expect(isSourceSnapshot(exported)).toBe(true)
+  const imported = buildAleReadout(parseSource(orangeOnly(JSON.parse(JSON.stringify(exported)))),'2026-10-26')
+  expect(imported.escalations.find(item => item.topic === 'Oracle MCP')?.historyKey).toBe(oracle.historyKey)
+  expect(exported.aleHistory?.updates.flatMap(update => update.decisions).filter(item => item.key === oracle.historyKey)).toHaveLength(prior.length + 1)
+  const invalid = structuredClone(snapshot)
+  invalid.annotations!['26'].historyName = ' '
+  expect(isSourceSnapshot(invalid)).toBe(false)
+})
+
 test('a following source update preserves first dates across row moves and ownership handoffs', () => {
   const next = nextSnapshot('2026-10-27')
   ;[next.rows[15], next.rows[35]] = [next.rows[35], next.rows[15]]

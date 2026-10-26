@@ -48,7 +48,7 @@ export function buildAleReadout(activities: SourceActivity[], today: string): Al
   const decision = (activity: SourceActivity, bucket: 'escalation' | 'alignment'): AleDecision => ({
     id: `${bucket}:${activity.id}`,
     activityId: activity.id,
-    historyKey: aleHistoryKey(activity.name, bucket),
+    historyKey: aleHistoryKey(activity.historyName ?? activity.name, bucket),
     topic: topic(activity),
     owners: [...new Set(owners.resolve(activity.pwcOwners))],
     frmOwners: [...new Set(frmOwners.resolve(activity.frmLeads))],

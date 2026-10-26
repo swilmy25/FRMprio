@@ -1658,7 +1658,7 @@
       "",
       "",
       "",
-      "TBD",
+      "2026-10-21",
       "TBD",
       "Coordinate with @cloie.vonmassenhausen; gather evidence from Adi for HR Ops review. Stephen/Cloie work split and hours to confirm."
     ]
@@ -1858,13 +1858,19 @@
           "recordedOn": "2026-10-26",
           "text": "Sprint 2 and 3 PBCs have been escalated with Urminder and are being tracked with TPM @sdp. The November 15 closure target remains.",
           "applicationNote": "The combined Phases 2 & 3 activity keeps its October 13–November 15 window. Escalation concerns PBC dependencies; no revised end or missed commitment is asserted."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Additional evidence for Ads New ITAC Controls — Phases 2 & 3 was received last week. A few evidence items remain pending into this week; tracking and escalating as needed with Sandeep. Still tracking for November 15, 2026 completion and full review.",
+          "applicationNote": "Relative weeks refer to this October 26 update. The October 13 start and November 15 end remain unchanged. Evidence receipt is progress, not confirmation that all evidence, testing or full review is complete."
         }
       ],
       "nameOverride": "Ads New ITAC Controls — Phases 2 & 3",
       "endOverride": "2026-11-15",
       "statusOverride": "In progress",
-      "escalationReason": "Sprint 2 / 3 PBC dependency escalated with Urminder; tracked with TPM @sdp.",
-      "escalationAction": "Follow up with Urminder and TPM @sdp on PBC delivery and protect the November 15 closure target."
+      "escalationReason": "Phases 2 & 3 evidence is still pending; tracking and escalating as needed with Sandeep.",
+      "escalationAction": "Follow up with Sandeep (@sdp) on the remaining evidence and protect November 15 completion and full review."
     },
     "48": {
       "nameOverride": "Non-Platform OE Testing — ITACs",
@@ -1910,11 +1916,18 @@
           "recordedOn": "2026-10-26",
           "text": "Platform OE testing is waiting for FRM confirmation of the TOD reassessment; Mayra links this pending confirmation to the Revenue discussion.",
           "applicationNote": "Apply the Platform-wide update to both OE buckets without merging their activities. FRM leads, priorities and dates remain unconfirmed."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Remove Stephen Wilm as an owner of Platform OE Testing — ITACs. Mayra Mendoza and Layla Yang remain assigned. Set the Platform OE Testing — ITACs end date to December 18, 2026. Refer to the separate Codex dashboard for OE progress and workflows.",
+          "applicationNote": "Stephen is removed without reassigning this item to Sonu. This line provides high-level visibility; detailed OE progress and workflows are tracked in the separate Codex dashboard. Its link has not been supplied. Start date, FRM lead and priorities remain unconfirmed, and the previous pending TOD reassessment is not marked resolved."
         }
       ],
-      "pwcOwnersOverride": "Stephen Wilm, Mayra Mendoza, Layla Yang",
+      "pwcOwnersOverride": "Mayra Mendoza, Layla Yang",
       "statusOverride": "Waiting on FRM",
-      "escalationAction": "Get FRM confirmation of the TOD reassessment linked to Revenue, then agree this OE bucket’s lead, priority and dates."
+      "escalationAction": "Use the separate Codex OE dashboard for progress and workflows; confirm the pending FRM TOD decision, lead, priority and start date against the December 18 end date.",
+      "endOverride": "2026-12-18"
     },
     "57": {
       "userAdded": true,
@@ -1931,10 +1944,17 @@
           "recordedOn": "2026-10-26",
           "text": "Platform OE testing is waiting for FRM confirmation of the TOD reassessment; Mayra links this pending confirmation to the Revenue discussion.",
           "applicationNote": "Apply the Platform-wide update to both OE buckets without merging their activities. FRM leads, priorities and dates remain unconfirmed."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Set the Platform OE Testing — ITGCs end date to December 18, 2026. Refer to the separate Codex dashboard for OE progress and workflows.",
+          "applicationNote": "Sonu Kumar, Mayra Mendoza and Layla Yang remain assigned. This line provides high-level visibility; detailed OE progress and workflows are tracked in the separate Codex dashboard. Its link has not been supplied. Start date, FRM lead and priorities remain unconfirmed, and the previous pending TOD reassessment is not marked resolved."
         }
       ],
       "statusOverride": "Waiting on FRM",
-      "escalationAction": "Get FRM confirmation of the TOD reassessment linked to Revenue, then agree this OE bucket’s lead, priority and dates."
+      "escalationAction": "Use the separate Codex OE dashboard for progress and workflows; confirm the pending FRM TOD decision, lead, priority and start date against the December 18 end date.",
+      "endOverride": "2026-12-18"
     },
     "58": {
       "userAdded": true,
@@ -1968,11 +1988,20 @@
           "recordedOn": "2026-10-26",
           "text": "During the October 16 testing meeting, a user could post journal entries directly without approvals and post to the wrong Oracle environment. @ssherugar had an RCA meeting planned for October 21 and was to update Stephen and Joaquin. October 30 completion is very much at risk and trending adversely.",
           "applicationNote": "October 16 is the reported issue date; the October 21 RCA was planned, with no outcome supplied. The October 30 end is retained and flagged at risk, rather than inventing a replacement date."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Rename the activity to Oracle MCP and retain scope and issue context in the details. Move the end date from October 30 to November 15, 2026 and keep the item flagged. A sample transaction with a larger dollar value will be conducted, with someone from the business processing it live for the control test. Confirmation from Sudhika/Pavan on the wrong-environment posting is still pending.",
+          "applicationNote": "The short activity name is used throughout the dashboard; the original Oracle journal-entry scope and Finance AI Framework / Deloitte discovery context remain in workbook detail. At risk remains in effect. The transaction is planned, not completed; no dollar amount, issue resolution or successful control-test outcome was supplied. Sudhika/Pavan are confirmation contacts; current PwC owners and FRM lead are unchanged. The existing escalation history is retained across the rename."
         }
       ],
       "statusOverride": "At risk",
-      "escalationReason": "Oracle testing identified approval bypass and wrong-environment journal posting; October 30 delivery is at risk.",
-      "escalationAction": "Get @ssherugar’s RCA outcome, agree remediation and retesting, and confirm or replan the October 30 end date."
+      "escalationReason": "Wrong-environment posting confirmation is pending with Sudhika/Pavan; the larger-value live transaction control test is still to be conducted.",
+      "escalationAction": "Conduct a larger-value sample transaction live with a business user and obtain Sudhika/Pavan’s confirmation on wrong-environment posting for the revised November 15 target.",
+      "nameOverride": "Oracle MCP",
+      "historyName": "Oracle MCP - currently only asked to test 1 use case (Oracle JE prep through Codex). Originally 8 controls, now 11 proposed\n\nFurther discovery is ongoing with Finance AI Framework and reviewing what will be provided to Deloitte.",
+      "endOverride": "2026-11-15"
     },
     "40": {
       "notes": [
@@ -2052,8 +2081,8 @@
           "Substantial log reconstruction, inaccessible evidence or a materially larger population/system footprint."
         ]
       },
-      "escalationReason": "HR/Payroll late-termination impact assessment is needed for SAD finalization; deadline and incremental resource allocation are unconfirmed.",
-      "escalationAction": "Agree Stephen’s scope and hours with Cloie and confirm SAD timing with Sudhika/Chandana; raise an OE exception immediately if a relevant UAR missed a late termination.",
+      "escalationReason": "Prioritized for SAD implications against the November 15 end date; Stephen’s incremental allocation is still unconfirmed.",
+      "escalationAction": "Agree Stephen’s scope and hours with Cloie to support the November 15 SAD-related assessment target; raise an OE exception immediately if a relevant UAR missed a late termination.",
       "notes": [
         {
           "source": "User update",
@@ -2072,8 +2101,15 @@
           "recordedOn": "2026-10-26",
           "text": "Proposed full-assessment planning range: 40–80 hours under the stated assumptions. Stephen’s incremental support share must be confirmed after the work split with Cloie.",
           "applicationNote": "This is an initial planning estimate prepared for this update, not an estimate supplied or approved by Stephen, Cloie or FRM. Remediation, retesting and expanded exception investigation are separate scope if needed."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-10-26",
+          "text": "Set the HR/Payroll late-termination impact assessment start to last Wednesday, October 21, 2026, and end to November 15, 2026. This work is being prioritized given its SAD implications.",
+          "applicationNote": "Last Wednesday is resolved relative to October 26, 2026 in America/Los_Angeles. High PwC priority is retained; FRM priority remains unconfirmed. The assessment end is now dated; no separate SAD-finalization milestone is invented. Stephen’s incremental allocation and the existing proposed full-assessment range remain unconfirmed. The conditional immediate OE-exception trigger and coordination with Cloie, Sudhika/Chandana, Adi and HR Ops remain in effect."
         }
-      ]
+      ],
+      "endOverride": "2026-11-15"
     }
   },
   "changeLog": [
@@ -2592,7 +2628,86 @@
         "discussion"
       ],
       "discussion": "Agree the scope split, evidence availability and incremental hours with Cloie, Stephen, Sudhika and Chandana before committing capacity."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 19,
+      "activity": "Ads New ITAC Controls — Phases 2 & 3",
+      "title": "Ads Phases 2 & 3 — evidence received; November 15 retained",
+      "detail": "Additional evidence received last week; a few items remain pending this week. Track and escalate as needed with Sandeep, with November 15 completion and full review still targeted.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "date-confirmed",
+        "in-progress",
+        "discussion"
+      ],
+      "discussion": "Follow up with Sandeep on remaining evidence to protect completion and full review by November 15."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 26,
+      "activity": "Oracle MCP",
+      "title": "Oracle MCP — October 30 → November 15",
+      "detail": "Shorten the activity name to Oracle MCP. Move the end from October 30 to November 15. Conduct a larger-value sample transaction processed live by a business user for the control test; Sudhika/Pavan confirmation on wrong-environment posting is still pending.",
+      "pwcOwners": "Joaquin Garcia Stephen Wilm",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "date-moved",
+        "at-risk",
+        "discussion"
+      ],
+      "discussion": "Complete the planned business-led live transaction test and obtain wrong-environment posting confirmation; keep the item flagged."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE ITACs — owner update; December 18 end",
+      "detail": "Remove Stephen Wilm as an owner; Mayra Mendoza and Layla Yang remain. Set the end from TBD to December 18. Refer to the separate Codex dashboard for OE progress and workflows.",
+      "pwcOwners": "Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change",
+        "date-moved",
+        "discussion"
+      ],
+      "discussion": "Use the detailed Codex OE tracker; confirm FRM TOD decision, lead, priorities and start date."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 57,
+      "activity": "Platform OE Testing — ITGCs",
+      "title": "Platform OE ITGCs — December 18 end",
+      "detail": "Set the end from TBD to December 18. Retain Sonu Kumar, Mayra Mendoza and Layla Yang as owners. Refer to the separate Codex dashboard for OE progress and workflows.",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "date-moved",
+        "discussion"
+      ],
+      "discussion": "Use the detailed Codex OE tracker; confirm FRM TOD decision, lead, priorities and start date."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-10-26",
+      "row": 59,
+      "activity": "HR/Payroll late terminations — impact assessment support",
+      "title": "HR/Payroll assessment — October 21–November 15; SAD priority",
+      "detail": "Set start from TBD to October 21 (last Wednesday) and end from TBD to November 15. Prioritize the impact assessment given SAD implications; High PwC priority is retained.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Sudhika & Chandana",
+      "flags": [
+        "date-moved",
+        "in-progress",
+        "discussion"
+      ],
+      "discussion": "Confirm Stephen’s incremental work split/hours with Cloie while protecting November 15; raise an OE exception immediately if a relevant UAR missed a late termination."
     }
   ],
-  "publicationId": "orange-notes-553f7923c59f"
+  "publicationId": "orange-notes-acfc188aaf2f"
 }

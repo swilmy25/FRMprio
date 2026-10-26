@@ -29,15 +29,15 @@ test('readout matches both buckets: ten decisions across nine topics with worksh
   expect(data.escalations.some(item=>['Stripe','AWS','Monitoring — Deloitte follow-up'].includes(item.topic))).toBe(false)
   expect(data.escalations.find(item => item.topic === 'Revenue new controls')?.nextStep).toContain('October 22 checkpoint')
   expect(data.alignment[0].nextStep).toContain('PwC High versus FRM Low')
-  expect(oracle.nextStep).toContain('RCA outcome')
+  expect(oracle.nextStep).toContain('larger-value sample transaction')
   expect(data.escalations.find(item=>item.topic.includes('Phases 2 & 3'))?.nextStep).toContain('@sdp')
   expect(data.escalations.find(item => item.topic === 'SDLC — Pando')?.nextStep).toContain('whether to resume')
   const platform = data.escalations.filter(item => item.topic.startsWith('Platform OE Testing'))
   expect(platform).toHaveLength(2)
   for (const item of platform) {
-    expect(item.owners).toEqual(item.topic.endsWith('ITACs')?['Stephen Wilm','Mayra Mendoza','Layla Yang']:['Sonu Kumar','Mayra Mendoza','Layla Yang'])
+    expect(item.owners).toEqual(item.topic.endsWith('ITACs')?['Mayra Mendoza','Layla Yang']:['Sonu Kumar','Mayra Mendoza','Layla Yang'])
     expect(item.frmOwners).toEqual([])
-    expect(item.nextStep).toContain('TOD reassessment')
+    expect(item.nextStep).toContain('pending FRM TOD decision')
   }
 })
 
@@ -102,8 +102,8 @@ test('mobile readout fits the viewport and keeps owners, topics and next steps v
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   const readout = page.getByRole('region', { name: readoutName })
   await expect(readout.getByRole('article')).toHaveCount(10)
-  await expect(readout.getByRole('article', { name: 'Escalations: Platform OE Testing — ITACs', exact: true })).toContainText('@Stephen Wilm')
-  await expect(readout.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })).toContainText('RCA')
+  await expect(readout.getByRole('article', { name: 'Escalations: Platform OE Testing — ITACs', exact: true })).not.toContainText('@Stephen Wilm')
+  await expect(readout.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })).toContainText('Sudhika/Pavan')
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
 })
 

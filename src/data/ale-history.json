@@ -291,6 +291,62 @@
           "bucket": "alignment"
         }
       ]
+    },
+    {
+      "id": "ad4cac6bc9169dde",
+      "observedAt": "2026-10-26T19:10:40.159Z",
+      "decisions": [
+        {
+          "key": "escalation:api tokenization with astra model",
+          "topic": "API Tokenization",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:it ops (chronosphere) scoping and discovery",
+          "topic": "IT Ops / Chronosphere",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:ads new itac controls - phases 2 & 3",
+          "topic": "Ads New ITAC Controls — Phases 2 & 3",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:oracle mcp - currently only asked to test 1 use case (oracle je prep through codex). originally 8 controls, now 11 proposed",
+          "topic": "Oracle MCP",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:sdlc - pando",
+          "topic": "SDLC — Pando",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:platform oe testing - itacs",
+          "topic": "Platform OE Testing — ITACs",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:platform oe testing - itgcs",
+          "topic": "Platform OE Testing — ITGCs",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:hr/payroll late terminations - impact assessment support",
+          "topic": "HR/Payroll late terminations — impact assessment support",
+          "bucket": "escalation"
+        },
+        {
+          "key": "alignment:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "alignment"
+        }
+      ]
     }
   ]
 }

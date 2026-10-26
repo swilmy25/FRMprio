@@ -7,7 +7,7 @@ const snapshot:SourceSnapshot=JSON.parse(readFileSync(new URL('../src/data/prior
 const activities=parseSource(snapshot)
 const activity=(row:number)=>activities.find(p=>p.row===row)!
 const verifiedOwners:{ownersByRow:Record<string,string[]>}=JSON.parse(readFileSync(new URL('./fixtures/workbook-pwc-owners.json',import.meta.url),'utf8'))
-const expectedOwners:Record<string,string[]>={...verifiedOwners.ownersByRow,'43':['Ben Oates'],'55':verifiedOwners.ownersByRow['48'],'56':['Stephen Wilm','Mayra Mendoza','Layla Yang'],'57':['Sonu Kumar','Mayra Mendoza','Layla Yang'],'58':['Stephen Wilm'],'59':['Stephen Wilm']}
+const expectedOwners:Record<string,string[]>={...verifiedOwners.ownersByRow,'43':['Ben Oates'],'55':verifiedOwners.ownersByRow['48'],'56':['Mayra Mendoza','Layla Yang'],'57':['Sonu Kumar','Mayra Mendoza','Layla Yang'],'58':['Stephen Wilm'],'59':['Stephen Wilm']}
 
 test('latest workbook and meeting decisions retain provenance and apply the requested dates',()=>{
  expect(isSourceSnapshot(snapshot)).toBe(true)
@@ -43,10 +43,10 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  }
  for(const row of [56,57]){
   expect(activity(row).userAdded).toBe(true)
-  expect(activity(row).pwcOwners).toBe(row===56?'Stephen Wilm, Mayra Mendoza, Layla Yang':'Sonu Kumar, Mayra Mendoza, Layla Yang')
+  expect(activity(row).pwcOwners).toBe(row===56?'Mayra Mendoza, Layla Yang':'Sonu Kumar, Mayra Mendoza, Layla Yang')
   expect(activity(row).frmLeads).toBe('')
   expect(activity(row).startRaw).toBe('TBD')
-  expect(activity(row).endRaw).toBe('TBD')
+  expect(activity(row).end).toBe('2026-12-18')
   expect(activity(row).pwcPriority).toBe('')
   expect(activity(row).frmPriority).toBe('')
   expect(activity(row).completed).toBe(false)
@@ -167,11 +167,11 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Ben Oates','Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','Sonu Kumar','Stephen Wilm'])
  expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
  const items=uniqueMeetingItems(groups)
- expect(items).toHaveLength(36)
+ expect(items).toHaveLength(41)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
- expect(rows('date-moved')).toEqual([12,22,27,35])
+ expect(rows('date-moved')).toEqual([12,22,26,27,35,56,57,59])
  expect(rows('date-corrected')).toEqual([40])
- expect(rows('date-confirmed')).toEqual([19,34])
+ expect(rows('date-confirmed')).toEqual([19,19,34])
  expect(rows('new-tbd')).toEqual([16,36])
  expect(rows('existing-tbd')).toEqual([17])
  const scoped=meetingUpdatesByMember(snapshotForLead(snapshot,'Avi'))
@@ -196,7 +196,7 @@ test('dashboard and meeting owners follow worksheet or explicit user assignments
   }
  }
  const stephen=groups.find(group=>group.member==='Stephen Wilm')!
- expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,56,58,18,19,26,56,56,59,59])
+ expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59])
  expect(stephen.items[0].providedBy).toBe('User update')
  const jeff=groups.find(group=>group.member==='Jeff Rose')!
  expect(jeff.items.map(item=>item.change.row)).toEqual([8,48,55])
