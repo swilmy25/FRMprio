@@ -67,7 +67,19 @@
     "57": "Active portfolio",
     "58": "Active portfolio",
     "59": "Active portfolio",
-    "60": "Active portfolio"
+    "60": "Active portfolio",
+    "61": "Active portfolio",
+    "62": "Active portfolio",
+    "63": "Active portfolio",
+    "64": "Active portfolio",
+    "65": "Active portfolio",
+    "66": "Active portfolio",
+    "67": "Active portfolio",
+    "68": "Active portfolio",
+    "69": "Active portfolio",
+    "70": "Active portfolio",
+    "71": "Active portfolio",
+    "72": "Completed"
   },
   "rows": [
     [
@@ -1689,6 +1701,330 @@
       "TBD",
       "2026-12-04",
       "Odinga, Matthew"
+    ],
+    [
+      "",
+      "",
+      "Project Galaxy",
+      "",
+      "",
+      "Ash, Urminder",
+      "",
+      "",
+      "",
+      "",
+      "New project",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "Monorepo inventory framework — errors and SDLC uplift",
+      "",
+      "Mayra Mendoza",
+      "Ash",
+      "",
+      "",
+      "",
+      "",
+      "Uplift work",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "Control-description uplift — BAM / BES acronyms",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Update",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "ToE / LMD approach and coverage confirmation",
+      "",
+      "",
+      "Ash, Urminder",
+      "",
+      "",
+      "",
+      "",
+      "Approach / Scope confirmation",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "Rockset compute-ops monitoring — testing approach",
+      "",
+      "Mayra Mendoza",
+      "Avi",
+      "",
+      "",
+      "",
+      "",
+      "Approach / Scope confirmation",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "AM-based UAR — ToD remediation and AWS / Azure scope",
+      "",
+      "Sonu Kumar",
+      "Chandana",
+      "",
+      "",
+      "",
+      "",
+      "Clarification / Follow up",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "DCGM scoping",
+      "",
+      "",
+      "Avi",
+      "",
+      "",
+      "",
+      "",
+      "Clarification / Follow up",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "Fivetran / Rockset — access-expiration controls",
+      "",
+      "",
+      "Avi, Chandana",
+      "",
+      "",
+      "",
+      "",
+      "Clarification / Follow up",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "Goldman Sachs Banking Portal — dual administration (TCM.03.09)",
+      "",
+      "",
+      "Sudhika",
+      "",
+      "",
+      "",
+      "",
+      "Evidences request",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "Zip — two-way match and PO approval follow-ups",
+      "",
+      "",
+      "Sudhika",
+      "",
+      "",
+      "",
+      "",
+      "Clarification / Follow up",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "VNDLY — job monitoring and incident management",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Clarification / Follow up",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
+    ],
+    [
+      "",
+      "",
+      "SKU Manager / Glass — migration and UAR scope follow-up",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Update",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "N/A",
+      "Completed",
+      ""
     ]
   ],
   "annotations": {
@@ -1699,9 +2035,51 @@
           "recordedOn": "2026-10-20",
           "text": "Project Keystone should have an October 30, 2026 end date.",
           "applicationNote": "The later explicit date supersedes the earlier TBD/escalation note and agrees with the latest workbook."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 21, 33: Update for SDLC - Keystone - PwC working on Memo; As par of Project Keystone, multiple automate business controls might have been impacted. As part of the SDLC memo, Ben is identifying the impacted controls and next steps if any;",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Ben is the source action DRI for memo/impact work. Sonu remains the project PwC owner. The previously removed SDLC–Keystone line is not recreated as a duplicate."
         }
       ],
-      "endOverride": "2026-10-30"
+      "endOverride": "2026-10-30",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 21,
+          "addedBy": "Ben",
+          "category": "Update",
+          "description": "Update for SDLC - Keystone - PwC working on Memo;",
+          "ownership": "Sandeep, PwC",
+          "currentDRI": "Ben",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "2026-10-31",
+          "notes": "PwC working on Memo\nPwC to confirm the missing information",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 33,
+          "addedBy": "Ben",
+          "category": "Uplift work",
+          "description": "As par of Project Keystone, multiple automate business controls might have been impacted. As part of the SDLC memo, Ben is identifying the impacted controls and next steps if any;",
+          "ownership": "Ben",
+          "currentDRI": "Ben",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "",
+          "notes": "",
+          "links": ""
+        }
+      ],
+      "statusOverride": "In progress",
+      "escalationAction": "Sonu / Avi: confirm Keystone discovery completion and Ben’s SDLC memo, missing information and impacted-control next steps; agree revised timing after October 30."
     },
     "37": {
       "notes": [
@@ -1722,9 +2100,36 @@
           "source": "Mayra",
           "recordedOn": "2026-10-20",
           "text": "API Tokenization due date moved to October 23, 2026."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 18: API Tokenization Deloitte Follow-up",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Source row 18 is an API-specific Deloitte follow-up and does not replace the separate ChatGPT tokenization decision. Support receipt and a planned call do not establish completion. The October 23 project end is retained."
         }
       ],
-      "endOverride": "2026-10-23"
+      "endOverride": "2026-10-23",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 18,
+          "addedBy": "PwC",
+          "category": "Approach / Scope confirmation",
+          "description": "API Tokenization Deloitte Follow-up",
+          "ownership": "",
+          "currentDRI": "Mayra",
+          "priority": "High",
+          "status": "Hold",
+          "deadline": "2026-10-20",
+          "notes": "10/20 - Received support, PwC going through the provided support.\nConfirm with DT  about the current understanding \nTBC is we still. need the test of one with DT + Eng -> Sandeep to coordinate it\n10/27 - to schedule a call with Bo and DT to discuss their questions",
+          "links": ""
+        }
+      ],
+      "statusOverride": "On hold",
+      "followUpDate": "2026-10-20",
+      "escalationAction": "Mayra: arrange the Bo/Deloitte discussion, confirm the current API tokenization understanding and whether a test of one with Engineering is still needed; coordinate with Sandeep and confirm revised delivery."
     },
     "16": {
       "notes": [
@@ -1751,6 +2156,12 @@
           "recordedOn": "2026-10-26",
           "text": "To escalate — due past October 9, 2026: confirm the conclusion of the ToD reassessment. The rest is solved, but FRM still needs to check how to proceed with reassessments for the remaining controls not selected for TOE.",
           "applicationNote": "Narrow the current escalation to the outstanding FRM ToD conclusion and reassessment approach, rather than generic unresolved scoping. Record October 9 as the overdue decision deadline; the later October 22 chase checkpoint remains historical context. Project start/end remain unconfirmed/TBD. Mayra remains the PwC owner, Urminder/Ash remain the FRM leads, and the separately recorded priority mismatch is not marked resolved."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 4, 16: Confirm the conclusion of the ToD reassessment. DT follow-up on REV.04.01 support provided",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below."
         }
       ],
       "endOverride": "TBD",
@@ -1774,7 +2185,41 @@
       "statusOverride": "Waiting on FRM",
       "followUpDate": "2026-10-09",
       "escalationAction": "Urminder / Ash: confirm the ToD reassessment conclusion and how to reassess remaining controls not selected for TOE; the October 9 decision deadline is overdue.",
-      "escalationReason": "Overdue FRM decision due October 9, 2026: confirm the ToD reassessment conclusion and the approach for remaining controls not selected for TOE; Mayra reports the rest is resolved."
+      "escalationReason": "Overdue FRM decision due October 9, 2026: confirm the ToD reassessment conclusion and the approach for remaining controls not selected for TOE; Mayra reports the rest is resolved.",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 4,
+          "addedBy": "PwC",
+          "category": "Approach / Scope confirmation",
+          "description": "Confirm the conclusion of the ToD reassessment.",
+          "ownership": "Urminder",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "Past Due",
+          "deadline": "2026-10-09",
+          "notes": "10/19 - DT is asking to share with them the approach for ToD reassessment\nAM 10/23 - FRM to come back on approach for ToD reassessment for controls not selected for ToE",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 16,
+          "addedBy": "PwC",
+          "category": "Approach / Scope confirmation",
+          "description": "DT follow-up on REV.04.01 support provided",
+          "ownership": "Urminder, PwC",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "Completed",
+          "deadline": "2026-10-23",
+          "notes": "Align on how to approach the follow-ups prior to responding\nPwC scheduled the WT to explain the code.",
+          "links": ""
+        }
+      ]
     },
     "21": {
       "notes": [
@@ -1783,6 +2228,12 @@
           "recordedOn": "2026-10-20",
           "text": "Monorepo Inventory is complete.",
           "applicationNote": "The meeting note does not supply an actual completion date. The former workbook date remains available for reference."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "The completed Monorepo Inventory baseline is retained. Action Items row 11 explicitly says inventory is done while the errors/SDLC framework follow-up is still in progress; that follow-up is now tracked separately.",
+          "applicationNote": "A completed baseline is not reopened solely because a separate remediation/uplift action remains open."
         }
       ],
       "sectionOverride": "Completed",
@@ -1838,13 +2289,53 @@
           "recordedOn": "2026-10-26",
           "text": "Chronosphere was a priority when the list was assembled, but it no longer is. Nothing has been pending on the PwC side since this past Tuesday; Mayra has been updating the agenda directly to reflect that.",
           "applicationNote": "The supplied Slack permalink is dated October 22, 2026 at 10:09 AM Pacific, so this past Tuesday refers to October 20. Deprioritize this item and remove it from active escalation/Ale-kazam readouts. Retain the record and historical notes; this clarification does not assert completed testing or FRM delivery. The TBD end is retained without generating a current PwC escalation."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 5, 10: Clarify synthetic monitoring implications for Chronosphere. Follow up on Chronosphere job-monitoring and other monitoring.",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. The tracker still lists FRM synthetic-monitoring feedback as past due and a separate memo follow-up on hold. Preserve Mayra’s newer explicit no-current-PwC-action/deprioritized disposition; record the FRM action context without reopening a PwC commitment."
         }
       ],
       "endOverride": "TBD",
       "statusOverride": "On hold",
       "sectionOverride": "Deprioritized",
       "escalationPaused": true,
-      "escalationPauseReason": "No current PwC action; no longer a priority per Mayra."
+      "escalationPauseReason": "No current PwC action; no longer a priority per Mayra.",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 5,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "Clarify synthetic monitoring implications for Chronosphere.",
+          "ownership": "Urminder",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "Past Due",
+          "deadline": "2026-10-21",
+          "notes": "Urminder to review the provide feedback in the workpaper before realized to DT to see if we include or Chronosphere or not in the workpaper.",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 10,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "Follow up on Chronosphere job-monitoring and other monitoring.",
+          "ownership": "Alejandro",
+          "currentDRI": "",
+          "priority": "Medium",
+          "status": "Hold",
+          "deadline": "",
+          "notes": "PwC provided Memo",
+          "links": ""
+        }
+      ]
     },
     "36": {
       "notes": [
@@ -1859,11 +2350,35 @@
           "recordedOn": "2026-10-26",
           "text": "Stripe is waiting for FRM. Remove it from the escalation/readout list for now; Mayra will bring it back when dates are available.",
           "applicationNote": "Retain Stripe as open in the portfolio with end TBD and existing owners. Pause its date escalation while awaiting dates; no completion or deletion is implied. Normal escalation rules resume when an end date is supplied or a new explicit risk is recorded."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 7: Confirm Stripe change timing and the needed walkthrough.",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Stripe is on hold in the tracker. October 27 is the action deadline, not a confirmed replacement delivery date. Preserve Mayra’s escalation pause and the TBD project end."
         }
       ],
       "endOverride": "TBD",
       "statusOverride": "Waiting on FRM",
-      "escalationPaused": true
+      "escalationPaused": true,
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 7,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "Confirm Stripe change timing and the needed walkthrough.",
+          "ownership": "Ash, Urminder",
+          "currentDRI": "",
+          "priority": "Medium",
+          "status": "Hold",
+          "deadline": "2026-10-27",
+          "notes": "Changes from September? Exclude what was tested in July. Mayra to provide timing; Sandeep was open to a deep dive in the XFN call.\n10/21 - MM asking Ash+ Urminder to provide due date",
+          "links": ""
+        }
+      ]
     },
     "27": {
       "notes": [
@@ -1879,10 +2394,34 @@
           "recordedOn": "2026-10-26",
           "text": "Update the monitoring / Deloitte follow-up end to December 31, 2026 because additional testing is being addressed during TOE.",
           "applicationNote": "Applies to the additional follow-up activity, not the completed original assessment. It remains in progress; the prior overdue October 15 end is superseded by December 31."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 26: TOE approach",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Completed refers to the TOE approach alignment: obtain a population/sample-test error resolution where downstream BP reconciliations do not cover the risk. The additional monitoring/Deloitte testing remains in progress through December 31."
         }
       ],
       "statusOverride": "In progress",
-      "endOverride": "2026-12-31"
+      "endOverride": "2026-12-31",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 26,
+          "addedBy": "PwC",
+          "category": "Update",
+          "description": "TOE approach",
+          "ownership": "Avi",
+          "currentDRI": "",
+          "priority": "Low",
+          "status": "Completed",
+          "deadline": "2026-10-22",
+          "notes": "We had an internal alignment with Sarah and will include IT monitoring testing (gain a population and sample test) for error resolution if there are no downstream BP recon controls to address the risk.",
+          "links": ""
+        }
+      ]
     },
     "45": {
       "notes": [
@@ -1980,11 +2519,51 @@
           "recordedOn": "2026-10-26",
           "text": "Set the Platform OE testing start date to last Wednesday, October 21, 2026. The end remains December 18, 2026. With both dates supplied, remove this bucket from current escalation/Ale-kazam; use the separate Codex dashboard for detailed OE progress and workflows.",
           "applicationNote": "Last Wednesday is resolved relative to October 26 in America/Los_Angeles. The former TBD start is superseded. Existing owners, FRM lead/priority fields and the December 18 end are unchanged. This schedule update does not assert testing completion or resolution of the previously reported TOD confirmation. No escalation pause is needed; normal date and risk checks remain active."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 24, 29: PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas Compute TOE in progress",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. The TPM-subscriber confirmation is completed, not the OE testing. Compute TOE is described as normal business with no escalation. The October 21–December 18 testing dates remain."
         }
       ],
       "pwcOwnersOverride": "Mayra Mendoza, Layla Yang",
       "statusOverride": "Waiting on FRM",
-      "endOverride": "2026-12-18"
+      "endOverride": "2026-12-18",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 24,
+          "addedBy": "Sonu",
+          "category": "Update",
+          "description": "PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas",
+          "ownership": "Sandeep, Adi",
+          "currentDRI": "Sandeep",
+          "priority": "High",
+          "status": "Completed",
+          "deadline": "2026-10-28",
+          "notes": "Yes let us add TPMs",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 29,
+          "addedBy": "PwC",
+          "category": "Evidences request",
+          "description": "Compute TOE in progress",
+          "ownership": "Avi",
+          "currentDRI": "",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-10-27",
+          "notes": "Normal business, no escalation",
+          "links": ""
+        }
+      ]
     },
     "57": {
       "userAdded": true,
@@ -2013,10 +2592,68 @@
           "recordedOn": "2026-10-26",
           "text": "Set the Platform OE testing start date to last Wednesday, October 21, 2026. The end remains December 18, 2026. With both dates supplied, remove this bucket from current escalation/Ale-kazam; use the separate Codex dashboard for detailed OE progress and workflows.",
           "applicationNote": "Last Wednesday is resolved relative to October 26 in America/Los_Angeles. The former TBD start is superseded. Existing owners, FRM lead/priority fields and the December 18 end are unchanged. This schedule update does not assert testing completion or resolution of the previously reported TOD confirmation. No escalation pause is needed; normal date and risk checks remain active."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 24, 29, 40: PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas Compute TOE in progress 1. Github OE controls becomes relevant if CI, SFDC repos have not moved\n2. We will get the PBC out;",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. The TPM-subscriber confirmation is completed, not the OE testing. Compute TOE is described as normal business with no escalation. The October 21–December 18 testing dates remain."
         }
       ],
       "statusOverride": "Waiting on FRM",
-      "endOverride": "2026-12-18"
+      "endOverride": "2026-12-18",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 24,
+          "addedBy": "Sonu",
+          "category": "Update",
+          "description": "PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas",
+          "ownership": "Sandeep, Adi",
+          "currentDRI": "Sandeep",
+          "priority": "High",
+          "status": "Completed",
+          "deadline": "2026-10-28",
+          "notes": "Yes let us add TPMs",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 29,
+          "addedBy": "PwC",
+          "category": "Evidences request",
+          "description": "Compute TOE in progress",
+          "ownership": "Avi",
+          "currentDRI": "",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-10-27",
+          "notes": "Normal business, no escalation",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 40,
+          "addedBy": "Sonu",
+          "category": "Clarification / Follow up",
+          "description": "1. Github OE controls becomes relevant if CI, SFDC repos have not moved\n2. We will get the PBC out;",
+          "ownership": "Avi",
+          "currentDRI": "Avi",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-11-06",
+          "notes": "",
+          "links": ""
+        }
+      ],
+      "followUpDate": "2026-11-06",
+      "escalationAction": "Confirm CI/SFDC repository migration and issue the relevant GitHub OE PBC by November 6; detailed OE workflows stay in the separate dashboard."
     },
     "58": {
       "userAdded": true,
@@ -2079,9 +2716,52 @@
           "recordedOn": "2026-10-26",
           "text": "Correct the AWS end date from the invalid 11/31 to November 30, 2026.",
           "applicationNote": "The October 26 start is unchanged. The invalid workbook date remains available as original context."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 19, 22: AWS Platform Control readiness - AWS Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Controls are already in Optro IT.AWS.CM.27.01 Direct Changes to Data or DB schema\nIs this conrol up and are we good to create evidence request for these? What is expected timeline?",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Six CUECs are described as a starting point, not an agreed final control count. The October 26–November 30 project window is retained."
         }
       ],
-      "endOverride": "2026-11-30"
+      "endOverride": "2026-11-30",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 19,
+          "addedBy": "Sonu",
+          "category": "Approach / Scope confirmation",
+          "description": "AWS Platform Control readiness - AWS Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Controls are already in Optro",
+          "ownership": "Avi",
+          "currentDRI": "Avi",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "TBD",
+          "notes": "Avi to confrim on the Aws Engineering team poc. Either we start with WT or go ahead to request evidence in Optro.\nPwC - Starting point - 6 CUECs \nAvi will provide his understanding and from there we are going to assess the controls applicables - TBD LSPM",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 22,
+          "addedBy": "Sonu",
+          "category": "Approach / Scope confirmation",
+          "description": "IT.AWS.CM.27.01 Direct Changes to Data or DB schema\nIs this conrol up and are we good to create evidence request for these? What is expected timeline?",
+          "ownership": "Avi",
+          "currentDRI": "Avi",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "2026-10-23",
+          "notes": "",
+          "links": ""
+        }
+      ],
+      "statusOverride": "Waiting on FRM",
+      "followUpDate": "2026-10-23",
+      "escalationAction": "Avi: confirm the AWS engineering contact and readiness/evidence request for IT.AWS.CM.27.01, overdue October 23, while protecting November 30."
     },
     "22": {
       "notes": [
@@ -2091,10 +2771,36 @@
           "recordedOn": "2026-10-26",
           "text": "Monorepo Automated Account Classification remains on track for completion on October 31, 2026.",
           "applicationNote": "The workbook end of October 30 is updated to October 31. This is the new control, separate from completed Monorepo Inventory."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 25: Monorepo control evidence",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. This is the new-control evidence follow-up, separate from the completed inventory baseline. The October 22 offline session was done; the October 27 additional-evidence clarification was still described as pending. The October 31 project end is retained."
         }
       ],
       "endOverride": "2026-10-31",
-      "statusOverride": "On track"
+      "statusOverride": "In progress",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 25,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "Monorepo control evidence",
+          "ownership": "Avi",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "2026-10-22",
+          "notes": "10/27: meeting with CO to clarify and live observe some additional evidence\n\n10/22: (Done offline) A quick live session with Avi to look at evidence for additional info (as PwC does not have access).\nIt looks like we are missing some key fields from the screenshots Avi shared, but there may be additional information we can see from the source CO provided.",
+          "links": ""
+        }
+      ],
+      "followUpDate": "2026-10-22",
+      "escalationAction": "Layla / Avi: resolve the missing Monorepo control-evidence fields with the control owner and confirm completion or a revised date after the October 31 target."
     },
     "43": {
       "notes": [
@@ -2198,6 +2904,30 @@
           "recordedOn": "2026-10-26",
           "text": "To escalate — due past October 16, 2026: Urminder to clarify materiality or the usage path of ChatGPT tokenization and confirm the control owner.",
           "applicationNote": "Apply this clarification to the distinct ChatGPT Tokenizer with Astra Model activity. October 16 is the overdue FRM decision deadline, not a supplied replacement for the October 30 project end. The API Tokenization activity and its October 23 end are unchanged. Mayra remains the PwC owner and Urminder the FRM lead."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 6: Clarify materiality or usage path of ChatGPT tokenization + control owner",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below."
+        }
+      ],
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 6,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "Clarify materiality or usage path of ChatGPT tokenization + control owner",
+          "ownership": "Urminder",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "Past Due",
+          "deadline": "2026-10-16",
+          "notes": "",
+          "links": ""
         }
       ]
     },
@@ -2213,8 +2943,607 @@
           "recordedOn": "2026-11-02",
           "text": "Add Azure Platform to the prioritization list, owned by Sonu Kumar, with a December 4, 2026 end date. Newly scoped work includes 8 controls and 200 reported hours.",
           "applicationNote": "This is a new Platform activity, separate from the Azure line previously removed from the workbook. Start date, FRM lead, priorities and activity type were not provided. The 200 hours describe the reported scope; no actual hours, remaining hours, approved allocation or baseline-plan classification is inferred."
+        },
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 20: Azure Platform Control readiness - Azure Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Cotrols are yet not in Optro and waiting for a go ahead from Avi",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Avi is the explicitly recorded Azure-readiness owner/current DRI and is added as FRM lead. The 8 controls, 200 hours, Sonu assignment, staffing and December 4 project end from the user update are retained."
+        }
+      ],
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 20,
+          "addedBy": "Sonu",
+          "category": "Approach / Scope confirmation",
+          "description": "Azure Platform Control readiness - Azure Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Cotrols are yet not in Optro and waiting for a go ahead from Avi",
+          "ownership": "Avi",
+          "currentDRI": "Avi",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "TBD",
+          "notes": "Avi to confrim on the Azure Engineering team poc. Either we start with WT or go ahead to request evidence in Optro.",
+          "links": ""
+        }
+      ],
+      "frmLeadsOverride": "Avi",
+      "statusOverride": "Waiting on FRM",
+      "escalationAction": "Avi: identify the Azure engineering evidence contact and give the go-ahead for Optro/control walkthroughs; confirm the project start against December 4."
+    },
+    "6": {
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 12: Follow up on wording of the 3 controls mentioning CosmosDB.",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below."
+        }
+      ],
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 12,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "Follow up on wording of the 3 controls mentioning CosmosDB.",
+          "ownership": "Ash",
+          "currentDRI": "",
+          "priority": "Low",
+          "status": "Hold",
+          "deadline": "TBD",
+          "notes": "Habitat only? Confirmation with control owners? Awaiting DT feedback on control wording.",
+          "links": ""
         }
       ]
+    },
+    "15": {
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 17: PBC - Commitment Manager - TX",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. The Commitment Manager transaction PBC is marked completed and support is provided by Arthur Gu. This does not establish completion of the overall project."
+        }
+      ],
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 17,
+          "addedBy": "PwC",
+          "category": "Evidences request",
+          "description": "PBC - Commitment Manager - TX",
+          "ownership": "Urminder, Ash",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "Completed",
+          "deadline": "2026-10-16",
+          "notes": "AM: Provided by Arthur Gu via Slack on #blueprint-fineng. To coordinate pulling the support down with FRM",
+          "links": ""
+        }
+      ]
+    },
+    "7": {
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Action Items rows 31, 34, 40: SFDC Repo Provisioning and Branch protection PBC is pending - (https://openai.auditboardapp.com/workspace/9/tasks/workstream/3250\nhttps://openai.auditboardapp.com/workspace/9/tasks/workstream/3252) For Salesforce, Local Login is applicable however, our SSO control wording giving incorrect impression, we should update it. \nCurrent Description - Salesforce Security Groups are only authenticated via Single Sign On (SSO).\nProposed Description - User authentication is performed through SSO, except where local authentication is permitted by the applicable Salesforce profile configuration. 1. Github OE controls becomes relevant if CI, SFDC repos have not moved\n2. We will get the PBC out;",
+          "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. The local-login/SSO wording action is completed; the SFDC repository provisioning/branch-protection evidence request remains open. GitHub OE relevance is conditional on repositories not moving. The Salesforce project is not marked complete."
+        }
+      ],
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 31,
+          "addedBy": "Sonu",
+          "category": "Evidences request",
+          "description": "SFDC Repo Provisioning and Branch protection PBC is pending - (https://openai.auditboardapp.com/workspace/9/tasks/workstream/3250\nhttps://openai.auditboardapp.com/workspace/9/tasks/workstream/3252)",
+          "ownership": "Sudhika",
+          "currentDRI": "Sudhika",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "2026-11-06",
+          "notes": "Request has been assigned to Mel as Sudhika also does not have access\nEvidence is pending",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 34,
+          "addedBy": "Sonu",
+          "category": "Clarification / Follow up",
+          "description": "For Salesforce, Local Login is applicable however, our SSO control wording giving incorrect impression, we should update it. \nCurrent Description - Salesforce Security Groups are only authenticated via Single Sign On (SSO).\nProposed Description - User authentication is performed through SSO, except where local authentication is permitted by the applicable Salesforce profile configuration.",
+          "ownership": "Sudhika",
+          "currentDRI": "Sudhika",
+          "priority": "Low",
+          "status": "Completed",
+          "deadline": "2026-10-31",
+          "notes": "",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 40,
+          "addedBy": "Sonu",
+          "category": "Clarification / Follow up",
+          "description": "1. Github OE controls becomes relevant if CI, SFDC repos have not moved\n2. We will get the PBC out;",
+          "ownership": "Avi",
+          "currentDRI": "Avi",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-11-06",
+          "notes": "",
+          "links": ""
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-11-06",
+      "escalationAction": "Sonu / Sudhika: coordinate Mel’s pending SFDC repository evidence by November 6 and confirm whether CI/SFDC repo migration makes GitHub OE controls relevant."
+    },
+    "5": {
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "The completed 18-UAR Q2 baseline is retained. Action Items row 28 identifies separate ongoing ToD design remediation and AWS/Azure UAR scope, now tracked as a new workstream.",
+          "applicationNote": "A completed baseline is not reopened solely because a separate remediation/uplift action remains open."
+        }
+      ]
+    },
+    "61": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 9,
+          "addedBy": "PwC",
+          "category": "New project",
+          "description": "Obtain an update on Project Galaxy.",
+          "ownership": "Ash, Urminder",
+          "currentDRI": "",
+          "priority": "Medium",
+          "status": "Hold",
+          "deadline": "TBD",
+          "notes": "May impact the SKU Manager/Glass work. May impact controls touching Salesforce",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 9. Obtain an update on Project Galaxy.",
+          "applicationNote": "No named PwC owner is recorded. Ash and Urminder are the tracker action owners; source notes describe possible impacts on SKU Manager/Glass and Salesforce. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "On hold",
+      "escalationAction": "Ash / Urminder: confirm the Galaxy update, project scope, PwC owner and schedule, including possible Glass/Salesforce impacts."
+    },
+    "62": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 11,
+          "addedBy": "PwC",
+          "category": "Uplift work",
+          "description": "Follow up on the key monorepo file inventory; obtain errors + SDLC.",
+          "ownership": "Ash, PwC",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "In Progress",
+          "deadline": "2026-10-27",
+          "notes": "Inventory marked done. DT requested the key monorepo file inventory (10/05); PwC working on the framework for going forward.",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 11. Follow up on the key monorepo file inventory; obtain errors + SDLC.",
+          "applicationNote": "PwC coordination is carried forward from the existing Monorepo Inventory assignment to Mayra. The inventory baseline remains completed; this new workstream tracks the ongoing framework/errors/SDLC follow-up. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-10-27",
+      "escalationAction": "Mayra / Ash: finish the Monorepo framework, errors and SDLC follow-up; confirm the next milestone after the October 27 action deadline."
+    },
+    "63": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 13,
+          "addedBy": "FRM",
+          "category": "Update",
+          "description": "Discuss BAM, BES, etc. with Deloitte for existing and new control descriptions.",
+          "ownership": "PwC",
+          "currentDRI": "",
+          "priority": "Low",
+          "status": "In Progress",
+          "deadline": "2026-12-20",
+          "notes": "PwC to update control descriptions in AB to avoid acronyms",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 13. Discuss BAM, BES, etc. with Deloitte for existing and new control descriptions.",
+          "applicationNote": "The tracker assigns the action to PwC without naming a person. No individual PwC owner or FRM lead is inferred. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-12-20",
+      "escalationAction": "Assign a PwC lead and confirm the control-description uplift scope and project dates; the tracker action is due December 20."
+    },
+    "64": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 14,
+          "addedBy": "FRM / PwC",
+          "category": "Approach / Scope confirmation",
+          "description": "Discuss ToE / LMD approach: coverage cutoff, testing timing and extent, and 20% of DT sampling.",
+          "ownership": "Ash, Urminder",
+          "currentDRI": "",
+          "priority": "High",
+          "status": "Past Due",
+          "deadline": "2026-10-20",
+          "notes": "To discuss after get the confirmation of the ToD reassessment work.\nAM 10/23 - FRM to come back on approach for ToD reassessment for controls not selected for ToE.",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 14. Discuss ToE / LMD approach: coverage cutoff, testing timing and extent, and 20% of DT sampling.",
+          "applicationNote": "This is the cross-project methodology decision on coverage cutoff, timing, extent and 20% of Deloitte sampling. It depends on the ToD reassessment conclusion and does not duplicate the Platform OE execution buckets or their hours. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "Waiting on FRM",
+      "followUpDate": "2026-10-20",
+      "escalationAction": "Ash / Urminder: confirm the ToE/LMD coverage, timing, extent and sampling approach after the ToD conclusion; the October 20 action is overdue."
+    },
+    "65": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 15,
+          "addedBy": "PwC",
+          "category": "Approach / Scope confirmation",
+          "description": "Identify the Rockset job relevant to the ITD for OE testing.",
+          "ownership": "Ash, Urminder",
+          "currentDRI": "",
+          "priority": "Medium",
+          "status": "Completed",
+          "deadline": "2026-10-23",
+          "notes": "Needs to get confirmation from FinEng the job monitoring - B2B.09.83",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 27,
+          "addedBy": "Sonu",
+          "category": "Update",
+          "description": "For Rockset Comp Ops Monitoring control, our ToD understanding and latest discussion with CO confirms that all rockset jobs are running in Chronosphere; Should we defer the testing given Chronosphere conclusion or else we will need the respective  Job to proceed with testing; \n\nBP.OAI-GLB.ADS.04.05 — Habitat/Habidex/Rockset Indexing\nBP.OAI-GLB.B2B.09.83 — Quipu to Rockset Sync",
+          "ownership": "Avi",
+          "currentDRI": "Mayra",
+          "priority": "Low",
+          "status": "In Progress",
+          "deadline": "2026-10-31",
+          "notes": "",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 15, 27. Identify the Rockset job relevant to the ITD for OE testing. For Rockset Comp Ops Monitoring control, our ToD understanding and latest discussion with CO confirms that all rockset jobs are running in Chronosphere; Should we defer the testing given Chronosphere conclusion or else we will need the respective  Job to proceed with testing; \n\nBP.OAI-GLB.ADS.04.05 — Habitat/Habidex/Rockset Indexing\nBP.OAI-GLB.B2B.09.83 — Quipu to Rockset Sync",
+          "applicationNote": "Current DRI Mayra in row 27 is matched to Mayra Mendoza. The completed Rockset-job identification action in row 15 does not close the separate pending Chronosphere/testing approach decision in row 27. Two referenced control IDs are retained without inventing a finalized control count. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-10-31",
+      "escalationAction": "Mayra / Avi: decide whether to defer Rockset monitoring testing based on Chronosphere or identify the jobs needed for the two named controls; the October 31 action is overdue."
+    },
+    "66": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 28,
+          "addedBy": "Sonu",
+          "category": "Clarification / Follow up",
+          "description": "1. AM Based UAR ToD Remediation Testing\n2. AWS and Azure Platforms are in-scope for UAR;",
+          "ownership": "Chandana",
+          "currentDRI": "Chandana",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-10-31",
+          "notes": "A kind reminder on the 18 AM based UAR (design issue) to check when those could be ready; Is is possible to prioritise those;",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 28. 1. AM Based UAR ToD Remediation Testing\n2. AWS and Azure Platforms are in-scope for UAR;",
+          "applicationNote": "Sonu remains the PwC coordinator from the existing 18 AM-based UAR assignment. Chandana is the tracker DRI. The completed Q2 baseline remains completed; this is the separately identified design-remediation follow-up and AWS/Azure scope. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-10-31",
+      "escalationAction": "Sonu / Chandana: prioritize the 18 AM-based UAR ToD remediations and confirm AWS/Azure UAR coverage and revised milestones after October 31."
+    },
+    "67": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 30,
+          "addedBy": "FRM / PwC",
+          "category": "Clarification / Follow up",
+          "description": "DCGM scoping",
+          "ownership": "Avi",
+          "currentDRI": "",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-10-27",
+          "notes": "10/27: PwC to connect with Avi to clarify on scoping decision and what it means",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 30. DCGM scoping",
+          "applicationNote": "Avi is the action owner. A named PwC project owner and project start/end dates were not provided. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-10-27",
+      "escalationAction": "Avi: clarify DCGM scoping and its implications, assign the PwC owner and agree dates; the October 27 action is overdue."
+    },
+    "68": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 38,
+          "addedBy": "Sonu",
+          "category": "Clarification / Follow up",
+          "description": "For the access expiration management control, we propose to tweak the Control wording -  example - (FiveTran and Rockset)\nControl Description  - Access to FiveTran is configured to expire within a defined period, not exceeding 7 days, and requires re-approval.\nProposed Description - Access to FiveTran is configured to expire within a defined period, not exceeding 7 days.",
+          "ownership": "Avi",
+          "currentDRI": "Avi",
+          "priority": "Low",
+          "status": "In Progress",
+          "deadline": "2026-10-31",
+          "notes": "",
+          "links": ""
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 39,
+          "addedBy": "Sonu",
+          "category": "Clarification / Follow up",
+          "description": "FiveTran and Rockset - Access Expiration mgmt Control testing is on hold as we do not have complete listing of AM groups; Is it possible to expedite ToD UAR for these as we expect the complete list in it?",
+          "ownership": "Avi, Chandana",
+          "currentDRI": "Chandana",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-10-31",
+          "notes": "",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 38, 39. For the access expiration management control, we propose to tweak the Control wording -  example - (FiveTran and Rockset)\nControl Description  - Access to FiveTran is configured to expire within a defined period, not exceeding 7 days, and requires re-approval.\nProposed Description - Access to FiveTran is configured to expire within a defined period, not exceeding 7 days. FiveTran and Rockset - Access Expiration mgmt Control testing is on hold as we do not have complete listing of AM groups; Is it possible to expedite ToD UAR for these as we expect the complete list in it?",
+          "applicationNote": "Combine the related wording and blocked-testing actions as one workstream. Sonu added the actions; the tracker names Avi/Chandana as owners/DRIs and does not identify an assigned PwC owner. Preserve that distinction. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "On hold",
+      "followUpDate": "2026-10-31",
+      "escalationAction": "Avi / Chandana: confirm the access-expiration wording and provide the complete AM-group inventory so Fivetran/Rockset testing can resume."
+    },
+    "69": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 41,
+          "addedBy": "PwC",
+          "category": "Evidences request",
+          "description": "TCM.03.09: Goldman Sachs Banking Portal Dual Administration;\nNeed the remaining screenshots",
+          "ownership": "Sudhika",
+          "currentDRI": "Sudhika",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-11-06",
+          "notes": "11/2 - Escalation needed from FRM\n- (10/13) Iskyas Amare requested the remaining screenshots from treasury team via 'blueprint-treasury' channel\n- (10/14) Jane Ro requested Max Bunge get admin access to perform the remaining procedures\n- (10/19) Iskyas Amare followed up in the 'blueprint-treasury' channel to see if Max got admin access and can provide the remaining screenshots\n- (10/19) Max Bunge noted he still doesnt have admin access and asked Jane Ro to get those ss's\n- (10/28) Iskyas Amare followed up with Max Bunge via 'blueprint-treasury' channel and Max responded saying he still doesn't have access and asked that either Jane or Chuck help him get admin access. \n\nOutstanding item since 10/13",
+          "links": "https://openai.auditboardapp.com/workspace/10/tasks/workstream/2876"
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 41. TCM.03.09: Goldman Sachs Banking Portal Dual Administration;\nNeed the remaining screenshots",
+          "applicationNote": "The source explicitly requests FRM escalation on November 2. Iskyas Amare is named in the follow-up history; a PwC project owner is not explicitly assigned. Keep the outstanding screenshots/admin-access dependency visible. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-11-06",
+      "escalationAction": "Sudhika: escalate the outstanding Goldman Sachs admin-access/screenshots dependency with Treasury; confirm delivery for the November 6 action deadline.",
+      "escalationReason": "The November 2 tracker notes explicitly request FRM escalation for outstanding evidence/configuration dependencies."
+    },
+    "70": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 42,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "BP.OAI-GLB.PTP.03.01: 2 Way Match Configuration (Zip)\nNeed remaining evidence to close out Deloitte follow up question",
+          "ownership": "Sudhika",
+          "currentDRI": "Sudhika",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-11-06",
+          "notes": "11/2 - Escalation needed from FRM [Discussions have occurred in \"blueprint-p2p\" Slack channel] \n- (10/19) Matthew Moy reached out to Xinyu Zhao (Deloitte) via Optro comment section on 10/19 asking to clarify the question asked on follow up request: Task #3199 - Control\n- (10/23) Xinyu Zhao (Deloitte) clarified their response on 10/23 via Optro comment section \n- (10/26) Matthew Moy responded to Xinyu saying he will reach out to the control owner on 10/26 via the Optro comment section\n- (10/26) Matthew Moy messaged Joe Wilson in the 'blueprint-p2p' slack channel on 10/26 asking to provide workflow logic evidence showing multiple workflows\n- (10/27) On 10/27, Joe Wilson said he would provide the evidence we are requesting",
+          "links": "https://openai.auditboardapp.com/workspace/9/tasks/workstream/3199"
+        },
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 43,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "BP.OAI-GLB.PTP.02.01: PO Approval Configuration (Zip)\nPending response from Deloitte to our clarifying question",
+          "ownership": "Sudhika",
+          "currentDRI": "Sudhika",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-11-06",
+          "notes": "11/2: Escalation needed from FRM [Discussions have occurred in \"blueprint-p2p\" Slack channel]\n- Matthew Moy reached out to Joe Wilson via P2P channel initially on 10/19. \n- Joe Wilson mentioned on 10/19 evidence would be provided end of week.\n- On 10/26, Matthew Moy followed-up with Joe, and Joe mentioned the initial configuration was completed and then they will test. \n- On 10/27, Joe Wilson mentioned the change is not ready for deployment yet.\n- On 10/28, Matthew Moy asked for ETA on change being deployed so we can respond back to DT's observation / question, but no response.\n- On 11/2, Matthew Moy again followed up with Joe Wilson.",
+          "links": "https://openai.auditboardapp.com/workspace/9/tasks/workstream/3023"
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 42, 43. BP.OAI-GLB.PTP.03.01: 2 Way Match Configuration (Zip)\nNeed remaining evidence to close out Deloitte follow up question BP.OAI-GLB.PTP.02.01: PO Approval Configuration (Zip)\nPending response from Deloitte to our clarifying question",
+          "applicationNote": "Group the two distinct Zip control follow-ups under one project. Matthew Moy is named in the follow-up history; a PwC project owner is not explicitly assigned. The source requests FRM escalation for both actions on November 2. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-11-06",
+      "escalationAction": "Sudhika: escalate the Zip evidence/configuration dependencies with the control owner and confirm the outstanding Deloitte responses by November 6.",
+      "escalationReason": "The November 2 tracker notes explicitly request FRM escalation for outstanding evidence/configuration dependencies."
+    },
+    "71": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 44,
+          "addedBy": "PwC",
+          "category": "Clarification / Follow up",
+          "description": "PBC Request | #IT.VDLY.CO.35.02: Job Monitoring and Incident Management\nPending additional evidence from management.\n\n1. JIRA Ticket EWF-489 – “PCR 45: FTR Failure - Report Failure”\nThe ticket was created on August 18, 2026, last updated on August 25, 2026, and was noted as being in “Waiting for Support” status. Could you please confirm whether this ticket has subsequently been closed? If closed, please provide a PDF copy of the completed/closed ticket for our documentation and testing purposes.\n\n2. VNDLY Integration File Types\nDuring the walkthrough, we noted that the VNDLY dashboard includes various report types, such as open jobs and marketing reports, which are not considered actual integrations. Could you please provide a filtered listing of the true integration file types/jobs that are subject to the Job Monitoring process, excluding standard reports or other non-integration items along with that for each in-scope integration job, please also provide the job/file type name, import/export direction, and scheduled frequency ?",
+          "ownership": "Brett Klinker",
+          "currentDRI": "Brett Klinker",
+          "priority": "Medium",
+          "status": "In Progress",
+          "deadline": "2026-11-06",
+          "notes": "",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 44. PBC Request | #IT.VDLY.CO.35.02: Job Monitoring and Incident Management\nPending additional evidence from management.\n\n1. JIRA Ticket EWF-489 – “PCR 45: FTR Failure - Report Failure”\nThe ticket was created on August 18, 2026, last updated on August 25, 2026, and was noted as being in “Waiting for Support” status. Could you please confirm whether this ticket has subsequently been closed? If closed, please provide a PDF copy of the completed/closed ticket for our documentation and testing purposes.\n\n2. VNDLY Integration File Types\nDuring the walkthrough, we noted that the VNDLY dashboard includes various report types, such as open jobs and marketing reports, which are not considered actual integrations. Could you please provide a filtered listing of the true integration file types/jobs that are subject to the Job Monitoring process, excluding standard reports or other non-integration items along with that for each in-scope integration job, please also provide the job/file type name, import/export direction, and scheduled frequency ?",
+          "applicationNote": "Brett Klinker is the recorded action owner/DRI. The tracker does not specify whether that is a PwC or FRM project assignment. Retain his name in action context and leave project-role fields unconfirmed. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "statusOverride": "In progress",
+      "followUpDate": "2026-11-06",
+      "escalationAction": "Brett Klinker: provide the closed JIRA ticket evidence and filtered integration-job population/frequencies for VNDLY by November 6; confirm PwC/FRM project ownership."
+    },
+    "72": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-02",
+      "trackerActions": [
+        {
+          "fileName": "Follow-up Tracker .xlsx",
+          "tabName": "Action Items",
+          "recordedOn": "2026-11-02",
+          "row": 8,
+          "addedBy": "PwC",
+          "category": "Update",
+          "description": "Check the response on SKU Manager / Glass migration and UAR.",
+          "ownership": "PwC",
+          "currentDRI": "",
+          "priority": "Low",
+          "status": "Completed",
+          "deadline": "2026-10-16",
+          "notes": "Migrated to Glass; nothing in Retool. No UAR since UI is out of scope. TDC: waiting for Joel’s SKU Manager confirmation; @Ankita.",
+          "links": ""
+        }
+      ],
+      "notes": [
+        {
+          "source": "Follow-up Tracker",
+          "recordedOn": "2026-11-02",
+          "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 8. Check the response on SKU Manager / Glass migration and UAR.",
+          "applicationNote": "The tracker marks this response/scope follow-up completed and says the migration is to Glass with the UI out of UAR scope. Notes still mention Joel confirmation; retain that caveat. This is a completed follow-up record, not a claim that all platform controls were tested. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        }
+      ],
+      "closureReason": "Scope follow-up marked completed in tracker"
     }
   },
   "changeLog": [
@@ -2944,7 +4273,388 @@
         "discussion"
       ],
       "discussion": "Finish the change-management evidence update and confirm closure or a revised end; October 31 is overdue."
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 5,
+      "activity": "18 UAR Q2 testing for AM based campaign and \nQ3 UARs Uplift across 18 Systems based on Q2 findings/ C&A Issues",
+      "title": "18 UAR Q2 testing for AM based campaign and  — tracker reconciliation",
+      "detail": "The completed 18-UAR Q2 baseline is retained. Action Items row 28 identifies separate ongoing ToD design remediation and AWS/Azure UAR scope, now tracked as a new workstream.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Chandana",
+      "flags": []
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 6,
+      "activity": "CosmosDB ITGC - Access Roles and Management Discovery for Application ",
+      "title": "CosmosDB ITGC - Access Roles and Management Discovery for Application  — tracker reconciliation",
+      "detail": "Action Items rows 12: Follow up on wording of the 3 controls mentioning CosmosDB.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 7,
+      "activity": "Salesforce Controls (Vendor Managed Releases, Change Management) and Saleforce Repo scoping consideration",
+      "title": "Salesforce Controls (Vendor Managed Releases, Change Management) and Saleforce Repo scoping consideration — tracker reconciliation",
+      "detail": "Action Items rows 31, 34, 40: SFDC Repo Provisioning and Branch protection PBC is pending - (https://openai.auditboardapp.com/workspace/9/tasks/workstream/3250\nhttps://openai.auditboardapp.com/workspace/9/tasks/workstream/3252) For Salesforce, Local Login is applicable however, our SSO control wording giving incorrect impression, we should update it. \nCurrent Description - Salesforce Security Groups are only authenticated via Single Sign On (SSO).\nProposed Description - User authentication is performed through SSO, except where local authentication is permitted by the applicable Salesforce profile configuration. 1. Github OE controls becomes relevant if CI, SFDC repos have not moved\n2. We will get the PBC out;",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 12,
+      "activity": "API Tokenization with Astra Model",
+      "title": "API Tokenization with Astra Model — tracker reconciliation",
+      "detail": "Action Items rows 18: API Tokenization Deloitte Follow-up",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 13,
+      "activity": "ChatGPT Tokenizer with Astra Model",
+      "title": "ChatGPT Tokenizer with Astra Model — tracker reconciliation",
+      "detail": "Action Items rows 6: Clarify materiality or usage path of ChatGPT tokenization + control owner",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 15,
+      "activity": "Commitment manager (also revenue, ChatGPT moving to pay as you go billing) (WT Thursday)",
+      "title": "Commitment manager (also revenue, ChatGPT moving to pay as you go billing) (WT Thursday) — tracker reconciliation",
+      "detail": "Action Items rows 17: PBC - Commitment Manager - TX",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": []
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 16,
+      "activity": "Revenue new controls\n- Apple RevShare moving to AutoRecon Platform\n",
+      "title": "Revenue new controls — tracker reconciliation",
+      "detail": "Action Items rows 4, 16: Confirm the conclusion of the ToD reassessment. DT follow-up on REV.04.01 support provided",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder, Ash",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 17,
+      "activity": "IT Ops (Chronosphere) Scoping and Discovery",
+      "title": "IT Ops (Chronosphere) Scoping and Discovery — tracker reconciliation",
+      "detail": "Action Items rows 5, 10: Clarify synthetic monitoring implications for Chronosphere. Follow up on Chronosphere job-monitoring and other monitoring.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 21,
+      "activity": "Monorepo Inventory",
+      "title": "Monorepo Inventory — tracker reconciliation",
+      "detail": "The completed Monorepo Inventory baseline is retained. Action Items row 11 explicitly says inventory is done while the errors/SDLC framework follow-up is still in progress; that follow-up is now tracked separately.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Ash",
+      "flags": []
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 22,
+      "activity": "Monorepo new control (Automated Account Classification)",
+      "title": "Monorepo new control (Automated Account Classification) — tracker reconciliation",
+      "detail": "Action Items rows 25: Monorepo control evidence",
+      "pwcOwners": "Layla Yang",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 27,
+      "activity": "Monitoring (Airflow/Fivetran/Azure scheduler/Spark/Grafana/PagerDuty) on Compute jobs/interfaces/ITACs - additional followup and documentation to address Deloitte questions/adding the same aspects in review",
+      "title": "Monitoring (Airflow/Fivetran/Azure scheduler/Spark/Grafana/PagerDuty) on Compute jobs/interfaces/ITACs - additional followup and documentation to address Deloitte questions/adding the same aspects in review — tracker reconciliation",
+      "detail": "Action Items rows 26: TOE approach",
+      "pwcOwners": "Layla Yang",
+      "frmLeads": "Avi",
+      "flags": []
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 34,
+      "activity": "Project Keystone - Understanding What Happened, What Migrated, Architecture Changes before SDLC testing can be done (changes from intiial understanding)",
+      "title": "Project Keystone - Understanding What Happened, What Migrated, Architecture Changes before SDLC testing can be done (changes from intiial understanding) — tracker reconciliation",
+      "detail": "Action Items rows 21, 33: Update for SDLC - Keystone - PwC working on Memo; As par of Project Keystone, multiple automate business controls might have been impacted. As part of the SDLC memo, Ben is identifying the impacted controls and next steps if any;",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 36,
+      "activity": "Stripe",
+      "title": "Stripe — tracker reconciliation",
+      "detail": "Action Items rows 7: Confirm Stripe change timing and the needed walkthrough.",
+      "pwcOwners": "Joaquin Garcia Mayra Mendoza",
+      "frmLeads": "Ash",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 40,
+      "activity": "AWS",
+      "title": "AWS — tracker reconciliation",
+      "detail": "Action Items rows 19, 22: AWS Platform Control readiness - AWS Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Controls are already in Optro IT.AWS.CM.27.01 Direct Changes to Data or DB schema\nIs this conrol up and are we good to create evidence request for these? What is expected timeline?",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE Testing — ITACs — tracker reconciliation",
+      "detail": "Action Items rows 24, 29: PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas Compute TOE in progress",
+      "pwcOwners": "Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 57,
+      "activity": "Platform OE Testing — ITGCs",
+      "title": "Platform OE Testing — ITGCs — tracker reconciliation",
+      "detail": "Action Items rows 24, 29, 40: PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas Compute TOE in progress 1. Github OE controls becomes relevant if CI, SFDC repos have not moved\n2. We will get the PBC out;",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 60,
+      "activity": "Azure Platform",
+      "title": "Azure Platform — tracker reconciliation",
+      "detail": "Action Items rows 20: Azure Platform Control readiness - Azure Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Cotrols are yet not in Optro and waiting for a go ahead from Avi",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 61,
+      "activity": "Project Galaxy",
+      "title": "NEW — Project Galaxy",
+      "detail": "New project/workstream from Action Items rows 9. No named PwC owner is recorded. Ash and Urminder are the tracker action owners; source notes describe possible impacts on SKU Manager/Glass and Salesforce.",
+      "pwcOwners": "",
+      "frmLeads": "Ash, Urminder",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 62,
+      "activity": "Monorepo inventory framework — errors and SDLC uplift",
+      "title": "NEW — Monorepo inventory framework — errors and SDLC uplift",
+      "detail": "New project/workstream from Action Items rows 11. PwC coordination is carried forward from the existing Monorepo Inventory assignment to Mayra. The inventory baseline remains completed; this new workstream tracks the ongoing framework/errors/SDLC follow-up.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Ash",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 63,
+      "activity": "Control-description uplift — BAM / BES acronyms",
+      "title": "NEW — Control-description uplift — BAM / BES acronyms",
+      "detail": "New project/workstream from Action Items rows 13. The tracker assigns the action to PwC without naming a person. No individual PwC owner or FRM lead is inferred.",
+      "pwcOwners": "",
+      "frmLeads": "",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 64,
+      "activity": "ToE / LMD approach and coverage confirmation",
+      "title": "NEW — ToE / LMD approach and coverage confirmation",
+      "detail": "New project/workstream from Action Items rows 14. This is the cross-project methodology decision on coverage cutoff, timing, extent and 20% of Deloitte sampling. It depends on the ToD reassessment conclusion and does not duplicate the Platform OE execution buckets or their hours.",
+      "pwcOwners": "",
+      "frmLeads": "Ash, Urminder",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 65,
+      "activity": "Rockset compute-ops monitoring — testing approach",
+      "title": "NEW — Rockset compute-ops monitoring — testing approach",
+      "detail": "New project/workstream from Action Items rows 15, 27. Current DRI Mayra in row 27 is matched to Mayra Mendoza. The completed Rockset-job identification action in row 15 does not close the separate pending Chronosphere/testing approach decision in row 27. Two referenced control IDs are retained without inventing a finalized control count.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Avi",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 66,
+      "activity": "AM-based UAR — ToD remediation and AWS / Azure scope",
+      "title": "NEW — AM-based UAR — ToD remediation and AWS / Azure scope",
+      "detail": "New project/workstream from Action Items rows 28. Sonu remains the PwC coordinator from the existing 18 AM-based UAR assignment. Chandana is the tracker DRI. The completed Q2 baseline remains completed; this is the separately identified design-remediation follow-up and AWS/Azure scope.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Chandana",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 67,
+      "activity": "DCGM scoping",
+      "title": "NEW — DCGM scoping",
+      "detail": "New project/workstream from Action Items rows 30. Avi is the action owner. A named PwC project owner and project start/end dates were not provided.",
+      "pwcOwners": "",
+      "frmLeads": "Avi",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 68,
+      "activity": "Fivetran / Rockset — access-expiration controls",
+      "title": "NEW — Fivetran / Rockset — access-expiration controls",
+      "detail": "New project/workstream from Action Items rows 38, 39. Combine the related wording and blocked-testing actions as one workstream. Sonu added the actions; the tracker names Avi/Chandana as owners/DRIs and does not identify an assigned PwC owner. Preserve that distinction.",
+      "pwcOwners": "",
+      "frmLeads": "Avi, Chandana",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 69,
+      "activity": "Goldman Sachs Banking Portal — dual administration (TCM.03.09)",
+      "title": "NEW — Goldman Sachs Banking Portal — dual administration (TCM.03.09)",
+      "detail": "New project/workstream from Action Items rows 41. The source explicitly requests FRM escalation on November 2. Iskyas Amare is named in the follow-up history; a PwC project owner is not explicitly assigned. Keep the outstanding screenshots/admin-access dependency visible.",
+      "pwcOwners": "",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 70,
+      "activity": "Zip — two-way match and PO approval follow-ups",
+      "title": "NEW — Zip — two-way match and PO approval follow-ups",
+      "detail": "New project/workstream from Action Items rows 42, 43. Group the two distinct Zip control follow-ups under one project. Matthew Moy is named in the follow-up history; a PwC project owner is not explicitly assigned. The source requests FRM escalation for both actions on November 2.",
+      "pwcOwners": "",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 71,
+      "activity": "VNDLY — job monitoring and incident management",
+      "title": "NEW — VNDLY — job monitoring and incident management",
+      "detail": "New project/workstream from Action Items rows 44. Brett Klinker is the recorded action owner/DRI. The tracker does not specify whether that is a PwC or FRM project assignment. Retain his name in action context and leave project-role fields unconfirmed.",
+      "pwcOwners": "",
+      "frmLeads": "",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Follow-up Tracker",
+      "recordedOn": "2026-11-02",
+      "row": 72,
+      "activity": "SKU Manager / Glass — migration and UAR scope follow-up",
+      "title": "NEW — SKU Manager / Glass — migration and UAR scope follow-up",
+      "detail": "New project/workstream from Action Items rows 8. The tracker marks this response/scope follow-up completed and says the migration is to Glass with the UI out of UAR scope. Notes still mention Joel confirmation; retain that caveat. This is a completed follow-up record, not a claim that all platform controls were tested.",
+      "pwcOwners": "",
+      "frmLeads": "",
+      "flags": [
+        "scope-change",
+        "closed"
+      ]
     }
   ],
-  "publicationId": "orange-notes-d76db57a3120"
+  "publicationId": "orange-notes-2b3e86b11926"
 }

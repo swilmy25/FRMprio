@@ -101,7 +101,7 @@ test('history validation, merging and lead exports retain dates without exportin
   expect(merged.updates[0].observedAt).toBe('2026-10-20T18:00:00.000Z')
   const exported = snapshotForLead({ ...snapshot, aleHistory: original }, 'Avi')
   expect(isSourceSnapshot(exported)).toBe(true)
-  expect(orangeOnly(exported).aleHistory?.updates[0].decisions).toHaveLength(1)
+  expect(orangeOnly(exported).aleHistory?.updates[0].decisions).toHaveLength(5)
   expect(exported.aleHistory?.updates[0].decisions.some(item => /Stripe|Revenue/.test(item.topic))).toBe(false)
   const invalid = structuredClone(original); invalid.updates[0].observedAt = '2026-02-30T18:00:00.000Z'
   expect(isAleHistory(invalid)).toBe(false)
@@ -137,7 +137,7 @@ test('source exports transfer local update history into a fresh browser without 
   await page.clock.setFixedTime(new Date('2026-11-04T18:00:00.000Z'))
   await page.goto('/')
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-04'))) })
-  await expect(page.getByRole('status')).toContainText('Imported 51 activities')
+  await expect(page.getByRole('status')).toContainText('Imported 63 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
   const download = await downloadPromise

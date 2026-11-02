@@ -11,7 +11,7 @@ const activity = (row: number) => activities.find(item => item.row === row)!
 const today = '2026-10-26'
 
 test('date corrections supersede overdue values without closing unfinished work or changing unrelated activities', () => {
-  expect(activities).toHaveLength(51)
+  expect(activities).toHaveLength(63)
   expect(activity(40).end).toBe('2026-11-30')
   expect(activity(40).workbookEndRaw).toBe('11/31')
   expect(activity(40).start).toBe('2026-10-26')
@@ -20,10 +20,10 @@ test('date corrections supersede overdue values without closing unfinished work 
   expect(activity(27).status).toBe('In progress')
   expect(activity(22).end).toBe('2026-10-31')
   expect(activity(22).workbookEndRaw).toBe('2026-10-30')
-  expect(activity(22).status).toBe('On track')
+  expect(activity(22).status).toBe('In progress')
   for (const row of [22,27,40]) {
     expect(activity(row).completed).toBe(false)
-    expect(dateHealth(activity(row), today).tone).toBe('scheduled')
+    expect(dateHealth(activity(row), today).tone).toBe(row===27?'scheduled':'escalation')
   }
   expect(activity(21).completed).toBe(true)
   expect(activity(53).completed).toBe(true)
@@ -87,7 +87,7 @@ test('relative follow-up is anchored to the confirmed post date and pending TOD 
   expect(revenue.endRaw).toBe('TBD')
   expect(dateHealth(revenue,today).reasons.join(' ')).toContain('checkpoint passed (2026-10-09)')
   expect(revenue.meetingNotes.find(note=>note.postedOn==='2026-10-21')?.postedOn).toBe('2026-10-21')
-  expect(revenue.meetingNotes.at(-1)?.recordedOn).toBe('2026-10-26')
+  expect(revenue.meetingNotes.find(note=>note.postedOn==='2026-10-21')?.recordedOn).toBe('2026-10-26')
   expect(activity(17).status).toBe('On hold')
   expect(activity(17).section).toBe('Deprioritized')
   expect(dateHealth(activity(17),today).tone).toBe('paused')
@@ -150,5 +150,5 @@ test('portfolio, owner filters, dated source attribution, paused view and Ale-ka
   await expect(readout.getByRole('article',{name:'Escalations: Oracle MCP',exact:true})).toContainText('@Stephen Wilm')
   await expect(readout.getByRole('article',{name:'Escalations: SDLC — Pando',exact:true})).toContainText('@Ben Oates')
   await expect(readout.getByRole('article',{name:'Escalations: SDLC — Pando',exact:true})).toContainText('EY on delivery of the readiness package')
-  for(const title of ['Stripe','AWS','Monitoring — Deloitte follow-up','IT Ops / Chronosphere','Platform OE Testing — ITACs','Platform OE Testing — ITGCs'])await expect(readout.getByRole('article',{name:`Escalations: ${title}`,exact:true})).toHaveCount(0)
+  for(const title of ['Stripe','Monitoring — Deloitte follow-up','IT Ops / Chronosphere','Platform OE Testing — ITACs','Platform OE Testing — ITGCs'])await expect(readout.getByRole('article',{name:`Escalations: ${title}`,exact:true})).toHaveCount(0)
 })
