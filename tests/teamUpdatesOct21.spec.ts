@@ -11,7 +11,7 @@ const activity = (row: number) => activities.find(item => item.row === row)!
 const today = '2026-10-26'
 
 test('date corrections supersede overdue values without closing unfinished work or changing unrelated activities', () => {
-  expect(activities).toHaveLength(50)
+  expect(activities).toHaveLength(51)
   expect(activity(40).end).toBe('2026-11-30')
   expect(activity(40).workbookEndRaw).toBe('11/31')
   expect(activity(40).start).toBe('2026-10-26')
@@ -63,7 +63,7 @@ test('reported control risk and PBC dependency escalate future targets with accu
   expect(dateHealth(ads, today).tone).toBe('escalation')
   expect(dateHealth(ads, today).reasons).not.toContain('End date has passed; completion is not recorded')
   const readout = buildAleReadout(activities, today)
-  expect(readout.escalations.find(item => item.topic === 'Oracle MCP')?.nextStep).toContain('Sudhika/Pavan')
+  expect(readout.escalations.find(item => item.topic === 'Oracle MCP')?.nextStep).toContain('Sudhika')
   expect(readout.escalations.find(item => item.topic.includes('Phases 2 & 3'))?.nextStep).toContain('@sdp')
   expect(readout.escalations.some(item => item.topic === 'API Tokenization')).toBe(true)
 })

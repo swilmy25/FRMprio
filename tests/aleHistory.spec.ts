@@ -8,7 +8,7 @@ import type { AleHistory } from '../src/aleHistory'
 
 const snapshot: SourceSnapshot = JSON.parse(readFileSync(new URL('../src/data/prioritization.json', import.meta.url), 'utf8'))
 const published: AleHistory = JSON.parse(readFileSync(new URL('../src/data/ale-history.json', import.meta.url), 'utf8'))
-const current = buildAleReadout(parseSource(snapshot), '2026-10-26')
+const current = buildAleReadout(parseSource(snapshot), '2026-11-02')
 const baselineData=buildAleReadout(parseSource(snapshot),'2026-10-20')
 const rootName = 'Alejandro’s leadership readout'
 const nextSnapshot = (date: string): SourceSnapshot => ({ ...structuredClone(snapshot), publicationId: undefined, importedAt: `${date}T18:00:00.000Z` })
@@ -111,7 +111,7 @@ test('history validation, merging and lead exports retain dates without exportin
 })
 
 test('readout shows both owner teams and carryover dates that survive reload and navigation', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-10-28T18:00:00.000Z'))
+  await page.clock.setFixedTime(new Date('2026-11-04T18:00:00.000Z'))
   await page.goto('/#view=ale-kazam')
   const root = page.getByRole('region', { name: rootName })
   const revenue = root.getByRole('article', { name: 'Escalations: Revenue new controls', exact: true })
@@ -119,11 +119,11 @@ test('readout shows both owner teams and carryover dates that survive reload and
   await expect(revenue.locator('.ale-frm-owners')).toContainText('@Ash')
   await expect(revenue.locator('.ale-item-history')).toContainText(published.updates.length===1?'New this update':`Carryover · ${published.updates.length} updates`)
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
-  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-10-28'))) })
+  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-04'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
   await expect(revenue.locator('.ale-item-history')).toContainText('First logged Oct 20, 2026')
-  await expect(revenue.locator('.ale-item-history')).toContainText('Last seen Oct 28, 2026')
+  await expect(revenue.locator('.ale-item-history')).toContainText('Last seen Nov 4, 2026')
   await expect(root.locator('.ale-metrics .metric').nth(3).locator('strong')).toHaveText(String(current.decisionCount))
   await page.reload()
   await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
@@ -134,10 +134,10 @@ test('readout shows both owner teams and carryover dates that survive reload and
 })
 
 test('source exports transfer local update history into a fresh browser without creating duplicate check-ins', async ({ page, browser }) => {
-  await page.clock.setFixedTime(new Date('2026-10-28T18:00:00.000Z'))
+  await page.clock.setFixedTime(new Date('2026-11-04T18:00:00.000Z'))
   await page.goto('/')
-  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-10-28'))) })
-  await expect(page.getByRole('status')).toContainText('Imported 50 activities')
+  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-04'))) })
+  await expect(page.getByRole('status')).toContainText('Imported 51 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
   const download = await downloadPromise
@@ -147,7 +147,7 @@ test('source exports transfer local update history into a fresh browser without 
   const context = await browser.newContext()
   try {
     const other = await context.newPage()
-    await other.clock.setFixedTime(new Date('2026-10-28T18:00:00.000Z'))
+    await other.clock.setFixedTime(new Date('2026-11-04T18:00:00.000Z'))
     await other.goto('/')
     await other.locator('input[type=file]').setInputFiles({ name: 'transferred.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(exported)) })
     await other.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
@@ -158,13 +158,13 @@ test('source exports transfer local update history into a fresh browser without 
 })
 
 test('history storage failures are visible and the in-memory history remains available for export', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-10-28T18:00:00.000Z'))
+  await page.clock.setFixedTime(new Date('2026-11-04T18:00:00.000Z'))
   await page.addInitScript(key => {
     const original = Storage.prototype.setItem
     Storage.prototype.setItem = function(name, value) { if (name === key) throw new DOMException('Quota exceeded', 'QuotaExceededError'); return original.call(this, name, value) }
   }, ALE_HISTORY_STORAGE)
   await page.goto('/')
-  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-10-28'))) })
+  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-04'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('Local update history could not be saved')
   await expect(page.getByRole('article', { name: 'Escalations: SDLC — Pando', exact: true }).locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)

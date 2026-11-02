@@ -6,7 +6,7 @@ import type { SourceSnapshot } from '../src/prioritization'
 
 const snapshot: SourceSnapshot = JSON.parse(readFileSync(new URL('../src/data/prioritization.json', import.meta.url), 'utf8'))
 const activities = parseSource(snapshot)
-const today = '2026-10-26'
+const today = '2026-11-02'
 const readoutName = 'Alejandro’s leadership readout'
 
 function fixture(end: string): SourceSnapshot {
@@ -15,21 +15,21 @@ function fixture(end: string): SourceSnapshot {
   return { ...snapshot, publicationId: undefined, annotations: undefined, changeLog: undefined, fileName: 'Readout test fixture', rows: [...snapshot.rows.slice(0, 2), row], sections: { '3': 'Active portfolio' } }
 }
 
-test('readout matches both buckets: eight decisions across seven topics with worksheet owners and distinct revenue asks', () => {
+test('readout matches both buckets: fifteen decisions across fourteen topics with worksheet owners and distinct revenue asks', () => {
   const data = buildAleReadout(activities, today)
-  expect(data.decisionCount).toBe(8)
-  expect(data.topicCount).toBe(7)
+  expect(data.decisionCount).toBe(15)
+  expect(data.topicCount).toBe(14)
   expect(data.overlapCount).toBe(1)
   expect(data.escalations.map(item => item.activityId)).toEqual(activities.filter(item => dateHealth(item, today).tone === 'escalation').map(item => item.id))
   expect(data.alignment.map(item => item.activityId)).toEqual(activities.filter(item => alignmentState(item) === 'Not aligned').map(item => item.id))
-  expect(new Set([...data.escalations, ...data.alignment].map(item => item.id)).size).toBe(8)
+  expect(new Set([...data.escalations, ...data.alignment].map(item => item.id)).size).toBe(15)
   const oracle = data.escalations.find(item => item.topic === 'Oracle MCP')!
   expect(oracle.owners).toEqual(['Joaquin Garcia', 'Stephen Wilm'])
   expect(oracle.owners).not.toContain('Jeff Rose')
   expect(data.escalations.some(item=>['Stripe','AWS','Monitoring — Deloitte follow-up','IT Ops / Chronosphere'].includes(item.topic))).toBe(false)
   expect(data.escalations.find(item => item.topic === 'Revenue new controls')?.nextStep).toContain('October 9 decision deadline')
   expect(data.alignment[0].nextStep).toContain('PwC High versus FRM Low')
-  expect(oracle.nextStep).toContain('larger-value sample transaction')
+  expect(oracle.nextStep).toContain('Joaquin’s workpapers')
   expect(data.escalations.find(item=>item.topic.includes('Phases 2 & 3'))?.nextStep).toContain('@sdp')
   expect(data.escalations.find(item => item.topic === 'SDLC — Pando')?.nextStep).toContain('EY on delivery of the readiness package')
   const platform = data.escalations.filter(item => item.topic.startsWith('Platform OE Testing'))
@@ -57,18 +57,18 @@ test('unknown owners stay unassigned, completed work leaves escalation and actio
 })
 
 test('top button opens the full portfolio readout from a filtered lead view and shows only concise metrics and actions', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-10-26T18:00:00Z'))
+  await page.clock.setFixedTime(new Date('2026-11-02T18:00:00Z'))
   await page.goto('/#lead=Ale')
   await page.getByLabel('Search source activities').fill('no matching activities')
   await expect(page.locator('.workbook-row.project-row')).toHaveCount(0)
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(page).toHaveURL(/#view=ale-kazam$/)
   const readout = page.getByRole('region', { name: readoutName })
-  await expect(readout.locator('.ale-metrics .metric').nth(0).locator('strong')).toHaveText('8')
-  await expect(readout.locator('.ale-metrics .metric').nth(1).locator('strong')).toHaveText('7')
+  await expect(readout.locator('.ale-metrics .metric').nth(0).locator('strong')).toHaveText('15')
+  await expect(readout.locator('.ale-metrics .metric').nth(1).locator('strong')).toHaveText('14')
   await expect(readout.locator('.ale-metrics .metric').nth(2).locator('strong')).toHaveText('1')
-  await expect(readout.getByRole('article')).toHaveCount(8)
-  await expect(readout).toContainText('Whole portfolio · 7 topics')
+  await expect(readout.getByRole('article')).toHaveCount(15)
+  await expect(readout).toContainText('Whole portfolio · 14 topics')
   await expect(readout).toContainText('1 topic appears in both buckets')
   const oracle = readout.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })
   await expect(oracle.locator('.ale-owners')).toContainText('@Stephen Wilm')
@@ -78,11 +78,11 @@ test('top button opens the full portfolio readout from a filtered lead view and 
   await expect(page.locator('.live-sheet')).toBeHidden()
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Project dashboard', exact: true })).toBeVisible()
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(50)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(51)
 })
 
 test('readout link survives reload and browser navigation restores the appropriate view', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-10-26T18:00:00Z'))
+  await page.clock.setFixedTime(new Date('2026-11-02T18:00:00Z'))
   await page.addInitScript(({ key, data }) => { if (!localStorage.getItem(key)) { localStorage.setItem(key, JSON.stringify(data)); localStorage.setItem('frmprio.sourceView', 'manual') } }, { key: SOURCE_STORAGE, data: snapshot })
   await page.goto('/#view=ale-kazam')
   await expect(page.getByRole('region', { name: readoutName })).toBeVisible()
@@ -98,14 +98,14 @@ test('readout link survives reload and browser navigation restores the appropria
 })
 
 test('mobile readout fits the viewport and keeps owners, topics and next steps visible', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-10-26T18:00:00Z'))
+  await page.clock.setFixedTime(new Date('2026-11-02T18:00:00Z'))
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto('/')
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   const readout = page.getByRole('region', { name: readoutName })
-  await expect(readout.getByRole('article')).toHaveCount(8)
+  await expect(readout.getByRole('article')).toHaveCount(15)
   await expect(readout.getByRole('article', { name: 'Escalations: Platform OE Testing — ITACs', exact: true })).toHaveCount(0)
-  await expect(readout.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })).toContainText('Sudhika/Pavan')
+  await expect(readout.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })).toContainText('Sudhika')
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
 })
 
@@ -123,7 +123,7 @@ test('Pacific date rollover updates the decision count without reloading', async
 })
 
 test('authorized sheet refresh continues while readout is open and updates its decisions', async ({ page }) => {
-  await page.clock.install({ time: new Date('2026-10-26T18:00:00Z') })
+  await page.clock.install({ time: new Date('2026-11-02T18:00:00Z') })
   await page.addInitScript(() => {
     window.google = { accounts: { oauth2: { initTokenClient: config => ({ requestAccessToken: () => config.callback({ access_token: 'test-fixture-token', expires_in: 3600 }) }), revoke: (_token, callback) => callback() } } }
   })

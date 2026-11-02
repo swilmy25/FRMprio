@@ -66,7 +66,8 @@
     "56": "Active portfolio",
     "57": "Active portfolio",
     "58": "Active portfolio",
-    "59": "Active portfolio"
+    "59": "Active portfolio",
+    "60": "Active portfolio"
   },
   "rows": [
     [
@@ -1661,6 +1662,33 @@
       "2026-10-21",
       "TBD",
       "Coordinate with @cloie.vonmassenhausen; gather evidence from Adi for HR Ops review. Stephen/Cloie work split and hours to confirm."
+    ],
+    [
+      "",
+      "",
+      "Azure Platform",
+      "",
+      "Sonu Kumar",
+      "",
+      "",
+      "Platform",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "2026-12-04",
+      "Odinga, Matthew"
     ]
   ],
   "annotations": {
@@ -1766,9 +1794,17 @@
           "source": "Mayra",
           "recordedOn": "2026-10-20",
           "text": "Vertex ITGCs due date moved to October 31, 2026."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "recordedOn": "2026-11-02",
+          "text": "Vertex is closed except for change management, where one piece of evidence needs to be updated. All other Vertex work is reported closed.",
+          "applicationNote": "Retain Vertex as open/In progress until the final change-management evidence update is finished. No actual completion date or revised end date was provided, so the October 31 end remains and is overdue as of this recorded update. No control counts or completion percentage are inferred. Mayra provides the update; the assigned PwC owners remain Joaquin Garcia and Mayra Mendoza."
         }
       ],
-      "endOverride": "2026-10-31"
+      "endOverride": "2026-10-31",
+      "statusOverride": "In progress",
+      "escalationAction": "Complete the remaining change-management evidence update and confirm closure or a revised end date with Urminder."
     },
     "8": {
       "notes": [
@@ -2020,11 +2056,17 @@
           "recordedOn": "2026-10-26",
           "text": "Rename the activity to Oracle MCP and retain scope and issue context in the details. Move the end date from October 30 to November 15, 2026 and keep the item flagged. A sample transaction with a larger dollar value will be conducted, with someone from the business processing it live for the control test. Confirmation from Sudhika/Pavan on the wrong-environment posting is still pending.",
           "applicationNote": "The short activity name is used throughout the dashboard; the original Oracle journal-entry scope and Finance AI Framework / Deloitte discovery context remain in workbook detail. At risk remains in effect. The transaction is planned, not completed; no dollar amount, issue resolution or successful control-test outcome was supplied. Sudhika/Pavan are confirmation contacts; current PwC owners and FRM lead are unchanged. The existing escalation history is retained across the rename."
+        },
+        {
+          "source": "Sonu Kumar",
+          "recordedOn": "2026-11-02",
+          "text": "Sonu believes all required Oracle MCP evidence was received last week. He is checking with Joaquin on workpapers for review, expected by the end of the week. The question of journal entries posting to production despite Codex being prompted for test remains open. Sonu followed up with Sudhika yesterday; she expects another update later this week after returning from conference.",
+          "applicationNote": "Record this as reported progress, with evidence completeness still tentative and workpaper review not yet complete. The original post date was not supplied, so relative timing is retained as reported rather than converted into a fixed workpaper or follow-up date. Keep the November 15 project end and At risk status while the production-posting question remains open. No successful retest or control resolution is inferred. Sonu is the update provider; Joaquin Garcia and Stephen Wilm remain the assigned PwC owners."
         }
       ],
       "statusOverride": "At risk",
-      "escalationReason": "Wrong-environment posting confirmation is pending with Sudhika/Pavan; the larger-value live transaction control test is still to be conducted.",
-      "escalationAction": "Conduct a larger-value sample transaction live with a business user and obtain Sudhika/Pavan’s confirmation on wrong-environment posting for the revised November 15 target.",
+      "escalationReason": "Wrong-environment posting confirmation remains open: journal entries reached production despite a test-environment prompt in Codex.",
+      "escalationAction": "Get Joaquin’s workpapers for review by the reported end-of-week target and obtain Sudhika’s follow-up on production JE posting despite a test prompt in Codex.",
       "nameOverride": "Oracle MCP",
       "historyName": "Oracle MCP - currently only asked to test 1 use case (Oracle JE prep through Codex). Originally 8 controls, now 11 proposed\n\nFurther discovery is ongoing with Finance AI Framework and reviewing what will be provided to Deloitte.",
       "endOverride": "2026-11-15"
@@ -2156,6 +2198,21 @@
           "recordedOn": "2026-10-26",
           "text": "To escalate — due past October 16, 2026: Urminder to clarify materiality or the usage path of ChatGPT tokenization and confirm the control owner.",
           "applicationNote": "Apply this clarification to the distinct ChatGPT Tokenizer with Astra Model activity. October 16 is the overdue FRM decision deadline, not a supplied replacement for the October 30 project end. The API Tokenization activity and its October 23 end are unchanged. Mayra remains the PwC owner and Urminder the FRM lead."
+        }
+      ]
+    },
+    "60": {
+      "userAdded": true,
+      "reportedScope": {
+        "controlCount": 8,
+        "hours": 200
+      },
+      "notes": [
+        {
+          "source": "Sonu Kumar",
+          "recordedOn": "2026-11-02",
+          "text": "Add Azure Platform to the prioritization list, owned by Sonu Kumar, with a December 4, 2026 end date. Newly scoped work includes 8 controls and 200 reported hours.",
+          "applicationNote": "This is a new Platform activity, separate from the Azure line previously removed from the workbook. Start date, FRM lead, priorities and activity type were not provided. The 200 hours describe the reported scope; no actual hours, remaining hours, approved allocation or baseline-plan classification is inferred."
         }
       ]
     }
@@ -2841,7 +2898,53 @@
         "discussion"
       ],
       "discussion": "Follow up with EY on package delivery and confirm the project start against November 15."
+    },
+    {
+      "source": "Sonu Kumar",
+      "recordedOn": "2026-11-02",
+      "row": 60,
+      "activity": "Azure Platform",
+      "title": "Azure Platform — newly scoped; December 4 end",
+      "detail": "Add Azure Platform under Sonu Kumar: 8 controls, 200 reported hours, December 4, 2026 end. Start date, FRM lead and priorities remain unconfirmed.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ],
+      "discussion": "Confirm start date, FRM lead, priorities and how the newly scoped work fits the plan."
+    },
+    {
+      "source": "Sonu Kumar",
+      "recordedOn": "2026-11-02",
+      "row": 26,
+      "activity": "Oracle MCP",
+      "title": "Oracle MCP — evidence reported received; workpapers awaited",
+      "detail": "Sonu believes all required evidence was received last week. Workpapers from Joaquin are expected for review by the end of the reporting week. Production JE posting despite a test prompt remains open; Sudhika expects a further update after conference.",
+      "pwcOwners": "Joaquin Garcia Stephen Wilm",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "in-progress",
+        "at-risk",
+        "discussion"
+      ],
+      "discussion": "Confirm the workpaper review date with Joaquin and obtain Sudhika’s production-posting clarification. November 15 remains the project end."
+    },
+    {
+      "source": "Mayra Mendoza",
+      "recordedOn": "2026-11-02",
+      "row": 35,
+      "activity": "Vertex (ITGCs)",
+      "title": "Vertex ITGCs — change-management evidence update remains",
+      "detail": "Mayra reports all Vertex work closed except change management, where one piece of evidence needs updating. Keep the overall item open until that final update is complete.",
+      "pwcOwners": "Joaquin Garcia Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": [
+        "in-progress",
+        "discussion"
+      ],
+      "discussion": "Finish the change-management evidence update and confirm closure or a revised end; October 31 is overdue."
     }
   ],
-  "publicationId": "orange-notes-f3a2a1ffd87b"
+  "publicationId": "orange-notes-d76db57a3120"
 }
