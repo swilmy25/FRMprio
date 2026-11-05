@@ -2722,9 +2722,15 @@
           "recordedOn": "2026-11-02",
           "text": "Action Items rows 19, 22: AWS Platform Control readiness - AWS Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Controls are already in Optro IT.AWS.CM.27.01 Direct Changes to Data or DB schema\nIs this conrol up and are we good to create evidence request for these? What is expected timeline?",
           "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Six CUECs are described as a starting point, not an agreed final control count. The October 26–November 30 project window is retained."
+        },
+        {
+          "source": "Sonu Kumar",
+          "recordedOn": "2026-11-05",
+          "text": "AWS is deprioritized. Move the project end to January 15, 2027.",
+          "applicationNote": "January 15 is interpreted as the next January after this November 5, 2026 update. The earlier action checkpoints remain historical tracker context and are superseded for current schedule escalation. Existing ownership, source records and scope figures are retained. No unprovided start date or numeric priority rating is inferred."
         }
       ],
-      "endOverride": "2026-11-30",
+      "endOverride": "2027-01-15",
       "trackerActions": [
         {
           "fileName": "Follow-up Tracker .xlsx",
@@ -2759,9 +2765,8 @@
           "links": ""
         }
       ],
-      "statusOverride": "Waiting on FRM",
-      "followUpDate": "2026-10-23",
-      "escalationAction": "Avi: confirm the AWS engineering contact and readiness/evidence request for IT.AWS.CM.27.01, overdue October 23, while protecting November 30."
+      "escalationAction": "Sonu / Avi: confirm the restart plan for the deprioritized AWS work against the January 15, 2027 end.",
+      "sectionOverride": "Deprioritized"
     },
     "22": {
       "notes": [
@@ -2777,10 +2782,15 @@
           "recordedOn": "2026-11-02",
           "text": "Action Items rows 25: Monorepo control evidence",
           "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. This is the new-control evidence follow-up, separate from the completed inventory baseline. The October 22 offline session was done; the October 27 additional-evidence clarification was still described as pending. The October 31 project end is retained."
+        },
+        {
+          "source": "Layla Yang",
+          "recordedOn": "2026-11-05",
+          "text": "Layla confirms the Monorepo Automated Account Classification control with the October 31 / October 30 target was completed on time. Mark the control complete and remove it from active tracking/escalation.",
+          "applicationNote": "The exact actual completion day was not supplied. October 30/31 are retained as target-date context; neither is invented as the actual completion date. The completed record stays visible in history and completed views. The separate Monorepo Inventory baseline and ongoing inventory-framework uplift are distinct activities."
         }
       ],
-      "endOverride": "2026-10-31",
-      "statusOverride": "In progress",
+      "endOverride": "Completed",
       "trackerActions": [
         {
           "fileName": "Follow-up Tracker .xlsx",
@@ -2799,8 +2809,7 @@
           "links": ""
         }
       ],
-      "followUpDate": "2026-10-22",
-      "escalationAction": "Layla / Avi: resolve the missing Monorepo control-evidence fields with the control owner and confirm completion or a revised date after the October 31 target."
+      "sectionOverride": "Completed"
     },
     "43": {
       "notes": [
@@ -2949,6 +2958,12 @@
           "recordedOn": "2026-11-02",
           "text": "Action Items rows 20: Azure Platform Control readiness - Azure Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Cotrols are yet not in Optro and waiting for a go ahead from Avi",
           "applicationNote": "Action deadlines and priorities are retained separately from project dates and the independent PwC/FRM ratings. Existing project assignments are retained unless explicitly described below. Avi is the explicitly recorded Azure-readiness owner/current DRI and is added as FRM lead. The 8 controls, 200 hours, Sonu assignment, staffing and December 4 project end from the user update are retained."
+        },
+        {
+          "source": "Sonu Kumar",
+          "recordedOn": "2026-11-05",
+          "text": "Azure Platform is deprioritized. Move the project end to January 15, 2027.",
+          "applicationNote": "January 15 is interpreted as the next January after this November 5, 2026 update. The earlier action checkpoints remain historical tracker context and are superseded for current schedule escalation. Existing ownership, source records and scope figures are retained. No unprovided start date or numeric priority rating is inferred."
         }
       ],
       "trackerActions": [
@@ -2970,8 +2985,9 @@
         }
       ],
       "frmLeadsOverride": "Avi",
-      "statusOverride": "Waiting on FRM",
-      "escalationAction": "Avi: identify the Azure engineering evidence contact and give the go-ahead for Optro/control walkthroughs; confirm the project start against December 4."
+      "escalationAction": "Sonu / Avi: confirm the restart plan and start date for the deprioritized Azure Platform work against the January 15, 2027 end.",
+      "endOverride": "2027-01-15",
+      "sectionOverride": "Deprioritized"
     },
     "6": {
       "notes": [
@@ -3309,11 +3325,19 @@
           "recordedOn": "2026-11-02",
           "text": "Newly tracked from Follow-up Tracker .xlsx → Action Items rows 28. 1. AM Based UAR ToD Remediation Testing\n2. AWS and Azure Platforms are in-scope for UAR;",
           "applicationNote": "Sonu remains the PwC coordinator from the existing 18 AM-based UAR assignment. Chandana is the tracker DRI. The completed Q2 baseline remains completed; this is the separately identified design-remediation follow-up and AWS/Azure scope. Project dates, role assignments and independent priority ratings remain unconfirmed where the tracker supplies only an action deadline/DRI. No hours or control totals are inferred."
+        },
+        {
+          "source": "Sonu Kumar",
+          "recordedOn": "2026-11-05",
+          "text": "Move the UAR workstream end to January 15, 2027 because testing will cover Q4. Sonu plans a UAR discussion with Chandana tomorrow, November 6, 2026, and may provide additional details or amend the plan afterward.",
+          "applicationNote": "This update applies to Sonu’s active AM-based UAR remediation/testing workstream. The completed Q2 baseline and UAR activities assigned to other owners retain their recorded dispositions. Q4 testing is planned, not reported complete. The October 31 action checkpoint is superseded for the current schedule; the November 6 discussion is a planning meeting, not an invented project deadline. Start remains unconfirmed. Preserve the original escalation identity across the Q4 title update."
         }
       ],
       "statusOverride": "In progress",
-      "followUpDate": "2026-10-31",
-      "escalationAction": "Sonu / Chandana: prioritize the 18 AM-based UAR ToD remediations and confirm AWS/Azure UAR coverage and revised milestones after October 31."
+      "escalationAction": "Sonu / Chandana: confirm Q4 UAR testing scope and start timing after the November 6 discussion, with delivery targeted for January 15, 2027.",
+      "historyName": "AM-based UAR — ToD remediation and AWS / Azure scope",
+      "nameOverride": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope)",
+      "endOverride": "2027-01-15"
     },
     "67": {
       "userAdded": true,
@@ -4654,7 +4678,61 @@
         "scope-change",
         "closed"
       ]
+    },
+    {
+      "source": "Sonu Kumar",
+      "recordedOn": "2026-11-05",
+      "row": 40,
+      "activity": "AWS",
+      "title": "AWS — deprioritized; November 30 → January 15",
+      "detail": "Deprioritize AWS and move its project end from November 30, 2026 to January 15, 2027. Supersede old schedule-escalation checkpoints.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "date-moved"
+      ]
+    },
+    {
+      "source": "Sonu Kumar",
+      "recordedOn": "2026-11-05",
+      "row": 60,
+      "activity": "Azure Platform",
+      "title": "Azure Platform — deprioritized; December 4 → January 15",
+      "detail": "Deprioritize Azure Platform and move its project end from December 4, 2026 to January 15, 2027. Retain Sonu, Avi, 8 controls, 200 reported hours and existing staffing.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "date-moved"
+      ]
+    },
+    {
+      "source": "Sonu Kumar",
+      "recordedOn": "2026-11-05",
+      "row": 66,
+      "activity": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope)",
+      "title": "AM-based UAR — Q4 testing; January 15 target",
+      "detail": "Set January 15, 2027 as the UAR delivery target for Q4 testing. Sonu’s discussion with Chandana is planned for November 6; further details may amend the plan.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Chandana",
+      "flags": [
+        "date-moved",
+        "scope-change",
+        "discussion"
+      ]
+    },
+    {
+      "source": "Layla Yang",
+      "recordedOn": "2026-11-05",
+      "row": 22,
+      "activity": "Monorepo new control (Automated Account Classification)",
+      "title": "Monorepo Automated Account Classification — completed on time",
+      "detail": "Layla confirms the October 30/31 Monorepo control was completed on time. Close the activity and remove it from active escalation; exact completion day was not supplied.",
+      "pwcOwners": "Layla Yang",
+      "frmLeads": "Avi",
+      "flags": [
+        "completed"
+      ]
     }
   ],
-  "publicationId": "orange-notes-2b3e86b11926"
+  "publicationId": "orange-notes-4bad0ad92ec5"
 }

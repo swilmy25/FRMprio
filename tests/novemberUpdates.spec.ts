@@ -11,7 +11,7 @@ const azure=activities.find(item=>item.row===60)!
 test('explicit scope survives orange projection and scoped exports without inventing actuals or an allocation',()=>{
  expect(azure.reportedScope).toEqual({controlCount:8,hours:200})
  expect(azure.pwcOwners).toBe('Sonu Kumar')
- expect(azure.end).toBe('2026-12-04')
+ expect(azure.end).toBe('2027-01-15')
  expect(azure.start).toBeNull()
  expect(azure.frmLeads).toBe('Avi')
  expect(azure.staffing).toBe('Odinga, Matthew')
@@ -54,7 +54,7 @@ test('scope is visible, staffing stays in details, and current Oracle and Vertex
  await expect(page.locator('.workbook-table')).not.toContainText('Matthew')
  await expect(page.getByRole('region',{name:'Reported scope and effort'})).toContainText('8 controls · 200 hours')
  await expect(page.locator('.staffing-detail')).toContainText('Odinga, Matthew')
- await expect(page.locator('.source-date-facts')).toContainText('Dec 4, 2026')
+ await expect(page.locator('.source-date-facts')).toContainText('Jan 15, 2027')
  await expect(page.locator('.detail-meta')).toContainText('Sonu Kumar')
  await expect(page.locator('.detail-meta')).toContainText('FRM leads: Avi')
  const downloadPromise=page.waitForEvent('download')
