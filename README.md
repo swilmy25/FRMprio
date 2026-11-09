@@ -147,3 +147,11 @@ Ads ITGCs (Arsenal UI), including Ads monitoring, are planned for November 16–
 AI Governance and Oracle MCP are one reporting topic, using Oracle’s existing owners and stable readout history. AI Governance’s original row and unconfirmed dates are retained as merged context. Deficiency wording is with Sudhika and the control owner. The retained November 15 date is an Oracle review milestone, not an invented deadline for all AI Governance work.
 
 HR/Payroll assessment evidence is outstanding with Adi and explicitly escalated. Existing SAD priority, dates, owners, proposed effort and the conditional immediate OE-exception trigger remain in effect.
+
+## Finance/control follow-ups — November 9, 2026
+
+Zip 2-Way’s Deloitte PBC follow-up submission is reported made; the DT potential issue remains open while PTP establishes a BP Configuration Change Review. Its ETA is November-end, represented by November 30. Confirm the external escalation-tracker entry. This ETA does not change the separate Zip PO-approval follow-up’s November 6 deadline; the parent project labels that timing distinction.
+
+Goldman Sachs TCM.03.09 also targets November-end, but the PBC remains explicitly overdue and the scenario test is blocked on another admin user following the TCM access reorganization toward third-party risk management. VNDLY has no open DT observation or PBC follow-up, while additional evidence requests from Dibyendu/team to the control owner remain unanswered and escalated. Its end is represented as **Around November 20**; the parser, timeline, details and meeting date comparisons retain that qualifier. A passed approximate ETA requests a revised estimate instead of asserting a missed firm deadline.
+
+HRP backdated-term support is awaiting SOX-app activity-appropriateness confirmation and IPE evidence with Chandana/Adi. The prior requested escalation and November 15 assessment target stay in effect. “End of this week,” reported from a prior-week commitment without an exact message date, is recorded as an evidence/confirmation ETA requiring an exact-date check, not a newly invented SAD milestone.

@@ -168,9 +168,9 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Ankita','Ben Oates','Cami Aromando','Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','PwC (team)','Sonu Kumar','Stephen Wilm'])
  expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
  const items=uniqueMeetingItems(groups)
- expect(items).toHaveLength(147)
+ expect(items).toHaveLength(151)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
- expect(rows('date-moved')).toEqual([12,20,22,26,27,35,40,56,57,59,60,66,67])
+ expect(rows('date-moved')).toEqual([12,20,22,26,27,35,40,56,57,59,60,66,67,69,70,71])
  expect(rows('date-corrected')).toEqual([40])
  expect(rows('date-confirmed')).toEqual([19,19,34])
  expect(rows('new-tbd')).toEqual([16,36])
@@ -197,7 +197,7 @@ test('dashboard and meeting owners follow worksheet or explicit user assignments
   }
  }
  const stephen=groups.find(group=>group.member==='Stephen Wilm')!
- expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19,18,26,18,19,20,31,19,20,26,59])
+ expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19,18,26,18,19,20,31,19,20,26,59,59])
  expect(stephen.items[0].providedBy).toBe('User update')
  const jeff=groups.find(group=>group.member==='Jeff Rose')!
  expect(jeff.items.map(item=>item.change.row)).toEqual([8,48,55,31])

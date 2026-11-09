@@ -3963,7 +3963,7 @@
           "Substantial log reconstruction, inaccessible evidence or a materially larger population/system footprint."
         ]
       },
-      "escalationAction": "Sudhika / Chandana: escalate the outstanding evidence with Adi and confirm delivery timing; coordinate Stephen/Cloie and HR Ops review for the November 15 SAD-related assessment target. Raise an OE exception immediately if a relevant UAR missed a late termination.",
+      "escalationAction": "Chandana / Adi: escalate the outstanding activity-confirmation and IPE evidence requests; confirm the appropriateness of activity for SOX in-scope apps, provide the pending IPE evidence and confirm the exact end-of-this-week delivery date. Stephen / Cloie to assess the evidence for the November 15 assessment target; raise an OE exception immediately if a relevant UAR missed a late termination.",
       "notes": [
         {
           "source": "User update",
@@ -3994,10 +3994,16 @@
           "recordedOn": "2026-11-09",
           "text": "HR/Payroll late terminations — impact assessment support: evidence remains outstanding with Adi and needs to be escalated.",
           "applicationNote": "Retain Stephen as PwC owner and Sudhika/Chandana as FRM leads; Adi is the evidence contact. Preserve the October 21–November 15 assessment window, SAD priority, proposed effort range and conditional OE-exception trigger. Outstanding evidence is not itself confirmation of a control exception."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "HRP Backdated Terms: working with Chandana and Adi to confirm the appropriateness of activity for SOX in-scope applications; IPE evidence is pending. The reported ETA is end of this week, based on a commitment attributed to “Chandan” last week.",
+          "applicationNote": "For this November 9 update, “this week” is November 9–15. Preserve the existing November 15 assessment target; an exact evidence-delivery day and the date of the prior-week commitment were not supplied. Confirm timing with Chandana. Do not create a second HRP project or infer that activity is appropriate, evidence has been received, or a control exception has been established. The earlier escalation, SAD priority, owners, proposed effort and conditional OE-exception trigger remain in place."
         }
       ],
       "endOverride": "2026-11-15",
-      "escalationReason": "Evidence for the HR/Payroll late-termination impact assessment is outstanding with Adi and needs escalation given the SAD implications."
+      "escalationReason": "HRP backdated terminations: confirmation of activity appropriateness for SOX in-scope apps and IPE evidence remain outstanding with Chandana and Adi; keep the prior requested escalation active for SAD support."
     },
     "13": {
       "statusOverride": "In progress",
@@ -5252,6 +5258,12 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 42. TCM.03.09: Goldman Sachs Banking Portal Dual Administration;\nNeed the remaining screenshots",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "TCM.03.09 / Goldman Sachs: another user needs admin access to finish the scenario test. TCM reorganized access so admins are more aligned with the third-party risk management team. The PBC is overdue; the current ETA is end of November 2026.",
+          "applicationNote": "Use November 30 as the new month-end ETA while preserving the explicitly overdue PBC and admin-access dependency as an escalation. Do not imply the access reorganization granted access or that scenario testing is complete. Keep the existing PwC team label and FRM lead; the specific new admin user is not confirmed."
         }
       ],
       "statusOverride": "In progress",
@@ -5274,14 +5286,15 @@
         }
       ],
       "startOverride": "2026-11-02",
-      "endOverride": "2026-11-06",
+      "endOverride": "2026-11-30",
       "categoryOverride": "Evidences request",
       "pwcOwnersOverride": "PwC (team)",
       "frmLeadsOverride": "Sudhika",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Sudhika / Treasury: escalate the pending Goldman Sachs admin-access/screenshots request and revise the November 6 deadline.",
-      "escalationReason": "The current tracker explicitly requests FRM escalation for outstanding evidence/configuration dependencies."
+      "escalationAction": "PwC / Sudhika / TCM and third-party risk management: arrange admin access for another Goldman Sachs test user, finish the scenario test and complete the overdue PBC, targeting end of November.",
+      "escalationReason": "TCM.03.09: the PBC is overdue and the remaining scenario test is blocked pending another user obtaining Goldman Sachs admin access after TCM moved admin access toward the third-party risk management team.",
+      "endBasisOverride": "Projected end · End-of-November ETA (user update)"
     },
     "70": {
       "userAdded": true,
@@ -5342,6 +5355,12 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 43, 44. BP.OAI-GLB.PTP.03.01: 2 Way Match Configuration (Zip)\nNeed remaining evidence to close out Deloitte follow up question BP.OAI-GLB.PTP.02.01: PO Approval Configuration (Zip)\nPending response from Deloitte to our clarifying question",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "Zip 2-Way: the Deloitte PBC follow-up was submitted. The DT potential issue remains open while the team works with PTP to put a BP Configuration Change Review in place; it is believed to have been added to the escalation tracker. ETA: end of November 2026.",
+          "applicationNote": "Record the reported PBC follow-up submission without claiming Deloitte acceptance or issue closure. Confirm the external escalation-tracker entry; its inclusion was reported tentatively. Keep the dashboard escalation visible. November 30 is the end-of-month ETA for the 2-Way scope, not an actual completion date or a newly agreed deadline for the separate PO-approval control. Preserve that control’s original November 6 deadline/status as unconfirmed. No named PwC owner, control count or hours are inferred."
         }
       ],
       "statusOverride": "In progress",
@@ -5380,14 +5399,15 @@
         }
       ],
       "startOverride": "2026-11-02",
-      "endOverride": "2026-11-06",
+      "endOverride": "2026-11-30",
       "categoryOverride": "Clarification / Follow up",
       "pwcOwnersOverride": "PwC (team)",
       "frmLeadsOverride": "Sudhika",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Sudhika / PwC: resolve the Zip workflow-evidence and PO-configuration dependencies, then respond to Deloitte and revise the November 6 deadline.",
-      "escalationReason": "The current tracker explicitly requests FRM escalation for outstanding evidence/configuration dependencies."
+      "escalationAction": "PwC / Sudhika / PTP: put the BP Configuration Change Review in place for the Zip 2-Way potential issue, targeting end of November, and confirm its external escalation-tracker entry. Confirm the separate PO-approval follow-up status and timing.",
+      "escalationReason": "Zip 2-Way: the Deloitte PBC follow-up submission is reported complete, but the DT potential issue remains open while PTP establishes a BP Configuration Change Review.",
+      "endBasisOverride": "Zip 2-Way ETA; separate PO-approval timing unconfirmed"
     },
     "71": {
       "userAdded": true,
@@ -5427,6 +5447,12 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 45. PBC Request | #IT.VDLY.CO.35.02: Job Monitoring and Incident Management\nPending additional evidence from management.\n\n1. JIRA Ticket EWF-489 – “PCR 45: FTR Failure - Report Failure”\nThe ticket was created on August 18, 2026, last updated on August 25, 2026, and was noted as being in “Waiting for Support” status. Could you please confirm whether this ticket has subsequently been closed? If closed, please provide a PDF copy of the completed/closed ticket for our documentation and testing purposes.\n\n2. VNDLY Integration File Types\nDuring the walkthrough, we noted that the VNDLY dashboard includes various report types, such as open jobs and marketing reports, which are not considered actual integrations. Could you please provide a filtered listing of the true integration file types/jobs that are subject to the Job Monitoring process, excluding standard reports or other non-integration items along with that for each in-scope integration job, please also provide the job/file type name, import/export direction, and scheduled frequency ?",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "VNDLY: no items are on the DT observation list or in PBC follow-up. Dibyendu and team have requested additional evidence from the control owner without a response; those requests are on the escalation list. ETA: around November 20, 2026.",
+          "applicationNote": "Keep the evidence dependency open and escalated. Preserve “around November 20” as an approximate ETA rather than a firm deadline. Do not carry forward the old PBC/DT-observation label as current status, mark all work completed, or infer a new project owner from the named evidence requester. Original workbook records remain historical context."
         }
       ],
       "statusOverride": "In progress",
@@ -5449,14 +5475,15 @@
         }
       ],
       "startOverride": "2026-11-02",
-      "endOverride": "2026-11-06",
+      "endOverride": "Around 2026-11-20",
       "categoryOverride": "Clarification / Follow up",
       "pwcOwnersOverride": "PwC (team)",
       "frmLeadsOverride": "Sudhika",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Sudhika / Brett Klinker: obtain the closed-ticket evidence and filtered VNDLY integration-job population/frequencies; escalate the outstanding evidence and revise the November 6 deadline.",
-      "escalationReason": "The current tracker explicitly requests FRM escalation for outstanding evidence/configuration dependencies."
+      "escalationAction": "PwC / Sudhika: follow up with Dibyendu and the control owner on the unanswered additional evidence requests and confirm delivery around November 20. Keep this evidence dependency escalated; no open DT observation or PBC follow-up is reported.",
+      "escalationReason": "VNDLY: no items remain on the DT observation or PBC follow-up lists, but Dibyendu and team’s additional evidence requests to the control owner remain unanswered and on the escalation list.",
+      "endBasisOverride": "Projected end · Approximate ETA (user update)"
     },
     "72": {
       "userAdded": true,
@@ -7854,9 +7881,69 @@
         "discussion"
       ],
       "discussion": "Sudhika / Chandana: escalate the outstanding evidence with Adi and confirm delivery timing; coordinate Stephen/Cloie and HR Ops review for the November 15 SAD-related assessment target. Raise an OE exception immediately if a relevant UAR missed a late termination."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 70,
+      "activity": "Zip — two-way match and PO approval follow-ups",
+      "title": "Zip 2-Way — PBC follow-up submitted; PTP review dependency; November-end ETA",
+      "detail": "Zip 2-Way: the Deloitte PBC follow-up was submitted. The DT potential issue remains open while the team works with PTP to put a BP Configuration Change Review in place; it is believed to have been added to the escalation tracker. ETA: end of November 2026.",
+      "pwcOwners": "PwC (team)",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "date-moved",
+        "discussion"
+      ],
+      "discussion": "PwC / Sudhika / PTP: put the BP Configuration Change Review in place for the Zip 2-Way potential issue, targeting end of November, and confirm its external escalation-tracker entry. Confirm the separate PO-approval follow-up status and timing."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 71,
+      "activity": "VNDLY — job monitoring and incident management",
+      "title": "VNDLY — no open DT/PBC items; additional evidence escalated; around November 20",
+      "detail": "VNDLY: no items are on the DT observation list or in PBC follow-up. Dibyendu and team have requested additional evidence from the control owner without a response; those requests are on the escalation list. ETA: around November 20, 2026.",
+      "pwcOwners": "PwC (team)",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "date-moved",
+        "discussion"
+      ],
+      "discussion": "PwC / Sudhika: follow up with Dibyendu and the control owner on the unanswered additional evidence requests and confirm delivery around November 20. Keep this evidence dependency escalated; no open DT observation or PBC follow-up is reported."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 69,
+      "activity": "Goldman Sachs Banking Portal — dual administration (TCM.03.09)",
+      "title": "Goldman Sachs / TCM.03.09 — overdue PBC and admin access; November-end ETA",
+      "detail": "TCM.03.09 / Goldman Sachs: another user needs admin access to finish the scenario test. TCM reorganized access so admins are more aligned with the third-party risk management team. The PBC is overdue; the current ETA is end of November 2026.",
+      "pwcOwners": "PwC (team)",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "date-moved",
+        "discussion"
+      ],
+      "discussion": "PwC / Sudhika / TCM and third-party risk management: arrange admin access for another Goldman Sachs test user, finish the scenario test and complete the overdue PBC, targeting end of November."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 59,
+      "activity": "HR/Payroll late terminations — impact assessment support",
+      "title": "HRP backdated terms — SOX activity confirmation and IPE evidence pending",
+      "detail": "HRP Backdated Terms: working with Chandana and Adi to confirm the appropriateness of activity for SOX in-scope applications; IPE evidence is pending. The reported ETA is end of this week, based on a commitment attributed to “Chandan” last week.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Sudhika & Chandana",
+      "flags": [
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "Chandana / Adi: escalate the outstanding activity-confirmation and IPE evidence requests; confirm the appropriateness of activity for SOX in-scope apps, provide the pending IPE evidence and confirm the exact end-of-this-week delivery date. Stephen / Cloie to assess the evidence for the November 15 assessment target; raise an OE exception immediately if a relevant UAR missed a late termination."
     }
   ],
-  "publicationId": "orange-notes-9e236a074f82",
+  "publicationId": "orange-notes-6445e1e3616d",
   "reviewAsOf": "2026-11-09",
   "followUpTracker": {
     "fileName": "Follow-up Tracker  (1).xlsx",
@@ -9008,6 +9095,48 @@
           "followUpDate": null,
           "reviewAfter": "2026-11-15"
         }
+      },
+      "43": {
+        "notes": [
+          {
+            "source": "User update",
+            "recordedOn": "2026-11-09",
+            "text": "Zip 2-Way: the Deloitte PBC follow-up was submitted. The DT potential issue remains open while the team works with PTP to put a BP Configuration Change Review in place; it is believed to have been added to the escalation tracker. ETA: end of November 2026.",
+            "applicationNote": "Record the reported PBC follow-up submission without claiming Deloitte acceptance or issue closure. Confirm the external escalation-tracker entry; its inclusion was reported tentatively. Keep the dashboard escalation visible. November 30 is the end-of-month ETA for the 2-Way scope, not an actual completion date or a newly agreed deadline for the separate PO-approval control. Preserve that control’s original November 6 deadline/status as unconfirmed. No named PwC owner, control count or hours are inferred."
+          }
+        ],
+        "endOverride": "2026-11-30",
+        "endBasisOverride": "Projected end · End-of-November ETA (user update)",
+        "escalationReason": "Zip 2-Way: the Deloitte PBC follow-up submission is reported complete, but the DT potential issue remains open while PTP establishes a BP Configuration Change Review.",
+        "escalationAction": "PwC / Sudhika / PTP: put the BP Configuration Change Review in place for the Zip 2-Way potential issue, targeting end of November, and confirm its external escalation-tracker entry. Confirm the separate PO-approval follow-up status and timing."
+      },
+      "45": {
+        "notes": [
+          {
+            "source": "User update",
+            "recordedOn": "2026-11-09",
+            "text": "VNDLY: no items are on the DT observation list or in PBC follow-up. Dibyendu and team have requested additional evidence from the control owner without a response; those requests are on the escalation list. ETA: around November 20, 2026.",
+            "applicationNote": "Keep the evidence dependency open and escalated. Preserve “around November 20” as an approximate ETA rather than a firm deadline. Do not carry forward the old PBC/DT-observation label as current status, mark all work completed, or infer a new project owner from the named evidence requester. Original workbook records remain historical context."
+          }
+        ],
+        "endOverride": "Around 2026-11-20",
+        "endBasisOverride": "Projected end · Approximate ETA (user update)",
+        "escalationReason": "VNDLY: no items remain on the DT observation or PBC follow-up lists, but Dibyendu and team’s additional evidence requests to the control owner remain unanswered and on the escalation list.",
+        "escalationAction": "PwC / Sudhika: follow up with Dibyendu and the control owner on the unanswered additional evidence requests and confirm delivery around November 20. Keep this evidence dependency escalated; no open DT observation or PBC follow-up is reported."
+      },
+      "42": {
+        "notes": [
+          {
+            "source": "User update",
+            "recordedOn": "2026-11-09",
+            "text": "TCM.03.09 / Goldman Sachs: another user needs admin access to finish the scenario test. TCM reorganized access so admins are more aligned with the third-party risk management team. The PBC is overdue; the current ETA is end of November 2026.",
+            "applicationNote": "Use November 30 as the new month-end ETA while preserving the explicitly overdue PBC and admin-access dependency as an escalation. Do not imply the access reorganization granted access or that scenario testing is complete. Keep the existing PwC team label and FRM lead; the specific new admin user is not confirmed."
+          }
+        ],
+        "endOverride": "2026-11-30",
+        "endBasisOverride": "Projected end · End-of-November ETA (user update)",
+        "escalationReason": "TCM.03.09: the PBC is overdue and the remaining scenario test is blocked pending another user obtaining Goldman Sachs admin access after TCM moved admin access toward the third-party risk management team.",
+        "escalationAction": "PwC / Sudhika / TCM and third-party risk management: arrange admin access for another Goldman Sachs test user, finish the scenario test and complete the overdue PBC, targeting end of November."
       }
     }
   }

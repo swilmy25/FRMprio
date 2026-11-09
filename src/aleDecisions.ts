@@ -31,6 +31,7 @@ function escalationNextStep(activity: SourceActivity, today: string): string {
   if (!activity.start && !activity.end) return 'Agree start and end dates with FRM so the work can be scheduled.'
   if (/chronosphere/i.test(activity.name) && !activity.end) return 'Confirm Chronosphere scoping and agree an end date with FRM.'
   if (!activity.end) return 'Agree a revised end date with FRM and confirm the delivery plan.'
+  if (health.reasons.includes('Approximate ETA has passed; confirm completion or a revised estimate')) return 'Confirm completion or agree a revised ETA; the reported target was approximate.'
   if (health.reasons.includes('End date has passed; completion is not recorded')) return 'Confirm completion or agree a revised end date with the team.'
   return 'Confirm the start date so the team can commit to the delivery plan.'
 }

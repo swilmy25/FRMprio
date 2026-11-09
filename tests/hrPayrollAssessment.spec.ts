@@ -32,8 +32,11 @@ test('assessment captures ownership, proposed priority, PBC workflow and the con
  const item=buildAleReadout(activities,'2026-10-26').escalations.find(item=>item.activityId===assessment.id)!
  expect(item.owners).toEqual(['Stephen Wilm'])
  expect(item.frmOwners).toEqual(['Sudhika','Chandana'])
- expect(item.nextStep).toContain('escalate the outstanding evidence with Adi')
- expect(assessment.escalationReason).toContain('outstanding with Adi')
+ expect(item.nextStep).toContain('escalate the outstanding activity-confirmation and IPE evidence requests')
+ expect(item.nextStep).toContain('Chandana / Adi')
+ expect(assessment.escalationReason).toContain('IPE evidence remain outstanding')
+ expect(assessment.end).toBe('2026-11-15')
+ expect(assessment.meetingNotes.at(-1)?.applicationNote).toContain('exact evidence-delivery day')
  expect(item.nextStep).toContain('OE exception immediately')
 })
 

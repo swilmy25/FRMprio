@@ -25,8 +25,10 @@ test('all 45 first-tab actions retain their baseline mapping with dated Slack ov
   expect(p.category).toBe(action.category)
   expect(p.start).toBe(action.updatedOn||null)
   expect(tracker.rows[action.row-1][23]).toBe(action.deadline||'TBD')
-  expect(p.endRaw).toBe(action.row===32?'Before 2026-11-13':action.deadline||'TBD')
-  expect(p.endBasis).toBe(action.row===32?'Projected end · Slack update':'Projected end · Deadline J')
+  const ends:Record<number,string>={32:'Before 2026-11-13',42:'2026-11-30',43:'2026-11-30',45:'Around 2026-11-20'}
+  expect(p.endRaw).toBe(ends[action.row]??(action.deadline||'TBD'))
+  const basis:Record<number,string>={32:'Projected end · Slack update',42:'Projected end · End-of-November ETA (user update)',43:'Projected end · End-of-November ETA (user update)',45:'Projected end · Approximate ETA (user update)'}
+  expect(p.endBasis).toBe(basis[action.row]??'Projected end · Deadline J')
   expect(p.completed).toBe(action.status==='Completed')
   expect(p.trackerActions).toEqual([action])
  }

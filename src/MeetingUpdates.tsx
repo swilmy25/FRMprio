@@ -36,6 +36,7 @@ type Focus = typeof focusOptions[number]['value']
 
 function dateText(raw: string): string {
   if(/^before\s/i.test(raw))return `Before ${dateText(raw.replace(/^before\s+/i,''))}`
+  if(/^around\s/i.test(raw))return `Around ${dateText(raw.replace(/^around\s+/i,''))}`
   const iso = sourceDate(raw)
   return iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : raw || 'Not supplied'
 }

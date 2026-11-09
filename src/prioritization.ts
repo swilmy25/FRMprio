@@ -117,14 +117,14 @@ export function parseSource(snapshot: SourceSnapshot): SourceActivity[] {
     const startMonth = start ? null : sourceMonth(startRaw)
     const endRaw = annotation?.endOverride??workbookEndRaw
     const completed = effectiveSection==='Completed' || /^completed$/i.test(endRaw)
-    const before = endRaw.match(/^before\s+(.+)$/i)
-    const beforeEnd = before ? sourceDate(before[1]) : null
+    const qualified = endRaw.match(/^(before|around)\s+(.+)$/i)
+    const qualifiedEnd = qualified ? sourceDate(qualified[2]) : null
     const revised = sourceDate(endRaw)
     const range = endRaw.match(/^(\d{1,2}\/\d{1,2}\/\d{4})\s*-\s*(\d{1,2}\/\d{1,2}\/\d{4})$/)
     const rangeEnd = range ? sourceDate(range[2]) : null
-    const end = beforeEnd ?? revised ?? rangeEnd ?? (dedicatedEnd ? null : sourceDate(cell(16)))
+    const end = qualifiedEnd ?? revised ?? rangeEnd ?? (dedicatedEnd ? null : sourceDate(cell(16)))
     const endBasis = annotation?.endBasisOverride ?? (annotation?.usesTrackerDates ? 'Projected end · Deadline J' : dedicatedEnd ? 'Projected/actual end · X' : revised ? 'Proposed updated due' : rangeEnd ? 'Updated due range endpoint' : end ? 'Original due only' : 'End unknown')
-    if(beforeEnd) warnings.push('The end date is an exclusive before-date boundary, not an exact completion day.')
+    if(qualifiedEnd) warnings.push(qualified![1].toLowerCase()==='around'?'The end is an approximate ETA; the exact completion day is not confirmed.':'The end date is an exclusive before-date boundary, not an exact completion day.')
     if(rangeEnd) warnings.push(`${dedicatedEnd?'X':'R'} contains a due-date range. The last stated date is shown as an endpoint, not a single agreed deadline.`)
     if(end && endBasis === 'Original due only') warnings.push('No precise revised due date; the timeline shows the original due date only.')
     const perspectives = splitPerspectives(cell(21))
@@ -200,11 +200,11 @@ export function dateHealth(p:SourceActivity,today:string):DateHealth {
  if(p.start&&p.end&&p.start>p.end)reasons.push('Start date is after end date')
  if(p.start&&p.end&&p.start===p.end&&/^before\s/i.test(p.endRaw))reasons.push('Start date must precede the before-date deadline')
  if(p.startMonth&&p.end&&p.startMonth>p.end.slice(0,7))reasons.push('Start month is after end date')
- if(p.end&&(p.end<today||/^before\s/i.test(p.endRaw)&&p.end===today))reasons.push('End date has passed; completion is not recorded')
+ if(p.end&&(p.end<today||/^before\s/i.test(p.endRaw)&&p.end===today))reasons.push(/^around\s/i.test(p.endRaw)?'Approximate ETA has passed; confirm completion or a revised estimate':'End date has passed; completion is not recorded')
  if(p.start&&p.start<today&&(/not started/i.test(p.startRaw)||p.status==='Planned'))reasons.push('Projected start date has passed')
  if(reasons.length)return {tone:'escalation',label:'Escalation',reasons}
  if(!p.end)return {tone:'ongoing',label:'Ongoing / not dated',reasons:['Source is ongoing or dates are not applicable.']}
- return {tone:'scheduled',label:p.end===today?'Due today':'Scheduled',reasons:[]}
+ return {tone:'scheduled',label:p.end===today?/^around\s/i.test(p.endRaw)?'ETA around today':'Due today':'Scheduled',reasons:[]}
 }
 
 export function activitiesForLead(activities:SourceActivity[],lead:string|null):SourceActivity[] {
