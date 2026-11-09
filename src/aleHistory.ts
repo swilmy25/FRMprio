@@ -50,7 +50,7 @@ export function aleUpdateId(snapshot: SourceSnapshot, data: AleReadoutData): str
   // Pacific day. Explicit workbook imports retain their original version stamp.
   const stamp = snapshot.fileName === 'Live Google Sheets' ? pacificDay(snapshot.importedAt) : snapshot.importedAt
   return fingerprint({ stamp, tab: snapshot.tabName, rows: snapshot.rows, sections: snapshot.sections, annotations: snapshot.annotations,
-    changeLog: snapshot.changeLog, decisions: [...data.escalations, ...data.alignment].map(item => item.historyKey).sort() })
+    changeLog: snapshot.changeLog, followUpTracker: snapshot.followUpTracker, decisions: [...data.escalations, ...data.alignment].map(item => item.historyKey).sort() })
 }
 
 export function mergeAleHistories(...histories: AleHistory[]): AleHistory {

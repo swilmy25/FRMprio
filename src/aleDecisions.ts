@@ -8,7 +8,7 @@ export type AleReadoutData = { escalations: AleDecision[]; alignment: AleDecisio
 function topic(activity: SourceActivity): string {
   const name = activity.name
   if (/^Revenue new controls\b/i.test(name)) return 'Revenue new controls'
-  if (/chronosphere/i.test(name)) return 'IT Ops / Chronosphere'
+  if (/^IT Ops\b.*Chronosphere/i.test(name)) return 'IT Ops / Chronosphere'
   if (/^Monitoring\b/i.test(name) && /additional followup|Deloitte questions/i.test(name)) return 'Monitoring — Deloitte follow-up'
   if (/^SDLC\s*-\s*Pando\b/i.test(name)) return 'SDLC — Pando'
   if (/^Project Keystone\b/i.test(name)) return 'Project Keystone'

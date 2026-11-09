@@ -61,7 +61,7 @@ export default function MeetingUpdates({ snapshot, lead, today, onSelectActivity
         <span className="meeting-headline-flags"><span className="meeting-flag flag-date-moved">{count('date-moved')} moved dates</span><span className="meeting-flag flag-new-tbd">{count('new-tbd')} new TBDs</span><span className="meeting-flag flag-discussion">{count('discussion')} to discuss</span></span>
       </summary>
       <div className="meeting-summary-body">
-        <p className="meeting-summary-description">Grouped by assigned PwC owners from the workbook and user updates; note providers are labeled separately. Shared updates appear under each owner and count once in totals. Date comparisons use the workbook end date; recorded dates show when notes were supplied.</p>
+        <p className="meeting-summary-description">Grouped by assigned PwC owners from the workbook and user updates; note providers are labeled separately. Shared updates appear under each owner and count once in totals. Historical notes keep their recorded dates. Date comparisons show the original workbook end and the current end, which may include later updates.</p>
         <div className="meeting-member-filters" role="group" aria-label="Meeting PwC owner">
           <button aria-pressed={!member} onClick={() => setMember(null)}>All PwC owners</button>
           {groups.map(group => <button key={group.member} aria-pressed={member === group.member} onClick={() => setMember(member === group.member ? null : group.member)}>{group.member}<span aria-hidden="true">{group.items.length}</span></button>)}
@@ -80,9 +80,9 @@ export default function MeetingUpdates({ snapshot, lead, today, onSelectActivity
                 <h4>{activity ? <button onClick={() => onSelectActivity(activity.row)} aria-label={`View ${change.title || change.activity} activity`}>{change.title || change.activity}</button> : change.title || change.activity}</h4>
                 <p className="meeting-owner-line"><strong>PwC {pwcOwners.length > 1 ? 'owners' : 'owner'}:</strong> {pwcOwners.join(', ') || 'Not recorded in latest workbook'}{pwcOwners.length > 1 ? ' · Shared ownership' : ''}</p>
                 <p className="meeting-update-source"><span><strong>Update from:</strong> {providedBy}</span><small>{change.postedOn && <>Posted {dateText(change.postedOn)} · </>}Recorded {dateText(change.recordedOn)}</small></p>
-                {activity && (flags.includes('date-moved') || flags.includes('date-corrected') || flags.includes('new-tbd')) && <p className="meeting-date-change">Workbook end <span>{dateText(activity.workbookEndRaw)}</span><span aria-hidden="true"> → </span><strong>{dateText(activity.endRaw)}</strong></p>}
-                {activity && flags.includes('date-confirmed') && <p className="meeting-date-change">End confirmed: <strong>{dateText(activity.endRaw)}</strong> · unchanged from workbook</p>}
-                {flags.includes('existing-tbd') && <p className="meeting-date-change">End remains <strong>TBD</strong> · already TBD in workbook</p>}
+                {activity && (flags.includes('date-moved') || flags.includes('date-corrected') || flags.includes('new-tbd')) && <p className="meeting-date-change">Workbook end <span>{dateText(activity.workbookEndRaw)}</span><span> · Current end </span><strong>{dateText(activity.endRaw)}</strong></p>}
+                {activity && flags.includes('date-confirmed') && <p className="meeting-date-change">Current end: <strong>{dateText(activity.endRaw)}</strong> · see the dated confirmation below</p>}
+                {flags.includes('existing-tbd') && <p className="meeting-date-change"><strong>TBD</strong> in this update · already TBD in workbook</p>}
                 <p className="meeting-item-description">{change.detail}</p>
                 {activity?.end && activity.end < today && !activity.completed && <p className="meeting-overdue">Current end {dateText(activity.end)} has passed; confirm revised timing.</p>}
                 {change.discussion && <p className="meeting-discussion"><strong>Discuss / next step:</strong> {change.discussion}</p>}
