@@ -6,6 +6,7 @@ import UpdateLinks from './UpdateLinks'
 import {TrackerActions, AdsDetails} from './TrackerDetails'
 import {adsPbcCounts} from './followUpTracker'
 import { usePacificDate } from './usePacificDate'
+import TwoWeekPriorities from './TwoWeekPriorities'
 
 const day = 86400000
 const value = (iso: string) => Date.parse(`${iso}T00:00:00Z`)
@@ -76,6 +77,7 @@ export default function WorkbookDashboard({ snapshot, lead = null }: { snapshot:
       <button className={`metric ${healthFilter === 'escalation' ? 'metric-active' : ''}`} onClick={() => setHealthFilter(healthFilter === 'escalation' ? 'All date statuses' : 'escalation')}><p>Escalation</p><strong className="red-number">{escalated}</strong><span>Dates, reported risk or escalated dependencies</span></button>
       <button className={`metric ${alignment === 'Not aligned' ? 'metric-active' : ''}`} onClick={() => setAlignment(alignment === 'Not aligned' ? 'All alignment' : 'Not aligned')}><p>PwC / FRM not aligned</p><strong>{unaligned}</strong><span>Source says No or ratings differ</span></button>
     </div>
+    {!snapshot.trackerView && <TwoWeekPriorities activities={allActivities} today={today} lead={lead} onSelect={selectMeetingActivity} />}
     {lead && <section className="lead-breakdowns" aria-label="FRM lead breakdown">
       <article><h2>FRM priorities</h2>{[...new Set(activities.map(p=>rating(p.frmPriority)))].map(r=><button key={r} onClick={()=>setFrmRatings(frmRatings.includes(r)?frmRatings.filter(v=>v!==r):[r])} aria-pressed={frmRatings.includes(r)}>{r}<strong>{activities.filter(p=>rating(p.frmPriority)===r).length}</strong></button>)}</article>
       <article><h2>Categories</h2>{[...new Set(activities.map(p=>p.category||'Not supplied'))].sort().map(c=><button key={c} onClick={()=>setCategories(categories.includes(c)?categories.filter(v=>v!==c):[c])} aria-pressed={categories.includes(c)}>{c}<strong>{activities.filter(p=>(p.category||'Not supplied')===c).length}</strong></button>)}</article>

@@ -1,0 +1,54 @@
+.fortnight-priorities{margin:0 0 24px;padding:24px;overflow:visible}
+.fortnight-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.fortnight-heading h2{font-size:20px;letter-spacing:-.5px;margin:0}
+.fortnight-heading p:not(.eyebrow){font-size:11px;color:#737d8b;margin:8px 0 0}
+.fortnight-total{font-size:11px;color:#876c51;background:#fff5e9;border:1px solid #f1dfc8;border-radius:20px;padding:8px 12px;white-space:nowrap}
+.fortnight-explanation{font-size:11px;line-height:1.8;color:#7b8592;max-width:900px;margin:16px 0}
+.fortnight-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:16px 0;border-top:1px solid #edf0f4;border-bottom:1px solid #edf0f4;margin:0 0 22px}
+.fortnight-summary>div{display:flex;gap:9px;align-items:center;min-width:0}
+.fortnight-summary strong{font-size:22px;font-weight:600;color:#46566b}
+.fortnight-summary span{font-size:10px;color:#7b8592;line-height:1.6}
+.fortnight-attention{border:1px solid #f0d9d2;border-radius:7px;background:#fffbf9;padding:16px;margin-bottom:22px}
+.fortnight-priorities h3{font-size:13px;margin:0;line-height:1.6}
+.fortnight-priorities section>header p,.fortnight-ongoing>p{font-size:11px;line-height:1.7;color:#7b8592;margin:6px 0 14px}
+.fortnight-attention>header h3{color:#ad5d42}
+.fortnight-weeks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.fortnight-week{min-width:0}
+.fortnight-week>header{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}
+.fortnight-week>header p{margin:3px 0 0!important;font-size:10px!important}
+.fortnight-week>header>span{font-size:10px;color:#7b8592;white-space:nowrap}
+.fortnight-cards{display:grid;gap:10px}
+.fortnight-card{min-width:0;background:#fff;border:1px solid #e3e7ed;border-radius:7px;padding:16px;overflow-wrap:anywhere}
+.fortnight-risk{border-left:3px solid #d8957a}
+.fortnight-card-heading{display:flex;flex-direction:column;gap:8px}
+.fortnight-card h4{margin:0}
+.fortnight-card h4 button{border:0;padding:0;background:none;text-align:left;color:#34455b;font-size:12px;font-weight:600;line-height:1.7;cursor:pointer}
+.fortnight-card h4 button:hover{text-decoration:underline;color:#a75d32}
+.fortnight-card h4 button:focus-visible{outline:2px solid #cb7c48;outline-offset:4px;border-radius:3px}
+.fortnight-card h4 button>svg{width:12px;height:12px;color:#9b8b79;vertical-align:-2px}
+.fortnight-signals{display:flex;gap:5px;flex-wrap:wrap}
+.fortnight-signals:empty{display:none}
+.fortnight-dates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:13px 0}
+.fortnight-dates dt{font-size:9px;color:#8b94a1;margin-bottom:5px}
+.fortnight-dates dd{font-size:11px;font-weight:600;line-height:1.7;margin:0;color:#586a80}
+.fortnight-dates dd small{display:block;font-size:9px;line-height:1.7;font-weight:400;color:#8b94a1;margin-top:4px}
+.fortnight-owners p{font-size:10px;line-height:1.7;color:#718094;margin:4px 0}
+.fortnight-owners b{color:#4c6076;margin-right:5px}
+.fortnight-ratings{display:flex;gap:7px;flex-wrap:wrap;margin:11px 0 0}
+.fortnight-ratings>span{font-size:9px;line-height:1.6;background:#f4f6f9;color:#798596;border-radius:4px;padding:4px 6px}
+.fortnight-ratings strong{font-weight:600;color:#50637b;margin-left:4px}
+.fortnight-context{font-size:10px;line-height:1.8;color:#788596;margin:12px 0 0;padding-top:10px;border-top:1px solid #f0f2f5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fortnight-attention .fortnight-context{display:block}
+.fortnight-context b{color:#5e7189;font-weight:600}
+.fortnight-starting{margin-top:22px}
+.fortnight-starting .fortnight-cards,.fortnight-attention .fortnight-cards,.fortnight-ongoing .fortnight-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fortnight-attention .fortnight-card:only-child{grid-column:1/-1}
+.fortnight-more{margin-top:10px}
+.fortnight-more>summary{font-size:11px;line-height:1.8;color:#9a6b47;padding:12px 0;cursor:pointer}
+.fortnight-ongoing{margin-top:22px;border-top:1px solid #edf0f4;padding-top:18px}
+.fortnight-ongoing>summary{font-size:12px;font-weight:600;color:#50637b;cursor:pointer;line-height:1.8}
+.fortnight-ongoing>summary>span{font-size:10px;margin-left:8px;color:#7b8592;background:#f1f4f8;padding:3px 7px;border-radius:4px}
+.fortnight-ongoing>p{margin-top:12px}
+.fortnight-empty{font-size:11px;line-height:1.8;color:#8a94a2;padding:14px 0;margin:0}
+@media(max-width:1050px){.fortnight-weeks{grid-template-columns:1fr}.fortnight-starting .fortnight-cards,.fortnight-attention .fortnight-cards,.fortnight-ongoing .fortnight-cards{grid-template-columns:1fr}}
+@media(max-width:760px){.fortnight-priorities{padding:16px}.fortnight-heading{align-items:flex-start;flex-direction:column;gap:10px}.fortnight-heading h2{font-size:18px}.fortnight-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.fortnight-card{padding:14px}.fortnight-dates{gap:10px}.fortnight-attention{padding:12px}.fortnight-heading .eyebrow{overflow-wrap:anywhere}}
