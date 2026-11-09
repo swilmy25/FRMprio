@@ -1,5 +1,9 @@
 .fortnight-priorities{margin:0 0 24px;padding:24px;overflow:visible}
 .fortnight-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.fortnight-heading-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fortnight-toggle{gap:7px}
+.fortnight-toggle svg{width:14px;height:14px}
+.fortnight-toggle[aria-expanded=false] svg{transform:rotate(-90deg)}
 .fortnight-heading h2{font-size:20px;letter-spacing:-.5px;margin:0}
 .fortnight-heading p:not(.eyebrow){font-size:11px;color:#737d8b;margin:8px 0 0}
 .fortnight-total{font-size:11px;color:#876c51;background:#fff5e9;border:1px solid #f1dfc8;border-radius:20px;padding:8px 12px;white-space:nowrap}

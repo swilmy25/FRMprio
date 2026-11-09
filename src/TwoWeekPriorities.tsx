@@ -1,10 +1,11 @@
-import { useMemo } from 'react'
+import { useId, useMemo, useState } from 'react'
 import { alignmentState, dateHealth, rating } from './prioritization'
 import type { SourceActivity } from './prioritization'
 import { buildTwoWeekPriorities } from './priorityWindow'
 import './TwoWeekPriorities.css'
 
 const date = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+const collapsedStorage = 'frmprio.twoWeekPriorities.collapsed'
 const endLabel = (p: SourceActivity) => p.end
   ? `${/^before\s/i.test(p.endRaw) ? 'Before ' : /^around\s/i.test(p.endRaw) ? 'Around ' : ''}${date(p.end)}`
   : p.endRaw || 'Not supplied'
@@ -37,6 +38,15 @@ function PriorityCard({ activity: p, today, action, onSelect }: {
 export default function TwoWeekPriorities({ activities, today, lead, onSelect }: {
   activities: SourceActivity[]; today: string; lead: string | null; onSelect: (row: number) => void
 }) {
+  const contentId = useId()
+  const [collapsed, setCollapsed] = useState(() => {
+    try { return localStorage.getItem(collapsedStorage) === 'true' } catch { return false }
+  })
+  const toggleCollapsed = () => {
+    const next = !collapsed
+    setCollapsed(next)
+    try { localStorage.setItem(collapsedStorage, String(next)) } catch { /* Keep the control usable without browser storage. */ }
+  }
   const plan = useMemo(() => buildTwoWeekPriorities(activities, today, lead), [activities, today, lead])
   const cards = (items: SourceActivity[]) => <div className="fortnight-cards">{items.map(p => <PriorityCard key={p.id} activity={p} today={today} action={plan.actions.get(p.id)} onSelect={onSelect} />)}</div>
   const week = (title: string, start: string, end: string, items: SourceActivity[]) => <section className="fortnight-week" aria-label={`${title} delivery priorities`}>
@@ -44,7 +54,8 @@ export default function TwoWeekPriorities({ activities, today, lead, onSelect }:
     {items.length ? <>{cards(items.slice(0, 3))}{items.length > 3 && <details className="fortnight-more"><summary>Show {items.length - 3} more deliveries</summary>{cards(items.slice(3))}</details>}</> : <p className="fortnight-empty">No additional delivery targets in this week.</p>}
   </section>
   return <section className="panel fortnight-priorities" aria-label="Next two weeks priorities">
-    <header className="fortnight-heading"><div><p className="eyebrow">{lead ? `FRM FOCUS · ${lead}` : 'PORTFOLIO FOCUS'}</p><h2>Next two weeks</h2><p>{date(plan.start)} – {date(plan.end)} · Pacific time</p></div><span className="fortnight-total">{plan.total} open {plan.total === 1 ? 'project' : 'projects'}</span></header>
+    <header className="fortnight-heading"><div><p className="eyebrow">{lead ? `FRM FOCUS · ${lead}` : 'PORTFOLIO FOCUS'}</p><h2>Next two weeks</h2><p>{date(plan.start)} – {date(plan.end)} · Pacific time</p></div><div className="fortnight-heading-actions"><span className="fortnight-total">{plan.total} open {plan.total === 1 ? 'project' : 'projects'}</span><button className="button fortnight-toggle" type="button" aria-label={`${collapsed ? 'Expand' : 'Collapse'} next two weeks`} aria-expanded={!collapsed} aria-controls={contentId} onClick={toggleCollapsed}>{collapsed ? 'Expand' : 'Collapse'}<svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="m4 6 4 4 4-4" /></svg></button></div></header>
+    <div id={contentId} hidden={collapsed}>
     <p className="fortnight-explanation">{lead ? `Priorities for ${lead}.` : 'Priorities across the full portfolio.'} Decisions first, then upcoming dates. Other active work is ordered by FRM priority, then PwC priority. Each project appears once; the project filters below apply to the timeline.</p>
     <div className="fortnight-summary" aria-label="Two-week focus counts"><div><strong>{plan.attention.length}</strong><span>Need attention</span></div><div><strong>{plan.firstWeek.length + plan.secondWeek.length}</strong><span>Delivery priorities</span></div><div><strong>{plan.starting.length}</strong><span>Upcoming starts</span></div><div><strong>{plan.ongoing.length}</strong><span>Other active work</span></div></div>
     {plan.attention.length > 0 && <section className="fortnight-attention" aria-label="Priorities needing attention"><header><h3>Act now</h3><p>Current escalations and priority decisions, including unresolved items from earlier dates.</p></header>{cards(plan.attention)}</section>}
@@ -52,5 +63,6 @@ export default function TwoWeekPriorities({ activities, today, lead, onSelect }:
     {plan.starting.length > 0 && <section className="fortnight-starting" aria-label="Upcoming project starts"><header><h3>Starting in this window</h3><p>Confirm readiness and agree the first milestones.</p></header>{cards(plan.starting)}</section>}
     {plan.ongoing.length > 0 && <details className="fortnight-ongoing"><summary>Other active work to advance <span>{plan.ongoing.length}</span></summary><p>These open projects span this window or have ongoing work. Confirm the next milestone with the owners.</p>{cards(plan.ongoing)}</details>}
     {!plan.total && <p className="fortnight-empty">No open priorities in this window for {lead || 'the portfolio'}.</p>}
+    </div>
   </section>
 }
