@@ -3,15 +3,15 @@ import type { AleHistory } from './aleHistory'
 
 export type UpdateProvenance = { sourceUrl?:string; via?:string; readoutUrl?:string }
 export type MeetingNote = UpdateProvenance & { source:string; recordedOn:string; postedOn?:string; text:string; applicationNote?:string }
-export type EscalationResolution = { recordedOn:string; reason:string; startRaw:string; endRaw:string; followUpDate:string|null }
+export type EscalationResolution = { recordedOn:string; reason:string; startRaw:string; endRaw:string; followUpDate:string|null; reviewAfter?:string }
 export type MergedActivity = { row:number; name:string; pwcOwners:string; frmLeads:string; frmPriority:string; category:string; pwcPriority:string; alignment:string; activityType:string; startRaw:string; endRaw:string; staffing:string }
-export const ACTIVITY_STATUSES = ['In progress','On track','At risk','On hold','Waiting on FRM'] as const
+export const ACTIVITY_STATUSES = ['In progress','On track','At risk','On hold','Waiting on FRM','Planned'] as const
 export type ActivityStatus = typeof ACTIVITY_STATUSES[number]
 export type PlanningEstimate = { status:'Proposed'; minHours:number; maxHours:number; scope:string; allocationNote:string; assumptions:string[]; exclusions:string[]; breakdown:{label:string;minHours:number;maxHours:number}[] }
 export type ReportedScope = { controlCount:number; hours:number }
 export type TrackerAction = { fileName:string; tabName:string; row:number; recordedOn:string; shortTitle?:string; updatedOn?:string; reviewAddedOn?:string; projectRows?:number[]; addedBy:string; category:string; description:string; ownership:string; currentDRI:string; priority:string; status:string; deadline:string; notes:string; links:string }
 export type FollowUpTracker = {fileName:string;tabName:string;importedAt:string;actions:TrackerAction[];annotations?:Record<string,ActivityAnnotation>}
-export type AdsEvidence = {fileName:string;recordedOn:string;controls:{row:number;control:string;title:string;phase:string;pbc:string;assignee:string;status:string;deadline:string;notes:string}[];followUps:{row:number;control:string;description:string;controlOwner:string;question:string;status:string;pbc:string}[]}
+export type AdsEvidence = {fileName:string;recordedOn:string;supersededOn?:string;supersededNote?:string;controls:{row:number;control:string;title:string;phase:string;pbc:string;assignee:string;status:string;deadline:string;notes:string}[];followUps:{row:number;control:string;description:string;controlOwner:string;question:string;status:string;pbc:string}[]}
 export type ActivityAnnotation = { notes:MeetingNote[]; startOverride?:string; categoryOverride?:string; usesTrackerDates?:boolean; adsEvidence?:AdsEvidence; trackerActionHistory?:TrackerAction[]; trackerActions?:TrackerAction[]; newlyTrackedOn?:string; discoverySource?:string; leadershipPriority?:string; endBasisOverride?:string; escalationResolution?:EscalationResolution; reportedScope?:ReportedScope; historyName?:string; planningEstimate?:PlanningEstimate; userAdded?:boolean; escalationPaused?:boolean; escalationPauseReason?:string; escalationReason?:string; escalationAction?:string; followUpDate?:string; pwcOwnersOverride?:string; nameOverride?:string; endOverride?:string; sectionOverride?:string; closureReason?:string; frmLeadsOverride?:string; mergedActivities?:MergedActivity[]; statusOverride?:ActivityStatus }
 export const MEETING_UPDATE_FLAGS = ['date-moved','date-confirmed','new-tbd','existing-tbd','discussion','completed','closed','scope-change','in-progress','date-corrected','on-track','at-risk','on-hold','waiting-frm','escalation-paused','escalation-closed'] as const
 export type MeetingUpdateFlag = typeof MEETING_UPDATE_FLAGS[number]
@@ -62,7 +62,7 @@ export function splitPerspectives(text: string): SourceActivity['perspectives'] 
 }
 function object(value:unknown):value is Record<string,unknown> {return !!value&&typeof value==='object'&&!Array.isArray(value)}
 function validProvenance(value:Record<string,unknown>):boolean {return ['sourceUrl','readoutUrl'].every(k=>value[k]===undefined||typeof value[k]==='string'&&/^https:\/\/[^\s]+$/.test(value[k]))&&(value.via===undefined||typeof value.via==='string'&&!!value.via.trim())}
-function validResolution(value:unknown):boolean {return value===undefined||object(value)&&typeof value.recordedOn==='string'&&!!sourceDate(value.recordedOn)&&['reason','startRaw','endRaw'].every(k=>typeof value[k]==='string')&&!!value.reason&&(value.followUpDate===null||typeof value.followUpDate==='string'&&!!sourceDate(value.followUpDate))}
+function validResolution(value:unknown):boolean {return value===undefined||object(value)&&typeof value.recordedOn==='string'&&!!sourceDate(value.recordedOn)&&['reason','startRaw','endRaw'].every(k=>typeof value[k]==='string')&&!!value.reason&&(value.reviewAfter===undefined||typeof value.reviewAfter==='string'&&!!sourceDate(value.reviewAfter)&&value.reviewAfter>=String(value.recordedOn))&&(value.followUpDate===null||typeof value.followUpDate==='string'&&!!sourceDate(value.followUpDate))}
 function validNotes(value:unknown):boolean {return Array.isArray(value)&&value.every(n=>object(n)&&validProvenance(n)&&typeof n.source==='string'&&typeof n.text==='string'&&typeof n.recordedOn==='string'&&!!sourceDate(n.recordedOn)&&(n.postedOn===undefined||typeof n.postedOn==='string'&&!!sourceDate(n.postedOn))&&(n.applicationNote===undefined||typeof n.applicationNote==='string'))}
 function validHourRange(value:unknown):boolean {
  return object(value)&&typeof value.minHours==='number'&&Number.isFinite(value.minHours)&&value.minHours>=0&&typeof value.maxHours==='number'&&Number.isFinite(value.maxHours)&&value.maxHours>=value.minHours
@@ -82,7 +82,7 @@ function validTrackerActions(value:unknown):boolean {
 }
 function validAdsEvidence(value:unknown):boolean {
  if(value===undefined)return true
- return object(value)&&typeof value.fileName==='string'&&typeof value.recordedOn==='string'&&!!sourceDate(value.recordedOn)&&Array.isArray(value.controls)&&value.controls.every(c=>object(c)&&Number.isInteger(c.row)&&Number(c.row)>0&&['control','title','phase','pbc','assignee','status','deadline','notes'].every(k=>typeof c[k]==='string'))&&Array.isArray(value.followUps)&&value.followUps.every(c=>object(c)&&Number.isInteger(c.row)&&Number(c.row)>0&&['control','description','controlOwner','question','status','pbc'].every(k=>typeof c[k]==='string'))
+ return object(value)&&typeof value.fileName==='string'&&typeof value.recordedOn==='string'&&!!sourceDate(value.recordedOn)&&(value.supersededOn===undefined||typeof value.supersededOn==='string'&&!!sourceDate(value.supersededOn))&&(value.supersededNote===undefined||typeof value.supersededNote==='string')&&Array.isArray(value.controls)&&value.controls.every(c=>object(c)&&Number.isInteger(c.row)&&Number(c.row)>0&&['control','title','phase','pbc','assignee','status','deadline','notes'].every(k=>typeof c[k]==='string'))&&Array.isArray(value.followUps)&&value.followUps.every(c=>object(c)&&Number.isInteger(c.row)&&Number(c.row)>0&&['control','description','controlOwner','question','status','pbc'].every(k=>typeof c[k]==='string'))
 }
 function validFollowUpTracker(value:unknown):boolean {return value===undefined||object(value)&&typeof value.fileName==='string'&&typeof value.tabName==='string'&&typeof value.importedAt==='string'&&Number.isFinite(Date.parse(value.importedAt))&&Array.isArray(value.actions)&&validTrackerActions(value.actions)&&new Set(value.actions.map(a=>a.row)).size===value.actions.length&&validAnnotations(value.annotations)}
 function validAnnotations(value:unknown):boolean {
@@ -188,7 +188,7 @@ export type DateHealth={tone:'completed'|'escalation'|'scheduled'|'ongoing'|'pau
 export function dateHealth(p:SourceActivity,today:string):DateHealth {
  if(p.completed)return {tone:'completed',label:p.closureReason?`Closed · ${p.closureReason[0].toLowerCase()}${p.closureReason.slice(1)}`:'Completed',reasons:[p.closureReason||'Marked completed in the source or confirmed by a meeting update.']}
  const resolution=p.escalationResolution
- if(resolution&&resolution.recordedOn<=today&&resolution.startRaw===p.startRaw&&resolution.endRaw===p.endRaw&&resolution.followUpDate===p.followUpDate&&!p.escalationReason&&p.status!=='At risk')return {tone:'paused',label:'Escalation closed',reasons:[resolution.reason]}
+ if(resolution&&resolution.recordedOn<=today&&(!resolution.reviewAfter||today<=resolution.reviewAfter)&&resolution.startRaw===p.startRaw&&resolution.endRaw===p.endRaw&&resolution.followUpDate===p.followUpDate&&!p.escalationReason&&p.status!=='At risk')return {tone:'paused',label:resolution.reviewAfter?'Escalation paused':'Escalation closed',reasons:[resolution.reason]}
  if(p.escalationPaused&&!p.end&&/^(TBD|pending|)$/i.test(p.endRaw.trim())&&!p.escalationReason&&p.status!=='At risk')return {tone:'paused',label:'Escalation paused',reasons:[p.escalationPauseReason||'Awaiting FRM dates; escalation paused by the recorded team update.']}
  const reasons:string[]=[]
  if(p.escalationReason)reasons.push(p.escalationReason)
@@ -201,7 +201,7 @@ export function dateHealth(p:SourceActivity,today:string):DateHealth {
  if(p.start&&p.end&&p.start===p.end&&/^before\s/i.test(p.endRaw))reasons.push('Start date must precede the before-date deadline')
  if(p.startMonth&&p.end&&p.startMonth>p.end.slice(0,7))reasons.push('Start month is after end date')
  if(p.end&&(p.end<today||/^before\s/i.test(p.endRaw)&&p.end===today))reasons.push('End date has passed; completion is not recorded')
- if(p.start&&p.start<today&&/not started/i.test(p.startRaw))reasons.push('Projected start date has passed')
+ if(p.start&&p.start<today&&(/not started/i.test(p.startRaw)||p.status==='Planned'))reasons.push('Projected start date has passed')
  if(reasons.length)return {tone:'escalation',label:'Escalation',reasons}
  if(!p.end)return {tone:'ongoing',label:'Ongoing / not dated',reasons:['Source is ongoing or dates are not applicable.']}
  return {tone:'scheduled',label:p.end===today?'Due today':'Scheduled',reasons:[]}
@@ -218,5 +218,5 @@ export function snapshotForLead(snapshot:SourceSnapshot,lead:string):SourceSnaps
  const header=snapshot.rows.findIndex(row=>/task\s*\/\s*activity/i.test(row[2]??''))
  const scopedActions=snapshot.followUpTracker?.actions.filter(a=>a.projectRows?.some(row=>selectedRows.has(row)))
  const scopedActionRows=new Set(scopedActions?.map(a=>String(a.row)))
- return {...snapshot,followUpTracker:snapshot.followUpTracker?{...snapshot.followUpTracker,actions:scopedActions!,annotations:Object.fromEntries(Object.entries(snapshot.followUpTracker.annotations??{}).filter(([row])=>scopedActionRows.has(row)))}:undefined,aleHistory:snapshot.aleHistory?aleHistoryForNames(snapshot.aleHistory,scoped.map(p=>p.historyName??p.name)):undefined,publicationId:undefined,fileName:`${snapshot.fileName} · FRM lead: ${lead}`,sections:Object.fromEntries(scoped.map(p=>[String(p.row),p.section])),annotations:Object.fromEntries(Object.entries(snapshot.annotations??{}).filter(([row])=>selectedRows.has(Number(row)))),changeLog:snapshot.changeLog?.filter(change=>change.row&&selectedRows.has(change.row)||change.frmLeads&&peopleDirectory([change.frmLeads]).resolve(change.frmLeads).includes(lead)),rows:snapshot.rows.map((row,index)=>index<=header||selectedRows.has(index+1)?row:row.map(()=>''))}
+ return {...snapshot,followUpTracker:snapshot.followUpTracker?{...snapshot.followUpTracker,actions:scopedActions!,annotations:Object.fromEntries(Object.entries(snapshot.followUpTracker.annotations??{}).filter(([row])=>scopedActionRows.has(row)))}:undefined,aleHistory:snapshot.aleHistory?aleHistoryForNames(snapshot.aleHistory,scoped.flatMap(p=>[p.historyName??p.name,...p.mergedActivities.map(m=>m.name)])):undefined,publicationId:undefined,fileName:`${snapshot.fileName} · FRM lead: ${lead}`,sections:Object.fromEntries(scoped.map(p=>[String(p.row),p.section])),annotations:Object.fromEntries(Object.entries(snapshot.annotations??{}).filter(([row])=>selectedRows.has(Number(row)))),changeLog:snapshot.changeLog?.filter(change=>change.row&&selectedRows.has(change.row)||change.frmLeads&&peopleDirectory([change.frmLeads]).resolve(change.frmLeads).includes(lead)),rows:snapshot.rows.map((row,index)=>index<=header||selectedRows.has(index+1)?row:row.map(()=>''))}
 }

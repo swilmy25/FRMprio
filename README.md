@@ -137,3 +137,13 @@ To refresh, have Buddy read the channel and its relevant threads, then supply it
 An **Escalation closed** record keeps the underlying project open. It stores the dates/checkpoint reviewed at closure; changed dates/checkpoints or a newly reported risk resume escalation checks. CosmosDB wording follows its own action, separately from the broader CosmosDB discovery project. Keystone’s architecture escalation is separate from the active SDLC memo/impact-assessment follow-ups. Completed readiness or uplift is separate from remaining Q4 testing in Optro.
 
 The DCGM deadline is **before November 13**, an exclusive date boundary. Ads’ reported November 13 delivery forecast and existing November 15 full-review target are retained together pending confirmation. New AI Governance scope is highlighted with its explicit leadership priority; missing PwC ownership and project dates remain unconfirmed. Current testing status for the confirmed B2B/B2C, Applied Infra and SecOps workstreams comes from Optro; the workbook remains a follow-up/action snapshot.
+
+## Latest Stephen/PwC update — November 9, 2026
+
+Ads Phases 2–3 remain in progress with the final ADS.09.01 follow-up and no escalation requested this week. The already agreed November 15 target stays in place; the escalation pause is reviewed after that date if completion is not confirmed. Workbook PBC statuses are retained as a historical snapshot and the latest project update is displayed separately.
+
+Ads ITGCs (Arsenal UI), including Ads monitoring, are planned for November 16–December 31. The earlier delivery window and design-gap escalation are superseded by this plan; historical design notes remain readiness context. A Planned start that passes without confirmation is escalated.
+
+AI Governance and Oracle MCP are one reporting topic, using Oracle’s existing owners and stable readout history. AI Governance’s original row and unconfirmed dates are retained as merged context. Deficiency wording is with Sudhika and the control owner. The retained November 15 date is an Oracle review milestone, not an invented deadline for all AI Governance work.
+
+HR/Payroll assessment evidence is outstanding with Adi and explicitly escalated. Existing SAD priority, dates, owners, proposed effort and the conditional immediate OE-exception trigger remain in effect.

@@ -11,7 +11,7 @@ const expectedOwners:Record<string,string[]>={...verifiedOwners.ownersByRow,'36'
 
 test('latest workbook and meeting decisions retain provenance and apply the requested dates',()=>{
  expect(isSourceSnapshot(snapshot)).toBe(true)
- expect(activities).toHaveLength(68)
+ expect(activities).toHaveLength(67)
  const metrics=activity(58)
  expect(metrics.name).toBe('Non-GAAP metrics')
  expect(metrics.pwcOwners).toBe('Stephen Wilm')
@@ -65,7 +65,7 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  expect(snapshot.rows[18][2]).toBe(activity(19).workbookName)
  expect(activities.filter(p=>/Phases 2 & 3/.test(p.name))).toHaveLength(1)
  expect(activity(18).end).toBeNull()
- expect(activity(20).name).toBe('Ads ITGCs (Arsenal UI)')
+ expect(activity(20).name).toBe('Ads ITGCs (Arsenal UI) — including Ads monitoring')
  expect(parseSource(snapshotForLead(snapshot,'Urminder')).find(p=>p.row===19)?.name).toBe(activity(19).name)
  expect(activity(12).workbookEndRaw).toBe('2026-10-15')
  expect(activity(12).meetingNotes[0].source).toBe('Mayra')
@@ -104,7 +104,7 @@ test('named removals leave AWS and Project Keystone intact and preserve revenue 
 })
 test('notes and original workbook values are visible, merged context is searchable, and Nano is clearly closed',async({page})=>{
  await page.goto('/')
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(68)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(67)
  await page.getByLabel('Search source activities').fill('API Tokenization')
  await expect(page.locator('.source-date-facts')).toContainText('Nov 10, 2026')
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('2026-10-15')
@@ -149,7 +149,7 @@ test('notes and original workbook values are visible, merged context is searchab
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Contracted Power')
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('all other metrics are ready')
  await page.reload()
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(68)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(67)
 })
 test('a browser-local import can explicitly return to the published workbook and decisions',async({page})=>{
  const local=structuredClone(snapshot);delete local.publicationId;delete local.annotations;delete local.changeLog
@@ -168,9 +168,9 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Ankita','Ben Oates','Cami Aromando','Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','PwC (team)','Sonu Kumar','Stephen Wilm'])
  expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
  const items=uniqueMeetingItems(groups)
- expect(items).toHaveLength(143)
+ expect(items).toHaveLength(147)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
- expect(rows('date-moved')).toEqual([12,22,26,27,35,40,56,57,59,60,66,67])
+ expect(rows('date-moved')).toEqual([12,20,22,26,27,35,40,56,57,59,60,66,67])
  expect(rows('date-corrected')).toEqual([40])
  expect(rows('date-confirmed')).toEqual([19,19,34])
  expect(rows('new-tbd')).toEqual([16,36])
@@ -197,7 +197,7 @@ test('dashboard and meeting owners follow worksheet or explicit user assignments
   }
  }
  const stephen=groups.find(group=>group.member==='Stephen Wilm')!
- expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19,18,26,18,19,20,31])
+ expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19,18,26,18,19,20,31,19,20,26,59])
  expect(stephen.items[0].providedBy).toBe('User update')
  const jeff=groups.find(group=>group.member==='Jeff Rose')!
  expect(jeff.items.map(item=>item.change.row)).toEqual([8,48,55,31])
@@ -263,7 +263,7 @@ test('member and focus filters show before/after dates and actionable TBDs witho
  await expect(summaries).toContainText('Workbook end Nov 15, 2026 · Current end TBD')
  await expect(summaries).toContainText('Workbook end Oct 30, 2026 · Current end Nov 10, 2026')
  await expect(summaries.getByRole('button',{name:'View IT Ops / Chronosphere activity'})).toHaveCount(0)
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(68)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(67)
  await expect(mayra.locator('li').filter({hasText:'Stripe'})).toContainText('PwC owner: Mayra Mendoza')
  await expect(mayra.locator('li').filter({hasText:'Stripe'}).locator('.meeting-update-source')).toContainText('Update from: Jeff Rose')
  await expect(mayra.locator('li').filter({hasText:'Stripe'}).locator('.meeting-update-source')).toContainText('Recorded Oct 20, 2026')

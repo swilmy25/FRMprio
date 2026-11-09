@@ -11,7 +11,7 @@ const activity = (row: number) => activities.find(item => item.row === row)!
 const today = '2026-11-09'
 
 test('date corrections supersede overdue values without closing unfinished work or changing unrelated activities', () => {
-  expect(activities).toHaveLength(68)
+  expect(activities).toHaveLength(67)
   expect(activity(40).end).toBe('2027-01-15')
   expect(activity(40).workbookEndRaw).toBe('11/31')
   expect(activity(40).start).toBe('2026-10-26')
@@ -53,19 +53,19 @@ test('current owners change independently of workbook ownership and update provi
 
 test('reported control risk and PBC dependency escalate future targets with accurate next steps', () => {
   const oracle = activity(26), ads = activity(19)
-  expect(oracle.status).toBe('At risk')
+  expect(oracle.status).toBe('Waiting on FRM')
   expect(oracle.end).toBe('2026-11-15')
   expect(dateHealth(oracle, today).tone).toBe('escalation')
-  expect(oracle.escalationReason).toContain('Wrong-environment posting confirmation')
+  expect(oracle.escalationReason).toContain('Deficiency wording')
   expect(oracle.meetingNotes.find(note=>note.postedOn==='2026-10-21')?.text).toContain('wrong Oracle environment')
   expect(oracle.meetingNotes.find(note=>note.postedOn==='2026-10-21')?.text).toContain('October 16')
   expect(oracle.meetingNotes.find(note=>note.postedOn==='2026-10-21')?.text).toContain('planned for October 21')
   expect(ads.end).toBe('2026-11-15')
-  expect(dateHealth(ads, today).tone).toBe('escalation')
+  expect(dateHealth(ads, today).tone).toBe('paused')
   expect(dateHealth(ads, today).reasons).not.toContain('End date has passed; completion is not recorded')
   const readout = buildAleReadout(activities, today)
-  expect(readout.escalations.find(item => item.topic === 'Oracle MCP')?.nextStep).toContain('Sudhika')
-  expect(readout.escalations.find(item => item.topic.includes('Phases 2 & 3'))?.nextStep).toContain('Sandeep')
+  expect(readout.escalations.find(item => item.topic === 'AI Governance / Oracle MCP')?.nextStep).toContain('Sudhika')
+  expect(readout.escalations.some(item => item.topic.includes('Phases 2 & 3'))).toBe(false)
   expect(readout.escalations.some(item => item.topic === 'API Tokenization')).toBe(false)
 })
 
@@ -126,8 +126,8 @@ test('portfolio, owner filters, dated source attribution, paused view and Ale-ka
   await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('completed on time')
   await expect(page.locator('.source-date-facts')).toContainText('Oct 31, 2026')
   await page.getByLabel('Search source activities').fill('Oracle MCP')
-  await expect(page.locator('.source-details h2')).toHaveText('Oracle MCP')
-  await expect(page.locator('.workbook-row.project-row .project-cell > strong[title="Oracle MCP"]')).toHaveCount(1)
+  await expect(page.locator('.source-details h2')).toHaveText('AI Governance / Oracle MCP')
+  await expect(page.locator('.workbook-row.project-row .project-cell > strong[title="AI Governance / Oracle MCP"]')).toHaveCount(1)
   await expect(page.locator('.source-date-facts')).toContainText('Nov 15, 2026')
   await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Originally 8 controls, now 11 proposed')
   await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('larger dollar value')
@@ -158,7 +158,7 @@ test('portfolio, owner filters, dated source attribution, paused view and Ale-ka
   await expect(page.locator('.workbook-row.date-scheduled')).toHaveCount(1)
   await page.getByRole('button',{name:'Ale-kazam',exact:true}).click()
   const readout=page.getByRole('region',{name:'Alejandro’s leadership readout'})
-  await expect(readout.getByRole('article',{name:'Escalations: Oracle MCP',exact:true})).toContainText('@Stephen Wilm')
+  await expect(readout.getByRole('article',{name:'Escalations: AI Governance / Oracle MCP',exact:true})).toContainText('@Stephen Wilm')
   await expect(readout.getByRole('article',{name:'Escalations: SDLC — Pando',exact:true})).toHaveCount(0)
   for(const title of ['AWS','Monorepo new control (Automated Account Classification)','Stripe','Monitoring — Deloitte follow-up','IT Ops / Chronosphere','Platform OE Testing — ITACs','Platform OE Testing — ITGCs'])await expect(readout.getByRole('article',{name:`Escalations: ${title}`,exact:true})).toHaveCount(0)
 })

@@ -1080,6 +1080,62 @@
           "bucket": "alignment"
         }
       ]
+    },
+    {
+      "id": "11fd586644ca1f6c",
+      "observedAt": "2026-11-09T19:09:18.101Z",
+      "decisions": [
+        {
+          "key": "escalation:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:oracle mcp - currently only asked to test 1 use case (oracle je prep through codex). originally 8 controls, now 11 proposed",
+          "topic": "AI Governance / Oracle MCP",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:key reports",
+          "topic": "Key Reports",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:vertex (itgcs)",
+          "topic": "Vertex ITGCs",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:key reports - wave 2",
+          "topic": "Key Reports - Wave 2",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:hr/payroll late terminations - impact assessment support",
+          "topic": "HR/Payroll late terminations — impact assessment support",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:goldman sachs banking portal - dual administration (tcm.03.09)",
+          "topic": "Goldman Sachs Banking Portal — dual administration (TCM.03.09)",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:zip - two-way match and po approval follow-ups",
+          "topic": "Zip — two-way match and PO approval follow-ups",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:vndly - job monitoring and incident management",
+          "topic": "VNDLY — job monitoring and incident management",
+          "bucket": "escalation"
+        },
+        {
+          "key": "alignment:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "alignment"
+        }
+      ]
     }
   ]
 }

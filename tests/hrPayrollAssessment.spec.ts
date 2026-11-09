@@ -17,7 +17,7 @@ test('assessment captures ownership, proposed priority, PBC workflow and the con
  expect(assessment.start).toBe('2026-10-21')
  expect(assessment.end).toBe('2026-11-15')
  expect(assessment.completed).toBe(false)
- expect(assessment.status).toBe('In progress')
+ expect(assessment.status).toBe('Waiting on FRM')
  const notes=assessment.meetingNotes.map(note=>note.text+' '+note.applicationNote).join(' ')
  expect(notes).toContain('Approximately 20 terminations')
  expect(notes).toContain('actual termination date')
@@ -32,7 +32,9 @@ test('assessment captures ownership, proposed priority, PBC workflow and the con
  const item=buildAleReadout(activities,'2026-10-26').escalations.find(item=>item.activityId===assessment.id)!
  expect(item.owners).toEqual(['Stephen Wilm'])
  expect(item.frmOwners).toEqual(['Sudhika','Chandana'])
- expect(item.nextStep).toContain('Agree Stephen’s scope and hours with Cloie')
+ expect(item.nextStep).toContain('escalate the outstanding evidence with Adi')
+ expect(assessment.escalationReason).toContain('outstanding with Adi')
+ expect(item.nextStep).toContain('OE exception immediately')
 })
 
 test('planning range is a scoped proposal, survives both lead exports and never becomes actual or allocated hours',()=>{

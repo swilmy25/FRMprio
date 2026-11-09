@@ -83,8 +83,7 @@
     "73": "Active portfolio",
     "74": "Completed",
     "75": "Active portfolio",
-    "76": "Active portfolio",
-    "77": "Active portfolio"
+    "76": "Active portfolio"
   },
   "rows": [
     [
@@ -2138,33 +2137,6 @@
       "2026-11-04",
       "2026-11-11",
       ""
-    ],
-    [
-      "",
-      "",
-      "AI Governance",
-      "",
-      "",
-      "Sudhika",
-      "",
-      "AI Governance",
-      "",
-      "",
-      "Governance",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "TBD",
-      "TBD",
-      ""
     ]
   ],
   "annotations": {
@@ -2874,13 +2846,18 @@
           "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
           "via": "FRMprio Buddy",
           "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "Ads New ITAC Controls — Phases 2 & 3: final controls will be prepared this week, with one last follow-up for AD.09.01 (tracked as ADS.09.01). No escalation is needed; closure is expected this week.",
+          "applicationNote": "“This week” is November 9–15, 2026. Retain the already agreed November 15 target without inventing an exact closure day. Supersede the older active PBC/held-control escalation and the November 13 forecast question. Keep the item open until completion is confirmed. The original Ads-tab statuses remain a historical evidence snapshot; no per-control certification is invented."
         }
       ],
       "nameOverride": "Ads New ITAC Controls — Phases 2 & 3",
       "endOverride": "2026-11-15",
       "statusOverride": "In progress",
-      "escalationReason": "Phases 2 / 3 still include one PBC with no evidence, two on hold and two in follow-up; review completion is not recorded.",
-      "escalationAction": "Stephen / Sandeep / Urminder: confirm November 13 delivery versus November 15 full review, obtain the missing ADS.09.01 evidence and unblock held/follow-up PBCs.",
+      "escalationAction": "Stephen / Sandeep / Urminder: prepare the final Phase 2–3 controls this week and close the last AD.09.01 follow-up (tracked as ADS.09.01); confirm completion and full review.",
       "trackerActions": [
         {
           "fileName": "Follow-up Tracker  (1).xlsx",
@@ -3040,7 +3017,17 @@
             "status": "Closed",
             "pbc": "3491.0"
           }
-        ]
+        ],
+        "supersededOn": "2026-11-09",
+        "supersededNote": "Final controls are being prepared this week; ADS.09.01 is the last follow-up. No escalation requested; closure expected this week."
+      },
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "Ads New ITAC Controls — Phases 2 & 3: final controls will be prepared this week, with one last follow-up for AD.09.01 (tracked as ADS.09.01). No escalation is needed; closure is expected this week.",
+        "startRaw": "2026-10-13",
+        "endRaw": "2026-11-15",
+        "followUpDate": null,
+        "reviewAfter": "2026-11-15"
       }
     },
     "48": {
@@ -3655,15 +3642,38 @@
           "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794012489918499",
           "via": "FRMprio Buddy",
           "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "Merge Oracle MCP into the AI Governance conversation. Deficiency wording has been shared with Sudhika and the control owner and is currently with Sudhika.",
+          "applicationNote": "Count the combined AI Governance / Oracle MCP topic once. Preserve Oracle’s existing owners, control-risk history and stable readout identity, and retain the original AI Governance scope and notes as merged context. Keep the November 15 Oracle review target as an Oracle component milestone; broader AI Governance dates remain unconfirmed. Wording shared is not a completed review or resolved deficiency. The current next step is Sudhika’s response, superseding the old workpaper request."
         }
       ],
-      "statusOverride": "At risk",
-      "escalationReason": "Wrong-environment posting confirmation remains open: journal entries reached production despite a test-environment prompt in Codex.",
-      "escalationAction": "Top priority for Ale / Sudhika: expedite blockers, obtain Joaquin’s workpapers and confirm review timing; resolve the still-open production JE posting question with Sudhika.",
-      "nameOverride": "Oracle MCP",
+      "statusOverride": "Waiting on FRM",
+      "escalationReason": "Deficiency wording has been shared with Sudhika and the control owner; Sudhika’s review and response remain outstanding.",
+      "escalationAction": "Sudhika: review the deficiency wording shared with the control owner and confirm the response, remaining actions and broader AI Governance milestones; Stephen/Joaquin to track the follow-up.",
+      "nameOverride": "AI Governance / Oracle MCP",
       "historyName": "Oracle MCP - currently only asked to test 1 use case (Oracle JE prep through Codex). Originally 8 controls, now 11 proposed\n\nFurther discovery is ongoing with Finance AI Framework and reviewing what will be provided to Deloitte.",
       "endOverride": "2026-11-15",
-      "leadershipPriority": "Top priority — Ale / Sudhika"
+      "leadershipPriority": "Top priority — Ale / Sudhika",
+      "mergedActivities": [
+        {
+          "row": 77,
+          "name": "AI Governance",
+          "pwcOwners": "",
+          "frmLeads": "Sudhika",
+          "frmPriority": "",
+          "category": "AI Governance",
+          "pwcPriority": "",
+          "alignment": "",
+          "activityType": "Governance",
+          "startRaw": "TBD",
+          "endRaw": "TBD",
+          "staffing": ""
+        }
+      ],
+      "endBasisOverride": "Oracle MCP review target; broader AI Governance dates unconfirmed"
     },
     "40": {
       "notes": [
@@ -3914,7 +3924,7 @@
     },
     "59": {
       "userAdded": true,
-      "statusOverride": "In progress",
+      "statusOverride": "Waiting on FRM",
       "planningEstimate": {
         "status": "Proposed",
         "minHours": 40,
@@ -3953,8 +3963,7 @@
           "Substantial log reconstruction, inaccessible evidence or a materially larger population/system footprint."
         ]
       },
-      "escalationReason": "Prioritized for SAD implications against the November 15 end date; Stephen’s incremental allocation is still unconfirmed.",
-      "escalationAction": "Agree Stephen’s scope and hours with Cloie to support the November 15 SAD-related assessment target; raise an OE exception immediately if a relevant UAR missed a late termination.",
+      "escalationAction": "Sudhika / Chandana: escalate the outstanding evidence with Adi and confirm delivery timing; coordinate Stephen/Cloie and HR Ops review for the November 15 SAD-related assessment target. Raise an OE exception immediately if a relevant UAR missed a late termination.",
       "notes": [
         {
           "source": "User update",
@@ -3979,9 +3988,16 @@
           "recordedOn": "2026-10-26",
           "text": "Set the HR/Payroll late-termination impact assessment start to last Wednesday, October 21, 2026, and end to November 15, 2026. This work is being prioritized given its SAD implications.",
           "applicationNote": "Last Wednesday is resolved relative to October 26, 2026 in America/Los_Angeles. High PwC priority is retained; FRM priority remains unconfirmed. The assessment end is now dated; no separate SAD-finalization milestone is invented. Stephen’s incremental allocation and the existing proposed full-assessment range remain unconfirmed. The conditional immediate OE-exception trigger and coordination with Cloie, Sudhika/Chandana, Adi and HR Ops remain in effect."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "HR/Payroll late terminations — impact assessment support: evidence remains outstanding with Adi and needs to be escalated.",
+          "applicationNote": "Retain Stephen as PwC owner and Sudhika/Chandana as FRM leads; Adi is the evidence contact. Preserve the October 21–November 15 assessment window, SAD priority, proposed effort range and conditional OE-exception trigger. Outstanding evidence is not itself confirmation of a control exception."
         }
       ],
-      "endOverride": "2026-11-15"
+      "endOverride": "2026-11-15",
+      "escalationReason": "Evidence for the HR/Payroll late-termination impact assessment is outstanding with Adi and needs escalation given the SAD implications."
     },
     "13": {
       "statusOverride": "In progress",
@@ -5728,25 +5744,6 @@
       "statusOverride": "In progress",
       "escalationAction": "Ben / Avi: identify the Kepler/Trino/Spark-to-S3 completeness and accuracy controls with Bonnie for the November 30 target."
     },
-    "77": {
-      "userAdded": true,
-      "newlyTrackedOn": "2026-11-09",
-      "discoverySource": "Slack via FRMprio Buddy",
-      "leadershipPriority": "Top priority — Ale / Sudhika",
-      "notes": [
-        {
-          "source": "Chester Phung",
-          "postedOn": "2026-11-06",
-          "recordedOn": "2026-11-09",
-          "text": "Chester reports that Ale wants AI Governance and Oracle MCP at the top of Sudhika’s workstream and faster escalation of blockers. Ale will circle back with Sudhika; a team discussion was planned for November 9.",
-          "applicationNote": "Leadership priority is explicit. This does not assign Chester as a PwC owner or confirm that the November 9 discussion occurred. AI Governance dates and its PwC owner remain unconfirmed. Existing Oracle owners, control risk and November 15 review target are retained.",
-          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794012489918499",
-          "via": "FRMprio Buddy",
-          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
-        }
-      ],
-      "escalationAction": "Ale / Sudhika: confirm the AI Governance PwC owner, scope and delivery dates, and escalate blockers promptly."
-    },
     "20": {
       "notes": [
         {
@@ -5758,11 +5755,19 @@
           "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
           "via": "FRMprio Buddy",
           "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "Ads ITGCs (Arsenal UI), including Ads monitoring: move the start to November 16, 2026 and projected finish to December 31, 2026.",
+          "applicationNote": "The latest dated plan supersedes the previous October 26–November 15 window and active design-gap escalation. Prior EY/design discussions remain historical readiness context; their resolution is not asserted. Mark the future work Planned, preserve the existing owners, and explicitly include Ads monitoring."
         }
       ],
-      "statusOverride": "Waiting on FRM",
-      "escalationReason": "The Slack readout reports outstanding Ads Manager / Arsenal ITGC and job-monitoring designs with EY; resolution is not confirmed.",
-      "escalationAction": "Stephen / Urminder / Alex: obtain the outstanding ITGC and job-monitoring designs from EY and confirm readiness for November 15."
+      "statusOverride": "Planned",
+      "escalationAction": "Stephen / Urminder: confirm design and monitoring readiness for the November 16 start and complete the expanded Ads ITGC/monitoring scope by December 31.",
+      "startOverride": "2026-11-16",
+      "endOverride": "2026-12-31",
+      "nameOverride": "Ads ITGCs (Arsenal UI) — including Ads monitoring"
     },
     "31": {
       "notes": [
@@ -7789,9 +7794,69 @@
       "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
       "via": "FRMprio Buddy",
       "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 19,
+      "activity": "Ads New ITAC Controls — Phases 2 & 3",
+      "title": "Ads Phases 2 & 3 — closing this week; no escalation",
+      "detail": "Ads New ITAC Controls — Phases 2 & 3: final controls will be prepared this week, with one last follow-up for AD.09.01 (tracked as ADS.09.01). No escalation is needed; closure is expected this week.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "in-progress",
+        "escalation-paused"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 20,
+      "activity": "Ads ITGCs (Arsenal UI) — including Ads monitoring",
+      "title": "Ads ITGCs and monitoring — November 16 to December 31",
+      "detail": "Ads ITGCs (Arsenal UI), including Ads monitoring: move the start to November 16, 2026 and projected finish to December 31, 2026.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "date-moved",
+        "scope-change"
+      ],
+      "discussion": "Stephen / Urminder: confirm design and monitoring readiness for the November 16 start and complete the expanded Ads ITGC/monitoring scope by December 31."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 26,
+      "activity": "AI Governance / Oracle MCP",
+      "title": "AI Governance / Oracle MCP — merged; deficiency wording with Sudhika",
+      "detail": "Merge Oracle MCP into the AI Governance conversation. Deficiency wording has been shared with Sudhika and the control owner and is currently with Sudhika.",
+      "pwcOwners": "Joaquin Garcia Stephen Wilm",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "scope-change",
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "Sudhika: review the deficiency wording shared with the control owner and confirm the response, remaining actions and broader AI Governance milestones; Stephen/Joaquin to track the follow-up."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 59,
+      "activity": "HR/Payroll late terminations — impact assessment support",
+      "title": "HR/Payroll late terminations — escalate evidence outstanding with Adi",
+      "detail": "HR/Payroll late terminations — impact assessment support: evidence remains outstanding with Adi and needs to be escalated.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Sudhika & Chandana",
+      "flags": [
+        "waiting-frm",
+        "discussion"
+      ],
+      "discussion": "Sudhika / Chandana: escalate the outstanding evidence with Adi and confirm delivery timing; coordinate Stephen/Cloie and HR Ops review for the November 15 SAD-related assessment target. Raise an OE exception immediately if a relevant UAR missed a late termination."
     }
   ],
-  "publicationId": "orange-notes-542d1ec0c9c9",
+  "publicationId": "orange-notes-9e236a074f82",
   "reviewAsOf": "2026-11-09",
   "followUpTracker": {
     "fileName": "Follow-up Tracker  (1).xlsx",
@@ -8927,8 +8992,22 @@
             "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
             "via": "FRMprio Buddy",
             "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          },
+          {
+            "source": "User update",
+            "recordedOn": "2026-11-09",
+            "text": "Ads New ITAC Controls — Phases 2 & 3: final controls will be prepared this week, with one last follow-up for AD.09.01 (tracked as ADS.09.01). No escalation is needed; closure is expected this week.",
+            "applicationNote": "“This week” is November 9–15, 2026. Retain the already agreed November 15 target without inventing an exact closure day. Supersede the older active PBC/held-control escalation and the November 13 forecast question. Keep the item open until completion is confirmed. The original Ads-tab statuses remain a historical evidence snapshot; no per-control certification is invented."
           }
-        ]
+        ],
+        "escalationResolution": {
+          "recordedOn": "2026-11-09",
+          "reason": "Ads New ITAC Controls — Phases 2 & 3: final controls will be prepared this week, with one last follow-up for AD.09.01 (tracked as ADS.09.01). No escalation is needed; closure is expected this week.",
+          "startRaw": "2026-10-27",
+          "endRaw": "TBD",
+          "followUpDate": null,
+          "reviewAfter": "2026-11-15"
+        }
       }
     }
   }

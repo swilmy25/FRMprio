@@ -15,22 +15,22 @@ function fixture(end: string): SourceSnapshot {
   return { ...snapshot, publicationId: undefined, annotations: undefined, changeLog: undefined, fileName: 'Readout test fixture', rows: [...snapshot.rows.slice(0, 2), row], sections: { '3': 'Active portfolio' } }
 }
 
-test('readout matches both buckets: thirteen decisions across twelve topics with worksheet owners and distinct revenue asks', () => {
+test('readout matches both buckets: ten decisions across nine topics with worksheet owners and distinct revenue asks', () => {
   const data = buildAleReadout(activities, today)
-  expect(data.decisionCount).toBe(13)
-  expect(data.topicCount).toBe(12)
+  expect(data.decisionCount).toBe(10)
+  expect(data.topicCount).toBe(9)
   expect(data.overlapCount).toBe(1)
   expect(data.escalations.map(item => item.activityId)).toEqual(activities.filter(item => dateHealth(item, today).tone === 'escalation').map(item => item.id))
   expect(data.alignment.map(item => item.activityId)).toEqual(activities.filter(item => alignmentState(item) === 'Not aligned').map(item => item.id))
-  expect(new Set([...data.escalations, ...data.alignment].map(item => item.id)).size).toBe(13)
-  const oracle = data.escalations.find(item => item.topic === 'Oracle MCP')!
+  expect(new Set([...data.escalations, ...data.alignment].map(item => item.id)).size).toBe(10)
+  const oracle = data.escalations.find(item => item.topic === 'AI Governance / Oracle MCP')!
   expect(oracle.owners).toEqual(['Joaquin Garcia', 'Stephen Wilm'])
   expect(oracle.owners).not.toContain('Jeff Rose')
   expect(data.escalations.some(item=>['Stripe','Monitoring — Deloitte follow-up','IT Ops / Chronosphere'].includes(item.topic))).toBe(false)
   expect(data.escalations.find(item => item.topic === 'Revenue new controls')?.nextStep).toContain('ToD conclusion action is marked completed')
   expect(data.alignment[0].nextStep).toContain('PwC High versus FRM Low')
-  expect(oracle.nextStep).toContain('Joaquin’s workpapers')
-  expect(data.escalations.find(item=>item.topic.includes('Phases 2 & 3'))?.nextStep).toContain('ADS.09.01')
+  expect(oracle.nextStep).toContain('deficiency wording')
+  expect(data.escalations.some(item=>item.topic.includes('Phases 2 & 3'))).toBe(false)
   expect(data.escalations.some(item => item.topic === 'SDLC — Pando')).toBe(false)
   const platform = data.escalations.filter(item => item.topic.startsWith('Platform OE Testing'))
   expect(platform).toHaveLength(0)
@@ -64,13 +64,13 @@ test('top button opens the full portfolio readout from a filtered lead view and 
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(page).toHaveURL(/#view=ale-kazam$/)
   const readout = page.getByRole('region', { name: readoutName })
-  await expect(readout.locator('.ale-metrics .metric').nth(0).locator('strong')).toHaveText('13')
-  await expect(readout.locator('.ale-metrics .metric').nth(1).locator('strong')).toHaveText('12')
+  await expect(readout.locator('.ale-metrics .metric').nth(0).locator('strong')).toHaveText('10')
+  await expect(readout.locator('.ale-metrics .metric').nth(1).locator('strong')).toHaveText('9')
   await expect(readout.locator('.ale-metrics .metric').nth(2).locator('strong')).toHaveText('1')
-  await expect(readout.getByRole('article')).toHaveCount(13)
-  await expect(readout).toContainText('Whole portfolio · 12 topics')
+  await expect(readout.getByRole('article')).toHaveCount(10)
+  await expect(readout).toContainText('Whole portfolio · 9 topics')
   await expect(readout).toContainText('1 topic appears in both buckets')
-  const oracle = readout.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })
+  const oracle = readout.getByRole('article', { name: 'Escalations: AI Governance / Oracle MCP', exact: true })
   await expect(oracle.locator('.ale-owners')).toContainText('@Stephen Wilm')
   await expect(oracle.locator('.ale-owners')).not.toContainText('Jeff')
   await expect(page.locator('.workbook-table, .workbook-filter-panel, .meeting-summaries, .staffing-detail')).toHaveCount(0)
@@ -78,7 +78,7 @@ test('top button opens the full portfolio readout from a filtered lead view and 
   await expect(page.locator('.live-sheet')).toBeHidden()
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Project dashboard', exact: true })).toBeVisible()
-  await expect(page.locator('.workbook-row.project-row')).toHaveCount(68)
+  await expect(page.locator('.workbook-row.project-row')).toHaveCount(67)
 })
 
 test('readout link survives reload and browser navigation restores the appropriate view', async ({ page }) => {
@@ -103,9 +103,9 @@ test('mobile readout fits the viewport and keeps owners, topics and next steps v
   await page.goto('/')
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   const readout = page.getByRole('region', { name: readoutName })
-  await expect(readout.getByRole('article')).toHaveCount(13)
+  await expect(readout.getByRole('article')).toHaveCount(10)
   await expect(readout.getByRole('article', { name: 'Escalations: Platform OE Testing — ITACs', exact: true })).toHaveCount(0)
-  await expect(readout.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })).toContainText('Sudhika')
+  await expect(readout.getByRole('article', { name: 'Escalations: AI Governance / Oracle MCP', exact: true })).toContainText('Sudhika')
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
 })
 

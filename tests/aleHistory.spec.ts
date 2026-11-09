@@ -8,7 +8,8 @@ import type { AleHistory } from '../src/aleHistory'
 
 const snapshot: SourceSnapshot = JSON.parse(readFileSync(new URL('../src/data/prioritization.json', import.meta.url), 'utf8'))
 const published: AleHistory = JSON.parse(readFileSync(new URL('../src/data/ale-history.json', import.meta.url), 'utf8'))
-const oracleSeen=published.updates.filter(update=>update.decisions.some(decision=>decision.topic==='Oracle MCP')).length
+const oracleHistoryKey=aleHistoryKey(snapshot.annotations!['26'].historyName!,'escalation')
+const oracleSeen=published.updates.filter(update=>update.decisions.some(decision=>decision.key===oracleHistoryKey)).length
 const current = buildAleReadout(parseSource(snapshot), '2026-11-09')
 const baselineData=buildAleReadout(parseSource(snapshot),'2026-10-20')
 const rootName = 'Alejandro’s leadership readout'
@@ -35,18 +36,19 @@ test('published baseline uses observed dates and the readout carries all effecti
 })
 
 test('shortening Oracle’s title preserves its existing escalation dates and history in lead exports', () => {
-  const oracle = current.escalations.find(item => item.topic === 'Oracle MCP')!
-  const prior = published.updates.slice(0, -1).filter(update => update.decisions.some(item => item.topic === 'Oracle MCP'))
+  const oracle = current.escalations.find(item => item.historyKey === oracleHistoryKey)!
+  const prior = published.updates.slice(0, -1).filter(update => update.decisions.some(item => item.key === oracleHistoryKey))
   expect(prior.length).toBeGreaterThan(0)
-  expect(oracle.historyKey).toBe(prior[0].decisions.find(item => item.topic === 'Oracle MCP')!.key)
+  expect(oracle.historyKey).toBe(prior[0].decisions.find(item => item.key === oracleHistoryKey)!.key)
   expect(aleItemHistory(published, aleUpdateId(snapshot, current), oracle.historyKey)).toMatchObject({
     firstSeen: pacificDay(prior[0].observedAt), seenUpdates: prior.length + 1, status: 'carryover',
   })
   const exported = snapshotForLead({ ...snapshot, aleHistory: published }, 'Sudhika')
   expect(isSourceSnapshot(exported)).toBe(true)
   const imported = buildAleReadout(parseSource(orangeOnly(JSON.parse(JSON.stringify(exported)))),'2026-10-26')
-  expect(imported.escalations.find(item => item.topic === 'Oracle MCP')?.historyKey).toBe(oracle.historyKey)
+  expect(imported.escalations.find(item => item.historyKey === oracleHistoryKey)?.historyKey).toBe(oracle.historyKey)
   expect(exported.aleHistory?.updates.flatMap(update => update.decisions).filter(item => item.key === oracle.historyKey)).toHaveLength(prior.length + 1)
+  expect(exported.aleHistory!.updates.some(update=>update.decisions.some(item=>item.key==='escalation:ai governance'))).toBe(true)
   const uarKey=aleHistoryKey(snapshot.rows[65][2],'escalation')
   expect(current.escalations.some(item=>item.activityId==='source-row-66')).toBe(false)
   const priorUar=published.updates.filter(update=>update.decisions.some(item=>item.key===uarKey)).at(-1)!
@@ -145,7 +147,7 @@ test('source exports transfer local update history into a fresh browser without 
   await page.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
   await page.goto('/')
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
-  await expect(page.getByRole('status')).toContainText('Imported 68 activities')
+  await expect(page.getByRole('status')).toContainText('Imported 67 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
   const download = await downloadPromise
@@ -159,7 +161,7 @@ test('source exports transfer local update history into a fresh browser without 
     await other.goto('/')
     await other.locator('input[type=file]').setInputFiles({ name: 'transferred.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(exported)) })
     await other.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
-    const row = other.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true })
+    const row = other.getByRole('article', { name: 'Escalations: AI Governance / Oracle MCP', exact: true })
     await expect(row.locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)
     await expect(row.locator('.ale-frm-owners')).toContainText('@Sudhika')
   } finally { await context.close() }
@@ -175,5 +177,5 @@ test('history storage failures are visible and the in-memory history remains ava
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('Local update history could not be saved')
-  await expect(page.getByRole('article', { name: 'Escalations: Oracle MCP', exact: true }).locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)
+  await expect(page.getByRole('article', { name: 'Escalations: AI Governance / Oracle MCP', exact: true }).locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)
 })
