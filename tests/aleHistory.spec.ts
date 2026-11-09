@@ -47,9 +47,12 @@ test('shortening Oracle’s title preserves its existing escalation dates and hi
   const imported = buildAleReadout(parseSource(orangeOnly(JSON.parse(JSON.stringify(exported)))),'2026-10-26')
   expect(imported.escalations.find(item => item.topic === 'Oracle MCP')?.historyKey).toBe(oracle.historyKey)
   expect(exported.aleHistory?.updates.flatMap(update => update.decisions).filter(item => item.key === oracle.historyKey)).toHaveLength(prior.length + 1)
-  const uar = current.escalations.find(item => item.activityId === 'source-row-66')!
-  expect(uar.historyKey).toBe(aleHistoryKey(snapshot.rows[65][2],'escalation'))
-  expect(aleItemHistory(published,aleUpdateId(snapshot,current),uar.historyKey)?.firstSeen).toBe('2026-11-02')
+  const uarKey=aleHistoryKey(snapshot.rows[65][2],'escalation')
+  expect(current.escalations.some(item=>item.activityId==='source-row-66')).toBe(false)
+  const priorUar=published.updates.filter(update=>update.decisions.some(item=>item.key===uarKey)).at(-1)!
+  expect(aleItemHistory(published,priorUar.id,uarKey)?.firstSeen).toBe('2026-11-02')
+  expect(published.updates.find(update=>update.id===aleUpdateId(snapshot,current))!.decisions.some(item=>item.key===uarKey)).toBe(false)
+  expect(aleItemHistory(published,aleUpdateId(snapshot,current),uarKey)?.lastSeen).toBe(pacificDay(priorUar.observedAt))
   const invalid = structuredClone(snapshot)
   invalid.annotations!['26'].historyName = ' '
   expect(isSourceSnapshot(invalid)).toBe(false)
@@ -142,7 +145,7 @@ test('source exports transfer local update history into a fresh browser without 
   await page.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
   await page.goto('/')
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
-  await expect(page.getByRole('status')).toContainText('Imported 67 activities')
+  await expect(page.getByRole('status')).toContainText('Imported 68 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
   const download = await downloadPromise

@@ -36,6 +36,8 @@ export function followUpSnapshot(snapshot:SourceSnapshot):SourceSnapshot|null {
    ...(onHold&&parentPaused?{escalationPaused:true,escalationPauseReason:parentPaused.escalationPauseReason||'On hold per the source tracker.'}:{}),
    ...(!completed&&/escalation.*(?:needed|required)/i.test(action.notes)?{escalationReason:'The tracker explicitly requests escalation for the outstanding dependency.'}:{}),
    notes:[{source:'Follow-up Tracker',recordedOn:action.recordedOn,text:action.description,applicationNote:'PwC owner comes from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). These dates describe this follow-up; they are not actual completion dates or a replacement for a related project’s testing delivery target. Team-only Added by entries retain their team label; FRM-only entries have no named PwC owner.'}]}
+  const override=tracker.annotations?.[String(action.row)]
+  if(override)annotations[String(action.row)]={...annotations[String(action.row)],...override,trackerActions:[action],notes:[...annotations[String(action.row)].notes,...override.notes]}
  }
  return {kind:'frmprio.prioritization.v1',fileName:tracker.fileName,tabName:tracker.tabName,importedAt:tracker.importedAt,includedColumns:ORANGE_COLUMNS,trackerView:true,reviewAsOf:tracker.actions.map(a=>a.recordedOn).sort().at(-1),rows,sections,annotations}
 }

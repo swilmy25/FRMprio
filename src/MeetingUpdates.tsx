@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { meetingUpdatesByMember, uniqueMeetingItems } from './meetingSummaries'
 import { sourceDate } from './prioritization'
 import type { MeetingUpdateFlag, SourceSnapshot } from './prioritization'
+import UpdateLinks from './UpdateLinks'
 
 const labels: Record<MeetingUpdateFlag, string> = {
   'date-moved': 'Date moved',
@@ -19,6 +20,7 @@ const labels: Record<MeetingUpdateFlag, string> = {
   'on-hold': 'On hold',
   'waiting-frm': 'Waiting on FRM',
   'escalation-paused': 'Escalation paused',
+  'escalation-closed': 'Escalation closed',
 }
 const focusOptions = [
   { value: 'all', label: 'All updates' },
@@ -27,11 +29,13 @@ const focusOptions = [
   { value: 'at-risk', label: 'At risk' },
   { value: 'new-tbd', label: 'New TBDs' },
   { value: 'existing-tbd', label: 'Existing TBDs' },
+  { value: 'escalation-closed', label: 'Closed escalations' },
   { value: 'discussion', label: 'Needs discussion' },
 ] as const
 type Focus = typeof focusOptions[number]['value']
 
 function dateText(raw: string): string {
+  if(/^before\s/i.test(raw))return `Before ${dateText(raw.replace(/^before\s+/i,''))}`
   const iso = sourceDate(raw)
   return iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : raw || 'Not supplied'
 }
@@ -79,7 +83,7 @@ export default function MeetingUpdates({ snapshot, lead, today, onSelectActivity
                 <div className="meeting-item-flags">{flags.map(flag => <span key={flag} className={`meeting-flag flag-${flag}`}>{labels[flag]}</span>)}</div>
                 <h4>{activity ? <button onClick={() => onSelectActivity(activity.row)} aria-label={`View ${change.title || change.activity} activity`}>{change.title || change.activity}</button> : change.title || change.activity}</h4>
                 <p className="meeting-owner-line"><strong>PwC {pwcOwners.length > 1 ? 'owners' : 'owner'}:</strong> {pwcOwners.join(', ') || 'Not recorded in latest workbook'}{pwcOwners.length > 1 ? ' · Shared ownership' : ''}</p>
-                <p className="meeting-update-source"><span><strong>Update from:</strong> {providedBy}</span><small>{change.postedOn && <>Posted {dateText(change.postedOn)} · </>}Recorded {dateText(change.recordedOn)}</small></p>
+                <p className="meeting-update-source"><span><strong>Update from:</strong> {providedBy}</span><small>{change.postedOn && <>Posted {dateText(change.postedOn)} · </>}Recorded {dateText(change.recordedOn)}</small><UpdateLinks update={change} /></p>
                 {activity && (flags.includes('date-moved') || flags.includes('date-corrected') || flags.includes('new-tbd')) && <p className="meeting-date-change">Workbook end <span>{dateText(activity.workbookEndRaw)}</span><span> · Current end </span><strong>{dateText(activity.endRaw)}</strong></p>}
                 {activity && flags.includes('date-confirmed') && <p className="meeting-date-change">Current end: <strong>{dateText(activity.endRaw)}</strong> · see the dated confirmation below</p>}
                 {flags.includes('existing-tbd') && <p className="meeting-date-change"><strong>TBD</strong> in this update · already TBD in workbook</p>}

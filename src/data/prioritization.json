@@ -83,7 +83,8 @@
     "73": "Active portfolio",
     "74": "Completed",
     "75": "Active portfolio",
-    "76": "Active portfolio"
+    "76": "Active portfolio",
+    "77": "Active portfolio"
   },
   "rows": [
     [
@@ -2137,6 +2138,33 @@
       "2026-11-04",
       "2026-11-11",
       ""
+    ],
+    [
+      "",
+      "",
+      "AI Governance",
+      "",
+      "",
+      "Sudhika",
+      "",
+      "AI Governance",
+      "",
+      "",
+      "Governance",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TBD",
+      "TBD",
+      ""
     ]
   ],
   "annotations": {
@@ -2159,6 +2187,16 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 23, 35. Update for SDLC - Keystone - PwC working on Memo; As par of Project Keystone, multiple automate business controls might have been impacted. As part of the SDLC memo, Ben is identifying the impacted controls and next steps if any;",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. Ben’s memo and impacted-control actions have a November 30 deadline and November 5 update date in the follow-up view. The existing Sonu-owned discovery project remains separate; completion of the earlier discovery target is not supplied."
+        },
+        {
+          "source": "Sonu Kumar",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "Project Keystone architecture / migration review: close the dashboard escalation. Sonu requests closing this dashboard escalation.",
+          "applicationNote": "Applied as an escalation closure, not evidence that all underlying testing or review is complete. Keep current owners, historical dates and scope visible. A new dated plan or reported risk will resume escalation checks; existing execution is tracked in Optro where stated.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794245101105399",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "endOverride": "2026-10-30",
@@ -2241,7 +2279,14 @@
           "notes": "",
           "links": ""
         }
-      ]
+      ],
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "Project Keystone architecture / migration review: close the dashboard escalation. Sonu requests closing this dashboard escalation.",
+        "startRaw": "2026-09-01",
+        "endRaw": "2026-10-30",
+        "followUpDate": null
+      }
     },
     "37": {
       "notes": [
@@ -2819,13 +2864,23 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 38. Refer to Ads tabs",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. Ads tabs: 2 Certified, 1 Evidence Not Received, 2 In Follow Up, 2 ON HOLD, 3 Submitted. Code/general follow-ups are separately marked closed. A certified/submitted PBC is not confirmation of completed workpaper review; overall project completion is not supplied. Added by Cami owns the tracker coordination item; Stephen’s broader project ownership is retained."
+        },
+        {
+          "source": "Stephen Wilm / Chester Phung",
+          "postedOn": "2026-11-03",
+          "recordedOn": "2026-11-09",
+          "text": "The Slack readout reports Sprint 1 complete and Sprints 2–3 tracking to November 13. Job-monitoring controls and Ads Manager / Arsenal ITGC design gaps were taken back to EY with Urminder and Alex.",
+          "applicationNote": "Sprint 1 is already completed by the user’s November 9 instruction. November 13 is retained as a reported delivery forecast; it is not assumed to replace the previously agreed November 15 completion/full-review target. Confirm the milestone distinction. Existing PwC and FRM owners are retained; Alex is recorded as a design follow-up contact. The November 9 workbook PBC evidence statuses remain unchanged.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "nameOverride": "Ads New ITAC Controls — Phases 2 & 3",
       "endOverride": "2026-11-15",
       "statusOverride": "In progress",
       "escalationReason": "Phases 2 / 3 still include one PBC with no evidence, two on hold and two in follow-up; review completion is not recorded.",
-      "escalationAction": "Stephen / Cami / Sandeep / Urminder: obtain ADS.09.01 evidence, unblock held invoice PBCs and close the order/magic-link follow-ups to protect November 15 completion and full review.",
+      "escalationAction": "Stephen / Sandeep / Urminder: confirm November 13 delivery versus November 15 full review, obtain the missing ADS.09.01 evidence and unblock held/follow-up PBCs.",
       "trackerActions": [
         {
           "fileName": "Follow-up Tracker  (1).xlsx",
@@ -3056,6 +3111,26 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 26, 31. PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas Compute TOE in progress",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. TPM subscription/GitHub-relevance actions are complete; Compute TOE is in progress with first-round PBCs released October 30 and due November 6, described as normal business in the tracker. Preserve the October 21–December 18 overall testing window."
+        },
+        {
+          "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+          "applicationNote": "Use Optro for current testing status for the named workstreams; do not claim migration of every other workstream. The uploaded follow-up tracker remains a sourced decision/action snapshot. Platform OE’s separate Codex workflow dashboard is retained; no testing completion or delivery-date change is inferred.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "Layla Yang",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+          "applicationNote": "Retain current UAR status and dates. Record the possible scope expansion as context; do not invent new project rows or mark UARs complete based on “done or nearly done” comments.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "pwcOwnersOverride": "Mayra Mendoza, Layla Yang",
@@ -3181,6 +3256,26 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 26, 31, 41. PBC - Operating Effectiveness - Confirmation on adding TPMs as subscriber for the applied engineering areas Compute TOE in progress 1. Github OE controls becomes relevant if CI, SFDC repos have not moved\n2. We will get the PBC out;",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. TPM subscription/GitHub-relevance actions are complete; Compute TOE is in progress with first-round PBCs released October 30 and due November 6, described as normal business in the tracker. Preserve the October 21–December 18 overall testing window."
+        },
+        {
+          "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+          "applicationNote": "Use Optro for current testing status for the named workstreams; do not claim migration of every other workstream. The uploaded follow-up tracker remains a sourced decision/action snapshot. Platform OE’s separate Codex workflow dashboard is retained; no testing completion or delivery-date change is inferred.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "Layla Yang",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+          "applicationNote": "Retain current UAR status and dates. Record the possible scope expansion as context; do not invent new project rows or mark UARs complete based on “done or nearly done” comments.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "In progress",
@@ -3336,6 +3431,16 @@
           "recordedOn": "2026-11-09",
           "text": "User confirmed Stephen Wilm’s Ads New ITAC Controls (Sprint 1 = 10* controls: 9/28 to 10/10) item is complete.",
           "applicationNote": "Mark the Sprint 1 project completed and remove it from active escalation/Ale-kazam. The actual completion date was not supplied; November 9 records this update only. Preserve the original October 30 projected end and prior workpaper/evidence context as history. Phases 2 & 3 and the shared Ads tracker coordination item remain open."
+        },
+        {
+          "source": "Stephen Wilm / Chester Phung",
+          "postedOn": "2026-11-03",
+          "recordedOn": "2026-11-09",
+          "text": "The Slack readout reports Sprint 1 complete and Sprints 2–3 tracking to November 13. Job-monitoring controls and Ads Manager / Arsenal ITGC design gaps were taken back to EY with Urminder and Alex.",
+          "applicationNote": "Sprint 1 is already completed by the user’s November 9 instruction. November 13 is retained as a reported delivery forecast; it is not assumed to replace the previously agreed November 15 completion/full-review target. Confirm the milestone distinction. Existing PwC and FRM owners are retained; Alex is recorded as a design follow-up contact. The November 9 workbook PBC evidence statuses remain unchanged.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "trackerActions": [
@@ -3540,14 +3645,25 @@
           "recordedOn": "2026-11-02",
           "text": "Sonu believes all required Oracle MCP evidence was received last week. He is checking with Joaquin on workpapers for review, expected by the end of the week. The question of journal entries posting to production despite Codex being prompted for test remains open. Sonu followed up with Sudhika yesterday; she expects another update later this week after returning from conference.",
           "applicationNote": "Record this as reported progress, with evidence completeness still tentative and workpaper review not yet complete. The original post date was not supplied, so relative timing is retained as reported rather than converted into a fixed workpaper or follow-up date. Keep the November 15 project end and At risk status while the production-posting question remains open. No successful retest or control resolution is inferred. Sonu is the update provider; Joaquin Garcia and Stephen Wilm remain the assigned PwC owners."
+        },
+        {
+          "source": "Chester Phung",
+          "postedOn": "2026-11-06",
+          "recordedOn": "2026-11-09",
+          "text": "Chester reports that Ale wants AI Governance and Oracle MCP at the top of Sudhika’s workstream and faster escalation of blockers. Ale will circle back with Sudhika; a team discussion was planned for November 9.",
+          "applicationNote": "Leadership priority is explicit. This does not assign Chester as a PwC owner or confirm that the November 9 discussion occurred. AI Governance dates and its PwC owner remain unconfirmed. Existing Oracle owners, control risk and November 15 review target are retained.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794012489918499",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "At risk",
       "escalationReason": "Wrong-environment posting confirmation remains open: journal entries reached production despite a test-environment prompt in Codex.",
-      "escalationAction": "Get Joaquin’s workpapers for review by the reported end-of-week target and obtain Sudhika’s follow-up on production JE posting despite a test prompt in Codex.",
+      "escalationAction": "Top priority for Ale / Sudhika: expedite blockers, obtain Joaquin’s workpapers and confirm review timing; resolve the still-open production JE posting question with Sudhika.",
       "nameOverride": "Oracle MCP",
       "historyName": "Oracle MCP - currently only asked to test 1 use case (Oracle JE prep through Codex). Originally 8 controls, now 11 proposed\n\nFurther discovery is ongoing with Finance AI Framework and reviewing what will be provided to Deloitte.",
-      "endOverride": "2026-11-15"
+      "endOverride": "2026-11-15",
+      "leadershipPriority": "Top priority — Ale / Sudhika"
     },
     "40": {
       "notes": [
@@ -3575,6 +3691,16 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 21, 24. AWS Platform Control readiness - AWS Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Controls are already in Optro IT.AWS.CM.27.01 Direct Changes to Data or DB schema\nIs this conrol up and are we good to create evidence request for these? What is expected timeline?",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. AWS/Azure readiness is completed; AWS direct-change control IT.AWS.CM.27.01 was de-keyed after Avi/Deloitte alignment. Preserve Sonu’s November 5 January 15, 2027 testing target, deprioritized section and existing scope/staffing."
+        },
+        {
+          "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+          "applicationNote": "Use Optro for current testing status for the named workstreams; do not claim migration of every other workstream. The uploaded follow-up tracker remains a sourced decision/action snapshot. Platform OE’s separate Codex workflow dashboard is retained; no testing completion or delivery-date change is inferred.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "endOverride": "2027-01-15",
@@ -3959,6 +4085,26 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 22. Azure Platform Control readiness - Azure Platform is in-scope basis discussion with Deloitte (DT) and FRM. Avi needs to identify the Engineering team responsible to help with the control evidence. Cotrols are yet not in Optro and waiting for a go ahead from Avi",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. AWS/Azure readiness is completed; AWS direct-change control IT.AWS.CM.27.01 was de-keyed after Avi/Deloitte alignment. Preserve Sonu’s November 5 January 15, 2027 testing target, deprioritized section and existing scope/staffing."
+        },
+        {
+          "source": "Sonu Kumar",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "Azure Platform: close the dashboard escalation. Sonu requests closing this dashboard escalation; the activity remains deprioritized with testing planned to January 15, 2027.",
+          "applicationNote": "Applied as an escalation closure, not evidence that all underlying testing or review is complete. Keep current owners, historical dates and scope visible. A new dated plan or reported risk will resume escalation checks; existing execution is tracked in Optro where stated.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794245248039109",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+          "applicationNote": "Use Optro for current testing status for the named workstreams; do not claim migration of every other workstream. The uploaded follow-up tracker remains a sourced decision/action snapshot. Platform OE’s separate Codex workflow dashboard is retained; no testing completion or delivery-date change is inferred.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "trackerActions": [
@@ -4005,7 +4151,14 @@
           "notes": "Avi to confrim on the Azure Engineering team poc. Either we start with WT or go ahead to request evidence in Optro.",
           "links": ""
         }
-      ]
+      ],
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "Azure Platform: close the dashboard escalation. Sonu requests closing this dashboard escalation; the activity remains deprioritized with testing planned to January 15, 2027.",
+        "startRaw": "TBD",
+        "endRaw": "2027-01-15",
+        "followUpDate": null
+      }
     },
     "6": {
       "notes": [
@@ -4303,6 +4456,16 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 20. Obtain an update on Project Galaxy.",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+          "applicationNote": "Close the escalation records for the four explicitly identified scopes. This is not confirmation of project completion. The partially visible fifth screenshot row is not identified or changed. CosmosDB wording is a follow-up distinct from the broader Sonu-owned CosmosDB ITGC discovery project.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "On hold",
@@ -4331,7 +4494,14 @@
       "frmLeadsOverride": "Ash, Urminder",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Mayra / Ash / Urminder: obtain the Galaxy update and agree scope/delivery dates, including Glass and Salesforce impacts."
+      "escalationAction": "Mayra / Ash / Urminder: obtain the Galaxy update and agree scope/delivery dates, including Glass and Salesforce impacts.",
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+        "startRaw": "2026-10-20",
+        "endRaw": "TBD",
+        "followUpDate": null
+      }
     },
     "62": {
       "userAdded": true,
@@ -4371,6 +4541,16 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 14. Follow up on the key monorepo file inventory; obtain errors + SDLC.",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+          "applicationNote": "Close the escalation records for the four explicitly identified scopes. This is not confirmation of project completion. The partially visible fifth screenshot row is not identified or changed. CosmosDB wording is a follow-up distinct from the broader Sonu-owned CosmosDB ITGC discovery project.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "In progress",
@@ -4399,7 +4579,14 @@
       "frmLeadsOverride": "Ash",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Mayra / Ash: confirm FRM review of the inventory maintenance approach after PwC addressed comments November 3; reconcile the October 27 deadline."
+      "escalationAction": "Mayra / Ash: confirm FRM review of the inventory maintenance approach after PwC addressed comments November 3; reconcile the October 27 deadline.",
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+        "startRaw": "2026-10-21",
+        "endRaw": "2026-10-27",
+        "followUpDate": null
+      }
     },
     "63": {
       "userAdded": true,
@@ -4529,6 +4716,16 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 7, 8. Discuss ToE / LMD approach: coverage cutoff, testing timing and extent, and 20% of DT sampling. Sandeep to confirm control owners before PwC sending PBCs",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "Mayra Mendoza",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+          "applicationNote": "Close the escalation records for the four explicitly identified scopes. This is not confirmation of project completion. The partially visible fifth screenshot row is not identified or changed. CosmosDB wording is a follow-up distinct from the broader Sonu-owned CosmosDB ITGC discovery project.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "In progress",
@@ -4557,7 +4754,14 @@
       "frmLeadsOverride": "Ash, Urminder, Avi",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Mayra / Ash / Urminder / Avi: confirm current control owners and agree LMD routing/self-service and sampling; share the two sample evidence packs requested November 4 and replan the November 6 target."
+      "escalationAction": "Mayra / Ash / Urminder / Avi: confirm current control owners and agree LMD routing/self-service and sampling; share the two sample evidence packs requested November 4 and replan the November 6 target.",
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+        "startRaw": "2026-10-27",
+        "endRaw": "2026-11-06",
+        "followUpDate": null
+      }
     },
     "65": {
       "userAdded": true,
@@ -4618,6 +4822,16 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 17, 29. Identify the Rockset job relevant to the ITD for OE testing. For Rockset Comp Ops Monitoring control, our ToD understanding and latest discussion with CO confirms that all rockset jobs are running in Chronosphere; Should we defer the testing given Chronosphere conclusion or else we will need the respective  Job to proceed with testing; \n\nBP.OAI-GLB.ADS.04.05 — Habitat/Habidex/Rockset Indexing – Currently on hold while Urminder investigates further\nBP.OAI-GLB.B2B.09.83 — Quipu to Rockset Sync - working on identifying originating job and alert with control owner (jeff deng)",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "Sonu Kumar",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "Rockset compute-ops monitoring / testing approach: close the dashboard escalation. Sonu reports that a path forward exists; the screenshot records Low priority.",
+          "applicationNote": "Applied as an escalation closure, not evidence that all underlying testing or review is complete. Keep current owners, historical dates and scope visible. A new dated plan or reported risk will resume escalation checks; existing execution is tracked in Optro where stated.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244958605709",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "In progress",
@@ -4662,7 +4876,14 @@
       "frmLeadsOverride": "Avi",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Sonu / Mayra / Urminder / Avi: resolve the held ADS.04.05 investigation and identify the Quipu/Rockset originating job and alert with Jeff Deng; the October 31 tracker deadline has passed."
+      "escalationAction": "Sonu / Mayra / Urminder / Avi: resolve the held ADS.04.05 investigation and identify the Quipu/Rockset originating job and alert with Jeff Deng; the October 31 tracker deadline has passed.",
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "Rockset compute-ops monitoring / testing approach: close the dashboard escalation. Sonu reports that a path forward exists; the screenshot records Low priority.",
+        "startRaw": "2026-10-30",
+        "endRaw": "2026-10-31",
+        "followUpDate": null
+      }
     },
     "66": {
       "userAdded": true,
@@ -4730,6 +4951,36 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 30, 48. 1. AM Based UAR ToD Remediation Testing\n2. AWS and Azure Platforms are in-scope for UAR; Alignment on below - \n1. UAR Q4 Testing expected timelines\n2 Generic/System account review controls expected timelines \n3. Where Generic account review is tracked?\n4. For AWS and Azure, what will be preference to create separate Generic account reviews controls or to be covered in the UARs itself?",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. Row 30 is explicitly completed as a duplicate of row 48; it does not complete Q4 testing. Row 48 covers Revenue/Infra Q4 UARs (Common-Infra Repo, GitHub, Habitat, Access Manager, Entra), generic/system-account review tracking and AWS/Azure Q4 ToD testing. Preserve the January 15, 2027 testing end while showing the November 11 alignment deadline in the follow-up view."
+        },
+        {
+          "source": "Sonu Kumar",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "AM-based UAR Q4 testing / ToD remediation: close the dashboard escalation. Sonu reports that the uplift is complete; remaining control testing and timelines are tracked in Optro.",
+          "applicationNote": "Applied as an escalation closure, not evidence that all underlying testing or review is complete. Keep current owners, historical dates and scope visible. A new dated plan or reported risk will resume escalation checks; existing execution is tracked in Optro where stated.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794246110855239",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "Sonu Kumar",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "PwC testing is limited by the SoW to Revenue applications and infrastructure affecting Revenue. Sonu will brief Layla on the applicable population. Chandana will confirm AM campaign timing with Adi; Q4 UAR readiness is tentatively before the year-end break. Chandana will provide a generic/system-account review plan during the week of November 9; an annual cadence was considered acceptable.",
+          "applicationNote": "Keep the January 15, 2027 Q4 testing target and Sonu’s existing PwC ownership. Layla’s Compute questions are coordination context, not a reassignment of the whole project. Generic/system-account planning remains open within the existing linked alignment action. The readiness window is tentative and does not supersede the January testing deadline.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793915018506539",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        },
+        {
+          "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+          "applicationNote": "Use Optro for current testing status for the named workstreams; do not claim migration of every other workstream. The uploaded follow-up tracker remains a sourced decision/action snapshot. Platform OE’s separate Codex workflow dashboard is retained; no testing completion or delivery-date change is inferred.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "In progress",
@@ -4756,7 +5007,14 @@
         }
       ],
       "followUpDate": "2026-11-11",
-      "categoryOverride": "Alignment"
+      "categoryOverride": "Alignment",
+      "escalationResolution": {
+        "recordedOn": "2026-11-09",
+        "reason": "AM-based UAR Q4 testing / ToD remediation: close the dashboard escalation. Sonu reports that the uplift is complete; remaining control testing and timelines are tracked in Optro.",
+        "startRaw": "TBD",
+        "endRaw": "2027-01-15",
+        "followUpDate": "2026-11-11"
+      }
     },
     "67": {
       "userAdded": true,
@@ -4796,6 +5054,16 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 32. DCGM scoping",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "Layla Yang",
+          "postedOn": "2026-11-09",
+          "recordedOn": "2026-11-09",
+          "text": "The DCGM scoping memo draft is ready. Layla will align with Cami/BP before wider circulation; the updated target is before Friday, November 13, 2026. The source tracker was updated.",
+          "applicationNote": "Assign the memo to Layla, retaining Avi as the existing FRM lead. Cami/BP are review contacts, not inferred FRM leads; BP’s identity is not confirmed. Preserve “before November 13” as a boundary, not a completed date. Original tracker Added by and November 6 deadline remain in source action details.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244067723979",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ],
       "statusOverride": "In progress",
@@ -4818,13 +5086,14 @@
         }
       ],
       "startOverride": "2026-11-02",
-      "endOverride": "2026-11-06",
+      "endOverride": "Before 2026-11-13",
       "categoryOverride": "Clarification / Follow up",
-      "pwcOwnersOverride": "PwC (team)",
+      "pwcOwnersOverride": "Layla Yang",
       "frmLeadsOverride": "Avi",
       "usesTrackerDates": true,
       "sectionOverride": "Active portfolio",
-      "escalationAction": "Avi / PwC: review the draft DCGM out-of-scope memo with BP, Sarah and Deloitte, and confirm the conclusion after the November 6 target."
+      "escalationAction": "Layla / Avi: align the draft DCGM memo with Cami/BP and circulate it before November 13; confirm BP’s identity and review completion.",
+      "endBasisOverride": "Projected end · Slack update"
     },
     "68": {
       "userAdded": true,
@@ -5458,6 +5727,84 @@
       "sectionOverride": "Active portfolio",
       "statusOverride": "In progress",
       "escalationAction": "Ben / Avi: identify the Kepler/Trino/Spark-to-S3 completeness and accuracy controls with Bonnie for the November 30 target."
+    },
+    "77": {
+      "userAdded": true,
+      "newlyTrackedOn": "2026-11-09",
+      "discoverySource": "Slack via FRMprio Buddy",
+      "leadershipPriority": "Top priority — Ale / Sudhika",
+      "notes": [
+        {
+          "source": "Chester Phung",
+          "postedOn": "2026-11-06",
+          "recordedOn": "2026-11-09",
+          "text": "Chester reports that Ale wants AI Governance and Oracle MCP at the top of Sudhika’s workstream and faster escalation of blockers. Ale will circle back with Sudhika; a team discussion was planned for November 9.",
+          "applicationNote": "Leadership priority is explicit. This does not assign Chester as a PwC owner or confirm that the November 9 discussion occurred. AI Governance dates and its PwC owner remain unconfirmed. Existing Oracle owners, control risk and November 15 review target are retained.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794012489918499",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        }
+      ],
+      "escalationAction": "Ale / Sudhika: confirm the AI Governance PwC owner, scope and delivery dates, and escalate blockers promptly."
+    },
+    "20": {
+      "notes": [
+        {
+          "source": "Stephen Wilm / Chester Phung",
+          "postedOn": "2026-11-03",
+          "recordedOn": "2026-11-09",
+          "text": "The Slack readout reports Sprint 1 complete and Sprints 2–3 tracking to November 13. Job-monitoring controls and Ads Manager / Arsenal ITGC design gaps were taken back to EY with Urminder and Alex.",
+          "applicationNote": "Sprint 1 is already completed by the user’s November 9 instruction. November 13 is retained as a reported delivery forecast; it is not assumed to replace the previously agreed November 15 completion/full-review target. Confirm the milestone distinction. Existing PwC and FRM owners are retained; Alex is recorded as a design follow-up contact. The November 9 workbook PBC evidence statuses remain unchanged.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        }
+      ],
+      "statusOverride": "Waiting on FRM",
+      "escalationReason": "The Slack readout reports outstanding Ads Manager / Arsenal ITGC and job-monitoring designs with EY; resolution is not confirmed.",
+      "escalationAction": "Stephen / Urminder / Alex: obtain the outstanding ITGC and job-monitoring designs from EY and confirm readiness for November 15."
+    },
+    "31": {
+      "notes": [
+        {
+          "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+          "applicationNote": "Use Optro for current testing status for the named workstreams; do not claim migration of every other workstream. The uploaded follow-up tracker remains a sourced decision/action snapshot. Platform OE’s separate Codex workflow dashboard is retained; no testing completion or delivery-date change is inferred.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        }
+      ]
+    },
+    "10": {
+      "notes": [
+        {
+          "source": "Layla Yang",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+          "applicationNote": "Retain current UAR status and dates. Record the possible scope expansion as context; do not invent new project rows or mark UARs complete based on “done or nearly done” comments.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        }
+      ]
+    },
+    "47": {
+      "notes": [
+        {
+          "source": "Layla Yang",
+          "postedOn": "2026-11-05",
+          "recordedOn": "2026-11-09",
+          "text": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+          "applicationNote": "Retain current UAR status and dates. Record the possible scope expansion as context; do not invent new project rows or mark UARs complete based on “done or nearly done” comments.",
+          "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+          "via": "FRMprio Buddy",
+          "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+        }
+      ]
     }
   },
   "changeLog": [
@@ -7028,9 +7375,423 @@
       "flags": [
         "completed"
       ]
+    },
+    {
+      "source": "Chester Phung",
+      "postedOn": "2026-11-06",
+      "recordedOn": "2026-11-09",
+      "row": 26,
+      "activity": "Oracle MCP",
+      "title": "Oracle MCP — Slack update",
+      "detail": "Chester reports that Ale wants AI Governance and Oracle MCP at the top of Sudhika’s workstream and faster escalation of blockers. Ale will circle back with Sudhika; a team discussion was planned for November 9.",
+      "pwcOwners": "Joaquin Garcia Stephen Wilm",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794012489918499",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee",
+      "discussion": "Get Joaquin’s workpapers for review by the reported end-of-week target and obtain Sudhika’s follow-up on production JE posting despite a test prompt in Codex."
+    },
+    {
+      "source": "Chester Phung",
+      "postedOn": "2026-11-06",
+      "recordedOn": "2026-11-09",
+      "row": 77,
+      "activity": "AI Governance",
+      "title": "AI Governance — Slack update",
+      "detail": "Chester reports that Ale wants AI Governance and Oracle MCP at the top of Sudhika’s workstream and faster escalation of blockers. Ale will circle back with Sudhika; a team discussion was planned for November 9.",
+      "pwcOwners": "",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794012489918499",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee",
+      "discussion": "Ale / Sudhika: confirm the AI Governance PwC owner, scope and delivery dates, and escalate blockers promptly."
+    },
+    {
+      "source": "Sonu Kumar",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 65,
+      "activity": "Rockset compute-ops monitoring — testing approach",
+      "title": "Rockset compute-ops monitoring — testing approach — escalation closed",
+      "detail": "Rockset compute-ops monitoring / testing approach: close the dashboard escalation. Sonu reports that a path forward exists; the screenshot records Low priority.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "escalation-closed"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244958605709",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Sonu Kumar",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 34,
+      "activity": "Project Keystone - Understanding What Happened, What Migrated, Architecture Changes before SDLC testing can be done (changes from intiial understanding)",
+      "title": "Project Keystone - Understanding What Happened, What Migrated, Architecture Changes before SDLC testing can be done (changes from intiial understanding) — escalation closed",
+      "detail": "Project Keystone architecture / migration review: close the dashboard escalation. Sonu requests closing this dashboard escalation.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "escalation-closed"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794245101105399",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Sonu Kumar",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 60,
+      "activity": "Azure Platform",
+      "title": "Azure Platform — escalation closed",
+      "detail": "Azure Platform: close the dashboard escalation. Sonu requests closing this dashboard escalation; the activity remains deprioritized with testing planned to January 15, 2027.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "escalation-closed"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794245248039109",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Sonu Kumar",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 66,
+      "activity": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope)",
+      "title": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope) — escalation closed",
+      "detail": "AM-based UAR Q4 testing / ToD remediation: close the dashboard escalation. Sonu reports that the uplift is complete; remaining control testing and timelines are tracked in Optro.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Chandana",
+      "flags": [
+        "escalation-closed"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794246110855239",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 61,
+      "activity": "Project Galaxy",
+      "title": "Project Galaxy — escalation closed",
+      "detail": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Ash, Urminder",
+      "flags": [
+        "escalation-closed"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 62,
+      "activity": "Monorepo inventory framework — errors and SDLC uplift",
+      "title": "Monorepo inventory framework — errors and SDLC uplift — escalation closed",
+      "detail": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Ash",
+      "flags": [
+        "escalation-closed"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Mayra Mendoza",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 64,
+      "activity": "ToE / LMD approach and coverage confirmation",
+      "title": "ToE / LMD approach and coverage confirmation — escalation closed",
+      "detail": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Ash, Urminder, Avi",
+      "flags": [
+        "escalation-closed"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Layla Yang",
+      "postedOn": "2026-11-09",
+      "recordedOn": "2026-11-09",
+      "row": 67,
+      "activity": "DCGM scoping",
+      "title": "DCGM scoping — Slack update",
+      "detail": "The DCGM scoping memo draft is ready. Layla will align with Cami/BP before wider circulation; the updated target is before Friday, November 13, 2026. The source tracker was updated.",
+      "pwcOwners": "Layla Yang",
+      "frmLeads": "Avi",
+      "flags": [
+        "date-moved",
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244067723979",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee",
+      "discussion": "Layla / Avi: align the draft DCGM memo with Cami/BP and circulate it before November 13; confirm BP’s identity and review completion."
+    },
+    {
+      "source": "Stephen Wilm / Chester Phung",
+      "postedOn": "2026-11-03",
+      "recordedOn": "2026-11-09",
+      "row": 18,
+      "activity": "Ads New ITAC Controls (Sprint 1 = 10* controls: 9/28 to 10/10)\n\n*6 controls complete; 4 controls moved to Sprint 1.5",
+      "title": "Ads New ITAC Controls (Sprint 1 = 10* controls: 9/28 to 10/10) — Slack update",
+      "detail": "The Slack readout reports Sprint 1 complete and Sprints 2–3 tracking to November 13. Job-monitoring controls and Ads Manager / Arsenal ITGC design gaps were taken back to EY with Urminder and Alex.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Stephen Wilm / Chester Phung",
+      "postedOn": "2026-11-03",
+      "recordedOn": "2026-11-09",
+      "row": 19,
+      "activity": "Ads New ITAC Controls — Phases 2 & 3",
+      "title": "Ads New ITAC Controls — Phases 2 & 3 — Slack update",
+      "detail": "The Slack readout reports Sprint 1 complete and Sprints 2–3 tracking to November 13. Job-monitoring controls and Ads Manager / Arsenal ITGC design gaps were taken back to EY with Urminder and Alex.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee",
+      "discussion": "Stephen / Urminder: confirm the November 13 delivery forecast versus November 15 full review, and close remaining evidence/design dependencies."
+    },
+    {
+      "source": "Stephen Wilm / Chester Phung",
+      "postedOn": "2026-11-03",
+      "recordedOn": "2026-11-09",
+      "row": 20,
+      "activity": "Ads ITGCs (Arsenal UI)",
+      "title": "Ads ITGCs (Arsenal UI) — Slack update",
+      "detail": "The Slack readout reports Sprint 1 complete and Sprints 2–3 tracking to November 13. Job-monitoring controls and Ads Manager / Arsenal ITGC design gaps were taken back to EY with Urminder and Alex.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee",
+      "discussion": "Stephen / Urminder / Alex: obtain the missing Ads Manager / Arsenal ITGC and job-monitoring designs from EY and confirm the November 15 delivery plan."
+    },
+    {
+      "source": "Sonu Kumar",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 66,
+      "activity": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope)",
+      "title": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope) — Slack update",
+      "detail": "PwC testing is limited by the SoW to Revenue applications and infrastructure affecting Revenue. Sonu will brief Layla on the applicable population. Chandana will confirm AM campaign timing with Adi; Q4 UAR readiness is tentatively before the year-end break. Chandana will provide a generic/system-account review plan during the week of November 9; an annual cadence was considered acceptable.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Chandana",
+      "flags": [
+        "scope-change",
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793915018506539",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee",
+      "discussion": "Sonu to brief Layla; Chandana to confirm AM campaign timing with Adi and provide the generic/system-account review plan."
+    },
+    {
+      "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 31,
+      "activity": "Deloitte Scope and Controls/Testing Approach Questions and Knowledgeshare\n - Responding to DT questions\n - Conducting additional meetings with DT\n - Adding in new controls, new Optro issues, etc\n - Azure Admin Access & MonoRepo Discussions",
+      "title": "Deloitte Scope and Controls/Testing Approach Questions and Knowledgeshare — Slack update",
+      "detail": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+      "pwcOwners": "Cami Aromando Jeff Rose Stephen Wilm Sonu Kumar Mayra Mendoza",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "scope-change"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 40,
+      "activity": "AWS",
+      "title": "AWS — Slack update",
+      "detail": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "scope-change"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE Testing — ITACs — Slack update",
+      "detail": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+      "pwcOwners": "Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 57,
+      "activity": "Platform OE Testing — ITGCs",
+      "title": "Platform OE Testing — ITGCs — Slack update",
+      "detail": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "scope-change"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 60,
+      "activity": "Azure Platform",
+      "title": "Azure Platform — Slack update",
+      "detail": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Avi",
+      "flags": [
+        "scope-change"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Stephen Wilm / Mayra Mendoza / Sonu Kumar",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 66,
+      "activity": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope)",
+      "title": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope) — Slack update",
+      "detail": "The channel supports using Optro for current testing status. Mayra confirmed the older ITGC/ITAC plan is unused for B2B/B2C; Sonu confirmed the same for Applied Infra and SecOps. Stephen endorsed moving fully to Optro.",
+      "pwcOwners": "Sonu Kumar",
+      "frmLeads": "Chandana",
+      "flags": [
+        "scope-change"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793828753558239",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Layla Yang",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 10,
+      "activity": "NodeDB PosgresDB (UAR)",
+      "title": "NodeDB PosgresDB (UAR) — Slack update",
+      "detail": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+      "pwcOwners": "Layla Yang ",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Layla Yang",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 47,
+      "activity": "PostgresDB (POSE) UAR (Q3)",
+      "title": "PostgresDB (POSE) UAR (Q3) — Slack update",
+      "detail": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+      "pwcOwners": "Layla Yang ",
+      "frmLeads": "Avi",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Layla Yang",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 56,
+      "activity": "Platform OE Testing — ITACs",
+      "title": "Platform OE Testing — ITACs — Slack update",
+      "detail": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+      "pwcOwners": "Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+    },
+    {
+      "source": "Layla Yang",
+      "postedOn": "2026-11-05",
+      "recordedOn": "2026-11-09",
+      "row": 57,
+      "activity": "Platform OE Testing — ITGCs",
+      "title": "Platform OE Testing — ITGCs — Slack update",
+      "detail": "Layla raised Q3 UAR questions and mentioned potential new Compute applications expected by Avi. The readout does not confirm completion of the two Postgres UARs or identify the new applications, scope, owners or dates. Layla intended a separate discussion before adding applications to the formal agenda.",
+      "pwcOwners": "Sonu Kumar, Mayra Mendoza, Layla Yang",
+      "frmLeads": "",
+      "flags": [
+        "discussion"
+      ],
+      "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793899109237949",
+      "via": "FRMprio Buddy",
+      "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
     }
   ],
-  "publicationId": "orange-notes-0866b4624865",
+  "publicationId": "orange-notes-542d1ec0c9c9",
   "reviewAsOf": "2026-11-09",
   "followUpTracker": {
     "fileName": "Follow-up Tracker  (1).xlsx",
@@ -7992,6 +8753,183 @@
         "links": "",
         "reviewAddedOn": "2026-11-09"
       }
-    ]
+    ],
+    "annotations": {
+      "29": {
+        "notes": [
+          {
+            "source": "Sonu Kumar",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "Rockset compute-ops monitoring / testing approach: close the dashboard escalation. Sonu reports that a path forward exists; the screenshot records Low priority.",
+            "applicationNote": "Applied as an escalation closure, not evidence that all underlying testing or review is complete. Keep current owners, historical dates and scope visible. A new dated plan or reported risk will resume escalation checks; existing execution is tracked in Optro where stated.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244958605709",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ],
+        "escalationResolution": {
+          "recordedOn": "2026-11-09",
+          "reason": "Rockset compute-ops monitoring / testing approach: close the dashboard escalation. Sonu reports that a path forward exists; the screenshot records Low priority.",
+          "startRaw": "2026-10-30",
+          "endRaw": "2026-10-31",
+          "followUpDate": null
+        }
+      },
+      "22": {
+        "notes": [
+          {
+            "source": "Sonu Kumar",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "Azure Platform: close the dashboard escalation. Sonu requests closing this dashboard escalation; the activity remains deprioritized with testing planned to January 15, 2027.",
+            "applicationNote": "Applied as an escalation closure, not evidence that all underlying testing or review is complete. Keep current owners, historical dates and scope visible. A new dated plan or reported risk will resume escalation checks; existing execution is tracked in Optro where stated.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794245248039109",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ]
+      },
+      "48": {
+        "notes": [
+          {
+            "source": "Sonu Kumar",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "AM-based UAR Q4 testing / ToD remediation: close the dashboard escalation. Sonu reports that the uplift is complete; remaining control testing and timelines are tracked in Optro.",
+            "applicationNote": "Applied as an escalation closure, not evidence that all underlying testing or review is complete. Keep current owners, historical dates and scope visible. A new dated plan or reported risk will resume escalation checks; existing execution is tracked in Optro where stated.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794246110855239",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          },
+          {
+            "source": "Sonu Kumar",
+            "postedOn": "2026-11-05",
+            "recordedOn": "2026-11-09",
+            "text": "PwC testing is limited by the SoW to Revenue applications and infrastructure affecting Revenue. Sonu will brief Layla on the applicable population. Chandana will confirm AM campaign timing with Adi; Q4 UAR readiness is tentatively before the year-end break. Chandana will provide a generic/system-account review plan during the week of November 9; an annual cadence was considered acceptable.",
+            "applicationNote": "Keep the January 15, 2027 Q4 testing target and Sonu’s existing PwC ownership. Layla’s Compute questions are coordination context, not a reassignment of the whole project. Generic/system-account planning remains open within the existing linked alignment action. The readiness window is tentative and does not supersede the January testing deadline.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793915018506539",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ]
+      },
+      "7": {
+        "notes": [
+          {
+            "source": "Mayra Mendoza",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+            "applicationNote": "Close the escalation records for the four explicitly identified scopes. This is not confirmation of project completion. The partially visible fifth screenshot row is not identified or changed. CosmosDB wording is a follow-up distinct from the broader Sonu-owned CosmosDB ITGC discovery project.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ],
+        "escalationResolution": {
+          "recordedOn": "2026-11-09",
+          "reason": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+          "startRaw": "2026-10-27",
+          "endRaw": "2026-11-06",
+          "followUpDate": null
+        }
+      },
+      "14": {
+        "notes": [
+          {
+            "source": "Mayra Mendoza",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+            "applicationNote": "Close the escalation records for the four explicitly identified scopes. This is not confirmation of project completion. The partially visible fifth screenshot row is not identified or changed. CosmosDB wording is a follow-up distinct from the broader Sonu-owned CosmosDB ITGC discovery project.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ],
+        "escalationResolution": {
+          "recordedOn": "2026-11-09",
+          "reason": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+          "startRaw": "2026-10-21",
+          "endRaw": "2026-10-27",
+          "followUpDate": null
+        }
+      },
+      "20": {
+        "notes": [
+          {
+            "source": "Mayra Mendoza",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+            "applicationNote": "Close the escalation records for the four explicitly identified scopes. This is not confirmation of project completion. The partially visible fifth screenshot row is not identified or changed. CosmosDB wording is a follow-up distinct from the broader Sonu-owned CosmosDB ITGC discovery project.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ],
+        "escalationResolution": {
+          "recordedOn": "2026-11-09",
+          "reason": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+          "startRaw": "2026-10-20",
+          "endRaw": "TBD",
+          "followUpDate": null
+        }
+      },
+      "15": {
+        "notes": [
+          {
+            "source": "Mayra Mendoza",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+            "applicationNote": "Close the escalation records for the four explicitly identified scopes. This is not confirmation of project completion. The partially visible fifth screenshot row is not identified or changed. CosmosDB wording is a follow-up distinct from the broader Sonu-owned CosmosDB ITGC discovery project.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244449037969",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ],
+        "frmLeadsOverride": "Ash",
+        "escalationResolution": {
+          "recordedOn": "2026-11-09",
+          "reason": "Mayra requests removing ToE/LMD approach and coverage (High), Monorepo inventory framework (High), CosmosDB control wording (Low) and Project Galaxy scope update (Medium, on hold) from the escalation view.",
+          "startRaw": "2026-10-16",
+          "endRaw": "TBD",
+          "followUpDate": null
+        }
+      },
+      "32": {
+        "notes": [
+          {
+            "source": "Layla Yang",
+            "postedOn": "2026-11-09",
+            "recordedOn": "2026-11-09",
+            "text": "The DCGM scoping memo draft is ready. Layla will align with Cami/BP before wider circulation; the updated target is before Friday, November 13, 2026. The source tracker was updated.",
+            "applicationNote": "Assign the memo to Layla, retaining Avi as the existing FRM lead. Cami/BP are review contacts, not inferred FRM leads; BP’s identity is not confirmed. Preserve “before November 13” as a boundary, not a completed date. Original tracker Added by and November 6 deadline remain in source action details.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244067723979",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ],
+        "pwcOwnersOverride": "Layla Yang",
+        "endOverride": "Before 2026-11-13",
+        "endBasisOverride": "Projected end · Slack update"
+      },
+      "38": {
+        "notes": [
+          {
+            "source": "Stephen Wilm / Chester Phung",
+            "postedOn": "2026-11-03",
+            "recordedOn": "2026-11-09",
+            "text": "The Slack readout reports Sprint 1 complete and Sprints 2–3 tracking to November 13. Job-monitoring controls and Ads Manager / Arsenal ITGC design gaps were taken back to EY with Urminder and Alex.",
+            "applicationNote": "Sprint 1 is already completed by the user’s November 9 instruction. November 13 is retained as a reported delivery forecast; it is not assumed to replace the previously agreed November 15 completion/full-review target. Confirm the milestone distinction. Existing PwC and FRM owners are retained; Alex is recorded as a design follow-up contact. The November 9 workbook PBC evidence statuses remain unchanged.",
+            "sourceUrl": "https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1793721236339759",
+            "via": "FRMprio Buddy",
+            "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
+          }
+        ]
+      }
+    }
   }
 }

@@ -11,7 +11,7 @@ const activity = (row: number) => activities.find(item => item.row === row)!
 const today = '2026-11-09'
 
 test('date corrections supersede overdue values without closing unfinished work or changing unrelated activities', () => {
-  expect(activities).toHaveLength(67)
+  expect(activities).toHaveLength(68)
   expect(activity(40).end).toBe('2027-01-15')
   expect(activity(40).workbookEndRaw).toBe('11/31')
   expect(activity(40).start).toBe('2026-10-26')
@@ -127,7 +127,7 @@ test('portfolio, owner filters, dated source attribution, paused view and Ale-ka
   await expect(page.locator('.source-date-facts')).toContainText('Oct 31, 2026')
   await page.getByLabel('Search source activities').fill('Oracle MCP')
   await expect(page.locator('.source-details h2')).toHaveText('Oracle MCP')
-  await expect(page.locator('.workbook-row.project-row .project-cell > strong')).toHaveAttribute('title','Oracle MCP')
+  await expect(page.locator('.workbook-row.project-row .project-cell > strong[title="Oracle MCP"]')).toHaveCount(1)
   await expect(page.locator('.source-date-facts')).toContainText('Nov 15, 2026')
   await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Originally 8 controls, now 11 proposed')
   await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('larger dollar value')

@@ -127,3 +127,13 @@ npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
 ```
 
 A custom domain or different Pages path requires updating the build base and Google authorized origin.
+
+## Slack readouts through FRMprio Buddy
+
+The November 9, 2026 update uses the accessible ChatGPT conversations **Slack Summary Updates** and **Slack Summary Decisions Owners Updates**, reporting channel `C0C9A94KGQN` coverage for November 3–9 through 10:24 PST. Source Slack permalinks, original authors/post dates, and the Buddy readout link are retained in project notes and owner summaries. A Buddy readout is a supplied source; this environment does not directly authenticate to Slack.
+
+To refresh, have Buddy read the channel and its relevant threads, then supply its conversation link or readout to Codex. Apply explicit changes against the existing project list and preserve ambiguous dates, owners and scope as questions for review. Refreshes occur when a readout is supplied and applied.
+
+An **Escalation closed** record keeps the underlying project open. It stores the dates/checkpoint reviewed at closure; changed dates/checkpoints or a newly reported risk resume escalation checks. CosmosDB wording follows its own action, separately from the broader CosmosDB discovery project. Keystone’s architecture escalation is separate from the active SDLC memo/impact-assessment follow-ups. Completed readiness or uplift is separate from remaining Q4 testing in Optro.
+
+The DCGM deadline is **before November 13**, an exclusive date boundary. Ads’ reported November 13 delivery forecast and existing November 15 full-review target are retained together pending confirmation. New AI Governance scope is highlighted with its explicit leadership priority; missing PwC ownership and project dates remain unconfirmed. Current testing status for the confirmed B2B/B2C, Applied Infra and SecOps workstreams comes from Optro; the workbook remains a follow-up/action snapshot.
