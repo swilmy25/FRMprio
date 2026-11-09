@@ -1192,6 +1192,42 @@
           "bucket": "alignment"
         }
       ]
+    },
+    {
+      "id": "37a6d807d0436419",
+      "observedAt": "2026-11-09T21:07:01.681Z",
+      "decisions": [
+        {
+          "key": "escalation:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:oracle mcp - currently only asked to test 1 use case (oracle je prep through codex). originally 8 controls, now 11 proposed",
+          "topic": "AI Governance / Oracle MCP",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:key reports",
+          "topic": "Key Reports",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:vertex (itgcs)",
+          "topic": "Vertex ITGCs",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:key reports - wave 2",
+          "topic": "Key Reports - Wave 2",
+          "bucket": "escalation"
+        },
+        {
+          "key": "alignment:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "alignment"
+        }
+      ]
     }
   ]
 }

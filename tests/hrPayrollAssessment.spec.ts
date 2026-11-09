@@ -28,16 +28,14 @@ test('assessment captures ownership, proposed priority, PBC workflow and the con
  expect(notes).toContain('from Adi')
  expect(notes).toContain('HR Ops review')
  expect(assessment.staffing).toContain('@cloie.vonmassenhausen')
- expect(dateHealth(assessment,'2026-10-26').tone).toBe('escalation')
- const item=buildAleReadout(activities,'2026-10-26').escalations.find(item=>item.activityId===assessment.id)!
- expect(item.owners).toEqual(['Stephen Wilm'])
- expect(item.frmOwners).toEqual(['Sudhika','Chandana'])
- expect(item.nextStep).toContain('escalate the outstanding activity-confirmation and IPE evidence requests')
- expect(item.nextStep).toContain('Chandana / Adi')
- expect(assessment.escalationReason).toContain('IPE evidence remain outstanding')
+ expect(dateHealth(assessment,'2026-11-09').tone).toBe('scheduled')
+ expect(buildAleReadout(activities,'2026-11-09').escalations.some(item=>item.activityId===assessment.id)).toBe(false)
+ expect(assessment.escalationAction).toContain('Chandana / Adi')
+ expect(assessment.escalationAction).toContain('pending IPE evidence')
+ expect(assessment.escalationReason).toBe('')
  expect(assessment.end).toBe('2026-11-15')
- expect(assessment.meetingNotes.at(-1)?.applicationNote).toContain('exact evidence-delivery day')
- expect(item.nextStep).toContain('OE exception immediately')
+ expect(assessment.meetingNotes.some(n=>n.applicationNote?.includes('exact evidence-delivery day'))).toBe(true)
+ expect(assessment.escalationAction).toContain('OE exception immediately')
 })
 
 test('planning range is a scoped proposal, survives both lead exports and never becomes actual or allocated hours',()=>{
