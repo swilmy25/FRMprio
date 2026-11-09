@@ -170,6 +170,7 @@ export function rating(value:string):string {
  return match ? match[1].toLowerCase()==='not applicable'?'Not applicable':match[1][0].toUpperCase()+match[1].slice(1).toLowerCase() : 'Not supplied'
 }
 export function alignmentState(p:SourceActivity):string {
+ if(p.completed)return 'Not applicable'
  if(/^no$/i.test(p.alignment))return 'Not aligned'
  const a=priorityRank(p.frmPriority),b=priorityRank(p.pwcPriority)
  if(a<4 && b<4 && a!==b)return 'Not aligned'

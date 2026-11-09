@@ -44,7 +44,7 @@ test('all 45 first-tab actions retain their baseline mapping with dated Slack ov
  expect(trackerPwCOwner('FRM / PwC',[])).toBe('PwC (team)')
 })
 
-test('completed readiness and duplicate actions do not close broad testing; active project workstreams use the new tracker dates',()=>{
+test('completed readiness and duplicate actions remain distinct from explicit project closures; active workstreams use the new tracker dates',()=>{
  const rows=[...new Set(activities.flatMap(a=>a.trackerActions.map(t=>t.row)))].sort((a,b)=>a-b)
  expect(rows).toEqual(Array.from({length:45},(_,i)=>i+4))
  expect(activities.filter(a=>a.newlyTrackedOn===today).map(a=>a.row)).toEqual([73,74,75,76])
@@ -70,8 +70,9 @@ test('completed readiness and duplicate actions do not close broad testing; acti
  expect(activity(27)).toMatchObject({completed:false,end:'2026-12-31'})
  for(const row of [56,57])expect(dateHealth(activity(row),today).tone).toBe('scheduled')
  expect(activity(16).followUpDate).toBeNull()
- expect(alignmentState(activity(16))).toBe('Not aligned')
- expect(activity(16).escalationAction).toContain('ToD conclusion action is marked completed')
+ expect(activity(16).completed).toBe(true)
+ expect(alignmentState(activity(16))).toBe('Not applicable')
+ expect(activity(16).escalationAction).toBe('')
  expect(dateHealth(activity(17),today).tone).toBe('paused')
  const next=buildAleReadout(activities,'2026-11-12')
  expect(next.escalations.find(p=>p.activityId==='source-row-75')?.topic).toBe('Chronosphere — ITAC/ITGC alert scope clarification')
@@ -138,7 +139,7 @@ test('latest new projects, source actions, history and Ads details are visible o
  await expect(page.locator('.source-date-facts')).toContainText('Nov 11, 2026')
  await expect(page.getByRole('region',{name:'Follow-up tracker actions'})).toContainText('Action Items · row 47')
  await page.getByRole('button',{name:'Clear all filters',exact:true}).click()
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(67)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(66)
  await page.getByLabel('Search source activities').fill('Rockset compute-ops monitoring')
  await page.locator('.project-cell > strong[title="Rockset compute-ops monitoring — testing approach"]').click()
  await expect(page.locator('.detail-meta')).toContainText('Sonu Kumar')
@@ -201,5 +202,5 @@ test('follow-up view supports six new-action reviews, Added-by owner/category fi
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
  await page.screenshot({path:'/tmp/frmprio-nov9-followups-mobile.png',fullPage:true})
  await page.getByRole('button',{name:'Back to projects',exact:true}).click()
- await expect(page.locator('.workbook-row.project-row')).toHaveCount(67)
+ await expect(page.locator('.workbook-row.project-row')).toHaveCount(66)
 })

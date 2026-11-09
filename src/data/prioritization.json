@@ -47,7 +47,6 @@
     "30": "Active portfolio",
     "31": "Active portfolio",
     "32": "Active portfolio",
-    "33": "Active portfolio",
     "34": "Active portfolio",
     "35": "Active portfolio",
     "36": "Active portfolio",
@@ -953,15 +952,6 @@
     [
       "",
       "",
-      "Key Reports\n - Databricks to Kepler KR uplift\n - Kepler KR Approach\n - KR Inventory finalisation (Wave 3)\n- Sunk time into Databricks KR inventory work and testing\n- FRM alignemnt & kick-off + stakeholder discussions",
-      "",
-      "Rajan Roy Ben Oates",
-      "Sudhika",
-      "High (Do Immediately/August - October)",
-      "Key Reports",
-      "High",
-      "Yes",
-      "All (Remediation/Uplift, Discovery, and Testing)",
       "",
       "",
       "",
@@ -973,9 +963,18 @@
       "",
       "",
       "",
-      "2026-09-10",
-      "10/15/2026 -10/30/2026",
-      "Ben Oates, Rajan Roy, Ashutosh Mallick, Akash Ray, Shreyansh Agarwal, Akash Agarwal, Kavita Jhunjhunwala, Nilay Das Sharma, Dibyendu Mondal, Amit Kumar Mishra, Abdhesh Upadhyay, Sumanta Ghosh"
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     [
       "",
@@ -2381,9 +2380,15 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 4, 18. [Deloitte Request] Confirm the conclusion of the ToD reassessment. DT follow-up on REV.04.01 support provided",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. The ToD conclusion/REV.04.01 follow-up actions are marked completed, while notes still discuss control buckets and top-up procedures. This does not complete all Revenue controls or resolve the separately recorded PwC/FRM priority mismatch. Monitoring details are tracked as a new workstream."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "Revenue new controls is closed per the user update.",
+          "applicationNote": "Mark the project completed/closed and remove it from current escalation and priority-alignment actions. Preserve original workbook dates, assignments and earlier updates as history. No exact actual completion date was supplied."
         }
       ],
-      "endOverride": "TBD",
+      "endOverride": "Completed",
       "mergedActivities": [
         {
           "row": 39,
@@ -2401,8 +2406,6 @@
         }
       ],
       "frmLeadsOverride": "Urminder, Ash",
-      "statusOverride": "In progress",
-      "escalationAction": "Mayra / Urminder / Ash: confirm overall Revenue scope and delivery milestones and agree the remaining risk-bucketing/top-up work. The ToD conclusion action is marked completed; priority alignment remains unconfirmed.",
       "trackerActions": [
         {
           "fileName": "Follow-up Tracker  (1).xlsx",
@@ -2480,7 +2483,8 @@
           "notes": "Align on how to approach the follow-ups prior to responding\nPwC scheduled the WT to explain the code.",
           "links": ""
         }
-      ]
+      ],
+      "sectionOverride": "Completed"
     },
     "21": {
       "notes": [
@@ -2512,11 +2516,16 @@
           "recordedOn": "2026-11-02",
           "text": "Vertex is closed except for change management, where one piece of evidence needs to be updated. All other Vertex work is reported closed.",
           "applicationNote": "Retain Vertex as open/In progress until the final change-management evidence update is finished. No actual completion date or revised end date was provided, so the October 31 end remains and is overdue as of this recorded update. No control counts or completion percentage are inferred. Mayra provides the update; the assigned PwC owners remain Joaquin Garcia and Mayra Mendoza."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "Vertex ITGCs is closed per the user update.",
+          "applicationNote": "Mark the project completed/closed and remove it from current escalation and priority-alignment actions. Preserve original workbook dates, assignments and earlier updates as history. No exact actual completion date was supplied."
         }
       ],
-      "endOverride": "2026-10-31",
-      "statusOverride": "In progress",
-      "escalationAction": "Complete the remaining change-management evidence update and confirm closure or a revised end date with Urminder."
+      "endOverride": "Completed",
+      "sectionOverride": "Completed"
     },
     "8": {
       "notes": [
@@ -5861,6 +5870,18 @@
           "readoutUrl": "https://chatgpt.com/c/6af20fde-a110-832e-9ba9-78a7f16754ee"
         }
       ]
+    },
+    "44": {
+      "notes": [
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "Key Reports - Wave 2 projected completion is moved to November 30, 2026.",
+          "applicationNote": "Keep Wave 2 open and preserve its original start, PwC owners and FRM lead. The old October 15–30 workbook range remains historical context; November 30 is a projected target, not an actual completion date. The separate Key Reports line is removed without merging its scope here."
+        }
+      ],
+      "endOverride": "2026-11-30",
+      "endBasisOverride": "Projected completion · User update"
     }
   },
   "changeLog": [
@@ -8017,9 +8038,63 @@
       "flags": [
         "escalation-closed"
       ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 16,
+      "activity": "Revenue new controls\n- Apple RevShare moving to AutoRecon Platform\n",
+      "title": "Revenue new controls — closed",
+      "detail": "Revenue new controls is closed per the user update. Kept in completed history; no exact actual completion date was supplied.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder, Ash",
+      "flags": [
+        "completed",
+        "escalation-closed"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 35,
+      "activity": "Vertex (ITGCs)",
+      "title": "Vertex ITGCs — closed",
+      "detail": "Vertex ITGCs is closed per the user update. Kept in completed history; no exact actual completion date was supplied.",
+      "pwcOwners": "Joaquin Garcia Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": [
+        "completed",
+        "escalation-closed"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 33,
+      "activity": "Key Reports\n - Databricks to Kepler KR uplift\n - Kepler KR Approach\n - KR Inventory finalisation (Wave 3)\n- Sunk time into Databricks KR inventory work and testing\n- FRM alignemnt & kick-off + stakeholder discussions",
+      "title": "Key Reports — removed",
+      "detail": "Remove the standalone Key Reports activity from the dashboard per the user request. Key Reports - Wave 2 remains a separate tracked project. This removal does not assert completion or merge the original scope into Wave 2.",
+      "pwcOwners": "Rajan Roy Ben Oates",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "scope-change"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 44,
+      "activity": "Key Reports - Wave 2",
+      "title": "Key Reports - Wave 2 — completion target moved to November 30",
+      "detail": "Projected completion moved from the October 15–30 workbook range to November 30, 2026. Wave 2 remains open with its original assignments and start date.",
+      "pwcOwners": "Rajan Roy Ben Oates",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "date-moved"
+      ]
     }
   ],
-  "publicationId": "orange-notes-3b9ec5bb6a92",
+  "publicationId": "orange-notes-94716c6010fa",
   "reviewAsOf": "2026-11-09",
   "followUpTracker": {
     "fileName": "Follow-up Tracker  (1).xlsx",

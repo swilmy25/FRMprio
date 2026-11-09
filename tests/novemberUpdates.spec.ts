@@ -37,13 +37,14 @@ test('explicit scope survives orange projection and scoped exports without inven
  expect(oracle.completed).toBe(false)
  expect(dateHealth(oracle,'2026-11-02').tone).toBe('escalation')
  const vertex=activities.find(item=>item.row===35)!
- expect(vertex.completed).toBe(false)
- expect(vertex.status).toBe('In progress')
- expect(vertex.end).toBe('2026-10-31')
- expect(dateHealth(vertex,'2026-11-02').tone).toBe('escalation')
+ expect(vertex.completed).toBe(true)
+ expect(vertex.status).toBe('Completed')
+ expect(vertex.end).toBeNull()
+ expect(vertex.workbookEndRaw).toBe('2026-10-30')
+ expect(dateHealth(vertex,'2026-11-09').tone).toBe('completed')
 })
 
-test('scope is visible, staffing stays in details, and current Oracle and Vertex updates remain open',async({page})=>{
+test('scope is visible, staffing stays in details, and Oracle remains open while Vertex is now closed',async({page})=>{
  await page.clock.setFixedTime(new Date('2026-11-04T18:00:00Z'))
  await page.goto('/')
  await page.getByLabel('Search source activities').fill('Azure Platform')
@@ -68,8 +69,9 @@ test('scope is visible, staffing stays in details, and current Oracle and Vertex
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('expected by the end of the week')
  await expect(page.locator('.date-escalation-panel')).toContainText('Deficiency wording has been shared with Sudhika')
  await page.getByLabel('Search source activities').fill('Vertex')
- await expect(page.locator('.workbook-row.date-escalation')).toHaveCount(1)
- await expect(page.locator('.workbook-row.date-completed')).toHaveCount(0)
+ await expect(page.locator('.workbook-row.date-escalation')).toHaveCount(0)
+ await expect(page.locator('.workbook-row.date-completed')).toHaveCount(1)
+ await expect(page.locator('.source-details')).toContainText('Status: Completed')
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('one piece of evidence needs to be updated')
  await page.setViewportSize({width:390,height:844})
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)

@@ -11,10 +11,14 @@ const published: AleHistory = JSON.parse(readFileSync(new URL('../src/data/ale-h
 const oracleHistoryKey=aleHistoryKey(snapshot.annotations!['26'].historyName!,'escalation')
 const oracleSeen=published.updates.filter(update=>update.decisions.some(decision=>decision.key===oracleHistoryKey)).length
 const current = buildAleReadout(parseSource(snapshot), '2026-11-09')
-const baselineData=buildAleReadout(parseSource(snapshot),'2026-10-20')
+// Explicit historical fixture keeps carryover/reopening scenarios independent of the current Revenue closure.
+const historicalSnapshot = structuredClone(snapshot)
+Object.assign(historicalSnapshot.annotations!['16'], {sectionOverride:'Active portfolio', endOverride:'TBD', statusOverride:'In progress'})
+const baselineData=buildAleReadout(parseSource(historicalSnapshot),'2026-10-20')
 const rootName = 'Alejandro’s leadership readout'
 const nextSnapshot = (date: string): SourceSnapshot => ({ ...structuredClone(snapshot), publicationId: undefined, importedAt: `${date}T18:00:00.000Z` })
-const firstHistory = () => observeAleHistory(EMPTY_ALE_HISTORY, snapshot, baselineData, '2026-10-20T18:00:00.000Z')
+const nextHistoricalSnapshot = (date:string): SourceSnapshot => ({...structuredClone(historicalSnapshot),publicationId:undefined,importedAt:`${date}T18:00:00.000Z`})
+const firstHistory = () => observeAleHistory(EMPTY_ALE_HISTORY, historicalSnapshot, baselineData, '2026-10-20T18:00:00.000Z')
 
 test('published baseline uses observed dates and the readout carries all effective FRM owners', () => {
   expect(isAleHistory(published)).toBe(true)
@@ -29,8 +33,9 @@ test('published baseline uses observed dates and the readout carries all effecti
     expect(latest.firstSeen).toBe(pacificDay(published.updates.find(update=>update.decisions.some(decision=>decision.key===item.historyKey))!.observedAt))
     expect(latest.seenUpdates).toBe(published.updates.filter(update=>update.decisions.some(decision=>decision.key===item.historyKey)).length)
   }
-  expect(current.escalations.find(item => item.topic === 'Revenue new controls')?.frmOwners).toEqual(['Urminder', 'Ash'])
-  expect(current.alignment[0].frmOwners).toEqual(['Urminder', 'Ash'])
+  expect(current.escalations.find(item => item.topic === 'AI Governance / Oracle MCP')?.frmOwners).toEqual(['Sudhika'])
+  expect(current.alignment).toEqual([])
+  expect(baselineData.alignment[0].frmOwners).toEqual(['Urminder', 'Ash'])
   expect(parseSource(snapshot).find(item => item.row === 43)?.frmLeads).toBe('Avi')
   expect(parseSource(snapshot).find(item => item.row === 43)?.pwcOwners).toBe('Ben Oates')
 })
@@ -61,7 +66,7 @@ test('shortening Oracle’s title preserves its existing escalation dates and hi
 })
 
 test('a following source update preserves first dates across row moves and ownership handoffs', () => {
-  const next = nextSnapshot('2026-10-27')
+  const next = nextHistoricalSnapshot('2026-10-27')
   next.annotations!['12'].endOverride='2026-10-23'
   ;[next.rows[15], next.rows[35]] = [next.rows[35], next.rows[15]]
   ;[next.annotations!['16'], next.annotations!['36']] = [next.annotations!['36'], next.annotations!['16']]
@@ -77,12 +82,12 @@ test('a following source update preserves first dates across row moves and owner
 })
 
 test('leaving and returning to one bucket does not reset dates or conflate Revenue’s separate decisions', () => {
-  const next = nextSnapshot('2026-10-21')
+  const next = nextHistoricalSnapshot('2026-10-21')
   next.rows[15][6] = 'High'; next.rows[15][9] = 'Yes'
   const data = buildAleReadout(parseSource(next), '2026-10-21')
   expect(data.alignment).toHaveLength(0)
   const second = observeAleHistory(firstHistory(), next, data, '2026-10-21T18:00:00.000Z')
-  const returned = nextSnapshot('2026-10-22')
+  const returned = nextHistoricalSnapshot('2026-10-22')
   const back = buildAleReadout(parseSource(returned), '2026-10-22')
   const third = observeAleHistory(second, returned, back, '2026-10-22T18:00:00.000Z')
   const id = aleUpdateId(returned, back)
@@ -117,26 +122,25 @@ test('history validation, merging and lead exports retain dates without exportin
   expect(isAleHistory(invalid)).toBe(false)
   expect(isSourceSnapshot({ ...snapshot, aleHistory: invalid })).toBe(false)
   expect(isAleHistory({ ...original, updates: [...original.updates, ...original.updates] })).toBe(false)
-  expect(aleHistoryKey(' Revenue new controls\nNew context', 'escalation')).toBe(current.escalations.find(item=>item.topic==='Revenue new controls')!.historyKey)
+  expect(aleHistoryKey(' Revenue new controls\nNew context', 'escalation')).toBe(baselineData.escalations.find(item=>item.topic==='Revenue new controls')!.historyKey)
 })
 
 test('readout shows both owner teams and carryover dates that survive reload and navigation', async ({ page }) => {
   await page.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
   await page.goto('/#view=ale-kazam')
   const root = page.getByRole('region', { name: rootName })
-  const revenue = root.getByRole('article', { name: 'Escalations: Revenue new controls', exact: true })
-  await expect(revenue.locator('.ale-frm-owners')).toContainText('@Urminder')
-  await expect(revenue.locator('.ale-frm-owners')).toContainText('@Ash')
-  await expect(revenue.locator('.ale-item-history')).toContainText(published.updates.length===1?'New this update':`Carryover · ${published.updates.length} updates`)
+  const oracle = root.getByRole('article', { name: 'Escalations: AI Governance / Oracle MCP', exact: true })
+  await expect(oracle.locator('.ale-frm-owners')).toContainText('@Sudhika')
+  await expect(oracle.locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen} updates`)
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
-  await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
-  await expect(revenue.locator('.ale-item-history')).toContainText('First logged Oct 20, 2026')
-  await expect(revenue.locator('.ale-item-history')).toContainText('Last seen Nov 9, 2026')
+  await expect(oracle.locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)
+  await expect(oracle.locator('.ale-item-history')).toContainText('First logged Oct 26, 2026')
+  await expect(oracle.locator('.ale-item-history')).toContainText('Last seen Nov 9, 2026')
   await expect(root.locator('.ale-metrics .metric').nth(3).locator('strong')).toHaveText(String(current.decisionCount))
   await page.reload()
-  await expect(revenue.locator('.ale-item-history')).toContainText(`Carryover · ${published.updates.length + 1} updates`)
+  await expect(oracle.locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)
   const history = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), ALE_HISTORY_STORAGE)
   expect(history.updates).toHaveLength(published.updates.length + 1)
   await page.setViewportSize({ width: 390, height: 844 })
@@ -147,7 +151,7 @@ test('source exports transfer local update history into a fresh browser without 
   await page.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
   await page.goto('/')
   await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
-  await expect(page.getByRole('status')).toContainText('Imported 67 activities')
+  await expect(page.getByRole('status')).toContainText('Imported 66 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
   const download = await downloadPromise

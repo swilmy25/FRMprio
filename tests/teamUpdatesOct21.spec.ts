@@ -11,7 +11,7 @@ const activity = (row: number) => activities.find(item => item.row === row)!
 const today = '2026-11-09'
 
 test('date corrections supersede overdue values without closing unfinished work or changing unrelated activities', () => {
-  expect(activities).toHaveLength(67)
+  expect(activities).toHaveLength(66)
   expect(activity(40).end).toBe('2027-01-15')
   expect(activity(40).workbookEndRaw).toBe('11/31')
   expect(activity(40).start).toBe('2026-10-26')
@@ -87,11 +87,12 @@ test('Stripe pauses only its unresolved-date escalation and resumes normal check
   expect(dateHealth({...stripe,escalationReason:'New confirmed blocker'},today).tone).toBe('escalation')
 })
 
-test('relative follow-up is anchored to the confirmed post date and pending TOD work is linked without merging buckets', () => {
+test('Revenue closure preserves relative follow-up provenance and linked TOD history without merging OE buckets', () => {
   const revenue = activity(16)
   expect(revenue.followUpDate).toBeNull()
-  expect(revenue.endRaw).toBe('TBD')
-  expect(revenue.escalationAction).toContain('ToD conclusion action is marked completed')
+  expect(revenue.endRaw).toBe('Completed')
+  expect(revenue.escalationAction).toBe('')
+  expect(revenue.meetingNotes.some(note=>note.text.includes('ToD reassessment'))).toBe(true)
   expect(revenue.meetingNotes.find(note=>note.postedOn==='2026-10-21')?.postedOn).toBe('2026-10-21')
   expect(revenue.meetingNotes.find(note=>note.postedOn==='2026-10-21')?.recordedOn).toBe('2026-10-26')
   expect(activity(17).status).toBe('On hold')
