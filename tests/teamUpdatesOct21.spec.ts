@@ -27,9 +27,10 @@ test('date corrections supersede overdue values without closing unfinished work 
   }
   expect(activity(21).completed).toBe(true)
   expect(activity(53).completed).toBe(true)
-  expect(activity(18).status).toBe('In progress')
-  expect(activity(18).completed).toBe(false)
-  expect(activity(18).end).toBe('2026-10-30')
+  expect(activity(18).status).toBe('Completed')
+  expect(activity(18).completed).toBe(true)
+  expect(activity(18).end).toBeNull()
+  expect(activity(18).workbookEndRaw).toBe('2026-10-30')
 })
 
 test('current owners change independently of workbook ownership and update providers', () => {

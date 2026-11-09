@@ -118,7 +118,7 @@ test('new publication replaces an older bundled browser snapshot, and ignores th
 test('new visitors see the fresh orange-only workbook with completed items and explicit dates', async ({ page }) => {
   await page.goto('/')
   await expect(page.locator('.workbook-row.project-row')).toHaveCount(67)
-  await expect(page.locator('.workbook-row.date-completed')).toHaveCount(12)
+  await expect(page.locator('.workbook-row.date-completed')).toHaveCount(13)
   await expect(page.locator('.table-head')).toContainText('PROJECTED/ACTUAL START')
   await expect(page.locator('.table-head')).toContainText('PROJECTED/ACTUAL END')
   expect(PUBLISHED_SNAPSHOT.includedColumns).toEqual(ORANGE_COLUMNS)

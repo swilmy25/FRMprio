@@ -74,17 +74,22 @@ test('completed readiness and duplicate actions do not close broad testing; acti
  expect(next.escalations.find(p=>p.activityId==='source-row-73')?.topic).toBe('Revenue job monitoring — Chronosphere alert details')
 })
 
-test('Ads PBC status and code questions remain separate from project review completion',()=>{
+test('Ads evidence and shared coordination remain distinct from the confirmed Sprint 1 completion',()=>{
  expect(adsPbcCounts(activity(18).adsEvidence!.controls)).toEqual({total:10,certified:10,submitted:0,followUp:0,missing:0,onHold:0})
  const evidence=activity(19).adsEvidence!
  expect(adsPbcCounts(evidence.controls)).toEqual({total:10,certified:2,submitted:3,followUp:2,missing:1,onHold:2})
  expect(evidence.controls.find(c=>c.control==='ADS.09.01')?.status).toBe('Evidence Not Received')
  expect(evidence.controls.find(c=>c.control==='ADS.02.07')?.status).toBe('In Follow Up')
  expect(evidence.followUps.find(c=>c.control==='ADS.02.07')?.status).toBe('Closed')
- for(const row of [18,19]){
-  expect(activity(row).completed).toBe(false)
-  expect(activity(row).pwcOwners).toBe('Stephen Wilm')
- }
+ expect(activity(18)).toMatchObject({pwcOwners:'Stephen Wilm',completed:true,status:'Completed',section:'Completed',end:null,endRaw:'Completed',workbookEndRaw:'2026-10-30'})
+ expect(dateHealth(activity(18),today).tone).toBe('completed')
+ expect(activity(18).meetingNotes.at(-1)?.source).toBe('User update')
+ expect(activity(18).meetingNotes.at(-1)?.recordedOn).toBe(today)
+ expect(activity(18).trackerActions[0].status).toBe('In Progress')
+ expect(followUp(38).completed).toBe(false)
+ expect(activity(19)).toMatchObject({completed:false,pwcOwners:'Stephen Wilm'})
+ expect(buildAleReadout(activities,today).escalations.some(p=>p.activityId==='source-row-18')).toBe(false)
+ expect(buildAleReadout(activities,today).escalations.some(p=>p.activityId==='source-row-19')).toBe(true)
  expect(activity(19).end).toBe('2026-11-15')
 })
 
@@ -144,6 +149,13 @@ test('latest new projects, source actions, history and Ads details are visible o
  await page.setViewportSize({width:390,height:844})
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
  await page.screenshot({path:'/tmp/frmprio-nov9-ads-mobile.png',fullPage:true})
+ await page.getByLabel('Search source activities').fill('Ads New ITAC Controls')
+ const sprint=page.locator('.workbook-row.project-row').filter({has:page.locator('.project-cell > strong[title^="Ads New ITAC Controls (Sprint 1 ="]')})
+ await expect(sprint).toHaveClass(/date-completed/)
+ await sprint.click()
+ await expect(page.locator('.source-details')).toContainText('Status: Completed')
+ await expect(page.locator('.source-date-facts')).toContainText('exact actual end date not supplied')
+ await expect(page.locator('.date-escalation-panel')).toHaveCount(0)
 })
 
 test('follow-up view supports six new-action reviews, Added-by owner/category filters, C/J dates, reload and scoped export',async({page})=>{

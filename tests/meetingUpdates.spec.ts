@@ -64,7 +64,7 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  expect(activity(19).workbookName).toContain('Sprint 1.5')
  expect(snapshot.rows[18][2]).toBe(activity(19).workbookName)
  expect(activities.filter(p=>/Phases 2 & 3/.test(p.name))).toHaveLength(1)
- expect(activity(18).end).toBe('2026-10-30')
+ expect(activity(18).end).toBeNull()
  expect(activity(20).name).toBe('Ads ITGCs (Arsenal UI)')
  expect(parseSource(snapshotForLead(snapshot,'Urminder')).find(p=>p.row===19)?.name).toBe(activity(19).name)
  expect(activity(12).workbookEndRaw).toBe('2026-10-15')
@@ -78,7 +78,7 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  expect(snapshot.rows.every(row=>row.every((value,i)=>ORANGE_COLUMNS.includes(i)||value===''))).toBe(true)
 })
 test('completed closures are distinct from testing and future IronClad scope remains planned',()=>{
- expect(activities.filter(p=>p.completed)).toHaveLength(12)
+ expect(activities.filter(p=>p.completed)).toHaveLength(13)
  for(const row of [8,21,37])expect(activity(row).section).toBe('Completed')
  expect(activity(37).closureReason).toBe('Not assessed in FY26')
  expect(dateHealth(activity(37),'2026-10-20').label).toBe('Closed · not assessed in FY26')
@@ -168,7 +168,7 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Ankita','Ben Oates','Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','PwC (team)','Sonu Kumar','Stephen Wilm'])
  expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
  const items=uniqueMeetingItems(groups)
- expect(items).toHaveLength(118)
+ expect(items).toHaveLength(119)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
  expect(rows('date-moved')).toEqual([12,22,26,27,35,40,56,57,59,60,66])
  expect(rows('date-corrected')).toEqual([40])
@@ -197,7 +197,7 @@ test('dashboard and meeting owners follow worksheet or explicit user assignments
   }
  }
  const stephen=groups.find(group=>group.member==='Stephen Wilm')!
- expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19])
+ expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19,18])
  expect(stephen.items[0].providedBy).toBe('User update')
  const jeff=groups.find(group=>group.member==='Jeff Rose')!
  expect(jeff.items.map(item=>item.change.row)).toEqual([8,48,55])

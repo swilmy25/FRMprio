@@ -3330,9 +3330,14 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 38. Refer to Ads tabs",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. Ads tabs: 10 Certified. Code/general follow-ups are separately marked closed. A certified/submitted PBC is not confirmation of completed workpaper review; overall project completion is not supplied. Added by Cami owns the tracker coordination item; Stephen’s broader project ownership is retained."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-09",
+          "text": "User confirmed Stephen Wilm’s Ads New ITAC Controls (Sprint 1 = 10* controls: 9/28 to 10/10) item is complete.",
+          "applicationNote": "Mark the Sprint 1 project completed and remove it from active escalation/Ale-kazam. The actual completion date was not supplied; November 9 records this update only. Preserve the original October 30 projected end and prior workpaper/evidence context as history. Phases 2 & 3 and the shared Ads tracker coordination item remain open."
         }
       ],
-      "statusOverride": "In progress",
       "trackerActions": [
         {
           "fileName": "Follow-up Tracker  (1).xlsx",
@@ -3512,7 +3517,8 @@
           }
         ]
       },
-      "escalationAction": "Stephen / Cami / Urminder: confirm workpaper delivery/review closure now that all 10 Phase 1 PBCs are certified; complete or replan the October 30 target."
+      "sectionOverride": "Completed",
+      "endOverride": "Completed"
     },
     "26": {
       "notes": [
@@ -7009,9 +7015,22 @@
       "flags": [
         "scope-change"
       ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-09",
+      "row": 18,
+      "activity": "Ads New ITAC Controls (Sprint 1 = 10* controls: 9/28 to 10/10)\n\n*6 controls complete; 4 controls moved to Sprint 1.5",
+      "title": "Ads New ITAC Controls — Sprint 1 completed",
+      "detail": "User confirmed Stephen Wilm’s Ads New ITAC Controls (Sprint 1 = 10* controls: 9/28 to 10/10) item is complete.",
+      "pwcOwners": "Stephen Wilm",
+      "frmLeads": "Urminder",
+      "flags": [
+        "completed"
+      ]
     }
   ],
-  "publicationId": "orange-notes-a67ca25c04ed",
+  "publicationId": "orange-notes-0866b4624865",
   "reviewAsOf": "2026-11-09",
   "followUpTracker": {
     "fileName": "Follow-up Tracker  (1).xlsx",

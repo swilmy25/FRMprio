@@ -908,6 +908,107 @@
           "bucket": "alignment"
         }
       ]
+    },
+    {
+      "id": "41f31ac84dbb559a",
+      "observedAt": "2026-11-09T16:38:39.978Z",
+      "decisions": [
+        {
+          "key": "escalation:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:ads new itac controls - phases 2 & 3",
+          "topic": "Ads New ITAC Controls — Phases 2 & 3",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:oracle mcp - currently only asked to test 1 use case (oracle je prep through codex). originally 8 controls, now 11 proposed",
+          "topic": "Oracle MCP",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:key reports",
+          "topic": "Key Reports",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:project keystone - understanding what happened, what migrated, architecture changes before sdlc testing can be done (changes from intiial understanding)",
+          "topic": "Project Keystone",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:vertex (itgcs)",
+          "topic": "Vertex ITGCs",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:key reports - wave 2",
+          "topic": "Key Reports - Wave 2",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:hr/payroll late terminations - impact assessment support",
+          "topic": "HR/Payroll late terminations — impact assessment support",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:azure platform",
+          "topic": "Azure Platform",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:project galaxy",
+          "topic": "Project Galaxy",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:monorepo inventory framework - errors and sdlc uplift",
+          "topic": "Monorepo inventory framework — errors and SDLC uplift",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:toe / lmd approach and coverage confirmation",
+          "topic": "ToE / LMD approach and coverage confirmation",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:rockset compute-ops monitoring - testing approach",
+          "topic": "Rockset compute-ops monitoring — testing approach",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:am-based uar - tod remediation and aws / azure scope",
+          "topic": "AM-based UAR — Q4 testing and ToD remediation (AWS / Azure scope)",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:dcgm scoping",
+          "topic": "DCGM scoping",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:goldman sachs banking portal - dual administration (tcm.03.09)",
+          "topic": "Goldman Sachs Banking Portal — dual administration (TCM.03.09)",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:zip - two-way match and po approval follow-ups",
+          "topic": "Zip — two-way match and PO approval follow-ups",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:vndly - job monitoring and incident management",
+          "topic": "VNDLY — job monitoring and incident management",
+          "bucket": "escalation"
+        },
+        {
+          "key": "alignment:revenue new controls",
+          "topic": "Revenue new controls",
+          "bucket": "alignment"
+        }
+      ]
     }
   ]
 }
