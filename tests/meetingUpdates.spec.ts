@@ -55,7 +55,12 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  expect(parseSource(snapshotForLead(snapshot,'Chandana')).filter(p=>p.name.includes('Non-Platform OE Testing'))).toHaveLength(2)
  expect(activity(34).end).toBe('2026-10-30')
  expect(activity(34).meetingNotes[0].applicationNote).toContain('supersedes the earlier TBD')
- expect(activity(12).end).toBe('2026-11-10')
+ expect(activity(12).endRaw).toBe('Completed')
+ expect(activity(12).completed).toBe(true)
+ expect(activity(12).meetingNotes.at(-1)?.recordedOn).toBe('2026-11-10')
+ expect(activity(26).end).toBe('2026-11-15')
+ expect(activity(26).meetingNotes.at(-1)?.text).toContain('Thursday, November 12, 2026 at 4:00 p.m. Pacific')
+ expect(activity(26).escalationAction).toContain('Thursday, November 12 at 4:00 p.m. Pacific')
  expect(activity(19).name).toBe('Ads New ITAC Controls — Phases 2 & 3')
  expect(activity(19).pwcOwners).toBe('Stephen Wilm')
  expect(activity(19).frmLeads).toBe('Urminder')
@@ -78,7 +83,7 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  expect(snapshot.rows.every(row=>row.every((value,i)=>ORANGE_COLUMNS.includes(i)||value===''))).toBe(true)
 })
 test('completed closures are distinct from testing and future IronClad scope remains planned',()=>{
- expect(activities.filter(p=>p.completed)).toHaveLength(15)
+ expect(activities.filter(p=>p.completed)).toHaveLength(16)
  for(const row of [16,35]){
   expect(activity(row).status).toBe('Completed')
   expect(activity(row).end).toBeNull()
@@ -120,7 +125,7 @@ test('notes and original workbook values are visible, merged context is searchab
  await page.goto('/')
  await expect(page.locator('.workbook-row.project-row')).toHaveCount(66)
  await page.getByLabel('Search source activities').fill('API Tokenization')
- await expect(page.locator('.source-date-facts')).toContainText('Nov 10, 2026')
+ await expect(page.locator('.source-date-facts')).toContainText('Completed')
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('2026-10-15')
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Mayra')
  await page.getByLabel('Search source activities').fill('Databricks - Orion')
@@ -173,7 +178,7 @@ test('a browser-local import can explicitly return to the published workbook and
  page.once('dialog',dialog=>dialog.accept())
  await page.getByRole('button',{name:'Load published update'}).click()
  await page.getByLabel('Search source activities').fill('API Tokenization')
- await expect(page.locator('.source-date-facts')).toContainText('Nov 10, 2026')
+ await expect(page.locator('.source-date-facts')).toContainText('Completed')
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Mayra')
 })
 
@@ -182,7 +187,7 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Ankita','Ben Oates','Cami Aromando','Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','PwC (team)','Rajan Roy','Sonu Kumar','Stephen Wilm'])
  expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
  const items=uniqueMeetingItems(groups)
- expect(items).toHaveLength(159)
+ expect(items).toHaveLength(161)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
  expect(rows('date-moved')).toEqual([12,20,22,26,27,35,40,44,56,57,59,60,66,67,69,70,71])
  expect(rows('date-corrected')).toEqual([40])
@@ -211,7 +216,7 @@ test('dashboard and meeting owners follow worksheet or explicit user assignments
   }
  }
  const stephen=groups.find(group=>group.member==='Stephen Wilm')!
- expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19,18,26,18,19,20,31,19,20,26,59,59,59])
+ expect(stephen.items.map(item=>item.change.row)).toEqual([19,48,55,58,18,19,26,59,59,19,26,59,26,18,19,18,26,18,19,20,31,19,20,26,59,59,59,26])
  expect(stephen.items[0].providedBy).toBe('User update')
  const jeff=groups.find(group=>group.member==='Jeff Rose')!
  expect(jeff.items.map(item=>item.change.row)).toEqual([8,48,55,31])
@@ -269,7 +274,7 @@ test('member and focus filters show before/after dates and actionable TBDs witho
  await summaries.locator('summary').click()
  await expect(summaries.getByRole('article')).toHaveCount(13)
  const mayra=summaries.getByRole('article',{name:'Mayra Mendoza meeting updates'})
- await expect(mayra).toContainText('Workbook end Oct 15, 2026 · Current end Nov 10, 2026')
+ await expect(mayra).toContainText('Workbook end Oct 15, 2026 · Current end Completed')
  await expect(mayra).toContainText('API Tokenization due date moved to October 23, 2026.')
  await expect(mayra).toContainText('Workbook end Oct 30, 2026 · Current end Completed')
  await summaries.getByRole('button',{name:'New TBDs',exact:true}).click()

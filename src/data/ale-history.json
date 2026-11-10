@@ -1239,6 +1239,22 @@
           "bucket": "escalation"
         }
       ]
+    },
+    {
+      "id": "51f03599973307a3",
+      "observedAt": "2026-11-10T21:56:02.097Z",
+      "decisions": [
+        {
+          "key": "escalation:chatgpt tokenizer with astra model",
+          "topic": "ChatGPT Tokenizer with Astra Model",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:oracle mcp - currently only asked to test 1 use case (oracle je prep through codex). originally 8 controls, now 11 proposed",
+          "topic": "AI Governance / Oracle MCP",
+          "bucket": "escalation"
+        }
+      ]
     }
   ]
 }

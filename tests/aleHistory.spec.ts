@@ -10,9 +10,10 @@ const snapshot: SourceSnapshot = JSON.parse(readFileSync(new URL('../src/data/pr
 const published: AleHistory = JSON.parse(readFileSync(new URL('../src/data/ale-history.json', import.meta.url), 'utf8'))
 const oracleHistoryKey=aleHistoryKey(snapshot.annotations!['26'].historyName!,'escalation')
 const oracleSeen=published.updates.filter(update=>update.decisions.some(decision=>decision.key===oracleHistoryKey)).length
-const current = buildAleReadout(parseSource(snapshot), '2026-11-09')
-// Explicit historical fixture keeps carryover/reopening scenarios independent of the current Revenue closure.
+const current = buildAleReadout(parseSource(snapshot), '2026-11-10')
+// Explicit historical fixtures keep carryover/reopening scenarios independent of current project closures.
 const historicalSnapshot = structuredClone(snapshot)
+Object.assign(historicalSnapshot.annotations!['12'], {sectionOverride:'Active portfolio', endOverride:'2026-11-10', statusOverride:'In progress'})
 Object.assign(historicalSnapshot.annotations!['16'], {sectionOverride:'Active portfolio', endOverride:'TBD', statusOverride:'In progress'})
 const baselineData=buildAleReadout(parseSource(historicalSnapshot),'2026-10-20')
 const rootName = 'Alejandro’s leadership readout'
@@ -126,18 +127,18 @@ test('history validation, merging and lead exports retain dates without exportin
 })
 
 test('readout shows both owner teams and carryover dates that survive reload and navigation', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
+  await page.clock.setFixedTime(new Date('2026-11-10T23:59:00.000Z'))
   await page.goto('/#view=ale-kazam')
   const root = page.getByRole('region', { name: rootName })
   const oracle = root.getByRole('article', { name: 'Escalations: AI Governance / Oracle MCP', exact: true })
   await expect(oracle.locator('.ale-frm-owners')).toContainText('@Sudhika')
   await expect(oracle.locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen} updates`)
   await page.getByRole('button', { name: 'Back to dashboard', exact: true }).click()
-  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
+  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-10'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(oracle.locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)
   await expect(oracle.locator('.ale-item-history')).toContainText('First logged Oct 26, 2026')
-  await expect(oracle.locator('.ale-item-history')).toContainText('Last seen Nov 9, 2026')
+  await expect(oracle.locator('.ale-item-history')).toContainText('Last seen Nov 10, 2026')
   await expect(root.locator('.ale-metrics .metric').nth(3).locator('strong')).toHaveText(String(current.decisionCount))
   await page.reload()
   await expect(oracle.locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)
@@ -148,9 +149,9 @@ test('readout shows both owner teams and carryover dates that survive reload and
 })
 
 test('source exports transfer local update history into a fresh browser without creating duplicate check-ins', async ({ page, browser }) => {
-  await page.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
+  await page.clock.setFixedTime(new Date('2026-11-10T23:59:00.000Z'))
   await page.goto('/')
-  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
+  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-10'))) })
   await expect(page.getByRole('status')).toContainText('Imported 66 activities')
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export', exact: false }).click()
@@ -161,7 +162,7 @@ test('source exports transfer local update history into a fresh browser without 
   const context = await browser.newContext()
   try {
     const other = await context.newPage()
-    await other.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
+    await other.clock.setFixedTime(new Date('2026-11-10T23:59:00.000Z'))
     await other.goto('/')
     await other.locator('input[type=file]').setInputFiles({ name: 'transferred.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(exported)) })
     await other.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
@@ -172,13 +173,13 @@ test('source exports transfer local update history into a fresh browser without 
 })
 
 test('history storage failures are visible and the in-memory history remains available for export', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-11-09T23:59:00.000Z'))
+  await page.clock.setFixedTime(new Date('2026-11-10T23:59:00.000Z'))
   await page.addInitScript(key => {
     const original = Storage.prototype.setItem
     Storage.prototype.setItem = function(name, value) { if (name === key) throw new DOMException('Quota exceeded', 'QuotaExceededError'); return original.call(this, name, value) }
   }, ALE_HISTORY_STORAGE)
   await page.goto('/')
-  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-09'))) })
+  await page.locator('input[type=file]').setInputFiles({ name: 'next-update.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(nextSnapshot('2026-11-10'))) })
   await page.getByRole('button', { name: 'Ale-kazam', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('Local update history could not be saved')
   await expect(page.getByRole('article', { name: 'Escalations: AI Governance / Oracle MCP', exact: true }).locator('.ale-item-history')).toContainText(`Carryover · ${oracleSeen + 1} updates`)

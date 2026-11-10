@@ -2290,9 +2290,15 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 5. API Tokenization Deloitte Follow-up: PwC and Urminder responding the new questions from DT",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-10",
+          "text": "API Tokenization with Astra Model is closed per the user update.",
+          "applicationNote": "Close the API Tokenization project and its matching Deloitte follow-up (Action Items row 5). Preserve the original workbook status, dates, owners and earlier notes as source history. No exact actual completion date was supplied. This closure applies to the API-specific workstream."
         }
       ],
-      "endOverride": "2026-11-10",
+      "endOverride": "Completed",
       "trackerActions": [
         {
           "fileName": "Follow-up Tracker  (1).xlsx",
@@ -2316,7 +2322,6 @@
           "links": ""
         }
       ],
-      "statusOverride": "In progress",
       "trackerActionHistory": [
         {
           "fileName": "Follow-up Tracker .xlsx",
@@ -2340,8 +2345,7 @@
       "pwcOwnersOverride": "Mayra Mendoza",
       "frmLeadsOverride": "Urminder",
       "usesTrackerDates": true,
-      "sectionOverride": "Active portfolio",
-      "escalationAction": "Mayra / Urminder: provide the remaining duration-based sample-query output and answer the final Deloitte question by November 10; three of four answers were sent November 2."
+      "sectionOverride": "Completed"
     },
     "16": {
       "notes": [
@@ -3657,11 +3661,17 @@
           "recordedOn": "2026-11-09",
           "text": "Merge Oracle MCP into the AI Governance conversation. Deficiency wording has been shared with Sudhika and the control owner and is currently with Sudhika.",
           "applicationNote": "Count the combined AI Governance / Oracle MCP topic once. Preserve Oracle’s existing owners, control-risk history and stable readout identity, and retain the original AI Governance scope and notes as merged context. Keep the November 15 Oracle review target as an Oracle component milestone; broader AI Governance dates remain unconfirmed. Wording shared is not a completed review or resolved deficiency. The current next step is Sudhika’s response, superseding the old workpaper request."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-10",
+          "text": "The Oracle MCP meeting moved from Tuesday, November 10 to Thursday, November 12, 2026 at 4:00 p.m. Pacific, based on control owner availability.",
+          "applicationNote": "Anchor “today” to the November 10 update and “Thursday” to November 12. Interpret 4 p.m. in the dashboard’s America/Los_Angeles timezone. This changes the meeting schedule; the November 15 Oracle review target, current owners and open deficiency review remain in effect."
         }
       ],
       "statusOverride": "Waiting on FRM",
       "escalationReason": "Deficiency wording has been shared with Sudhika and the control owner; Sudhika’s review and response remain outstanding.",
-      "escalationAction": "Sudhika: review the deficiency wording shared with the control owner and confirm the response, remaining actions and broader AI Governance milestones; Stephen/Joaquin to track the follow-up.",
+      "escalationAction": "Sudhika / Stephen / Joaquin: prepare for the rescheduled Oracle MCP meeting on Thursday, November 12 at 4:00 p.m. Pacific, based on control owner availability; review the deficiency wording and confirm the response, remaining actions and broader AI Governance milestones.",
       "nameOverride": "AI Governance / Oracle MCP",
       "historyName": "Oracle MCP - currently only asked to test 1 use case (Oracle JE prep through Codex). Originally 8 controls, now 11 proposed\n\nFurther discovery is ongoing with Finance AI Framework and reviewing what will be provided to Deloitte.",
       "endOverride": "2026-11-15",
@@ -8092,9 +8102,37 @@
       "flags": [
         "date-moved"
       ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-10",
+      "row": 12,
+      "activity": "API Tokenization with Astra Model",
+      "title": "API Tokenization — closed",
+      "detail": "API Tokenization with Astra Model and its matching Deloitte follow-up are closed per the user update. No exact actual completion date was supplied. Original workbook values remain historical context.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": [
+        "completed",
+        "escalation-closed"
+      ]
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-10",
+      "row": 26,
+      "activity": "AI Governance / Oracle MCP",
+      "title": "Oracle MCP — meeting moved to Thursday, November 12 at 4 p.m. Pacific",
+      "detail": "The Oracle MCP meeting moved from Tuesday, November 10 to Thursday, November 12, 2026 at 4:00 p.m. Pacific, based on control owner availability. The November 15 Oracle review target remains in effect.",
+      "pwcOwners": "Joaquin Garcia Stephen Wilm",
+      "frmLeads": "Sudhika",
+      "flags": [
+        "discussion"
+      ],
+      "discussion": "Sudhika / Stephen / Joaquin: prepare for the rescheduled Oracle MCP meeting on Thursday, November 12 at 4:00 p.m. Pacific, based on control owner availability; review the deficiency wording and confirm the response, remaining actions and broader AI Governance milestones."
     }
   ],
-  "publicationId": "orange-notes-94716c6010fa",
+  "publicationId": "orange-notes-23766d0329e2",
   "reviewAsOf": "2026-11-09",
   "followUpTracker": {
     "fileName": "Follow-up Tracker  (1).xlsx",
@@ -9306,6 +9344,19 @@
         "endBasisOverride": "Projected end · End-of-November ETA (user update)",
         "escalationReason": "",
         "escalationAction": "PwC / Sudhika / TCM and third-party risk management: arrange another Goldman Sachs test user’s admin access, finish the scenario test and complete the overdue PBC, targeting end of November."
+      },
+      "5": {
+        "notes": [
+          {
+            "source": "User update",
+            "recordedOn": "2026-11-10",
+            "text": "API Tokenization with Astra Model is closed per the user update.",
+            "applicationNote": "Close the API Tokenization project and its matching Deloitte follow-up (Action Items row 5). Preserve the original workbook status, dates, owners and earlier notes as source history. No exact actual completion date was supplied. This closure applies to the API-specific workstream."
+          }
+        ],
+        "sectionOverride": "Completed",
+        "endOverride": "Completed",
+        "escalationReason": ""
       }
     }
   }

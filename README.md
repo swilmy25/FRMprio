@@ -169,3 +169,7 @@ The project dashboard and each sidebar FRM contact view include a rolling 14-day
 The section retains approximate/before-date qualifiers and month-only starts. A “before” boundary belongs to the preceding calendar day when deciding which week contains it. Owners, both priority ratings, target scope and latest context stay visible; selecting a title clears timeline filters and opens that project’s details. The planning section is independent of timeline filters and is not added to the separate follow-up action view. It does not rewrite source priorities, dates or assignments.
 
 Use Collapse/Expand in the section heading to hide or show the two-week details. The heading, date range and project count stay visible. This browser remembers the choice across reloads and FRM contact views; browser storage failures leave the control usable for the current view.
+
+## November 10, 2026 update
+
+API Tokenization with Astra Model and its matching Deloitte follow-up (Action Items row 5) are closed per the user update; original workbook records remain preserved, and no actual completion date is inferred. The separate ChatGPT tokenizer activity retains its recorded status. Oracle MCP’s meeting moves from November 10 to Thursday, November 12 at 4 p.m. Pacific for control owner availability. The reschedule is included in its current next step and meeting history; the November 15 Oracle review target and open deficiency review remain in effect.

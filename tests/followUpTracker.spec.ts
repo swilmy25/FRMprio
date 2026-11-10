@@ -25,14 +25,14 @@ test('all 45 first-tab actions retain their baseline mapping with dated Slack ov
   expect(p.category).toBe(action.category)
   expect(p.start).toBe(action.updatedOn||null)
   expect(tracker.rows[action.row-1][23]).toBe(action.deadline||'TBD')
-  const ends:Record<number,string>={32:'Before 2026-11-13',42:'2026-11-30',43:'2026-11-30',45:'Around 2026-11-20'}
+  const ends:Record<number,string>={5:'Completed',32:'Before 2026-11-13',42:'2026-11-30',43:'2026-11-30',45:'Around 2026-11-20'}
   expect(p.endRaw).toBe(ends[action.row]??(action.deadline||'TBD'))
   const basis:Record<number,string>={32:'Projected end · Slack update',42:'Projected end · End-of-November ETA (user update)',43:'Projected end · End-of-November ETA (user update)',45:'Projected end · Approximate ETA (user update)'}
   expect(p.endBasis).toBe(basis[action.row]??'Projected end · Deadline J')
-  expect(p.completed).toBe(action.status==='Completed')
+  expect(p.completed).toBe(action.row===5||action.status==='Completed')
   expect(p.trackerActions).toEqual([action])
  }
- expect(followUps.filter(p=>p.completed)).toHaveLength(20)
+ expect(followUps.filter(p=>p.completed)).toHaveLength(21)
  expect(followUps.filter(p=>p.newlyTrackedOn===today).map(p=>p.row)).toEqual([8,9,37,46,47,48])
  expect(followUps.filter(p=>!p.start)).toHaveLength(7)
  expect(followUps.filter(p=>!p.start).every(p=>p.completed)).toBe(true)
@@ -58,7 +58,9 @@ test('completed readiness and duplicate actions remain distinct from explicit pr
  expect(activity(66).followUpDate).toBe('2026-11-11')
  expect(activity(60).reportedScope).toEqual({controlCount:8,hours:200})
  expect(activity(60).staffing).toBe('Odinga, Matthew')
- expect(activity(12)).toMatchObject({start:'2026-11-03',end:'2026-11-10',category:followUp(5).category})
+ expect(activity(12)).toMatchObject({start:'2026-11-03',end:null,completed:true,category:followUp(5).category})
+ expect(followUp(5).completed).toBe(true)
+ expect(followUp(6).completed).toBe(false)
  expect(activity(36)).toMatchObject({pwcOwners:'Mayra Mendoza',start:'2026-10-26',end:'2026-11-10'})
  expect(activity(43)).toMatchObject({pwcOwners:'Ben Oates',start:'2026-11-05',end:'2026-11-30'})
  expect(activity(65).pwcOwners).toBe('Sonu Kumar')
@@ -168,7 +170,7 @@ test('follow-up view supports six new-action reviews, Added-by owner/category fi
  await page.goto('/#view=follow-ups')
  await expect(page.getByRole('heading',{name:'Follow-up tracker',exact:true})).toBeVisible()
  await expect(page.locator('.workbook-row.project-row')).toHaveCount(45)
- await expect(page.locator('.workbook-row.date-completed')).toHaveCount(20)
+ await expect(page.locator('.workbook-row.date-completed')).toHaveCount(21)
  const banner=page.getByRole('region',{name:'New projects for review'})
  await expect(banner).toContainText('6 new follow-ups for review')
  await banner.getByRole('button',{name:'Show new follow-ups',exact:true}).click()

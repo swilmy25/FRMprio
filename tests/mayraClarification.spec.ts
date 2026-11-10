@@ -25,7 +25,7 @@ test('a custom pause explains no current PwC action, survives lead exports and d
   const tokenization = activities.find(item => item.row === 13)!
   expect(tokenization.followUpDate).toBeNull()
   expect(tokenization.end).toBe('2026-11-09')
-  expect(activities.find(item => item.row === 12)?.end).toBe('2026-11-10')
+  expect(activities.find(item => item.row === 12)?.completed).toBe(true)
   expect(readout.escalations.find(item => item.activityId === tokenization.id)).toMatchObject({owners:['Mayra Mendoza'],frmOwners:['Urminder'],nextStep:expect.stringContaining('usage path/control ownership')})
   expect(readout.escalations.some(item => item.activityId === 'source-row-16')).toBe(false)
 })
