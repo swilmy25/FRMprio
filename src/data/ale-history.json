@@ -1255,6 +1255,17 @@
           "bucket": "escalation"
         }
       ]
+    },
+    {
+      "id": "b18a52ed3308b181",
+      "observedAt": "2026-11-10T22:25:38.419Z",
+      "decisions": [
+        {
+          "key": "escalation:oracle mcp - currently only asked to test 1 use case (oracle je prep through codex). originally 8 controls, now 11 proposed",
+          "topic": "AI Governance / Oracle MCP",
+          "bucket": "escalation"
+        }
+      ]
     }
   ]
 }

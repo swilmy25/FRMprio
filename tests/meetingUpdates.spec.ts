@@ -83,7 +83,7 @@ test('latest workbook and meeting decisions retain provenance and apply the requ
  expect(snapshot.rows.every(row=>row.every((value,i)=>ORANGE_COLUMNS.includes(i)||value===''))).toBe(true)
 })
 test('completed closures are distinct from testing and future IronClad scope remains planned',()=>{
- expect(activities.filter(p=>p.completed)).toHaveLength(16)
+ expect(activities.filter(p=>p.completed)).toHaveLength(17)
  for(const row of [16,35]){
   expect(activity(row).status).toBe('Completed')
   expect(activity(row).end).toBeNull()
@@ -187,7 +187,7 @@ test('member summaries distinguish moved dates, confirmed dates, new TBDs and ex
  expect(groups.filter(group=>!group.unassigned).map(group=>group.member)).toEqual(['Ankita','Ben Oates','Cami Aromando','Jeff Rose','Joaquin Garcia','Layla Yang','Mayra Mendoza','Nareg Seukunian','PwC (team)','Rajan Roy','Sonu Kumar','Stephen Wilm'])
  expect(groups.find(group=>group.unassigned)?.member).toBe(UNRECORDED_PWC_OWNER)
  const items=uniqueMeetingItems(groups)
- expect(items).toHaveLength(161)
+ expect(items).toHaveLength(162)
  const rows=(flag:string)=>items.filter(item=>item.change.flags?.some(value=>value===flag)).map(item=>item.change.row).sort((a,b)=>a!-b!)
  expect(rows('date-moved')).toEqual([12,20,22,26,27,35,40,44,56,57,59,60,66,67,69,70,71])
  expect(rows('date-corrected')).toEqual([40])

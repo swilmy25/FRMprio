@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { readFileSync } from 'node:fs'
-import { parseSource } from '../src/prioritization'
+import { parseSource, SOURCE_STORAGE } from '../src/prioritization'
 import type { ActivityAnnotation, SourceActivity, SourceSnapshot } from '../src/prioritization'
 import { buildTwoWeekPriorities } from '../src/priorityWindow'
 
@@ -129,10 +129,11 @@ test('sidebar contact views, reload and mobile preserve two-week scope and share
 
 test('the two-week dates roll forward at Pacific midnight without reloading', async ({page}) => {
   await page.clock.install({time:new Date('2026-11-10T07:59:30Z')})
+  await page.addInitScript(({key,data}) => localStorage.setItem(key,JSON.stringify(data)), {key:SOURCE_STORAGE,data:fixture([{name:'Rollover delivery',end:'2026-11-09'}])})
   await page.goto('/')
   const section = page.getByRole('region', {name:'Next two weeks priorities'})
   await expect(section).toContainText('Nov 9, 2026 – Nov 22, 2026')
   await page.clock.fastForward(61000)
   await expect(section).toContainText('Nov 10, 2026 – Nov 23, 2026')
-  await expect(section.getByRole('region', {name:'Priorities needing attention'})).toContainText('ChatGPT Tokenizer')
+  await expect(section.getByRole('region', {name:'Priorities needing attention'})).toContainText('Rollover delivery')
 })

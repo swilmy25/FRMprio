@@ -4031,7 +4031,6 @@
       "escalationReason": ""
     },
     "13": {
-      "statusOverride": "In progress",
       "notes": [
         {
           "source": "Mayra Mendoza",
@@ -4050,6 +4049,12 @@
           "recordedOn": "2026-11-09",
           "text": "Updated from Follow-up Tracker  (1).xlsx → Action Items rows 6. Clarify materiality or usage path of ChatGPT tokenization + control owner",
           "applicationNote": "This is the new follow-up list. The dedicated follow-up view maps PwC ownership from Added by (B), category from D, start from Date added/updated (C), and projected end from Deadline (J). Prior tracker records are retained separately. Completed readiness/evidence actions do not by themselves close a broader testing project. This workstream now uses the row’s B/D/C/J mapping directly. A blank start date stays TBD. A deadline is a projected end, not an actual completion date."
+        },
+        {
+          "source": "User update",
+          "recordedOn": "2026-11-10",
+          "text": "ChatGPT Tokenizer with Astra Model is closed per the user update.",
+          "applicationNote": "Close the ChatGPT Tokenizer project and its matching materiality/control-owner follow-up (Action Items row 6). Preserve original workbook values, assignments and prior escalation notes as history. No exact actual completion date was supplied."
         }
       ],
       "trackerActions": [
@@ -4094,13 +4099,12 @@
         }
       ],
       "startOverride": "2026-11-03",
-      "endOverride": "2026-11-09",
+      "endOverride": "Completed",
       "categoryOverride": "Clarification / Follow up",
       "pwcOwnersOverride": "Mayra Mendoza",
       "frmLeadsOverride": "Urminder",
       "usesTrackerDates": true,
-      "sectionOverride": "Active portfolio",
-      "escalationAction": "Mayra / Urminder: follow up with the table owner on the unattributed materiality bucket and confirm usage path/control ownership against the November 9 deadline."
+      "sectionOverride": "Completed"
     },
     "60": {
       "userAdded": true,
@@ -8130,9 +8134,23 @@
         "discussion"
       ],
       "discussion": "Sudhika / Stephen / Joaquin: prepare for the rescheduled Oracle MCP meeting on Thursday, November 12 at 4:00 p.m. Pacific, based on control owner availability; review the deficiency wording and confirm the response, remaining actions and broader AI Governance milestones."
+    },
+    {
+      "source": "User update",
+      "recordedOn": "2026-11-10",
+      "row": 13,
+      "activity": "ChatGPT Tokenizer with Astra Model",
+      "title": "ChatGPT Tokenizer — closed",
+      "detail": "ChatGPT Tokenizer with Astra Model and its matching materiality/control-owner follow-up are closed per the user update. No exact actual completion date was supplied; original workbook records remain historical context.",
+      "pwcOwners": "Mayra Mendoza",
+      "frmLeads": "Urminder",
+      "flags": [
+        "completed",
+        "escalation-closed"
+      ]
     }
   ],
-  "publicationId": "orange-notes-23766d0329e2",
+  "publicationId": "orange-notes-121f46011082",
   "reviewAsOf": "2026-11-09",
   "followUpTracker": {
     "fileName": "Follow-up Tracker  (1).xlsx",
@@ -9352,6 +9370,19 @@
             "recordedOn": "2026-11-10",
             "text": "API Tokenization with Astra Model is closed per the user update.",
             "applicationNote": "Close the API Tokenization project and its matching Deloitte follow-up (Action Items row 5). Preserve the original workbook status, dates, owners and earlier notes as source history. No exact actual completion date was supplied. This closure applies to the API-specific workstream."
+          }
+        ],
+        "sectionOverride": "Completed",
+        "endOverride": "Completed",
+        "escalationReason": ""
+      },
+      "6": {
+        "notes": [
+          {
+            "source": "User update",
+            "recordedOn": "2026-11-10",
+            "text": "ChatGPT Tokenizer with Astra Model is closed per the user update.",
+            "applicationNote": "Close the ChatGPT Tokenizer project and its matching materiality/control-owner follow-up (Action Items row 6). Preserve original workbook values, assignments and prior escalation notes as history. No exact actual completion date was supplied."
           }
         ],
         "sectionOverride": "Completed",
