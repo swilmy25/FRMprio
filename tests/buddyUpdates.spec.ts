@@ -13,7 +13,7 @@ const action=(row:number)=>actions.find(p=>p.row===row)!
 const today='2026-11-09'
 
 test('explicit escalation closures preserve open work and reopen on a changed plan or new risk',()=>{
- const closed=[34,60,61,62,64,65,66]
+ const closed=[34,60,61,65,66]
  for(const row of closed){
   const p=project(row)
   expect(p.completed).toBe(false)
@@ -32,9 +32,11 @@ test('explicit escalation closures preserve open work and reopen on a changed pl
  expect(dateHealth(project(19),'2026-11-15').label).toBe('Escalation paused')
  expect(dateHealth(project(19),'2026-11-16').tone).toBe('escalation')
  expect(dateHealth({...project(19),escalationReason:'New confirmed blocker'},today).tone).toBe('escalation')
- expect(dateHealth(action(38),today).label).toBe('Escalation paused')
- expect(dateHealth(action(38),'2026-11-16').tone).toBe('escalation')
- for(const row of [7,14,15,20,29])expect(dateHealth(action(row),today).label).toBe('Escalation closed')
+ expect(dateHealth(action(39),today).label).toBe('Escalation paused')
+ expect(dateHealth(action(39),'2026-11-16').tone).toBe('escalation')
+ for(const row of [20,29])expect(dateHealth(action(row),today).label).toBe('Escalation closed')
+ for(const row of [7,14,15])expect(dateHealth(action(row),'2026-11-12').tone).toBe('scheduled')
+ for(const row of [62,64])expect(dateHealth(project(row),'2026-11-12').tone).toBe('scheduled')
  expect(project(6)).toMatchObject({pwcOwners:'Sonu Kumar',frmLeads:'Avi',completed:false})
  expect(project(6).escalationResolution).toBeUndefined()
  expect(action(15).frmLeads).toBe('Ash')
@@ -44,7 +46,7 @@ test('explicit escalation closures preserve open work and reopen on a changed pl
   expect(action(row).end).toBe('2026-11-30')
  }
  for(const row of [40,60,66])expect(project(row).end).toBe('2027-01-15')
- expect(action(48)).toMatchObject({completed:false,end:'2026-11-11'})
+ expect(action(49)).toMatchObject({completed:false,end:'2026-11-11'})
 })
 
 test('before-date boundaries, delivery forecasts and named roles retain their precision',()=>{
@@ -54,7 +56,7 @@ test('before-date boundaries, delivery forecasts and named roles retain their pr
  expect(dateHealth(dcgm,'2026-11-13').tone).toBe('escalation')
  expect(dateHealth({...dcgm,start:'2026-11-13'},'2026-11-12').tone).toBe('escalation')
  expect(action(32)).toMatchObject({pwcOwners:'Layla Yang',endRaw:dcgm.endRaw,end:dcgm.end})
- expect(action(32).trackerActions[0]).toMatchObject({addedBy:'FRM / PwC',deadline:'2026-11-06'})
+ expect(action(32).trackerActions[0]).toMatchObject({addedBy:'FRM / PwC',deadline:'2026-11-13'})
  const vndly=project(71)
  expect(vndly).toMatchObject({endRaw:'Around 2026-11-20',end:'2026-11-20',completed:false,pwcOwners:'PwC (team)'})
  expect(dateHealth(vndly,today).tone).toBe('scheduled')
@@ -69,16 +71,16 @@ test('before-date boundaries, delivery forecasts and named roles retain their pr
   expect(buildAleReadout(activities,today).escalations.some(p=>p.activityId===`source-row-${row}`)).toBe(false)
   expect(dateHealth({...project(row),escalationReason:'New confirmed blocker'},today).tone).toBe('escalation')
  }
- for(const row of [42,43,45])expect(dateHealth(action(row),today).tone).toBe('scheduled')
+ for(const row of [43,44,46])expect(dateHealth(action(row),today).tone).toBe('scheduled')
  expect(dateHealth(project(59),'2026-11-16').tone).toBe('escalation')
  expect(dateHealth(project(69),'2026-12-01').tone).toBe('escalation')
  expect(dateHealth(project(70),'2026-12-01').tone).toBe('escalation')
  expect(project(70).end).toBe('2026-11-30')
  expect(project(70).endBasis).toContain('separate PO-approval timing unconfirmed')
- expect(action(43).end).toBe('2026-11-30')
- expect(action(44).end).toBe('2026-11-06')
- expect(action(44).meetingNotes.some(n=>n.source==='User update')).toBe(false)
- expect(action(45).endRaw).toBe('Around 2026-11-20')
+ expect(action(44).end).toBe('2026-11-30')
+ expect(action(45).end).toBe('2026-11-06')
+ expect(action(45).meetingNotes.some(n=>n.source==='User update')).toBe(false)
+ expect(action(46).endRaw).toBe('Around 2026-11-20')
  expect(project(19).end).toBe('2026-11-15')
  expect(project(19).meetingNotes.some(n=>n.via==='FRMprio Buddy'&&n.text.includes('November 13'))).toBe(true)
  expect(project(19).meetingNotes.at(-1)?.text).toContain('No escalation is needed')
@@ -103,8 +105,8 @@ test('Buddy and Slack provenance survive round trips and lead scoping; unsafe or
  const exported=snapshotForLead(orangeOnly(snapshot),'Avi')
  expect(isSourceSnapshot(exported)).toBe(true)
  const p=parseSource(JSON.parse(JSON.stringify(exported))).find(p=>p.row===67)!
- expect(p.meetingNotes.at(-1)).toMatchObject({source:'Layla Yang',postedOn:today,recordedOn:today,via:'FRMprio Buddy',sourceUrl:'https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244067723979'})
- expect(p.meetingNotes.at(-1)?.readoutUrl).toContain('https://chatgpt.com/c/')
+ expect(p.meetingNotes.findLast(n=>n.via==='FRMprio Buddy')).toMatchObject({source:'Layla Yang',postedOn:today,recordedOn:today,via:'FRMprio Buddy',sourceUrl:'https://openai.enterprise.slack.com/archives/C0C9A94KGQN/p1794244067723979'})
+ expect(p.meetingNotes.findLast(n=>n.via==='FRMprio Buddy')?.readoutUrl).toContain('https://chatgpt.com/c/')
  expect(exported.followUpTracker?.annotations?.['32']).toEqual(snapshot.followUpTracker?.annotations?.['32'])
  const sudhika=snapshotForLead(snapshot,'Sudhika')
  expect(sudhika.followUpTracker?.annotations?.['32']).toBeUndefined()
@@ -153,7 +155,7 @@ test('closed escalation, leadership priority, source links and qualified dates a
  await page.getByLabel('Search source activities').fill('DCGM scoping')
  await expect(page.locator('.source-date-facts')).toContainText('Before Nov 13, 2026')
  await expect(page.locator('.detail-meta')).toContainText('Layla Yang')
- await expect(page.getByRole('region',{name:'Follow-up tracker actions'})).toContainText('Nov 6, 2026')
+ await expect(page.getByRole('region',{name:'Follow-up tracker actions'})).toContainText('Nov 13, 2026')
  await expect(page.getByRole('region',{name:'Meeting context'}).getByRole('link',{name:'Buddy readout',exact:true})).toHaveAttribute('href',/chatgpt.com\/c\//)
  await page.setViewportSize({width:390,height:844})
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)

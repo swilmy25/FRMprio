@@ -81,7 +81,7 @@ test('dashboard exposes the proposed range, owner allocation gap, procedures and
  await expect(page.getByRole('region',{name:'Meeting context'})).toContainText('Planning estimate')
  await expect(page.locator('.workbook-table')).not.toContainText('@cloie.vonmassenhausen')
  const downloadPromise=page.waitForEvent('download')
- await page.getByRole('button',{name:'Export',exact:false}).click()
+ await page.getByRole('button',{name:'↓ Export',exact:true}).click()
  const download=await downloadPromise
  const exported:SourceSnapshot=JSON.parse(readFileSync((await download.path())!,'utf8'))
  expect(isSourceSnapshot(exported)).toBe(true)

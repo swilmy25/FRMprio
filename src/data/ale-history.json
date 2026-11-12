@@ -1266,6 +1266,52 @@
           "bucket": "escalation"
         }
       ]
+    },
+    {
+      "id": "472196bf38eb41e6",
+      "observedAt": "2026-11-12T18:06:06.589Z",
+      "decisions": [
+        {
+          "key": "escalation:oracle mcp - currently only asked to test 1 use case (oracle je prep through codex). originally 8 controls, now 11 proposed",
+          "topic": "AI Governance / Oracle MCP",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:stripe",
+          "topic": "Stripe",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:salesforce - main-ruleset bypass protections",
+          "topic": "Salesforce — main-ruleset bypass protections",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:itac sample-of-one - variance and negative-test approach",
+          "topic": "ITAC sample-of-one — variance and negative-test approach",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:entra / access manager - code, monitoring and mfa evidence",
+          "topic": "Entra / Access Manager — code, monitoring and MFA evidence",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:provisioning populations - salesforce / habitat outstanding",
+          "topic": "Provisioning populations — Salesforce / Habitat outstanding",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:monorepo - deloitte in-scope file-path export",
+          "topic": "Monorepo — Deloitte in-scope file-path export",
+          "bucket": "escalation"
+        },
+        {
+          "key": "escalation:zip - supplier bank-account approval configuration (ptp.01.10)",
+          "topic": "Zip — supplier bank-account approval configuration (PTP.01.10)",
+          "bucket": "escalation"
+        }
+      ]
     }
   ]
 }

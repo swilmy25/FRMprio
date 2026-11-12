@@ -59,7 +59,7 @@ test('scope is visible, staffing stays in details, and Oracle remains open while
  await expect(page.locator('.detail-meta')).toContainText('Sonu Kumar')
  await expect(page.locator('.detail-meta')).toContainText('FRM leads: Avi')
  const downloadPromise=page.waitForEvent('download')
- await page.getByRole('button',{name:'Export',exact:false}).click()
+ await page.getByRole('button',{name:'↓ Export',exact:true}).click()
  const exported:SourceSnapshot=JSON.parse(readFileSync((await (await downloadPromise).path())!,'utf8'))
  expect(parseSource(exported).find(item=>item.row===60)?.reportedScope).toEqual(azure.reportedScope)
  await page.getByLabel('Search source activities').fill('Oracle MCP')

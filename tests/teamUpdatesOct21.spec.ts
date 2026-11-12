@@ -11,7 +11,7 @@ const activity = (row: number) => activities.find(item => item.row === row)!
 const today = '2026-11-09'
 
 test('date corrections supersede overdue values without closing unfinished work or changing unrelated activities', () => {
-  expect(activities).toHaveLength(66)
+  expect(activities).toHaveLength(74)
   expect(activity(40).end).toBe('2027-01-15')
   expect(activity(40).workbookEndRaw).toBe('11/31')
   expect(activity(40).start).toBe('2026-10-26')
@@ -71,7 +71,7 @@ test('reported control risk and PBC dependency escalate future targets with accu
 
 test('Stripe pauses only its unresolved-date escalation and resumes normal checks when dates or risks change', () => {
   const current = activity(36)
-  expect(current.end).toBe('2026-11-10')
+  expect(current.end).toBe('2026-11-16')
   expect(current.pwcOwners).toBe('Mayra Mendoza')
   expect(current.status).toBe('In progress')
   expect(dateHealth(current,today).tone).toBe('scheduled')
@@ -155,7 +155,7 @@ test('portfolio, owner filters, dated source attribution, paused view and Ale-ka
   await page.getByLabel('Filter date status').selectOption('scheduled')
   await expect(page.locator('.workbook-row.project-row')).toHaveCount(1)
   await expect(page.locator('.source-details h2')).toHaveText('Stripe')
-  await expect(page.locator('.source-date-facts')).toContainText('Nov 10, 2026')
+  await expect(page.locator('.source-date-facts')).toContainText('Nov 16, 2026')
   await expect(page.locator('.workbook-row.date-scheduled')).toHaveCount(1)
   await page.getByRole('button',{name:'Ale-kazam',exact:true}).click()
   const readout=page.getByRole('region',{name:'Alejandro’s leadership readout'})

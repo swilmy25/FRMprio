@@ -71,13 +71,13 @@ test('FRM contact scoping retains shared projects once and ranks FRM priority be
 })
 
 test('overall priorities show dates and owners, stay visible through timeline filters and open the chosen project', async ({page}) => {
-  await page.clock.setFixedTime(new Date('2026-11-09T18:00:00Z'))
+  await page.clock.setFixedTime(new Date('2026-11-12T18:00:00Z'))
   await page.goto('/')
   const section = page.getByRole('region', {name:'Next two weeks priorities'})
-  await expect(section).toContainText('Nov 9, 2026 – Nov 22, 2026')
+  await expect(section).toContainText('Nov 12, 2026 – Nov 25, 2026')
   await expect(section).toContainText('Priorities across the full portfolio')
   const attention = section.getByRole('region', {name:'Priorities needing attention'})
-  await expect(attention.getByRole('article')).toHaveCount(1)
+  await expect(attention.getByRole('article')).toHaveCount(8)
   await expect(attention).toContainText('AI Governance / Oracle MCP')
   await expect(attention).toContainText('Sudhika')
   await expect(attention).toContainText('Joaquin Garcia Stephen Wilm')
@@ -90,7 +90,7 @@ test('overall priorities show dates and owners, stay visible through timeline fi
   await expect(section.getByRole('article', {name:'Ads New ITAC Controls — Phases 2 & 3',exact:true})).not.toContainText('Escalation needed')
   await page.getByLabel('Search source activities').fill('no matches')
   await expect(page.locator('.workbook-row.project-row')).toHaveCount(0)
-  await expect(attention.getByRole('article')).toHaveCount(1)
+  await expect(attention.getByRole('article')).toHaveCount(8)
   await section.getByRole('button', {name:'View DCGM scoping project details',exact:true}).click()
   await expect(page.locator('.source-details h2')).toHaveText('DCGM scoping')
   await expect(page.getByLabel('Search source activities')).toHaveValue('')
@@ -98,7 +98,7 @@ test('overall priorities show dates and owners, stay visible through timeline fi
 })
 
 test('sidebar contact views, reload and mobile preserve two-week scope and shared ownership', async ({page}) => {
-  await page.clock.setFixedTime(new Date('2026-11-09T18:00:00Z'))
+  await page.clock.setFixedTime(new Date('2026-11-12T18:00:00Z'))
   await page.goto('/')
   await page.locator('.sidebar').getByRole('button', {name:'Chandana view',exact:true}).click()
   const section = page.getByRole('region', {name:'Next two weeks priorities'})
